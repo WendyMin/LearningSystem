@@ -1,0 +1,97 @@
+// @flow
+/*
+**   Antinux Innovation
+**   Author: Eric Deng
+*/
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actionCreators from 'actions';
+import Button from 'UI/Button';
+import FormGroup from 'react-bootstrap';
+import Checkbox from 'react-bootstrap';
+//import 'react-bootstrap';
+
+import Question from 'UI/MultQuestion';
+
+import AppearUD from 'Animation/AppearUD';
+
+import style from 'style';
+
+
+class MultOptionQuestions extends React.PureComponent {
+  constructor( props ){
+    super( props );
+    this.state = {
+      color: ""
+    }
+  }
+
+  changeColor = () => {
+    var color = "red";
+    return color
+  }
+
+  render(){
+    const {
+      //questions,
+      //setChoice,
+      //questionSize,
+      //submiter,
+      //loader
+    } = this.props;
+
+    return (
+      <div className="container">
+
+        <div className={style.leftOption}>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  A 概念混淆 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  B 条件不充分 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  C 无法推出 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  D 以偏概全 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  E 非黑即白 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  F 因果无关 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  G 目的达不到 </label><br/>
+        </div>
+        <div className={style.rightOption}>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  K 论据不成立 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  L 条件不必要 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  M 类比不当 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  N 不当假设 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  O 自相矛盾 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  P 存在他因 </label><br/>
+          <input className={style.checkbox} type="checkbox" />
+            <label>  Q 措施不可行 </label><br/>
+       </div>
+
+       <div className={style.commit}>
+         <label>确认提交</label>&nbsp;&nbsp;&nbsp;
+         <label>答案解析</label><br/>
+         <label>参考范文</label>&nbsp;&nbsp;&nbsp;
+         <label>谬误范例</label><br/>
+       </div>
+
+
+     </div>
+
+
+    );
+  }
+};
+
+export default connect(
+
+)( MultOptionQuestions );

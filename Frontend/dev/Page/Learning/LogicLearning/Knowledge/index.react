@@ -1,0 +1,199 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Prompt } from 'react-router';
+import style from 'style';
+
+import Button from 'UI/Button';
+import Info from 'UI/Info';
+import ButtonControlPane from 'UI/ButtonControlPane';
+
+import Loading from 'Animation/Loading';
+import SlideLR from 'Animation/SlideLR';
+import SlideRL from 'Animation/SlideRL';
+import SlideDU from 'Animation/SlideDU';
+import SlideUD from 'Animation/SlideUD';
+
+import UserManagerWindow from "Windows/UserManager";
+
+import {
+  view as EnglishLearningSummary
+} from 'Connected/EnglishLearningSummary';
+import {
+  view as SingleOptionQuestions,
+  actions as SingleOptionQuestionsActions
+} from 'Connected/SingleOptionQuestions';
+
+import protect from 'HOC/protect';
+import asyncProcessControl from 'HOC/asyncProcessControl';
+import makePage from 'HOC/makePage';
+import applyHOCs from 'HOC/applyHOCs';
+
+class Knowledge extends React.PureComponent {
+
+  constructor( props ){
+    super( props );
+    /*this.actions =
+    [ this.submitQuestions , props.translateWords , () => { this.confirm(); this.setState({displayByWords:false})} , () => { props.translateSentences(); this.confirm() } , () => { props.hideTranslate();this.confirm() }, this.submitQuestions , [ this.confirm , props.translateAll ] ,  [ this.quit , this.doMore ]];
+    this.texts =
+    [ "SUBMIT" , "translate words" , "confirm" , "translate sentences" , "confirm" , "submit" , [ "confirm" , "translate all" ] ,  [ "end" , "do more" ] ];
+    this.describes =
+    ["Hey!","choose your unknown words","read the explaination", "choose the sentences you do not understand well" , "check all translates again" , "do these questions again" , "check your answers and see analysises" , "want to do more?"];
+    */this.state = {
+      //processStep: 0,
+      //displayByWords: true
+      end: false
+    };
+
+  }
+
+
+  loadQuestions = () => {
+    this.props.loadQuestions({
+      url: "http://139.129.210.230/LearningSystem/BackEnd/offer_zhongdian_question.php",
+      body: {
+        username: "lxq"
+        //username: this.props.username
+      },
+      parser: questions => questions.map( q => ({
+        type: q.type,
+        questionId: q.id,
+        options: q.option,
+        rightKey: q.answer,
+        question: q.question,
+        analysis: q.analysis
+      }))
+    });
+  }
+
+  submitQuestions = () => {
+    const {
+      username,
+      questions,
+      articleId,
+      submitQuestionState,
+      submiting,
+      lockAndShow
+    } = this.props;
+    var submitTime = submitQuestionState.resolved;
+    if( submiting ){
+      return;
+    }
+    var wrongList = "";
+    for( var i = 0 ; i < questions.length ; i++ ){
+      if( questions[i].choosed !== questions[i].rightKey ){
+        wrongList += `${questions[i].questionId} `;
+      }
+    }
+    this.props.submitQuestions({
+      url: "http://139.129.210.230/LearningSystem/BackEnd/record_wrong_question.php",
+      body: {
+        username: username,
+        article_id: articleId,
+        wrong_question_ids: wrongList,
+        time: submitTime + 1
+      }
+    });
+    //if( ( ( submitTime + 1 ) & 1 ) === 0 ){
+      for( var i = 0; i < questions.length ; i++ ){
+        lockAndShow( questions[i].questionId );
+      }
+    //}
+  }
+
+  componentDidMount(){
+    this.loadQuestions();
+  }
+
+
+  render(){
+    const { end } = this.state;
+    const {
+      submitQuestionState,
+      loadQuestionState,
+      loadContent,
+      ined
+    } = this.props;
+
+    return (
+      <React.Fragment>
+        <Prompt
+          when={end==false}
+          message="you need to do it again, are you sure to quit?"
+        />
+
+        <div className={style.HUD}>
+          重点题型
+        </div>
+
+        <div className = {style.question}>
+          <Loading
+            loading={loadQuestionState.pending}
+            wasLoaded={loadQuestionState.resolved}
+            lastFailed={loadQuestionState.lastFailed}
+            reloader={this.loadQuestions}
+            center
+          >
+            <SlideRL play={ined}>
+              <SingleOptionQuestions
+                submiter={this.submitQuestions}
+                loader={this.loadQuestions}
+              />
+            </SlideRL>
+          </Loading>
+
+          <Button className = {style.button} text = {"确认提交"} onClick={this.submitQuestions}/>
+        </div>
+
+      </React.Fragment>
+    );
+  }
+};
+
+export default applyHOCs([
+  asyncProcessControl({
+    submitQuestionState: {
+      onResolved: function(){
+        //this.nextStep()
+      },
+      onRejected: function(){
+        this.props.alert( "失败" )
+      }
+    },
+
+  }),
+  protect({
+    logined: {
+      satisfy: l => l === true,
+      block: ({ openWindow , history, closeMask , openMask }) => {
+        openWindow( UserManagerWindow,
+          {
+            width: '380px',
+            height: '300px',
+            position: {
+              top: 'calc( 50% - 190px)',
+              left: 'calc( 50% - 150px)'
+            },
+            onCancel: () => history.goBack() || closeMask(),
+            onSuccess: closeMask,
+          }
+        );
+        openMask();
+      }
+    }
+  }),
+  makePage,
+  connect(
+    state => ({
+      logined: state.UserManager.logined,
+      username: state.UserManager.name,
+      questions: state.SingleOptionQuestions.content,
+      loadQuestionState: state.SingleOptionQuestions.loadState,
+      submitQuestionState: state.SingleOptionQuestions.submitState,
+    }),
+    dispatch => ({
+      ...bindActionCreators( SingleOptionQuestionsActions , dispatch ),
+    })
+  )],
+  Knowledge
+);

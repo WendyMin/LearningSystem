@@ -1,0 +1,116 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Prompt } from 'react-router';
+import style from 'style';
+
+import Button from 'UI/Button';
+
+import Loading from 'Animation/Loading';
+import SlideLR from 'Animation/SlideLR';
+import SlideRL from 'Animation/SlideRL';
+import SlideDU from 'Animation/SlideDU';
+import SlideUD from 'Animation/SlideUD';
+
+import UserManagerWindow from "Windows/UserManager";
+
+import protect from 'HOC/protect';
+import asyncProcessControl from 'HOC/asyncProcessControl';
+import makePage from 'HOC/makePage';
+import applyHOCs from 'HOC/applyHOCs';
+
+import {
+  view as ButtonExpand,
+  actions as ButtonExpandActions
+} from 'Connected/ButtonExpand';
+
+class UITest extends React.PureComponent {
+
+  constructor( props ){
+    super( props );
+    this.state = {
+      processStep: 0,
+    };
+  }
+
+/*function = () => {
+  this.props.loadButtonContents({
+    url: "http://139.129.210.230/LearningSystem/BackEnd/lunshuo_jiqiao_xiaolei_name.php",
+    body: {
+    }
+  })
+}*/
+/*function = () => {
+  this.props.loadButtonContents({
+    url: "http://139.129.210.230/LearningSystem/BackEnd/offer_logic_course.php",
+    body: {
+      username: "lxq"
+    }
+  })
+}*/
+/*function = () => {
+  this.props.loadButtonContents({
+    url: "http://139.129.210.230/LearningSystem/BackEnd/get_logic_title.php",
+    body: {
+      username: "lxq"
+    }
+  })
+}*/
+
+  render(){
+    const { processStep } = this.state;
+
+    const {
+      ined
+    } = this.props;
+
+    return (
+      <React.Fragment>
+        <Prompt
+          when={processStep !== 0 && processStep !== this.actions.length - 1}
+          message="you need to do it again, are you sure to quit?"
+        />
+
+        <p>hi</p>
+        <Button text="示例" onClick={this.function} />
+
+      </React.Fragment>
+    );
+  }
+};
+
+export default applyHOCs([
+  asyncProcessControl({
+  }),
+  protect({
+    logined: {
+      satisfy: l => l === true,
+      block: ({ openWindow , history, closeMask , openMask }) => {
+        openWindow( UserManagerWindow,
+          {
+            width: '380px',
+            height: '300px',
+            position: {
+              top: 'calc( 50% - 190px)',
+              left: 'calc( 50% - 150px)'
+            },
+            onCancel: () => history.goBack() || closeMask(),
+            onSuccess: closeMask,
+          }
+        );
+        openMask();
+      }
+    }
+  }),
+  makePage,
+  connect(
+    state => ({
+      logined: state.UserManager.logined,
+      username: state.UserManager.name,
+    }),
+    dispatch => ({
+      ...bindActionCreators( ButtonExpandActions , dispatch),
+    })
+  )],
+  UITest
+);
