@@ -45,7 +45,7 @@ class LogicTest extends React.PureComponent {
 
   loadQuestions = () => {
     this.props.loadQuestions({
-      url: "http://139.129.210.230/LearningSystem/BackEnd/logic_test.php",
+      url: "http://59.110.23.212/LearningSystem/BackEnd/logic_test.php",
       body: {
         username: this.props.username
       },
@@ -93,7 +93,7 @@ class LogicTest extends React.PureComponent {
       }
     }
     this.props.submitQuestions({
-      url: "http://139.129.210.230/LearningSystem/BackEnd/record_wrong_question.php",
+      url: "http://59.110.23.212/LearningSystem/BackEnd/record_wrong_question.php",
       body: {
         username: username,
         article_id: articleId,

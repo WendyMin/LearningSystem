@@ -3,7 +3,13 @@ import {
 } from 'actionTypes';
 
 export default ( state = {
-    content: [],
+    //content: {},
+    title: [],
+    title_article: [],
+    name: [],
+    example_article: [],
+    example_comment: [],
+
     loadState: {
       pending: 0,
       resolved: 0,
@@ -38,7 +44,14 @@ export default ( state = {
       return {
         ...state,
         loadState,
-        content: response
+        //content: response.title_article
+        //content: {
+          title: response.title,
+          title_article: response.title_article,
+          name: response.name,
+          example_article: response.content,
+          example_comment: response.comment
+        //}
       };
     }
     case __ASYNC_LOAD_WRITE_CONTENTS.rejected: {

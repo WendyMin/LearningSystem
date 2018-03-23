@@ -4,6 +4,8 @@ import asyncLoad from 'HOC/asyncLoad';
 
 import Index from 'Page/Index';
 
+const LearningSystem = asyncLoad( () => import('Page/LearningSystem') );
+const Login = asyncLoad( () => import('Page/Login') );
 const NotFound = asyncLoad( () => import('Page/NotFound') );
 const UITest = asyncLoad( () => import('Page/UITest') );
 const Learning = asyncLoad( () => import('Page/Learning') );
@@ -15,6 +17,9 @@ class Routes extends React.Component {
       <Switch location={this.props.location}>
         <Route exact path="/" component={Index} />
         <Route path="/learning" component={Learning} />
+        <Route path="/learningsystem" component={LearningSystem} />
+        <Route path="/loginOrSignup" component={Login} />
+
         <Route path="/test" component={Test} />
         <Route exact path="/ui" component={UITest} />
         <Route path='*' component={NotFound} />

@@ -1,0 +1,5 @@
+/*!
+ * Antinus Innovation
+ * All rights reserved
+ */
+webpackJsonp([4],{521:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var u=i(n(12)),l=i(n(1)),a=i(n(9)),r=i(n(2)),f=i(n(3)),o=i(n(0)),d=n(105),c=(n(21),i(n(223)));function i(e){return e&&e.__esModule?e:{default:e}}var p=(0,c.default)(function(){return n.e(14).then(n.bind(null,558))}),h=(0,c.default)(function(){return n.e(0).then(n.bind(null,516))}),s=function(e){function t(){return(0,l.default)(this,t),(0,r.default)(this,(t.__proto__||(0,u.default)(t)).apply(this,arguments))}return(0,f.default)(t,e),(0,a.default)(t,[{key:"render",value:function(){var e=this.props.match;return o.default.createElement(o.default.Fragment,null,o.default.createElement(d.Switch,null,o.default.createElement(d.Route,{exact:!0,path:e.url+"/logic",component:p}),o.default.createElement(d.Route,{path:"*",component:h})))}}]),t}(o.default.PureComponent);t.default=s}});

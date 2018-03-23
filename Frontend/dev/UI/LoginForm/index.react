@@ -5,6 +5,7 @@
 import React from 'react';
 import { FormGroup , ControlLabel , FormControl } from 'react-bootstrap';
 import ButtonControlPane from 'UI/ButtonControlPane';
+import style from 'style';
 
 class LoginForm extends React.Component {
   static defaultProps = {
@@ -36,8 +37,9 @@ class LoginForm extends React.Component {
             validationState={usernameValid}
             onSubmit={this.onLogin}
           >
-            <ControlLabel>username</ControlLabel>
+            <ControlLabel className={style.username}>Username</ControlLabel>
             <FormControl
+              className={style.inputUsername}
               type="text"
               value={this.state.username}
               placeholder="your username"
@@ -55,8 +57,9 @@ class LoginForm extends React.Component {
             controlId="userLoginUsername"
             validationState={passwordValid}
           >
-            <ControlLabel>password</ControlLabel>
+            <ControlLabel className={style.username}>Password</ControlLabel>
             <FormControl
+              className={style.inputUsername}
               type="password"
               value={this.state.password}
               placeholder="your password"

@@ -1,0 +1,52 @@
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { Link , Route } from 'react-router-dom';
+
+import Button from 'UI/Button';
+
+import makePage from 'HOC/makePage';
+
+class IndexPage extends React.Component {
+  constructor( props ){
+    super( props );
+  }
+
+  render(){
+    const { alert , openModal } = this.props;
+    return (
+      <React.Fragment>
+
+        <Link to="/learning/english">英语学习(新增) </Link>
+        <br/>
+        <Link to="/learning/english/courseLearning">英语学习 </Link>
+        <br/>
+        <Link to="/learning/logic">逻辑学习(新增)</Link>
+        <br/>
+        <Link to="/learning/writing">写作学习(新增)</Link>
+        <br/>
+        <Link to="/learning/logic/knowledge">逻辑部分知识点精要</Link>
+        <br/>
+        <Link to="/learning/logic/zhongdian">逻辑部分重点练习</Link>
+        <br/>
+        <Link to="/learning/writing/lunzheng">论证有效性分析</Link>
+        <br/>
+        <Link to="/learning/writing/lunshuo">论说文</Link>
+        <br/>
+        <Link to="/test/logic">逻辑入口测试</Link>
+        <br/>
+        <Link to="/ui">ui测试</Link>
+        <br/>
+        <Link to="/learningsystem">主页面设计</Link>
+        <br/>
+        {/*<Link to="/loginOrSignup">登录界面</Link>
+        <br/>  <Link to="/nowhere">nowhere</Link>*/}
+
+
+      </React.Fragment>
+    );
+  }
+
+};
+
+export default makePage( IndexPage );

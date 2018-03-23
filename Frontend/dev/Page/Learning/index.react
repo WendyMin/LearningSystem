@@ -7,11 +7,12 @@ import asyncLoad from 'HOC/asyncLoad';
 const EnglishLearning = asyncLoad( () => import( 'EnglishLearning' ) );
 const Knowledge = asyncLoad( () => import( 'LogicLearning/Knowledge' ) );
 const ZhongDian = asyncLoad( () => import( 'LogicLearning/ZhongDian' ) );
-//const LogicLearning = asyncLoad( () => import( 'LogicLearning' ) );
-// const WritingLearning = asyncLoad( () => import('WritingLearning') );
+const LogicLearning = asyncLoad( () => import( 'LogicLearning' ) );
+const WritingLearning = asyncLoad( () => import('WritingLearning') );
 const LunZheng = asyncLoad( () => import( 'WritingLearning/LunZheng' ) );
 const LunShuo = asyncLoad( () => import( 'WritingLearning/LunShuo' ) );
 const NotFound = asyncLoad( () => import( 'Page/NotFound' ) );
+const EnglishCourseLearning = asyncLoad( () => import( 'EnglishLearning/CourseLearning' ) );
 
 class Learning extends React.PureComponent {
     render(){
@@ -20,10 +21,11 @@ class Learning extends React.PureComponent {
         <React.Fragment>
           <Switch>
             <Route exact path={`${match.url}/english`} component={EnglishLearning} />
+            <Route exact path={`${match.url}/logic`} component={LogicLearning} />
+            <Route exact path={`${match.url}/writing`} component={WritingLearning} />
+            <Route exact path={`${match.url}/english/courseLearning`} component={EnglishCourseLearning} />
             <Route exact path={`${match.url}/logic/knowledge`} component={Knowledge} />
             <Route exact path={`${match.url}/logic/zhongdian`} component={ZhongDian} />
-            {/* <Route exact path={`${match.url}/logic`} component={LogicLearning} />
-            <Route exact path={`${match.url}/writing`} component={WritingLearning} /> */}
             <Route exact path={`${match.url}/writing/lunshuo`} component={LunShuo} />
             <Route exact path={`${match.url}/writing/lunzheng`} component={LunZheng} />
             <Route path="*" component={NotFound} />
@@ -32,5 +34,4 @@ class Learning extends React.PureComponent {
       );
     }
 };
-
 export default Learning;

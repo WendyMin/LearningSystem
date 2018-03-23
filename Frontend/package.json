@@ -4,7 +4,8 @@
   "description": "",
   "main": "webpack.config.dev.js",
   "scripts": {
-    "test": "webpack-dev-server --config webpack.config.dev.js --open",
+    "test": "webpack-dev-server --config webpack.config.dev.js --open --hot",
+    "build": "webpack -p",
     "make": "webpack --config webpack.config.pro.js",
     "flow": "flow",
     "hotDeploy": "webpack-dev-server --config webpack.config.dev.js --host=0.0.0.0"

@@ -7,6 +7,9 @@ import { reducer as EnglishArticle } from 'Connected/EnglishArticle';
 import { reducer as SingleSubjectTest } from 'Connected/SingleSubjectTest';
 import { reducer as ButtonExpand } from 'Connected/ButtonExpand';
 import { reducer as WriteContent } from 'Connected/WriteContent';
+import { reducer as Navigation } from 'Connected/Navigation';
+import { reducer as WriteKnowledge } from 'Connected/WriteKnowledge';
+import { reducer as PortTest } from 'Connected/PortTest';
 
 //import { reducer as ... } from 'Connected/...';
 
@@ -18,6 +21,9 @@ export default combineReducers({
   EnglishArticle: EnglishArticle,
   SingleSubjectTest: SingleSubjectTest,
   ButtonExpand: ButtonExpand,
-  WriteContent: WriteContent
+  WriteContent: WriteContent,
+  WriteKnowledge: WriteKnowledge,
+  PortTest: PortTest,
+
   //others
 });

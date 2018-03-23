@@ -20,7 +20,18 @@ class ButtonExpand extends React.PureComponent {
 
     return (
       <div className="container">
-      {
+
+        {buttonTexts.map(( oneway , key ) =>
+          <div key = {key}>
+            <Button className = {style.buttonSize} text={oneway}
+                    onClick = {() => {setButtonChoice(oneway);requestData( oneway )} }
+            /><br/>
+          </div>
+          )
+        }
+
+
+      {/*
          Object.entries(buttonTexts).map( ([waykey,oneway]) =>
            <div key={waykey}>
              <Button className={style.buttonSize} text={oneway}
@@ -28,7 +39,7 @@ class ButtonExpand extends React.PureComponent {
              /><br/>
            </div>
         )
-      }
+      */}
       </div>
     );
   }

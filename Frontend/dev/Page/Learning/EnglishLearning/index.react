@@ -4,6 +4,145 @@ import { bindActionCreators } from 'redux';
 import { Prompt } from 'react-router';
 import style from 'style';
 
+//import LogicTest from 'Page/Test/LogicTest';
+import CourseLearning from 'Page/Learning/EnglishLearning/CourseLearning';
+//import LogicHelp from 'UI/Help/LogicHelp';
+import EnglishHelp from 'UI/Help/EnglishHelp';
+
+import protect from 'HOC/protect';
+import asyncProcessControl from 'HOC/asyncProcessControl';
+import makePage from 'HOC/makePage';
+import applyHOCs from 'HOC/applyHOCs';
+
+class LogicLearning extends React.PureComponent {
+
+  constructor( props ){
+    super( props );
+
+    this.subject = ["入口测试" , "英语课程学习" , "复习" , "数据统计" , "帮助"];
+    this.state = {
+      test : true,
+      learning : false,
+      review : false,
+      statistics : false,
+      help : false,
+    }
+  }
+
+  showIntroduction = (num) => {
+    num == 0 ? this.setState({test: true , learning: false , review: false , statistics: false , help: false }) :
+    num == 1 ? this.setState({test: false , learning: true , review: false , statistics: false , help : false }) :
+    num == 2 ? this.setState({test: false , learning: false , review: true , statistics: false , help : false }) :
+    num == 3 ? this.setState({test: false , learning: false , review: false , statistics: true , help : false}) :
+    this.setState({test: false , learning: false , review: false , statistics: false , help : true})
+
+  }
+
+  render(){
+
+    var TextStyle = [];
+    this.state.test ? TextStyle[0] = style.chosedText : TextStyle[0] = style.normalText;
+    this.state.learning ? TextStyle[1] = style.chosedText : TextStyle[1] = style.normalText;
+    this.state.review ? TextStyle[2] = style.chosedText : TextStyle[2] = style.normalText;
+    this.state.statistics ? TextStyle[3] = style.chosedText : TextStyle[3] = style.normalText;
+    this.state.help ? TextStyle[4] = style.chosedText : TextStyle[4] = style.normalText;
+
+    return (
+      <React.Fragment>
+        <div className = {style.wholePage}>
+
+          <div className={style.HUD}>
+            <div className={style.title}> 学习系统 </div>
+          </div>
+
+          <div className = {style.subjectText}>
+            <br/><img className = {style.picture} src = "http://59.110.23.212/LearningSystem/admin.jpg"/>
+            <br/><div className = {style.username}> 用户名 </div><br/>
+            <div>
+              {this.subject.map((sub , key) =>
+                <div key = {key} className = {TextStyle[key]}
+                    onMouseMove = { () => this.showIntroduction(key) }
+                    onClick = { () => this.showIntroduction(key) }
+                >{sub}</div>
+              )}
+            </div>
+          </div>
+
+          <div className = {style.mainContent}>
+            {this.state.test ? <div></div> :
+            this.state.learning ? <div><CourseLearning/></div> :
+            this.state.review ? <div>复习</div> :
+            this.state.statistics ? <div>统计表单</div> :
+            <EnglishHelp/>}
+          </div>
+
+
+
+        </div>
+      </React.Fragment>
+    );
+  }
+};
+
+export default applyHOCs([
+  asyncProcessControl({
+  }),
+  protect({
+    logined: {
+      satisfy: l => l === true,
+      block: ({ openWindow , history, closeMask , openMask }) => {
+        openWindow( UserManagerWindow,
+          {
+            width: '380px',
+            height: '300px',
+            position: {
+              top: 'calc( 50% - 190px)',
+              left: 'calc( 50% - 150px)'
+            },
+            onCancel: () => history.goBack() || closeMask(),
+            onSuccess: closeMask,
+          }
+        );
+        openMask();
+      }
+    }
+  }),
+  makePage,
+  connect(
+    state => ({
+      logined: state.UserManager.logined,
+      username: state.UserManager.name,
+    }),
+    dispatch => ({
+      //...bindActionCreators( ButtonExpandActions , dispatch),
+    })
+  )],
+  LogicLearning
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Prompt } from 'react-router';
+import style from 'style';
+
 import Button from 'UI/Button';
 import Info from 'UI/Info';
 import ButtonControlPane from 'UI/ButtonControlPane';
@@ -58,7 +197,8 @@ class EnglishLearning extends React.PureComponent {
 
   loadQuestions = () => {
     this.props.loadQuestions({
-      url: "http://139.129.210.230/LearningSystem/BackEnd/get_question.php",
+      url: "http://59.110.23.212/LearningSystem/BackEnd/get_question.php",
+      //url: "LSCode/BackEnd/get_question.php",
       body: {
         username: this.props.username,
         lock: 0,
@@ -126,7 +266,7 @@ class EnglishLearning extends React.PureComponent {
       }
     }
     this.props.submitQuestions({
-      url: "http://139.129.210.230/LearningSystem/BackEnd/record_wrong_question.php",
+      url: "http://59.110.23.212/LearningSystem/BackEnd/record_wrong_question.php",
       body: {
         username: username,
         article_id: articleId,
@@ -228,7 +368,7 @@ class EnglishLearning extends React.PureComponent {
               9 -> do more
 
               */
-                (() => {
+                /*(() => {
                   switch( processStep ){
                     case 0:
                     case 5:
@@ -353,4 +493,4 @@ export default applyHOCs([
     })
   )],
   EnglishLearning
-);
+);*/

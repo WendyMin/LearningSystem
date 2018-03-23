@@ -9,11 +9,11 @@
 //export const __HIDE_QUESTION = "SINGLE_OPTION_QUESTIONS/__HIDE_QUESTION";
 //export const __UNLOCK_AND_HIDE = "SINGLE_OPTION_QUESTIONS/__UNLOCK_AND_HIDE";
 
-//export const __ASYNC_SUBMIT_QUESTIONS = {
-  //pending: "SingleOptionQuestion/__SUBMIT_QUESTIONS_PENDING",
-  //resolved: "SingleOptionQuestions/__SUBMIT_QUESTIONS_RESOVLED",
-  //rejected: "SingleOptionQuestions/__SUBMIT_QUESTIONS_REJECTED",
-//};
+export const __ASYNC_SUBMIT_QUESTIONS = {
+  pending: "MultOptionQuestons/__SUBMIT_QUESTIONS_PENDING",
+  resolved: "MultOptionQuestons/__SUBMIT_QUESTIONS_RESOVLED",
+  rejected: "MultOptionQuestons/__SUBMIT_QUESTIONS_REJECTED",
+};
 
 //export const __ASYNC_LOAD_QUESTIONS = {
   //pending: "SingleOptionQuestions/__LOAD_QUESTIONS_PENDING",

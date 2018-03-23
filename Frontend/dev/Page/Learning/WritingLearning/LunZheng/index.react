@@ -5,8 +5,6 @@ import { Prompt } from 'react-router';
 import style from 'style';
 
 import Button from 'UI/Button';
-import Info from 'UI/Info';
-import MultQuestion from 'UI/MultQuestion';
 
 import Loading from 'Animation/Loading';
 import SlideLR from 'Animation/SlideLR';
@@ -25,9 +23,17 @@ import {
   actions as WriteContentActions
 } from 'Connected/WriteContent';
 import {
+  view as WriteKnowledge,
+  actions as WriteKnowledgeActions
+} from 'Connected/WriteKnowledge';
+import {
   view as MultOptionQuestons,
   actions as MultOptionQuestionsActions
 } from 'Connected/MultOptionQuestions';
+import {
+  view as PortTest,
+  actions as PortTestActions
+} from 'Connected/PortTest';
 
 import protect from 'HOC/protect';
 import asyncProcessControl from 'HOC/asyncProcessControl';
@@ -49,7 +55,9 @@ class LunZheng extends React.PureComponent {
       contentDisplay: false,
       titleContentDisplay: false,
       optionContentDisplay: false,
-      acknowledgeDisplay: false
+      acknowledgeDisplay: false,
+      egArticleContentDisplay: false,
+      gongguEgArticle: false
     };
 
   }
@@ -78,7 +86,7 @@ class LunZheng extends React.PureComponent {
       zhentiDisplay: false
     });
     this.props.loadButtonContents({
-      url: "http://139.129.210.230/LearningSystem/BackEnd/lunzheng_zhaocuo.php"
+      url: "http://59.110.23.212/LearningSystem/BackEnd/lunzheng_zhaocuoxicuo.php"
     });
   }
 
@@ -87,12 +95,13 @@ class LunZheng extends React.PureComponent {
    */
   loadButtonContents_moban = () => {
     this.setState({
+      //zhaocuoDisplay: false,
       mobanDisplay: true,
       gongguDisplay: false,
       zhentiDisplay: false
     });
     this.props.loadButtonContents({
-        url: "http://139.129.210.230/LearningSystem/BackEnd/lunzheng_moban.php"
+        url: "http://59.110.23.212/LearningSystem/BackEnd/lunzheng_template.php"
       });
   }
 
@@ -107,7 +116,7 @@ class LunZheng extends React.PureComponent {
       zhentiDisplay: false
     });
     this.props.loadButtonContents({
-        url: "http://139.129.210.230/LearningSystem/BackEnd/lunzheng_gonggu.php"
+        url: "http://59.110.23.212/LearningSystem/BackEnd/lunzheng_gonggu.php"
       });
   }
 
@@ -122,7 +131,7 @@ class LunZheng extends React.PureComponent {
       zhentiDisplay: !this.state.zhentiDisplay
     });
     this.props.loadButtonContents({
-        url: "http://139.129.210.230/LearningSystem/BackEnd/lunzheng_zhenti.php"
+        url: "http://59.110.23.212/LearningSystem/BackEnd/lunzheng_zhenti.php"
       });
   }
 
@@ -134,10 +143,17 @@ class LunZheng extends React.PureComponent {
       zhentiDisplay: false ,
       titleContentDisplay: true ,
       optionContentDisplay: true,
-      acknowledgeDisplay: false
+      acknowledgeDisplay: false,
+      egArticleContentDisplay: false
    });
     this.props.loadWriteContents({
-      url: "http://139.129.210.230/LearningSystem/BackEnd/lunzheng_zhenti_content.php",
+      url: "http://59.110.23.212/LearningSystem/BackEnd/lunzheng_zhenti_content.php",
+      body: {
+        requestQuestion: choice
+      }
+    });
+    this.props.loadPortContent({
+      url: "http://59.110.23.212/LearningSystem/BackEnd/lunzheng_zhenti_error.php",
       body: {
         requestQuestion: choice
       }
@@ -148,11 +164,13 @@ class LunZheng extends React.PureComponent {
     this.setState({
       gongguDisplay: false,
       titleContentDisplay: true ,
-      optionContentDisplay: true,
+      gongguEgArticle: false,
+      egArticleContentDisplay: true,
+      optionContentDisplay: false,
       acknowledgeDisplay: false
    });
     this.props.loadWriteContents({
-      url: "http://139.129.210.230/LearningSystem/BackEnd/lunzheng_gonggu_content.php",
+      url: "http://59.110.23.212/LearningSystem/BackEnd/lunzheng_gonggu_content.php",
       body: {
         requestQuestion: choice
       }
@@ -165,10 +183,11 @@ class LunZheng extends React.PureComponent {
       jiqiaoDisplay: false,
       titleContentDisplay: false ,
       optionContentDisplay: false,
+      egArticleContentDisplay: false,
       acknowledgeDisplay: true
    });
-    this.props.loadWriteContents({
-      url: "http://139.129.210.230/LearningSystem/BackEnd/lunzheng_zhaocuo_content.php",
+    this.props.loadWriteKnowledge({
+      url: "http://59.110.23.212/LearningSystem/BackEnd/lunzheng_zhaocuoxicuo_content.php",
       body: {
         requestQuestion: choice
       }
@@ -181,10 +200,11 @@ class LunZheng extends React.PureComponent {
       jiqiaoDisplay: false,
       titleContentDisplay: false ,
       optionContentDisplay: false,
+      egArticleContentDisplay: false,
       acknowledgeDisplay: true
    });
-    this.props.loadWriteContents({
-      url: "http://139.129.210.230/LearningSystem/BackEnd/lunzheng_moban_content.php",
+    this.props.loadWriteKnowledge({
+      url: "http://59.110.23.212/LearningSystem/BackEnd/lunzheng_template_content.php",
       body: {
         requestQuestion: choice
       }
@@ -202,17 +222,21 @@ class LunZheng extends React.PureComponent {
       zhentiDisplay,
       titleContentDisplay,
       optionContentDisplay,
-      acknowledgeDisplay
+      acknowledgeDisplay,
+      egArticleContentDisplay
      } = this.state;
 
     const {
       loadButtonContentsState,
       loadWriteContentsState,
+      loadWriteKnowledgeState,
       ined,
       choice,
+      name,
+      example_article,
       showContent
     } = this.props;
-    console.log(optionContentDisplay)
+    //console.log(optionContentDisplay)
 
 
     return (
@@ -223,7 +247,8 @@ class LunZheng extends React.PureComponent {
         />
 
         <div className={style.HUD}>
-          论证有效性分析
+          <div className={style.HUDtitle}> 学习系统 </div>
+          <div> 论证有效性分析 </div>
         </div>
 
         <div className={style.wrapper}>
@@ -302,6 +327,25 @@ class LunZheng extends React.PureComponent {
               null
             }
 
+            {
+              egArticleContentDisplay?
+              <div className={style.option}>
+                <div className = {style.egArticleText} onClick = {() => this.setState({gongguEgArticle: !this.state.gongguEgArticle})}> 参考范文 </div>
+                {this.state.gongguEgArticle ?
+                  <div className = {style.egArticle}>
+                    <p className = {style.article_title}>{name}</p>
+                    {example_article.map((onePara , key) =>
+                      <p key = {key}> &nbsp;&nbsp;&nbsp;&nbsp;{onePara} </p>
+                    )}
+                  </div>
+                  :
+                  null
+                }
+              </div>
+              :
+              null
+            }
+
 
 
               {
@@ -319,8 +363,10 @@ class LunZheng extends React.PureComponent {
 
           {
              acknowledgeDisplay?
-               <div className={style.content}>
-                  <WriteContent className={style.content}  loader={this.loadWriteContents}/>
+               <div //className={style.rightPane}
+               >
+                 <div className={style.centerbiaoti}>{choice}</div>
+                 <WriteKnowledge className={style.content}  loader={this.loadWriteContents}/>
                </div>
             :
              null
@@ -373,12 +419,17 @@ export default applyHOCs([
       loadButtonContentsState: state.ButtonExpand.loadState,
       choice: state.ButtonExpand.choice,
       mainContent: state.WriteContent.content,
+      name: state.WriteContent.name,
+      example_article: state.WriteContent.example_article,
       loadWriteContentsState: state.WriteContent.loadState,
+      loadWriteKnowledgeState: state.WriteKnowledge.loadState,
       showContent: state.ButtonExpand.showContent,
     }),
     dispatch => ({
       ...bindActionCreators( ButtonExpandActions , dispatch ),
-      ...bindActionCreators( WriteContentActions , dispatch )
+      ...bindActionCreators( WriteContentActions , dispatch ),
+      ...bindActionCreators( WriteKnowledgeActions , dispatch ),
+      ...bindActionCreators( PortTestActions , dispatch ),
     })
 
   )],

@@ -3,14 +3,14 @@
 **   Author: Eric Deng
 */
 /*import {
-  __SET_CHOICE,
-  __LOCK_QUESTION,
-  __HIDE_QUESTION,
-  __SHOW_QUESTION,
-  __LOCK_AND_SHOW,
-  __UNLOCK_AND_HIDE,
-  __UNLOCK_QUESTION,
-  __ASYNC_LOAD_QUESTIONS,
+//  __SET_CHOICE,
+//  __LOCK_QUESTION,
+//  __HIDE_QUESTION,
+//  __SHOW_QUESTION,
+//  __LOCK_AND_SHOW,
+  //__UNLOCK_AND_HIDE,
+  //__UNLOCK_QUESTION,
+  //__ASYNC_LOAD_QUESTIONS,
   __ASYNC_SUBMIT_QUESTIONS,
 } from 'actionTypes';
 
