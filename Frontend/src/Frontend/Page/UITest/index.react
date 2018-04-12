@@ -56,21 +56,20 @@ class UITest extends React.PureComponent {
 //     url: "http://59.110.23.212/LearningSystem/BackEnd/word_test.php",
 //   })
 // }
-function2 = () => {
-  const {username} = this.props;
-  console.log(username)
-  this.props.loadButtonContents({
-    url: "http://59.110.23.212/LearningSystem/BackEnd/logic_ceshi.php",
-    body: {
-      username: this.props.username,
-      //articleId: 1
-    }
-  })
-}
+//
+// function = () => {
+//   const {username} = this.props;
+//   console.log(username)
+//   this.props.loadButtonContents({
+//     url: "http://59.110.23.212/LearningSystem/BackEnd/logic_ceshi.php",
+//     body: {
+//       username: this.props.username,
+//       //articleId: 1
+//     }
+//   })
+// }
 
-function1 = () => {
-  const {username} = this.props;
-  console.log(username)
+function = () => {
   this.props.loadButtonContents({
     url: "http://59.110.23.212/LearningSystem/BackEnd/getWriteTest.php",
     body: {
@@ -96,6 +95,7 @@ function1 = () => {
 
         <p>hi</p>
         <Button text="测试" onClick={this.function} />
+        <input type="file" />
 
       </React.Fragment>
     );
