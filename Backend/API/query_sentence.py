@@ -123,4 +123,5 @@ def translate_sentence(user_name,lock,articleId):
 def get_translate_sentence():
 	sys.exit(translate_sentence(sys.argv[1],sys.argv[2],sys.argv[3]))
 if __name__ == '__main__':
-    get_translate_sentence()
+    #get_translate_sentence()
+    translate_sentence('lxq','0','1')

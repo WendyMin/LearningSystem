@@ -1,6 +1,0 @@
-export default ( HOCarray , Comp ) => {
-  for( let i = 0 ; i < HOCarray.length ; i++ ){
-    Comp = HOCarray[i]( Comp );
-  }
-  return Comp;
-};

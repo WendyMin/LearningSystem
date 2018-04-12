@@ -37,7 +37,7 @@ def hard_word(username,articleId):
     # jsondata_sub = jsondata[1:len(jsondata)-1]
     print jsondata
 def query_word(word):
-    conn = MySQLdb.Connect(host = 'localhost',user = 'root', passwd = '123456', db = 'gyc_f_e', \
+    conn = MySQLdb.Connect(host = '127.0.0.1',user = 'root', passwd = '123456', db = 'gyc_f_e', \
                            port = 3306,charset='utf8')
     cur = conn.cursor()
     # cur = connect_db()
@@ -77,7 +77,7 @@ def query_word(word):
         a = youdao_api(word)
         return a
 def youdao_api(word):
-    conn = MySQLdb.Connect(host='localhost', user='root', passwd='123456', db='gyc_f_e', port=3306, charset='utf8')
+    conn = MySQLdb.Connect(host='127.0.0.1', user='root', passwd='123456', db='gyc_f_e', port=3306, charset='utf8')
     cur = conn.cursor()
     # print 'youdao'
     a = word.split()

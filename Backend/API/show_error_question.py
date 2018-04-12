@@ -66,5 +66,5 @@ def show_questionl():
 	sys.exit(show_question(sys.argv[1],sys.argv[2]))
 if __name__ == '__main__':
 	show_questionl()
-    # show_question('lxq','5')
+#        show_question('lxq','5')
 

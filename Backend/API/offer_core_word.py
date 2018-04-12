@@ -26,5 +26,5 @@ def core_word(articleId):
 def core_word_l():
     sys.exit(core_word(sys.argv[1]))
 if __name__ == '__main__':
-    # core_word(5)
-    core_word_l()
+   # core_word(5)
+   core_word_l()

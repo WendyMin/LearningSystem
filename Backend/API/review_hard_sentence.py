@@ -39,5 +39,5 @@ def review(username,articleId):
 def view_l():
     sys.exit(review(sys.argv[1],sys.argv[2]))
 if __name__ == '__main__':
-    # review('lxq',5)
+   #  review('lxq',5)
     view_l()

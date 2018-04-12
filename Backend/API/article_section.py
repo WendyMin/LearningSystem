@@ -48,5 +48,5 @@ def offer_passage_recommend(articleID):
 def offer_passage_recommend_l():
     offer_passage_recommend(sys.argv[1])
 if __name__ == '__main__':
-    offer_passage_recommend_l()
+     offer_passage_recommend_l()
     # offer_passage_recommend('1')

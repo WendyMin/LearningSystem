@@ -55,4 +55,4 @@ def storagel():
     sys.exit(storage_all_error_questions(sys.argv[3::],sys.argv[1],sys.argv[2]))
 if __name__ == '__main__':
     storagel()
-    # storage_all_error_questions('1 5 8','lxq',13)
+   # storage_all_error_questions(['2','1','3'],'lxq',12)

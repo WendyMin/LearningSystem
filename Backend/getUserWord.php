@@ -1,5 +1,7 @@
 <?php
 header("Access-Control-Allow-Origin:*");
-$cmd = "sudo /usr/bin/python API/offer_hard_word.py $_POST['username'] $_POST['articleId']";
-system( $cmd );
- ?>
+  $username = $_POST['username'];
+  $articleId = $_POST['articleId'];
+  $cmd = "/usr/bin/python API/offer_hard_word.py {$username} {$articleId}";
+  system($cmd);
+?>

@@ -266,6 +266,6 @@ def storage_wordl():
     sys.exit(storage_all_word(sys.argv[3::],sys.argv[1],sys.argv[2]))
 if __name__ == '__main__':
     storage_wordl()
-    # storage_all_word(['abideuuu',' you', 'I','are','poople'],'lxq',80)
+    #storage_all_word(['abideuuu',' you', 'I','are','poople'],'lxq',80)
     # recommend_ll('lxq',-1)
     # recommend(['abideuuu',' you', 'I','are','poople'],'lxq',-1)

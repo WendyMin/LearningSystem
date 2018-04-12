@@ -35,3 +35,4 @@ def offer_passageidl():
 	sys.exit(offer_passageid(sys.argv[1]))
 if __name__ == '__main__':
 	offer_passageidl()
+	# offer_passageid('lxq')

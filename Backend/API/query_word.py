@@ -159,4 +159,4 @@ def query_wordl():
 if __name__ == '__main__':
     # query_word('e')
     # query_all_word(['we','we are','w'])
-    query_wordl()
+   query_wordl()
