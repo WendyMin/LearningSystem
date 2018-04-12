@@ -48,7 +48,7 @@ class WritingPage extends React.PureComponent {
     //this.state.review ? TextStyle[2] = style.chosedText : TextStyle[2] = style.normalText;
     this.state.statistics ? TextStyle[2] = style.chosedText : TextStyle[2] = style.normalText;
     this.state.help ? TextStyle[3] = style.chosedText : TextStyle[3] = style.normalText;
-    this.state.upload ? TextStyle[4] = style.chosedTest: TextStyle[4] = style.normalText;
+    this.state.upload ? TextStyle[4] = style.chosedText: TextStyle[4] = style.normalText;
 
     return (
       <React.Fragment>
