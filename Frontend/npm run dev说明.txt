@@ -1,0 +1,5 @@
+首先，更改了./package.json里的""dev": "direct dev""语句，换为""dev": "direct openDev""语句
+在此调用的是./node_modules/simple-direct/package.json中的openDev，即为"webpack-dev-server --config webpack.config.dev.js --hot --open"
+现在可以在npm run dev时打开网页
+接下来更改了./node_modules/simple-direct/package.json中的openDev语句，增加了"--inline"，即变为""openDev": "webpack-dev-server --config webpack.config.dev.js --hot --inline --open""
+现在可以随着代码的变化，网页实时更新了

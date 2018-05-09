@@ -1,7 +1,7 @@
 import {
   __ASYNC_LOAD_WRITE_KNOWLEDGE
 } from 'actionTypes';
-import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
+
 
 let loadWriteKnowledgeCounter = 0;
 const loadWriteKnowledgeStart = () => ({
@@ -39,12 +39,12 @@ export const loadWriteKnowledge = ({ url , body , parser , headers  , initState 
     }
     dispatch( loadWriteKnowledgeStart() );
     if( typeof body === "object" ){
-      body = jsonToUrlencoded( body );
+      body = JSON.stringify( body );
     }
     fetch( url , {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           ...headers
         },
         body: body

@@ -11,5 +11,7 @@ module.exports = {
       secret: "Antinux",
       resave: true,
       saveUninitialized: true
-    }
+    },
+    middleWares: [],
+    socketMiddleWares: []
 };

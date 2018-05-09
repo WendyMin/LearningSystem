@@ -1,7 +1,7 @@
 import {
   __ASYNC_LOAD_PORT_CONTENT
 } from 'actionTypes';
-import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
+//import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
 
 let loadPortContentCounter = 0;
 const loadPortContentStart = () => ({
@@ -39,12 +39,12 @@ export const loadPortContent = ({ url , body , parser , headers  , initState }) 
     }
     dispatch( loadPortContentStart() );
     if( typeof body === "object" ){
-      body = jsonToUrlencoded( body );
+      body = JSON.stringify( body );
     }
     fetch( url , {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           ...headers
         },
         body: body

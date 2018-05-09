@@ -2,7 +2,7 @@ import {
   __ASYNC_LOAD_BUTTON_CONTENTS,
   __SET_BUTTON_CHOICE
 } from 'actionTypes';
-import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
+//import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
 
 let setButtonChoiceCounter = 0;
 export const setButtonChoice = ( choice ) => ({
@@ -49,12 +49,12 @@ export const loadButtonContents = ({ url , body , parser , headers  , initState 
     }
     dispatch( loadButtonContentsStart() );
     if( typeof body === "object" ){
-      body = jsonToUrlencoded( body );
+      body = JSON.stringify( body );
     }
     fetch( url , {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           ...headers
         },
         body: body

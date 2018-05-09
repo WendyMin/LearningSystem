@@ -10,7 +10,7 @@ import {
   __CLEAR_AUTO_NEXT
 } from 'actionTypes';
 
-import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
+//import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
 
 export const forceNext = () => ( dispatch , getState ) => {
   const { SingleSubjectTest: { clear } } = getState();
@@ -113,12 +113,12 @@ export const submitQuestions = ({ url , body , headers }) => ( dispatch , getSta
   }
   dispatch( submitQuestionsStart() );
   if( typeof body === "object" ){
-    body = jsonToUrlencoded( body );
+    body = JSON.stringify( body );
   }
   fetch( url , {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         ...headers
       },
       body: body
@@ -168,12 +168,12 @@ export const loadQuestions = ({ url , body , parser , headers  , initState }) =>
   }
   dispatch( loadQuestionsStart() );
   if( typeof body === "object" ){
-    body = jsonToUrlencoded( body );
+    body = JSON.stringify( body );
   }
   fetch( url , {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         ...headers
       },
       body: body

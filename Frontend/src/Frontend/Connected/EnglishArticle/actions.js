@@ -110,13 +110,17 @@ export const translateWords = () => ( dispatch , getState ) => {
     }
   }
   dispatch( translateWordsStart() );
-  fetch( 'http://59.110.23.212/LearningSystem/BackEnd/get_word.php' , {
+  fetch( '/api/getWord' , {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
+        //'Content-Type': 'application/x-www-form-urlencoded',
 
       },
-      body: 'query_words=' + oldState.EnglishArticle.choosedWords.toArray().join(' ')
+      // body: 'query_words=' + oldState.EnglishArticle.choosedWords.toArray().join(' ')
+      body: JSON.stringify({
+         query_words: oldState.EnglishArticle.choosedWords.toArray().join(' ')
+      })
   })
   .then( response => {
     if( !response.ok ){
@@ -174,12 +178,17 @@ export const loadContent = () => ( dispatch , getState ) => {
     }
   }
   dispatch( loadContentStart() );
-  fetch( 'http://59.110.23.212/LearningSystem/BackEnd/get_sentence.php' , {
+  fetch( '/api/getSentence' , {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       },
-      body: `username=${oldState.UserManager.name}&lock=0&articleId=0`
+      // body: `username=${oldState.UserManager.name}&lock=0&articleId=0`
+      body: JSON.stringify({
+         username: oldState.UserManager.name,
+         lock:0,
+         articleId:0
+      })
   })
   .then( response => {
     if( !response.ok ){

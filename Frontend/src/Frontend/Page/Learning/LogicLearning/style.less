@@ -1,13 +1,14 @@
 @niceGrey: hsl( 220 , 50% , 55% );
 
-.wholePage {
+.wholeLogicPage {
   height: 100%;
   width: 100%;
 }
 
-.HUD {
-  display: flex;
-  height: 10%;
+.logicPageTitle {
+  position: absolute;
+  //display: flex;
+  height: 6%;
   width: 100%;
   background-color: @niceGrey;
   color: white;
@@ -29,10 +30,10 @@
 
 .subjectText {
   position: absolute;
-  top: 10%;
+  top: 6%;
   left: 0;
   bottom: 0;
-  width: 15%;
+  width: 12%;
   background: @niceGrey;
   font-size: 25px;
   text-align: center;
@@ -57,20 +58,15 @@
 }
 
 .chosedText {
-  //font-size: 25px;
-  //padding-top: 5px;
-  //padding-bottom: 5px;
-  //color: white;
-  //color: @niceGrey;
   background: orange;
 }
 
 .mainContent {
   position: absolute;
-  top: 10%;
-  left: 15%;
-  height: 90%;
-  width: 85%;
+  top: 8%;
+  left: 12%;
+  height: 94%;
+  width: 88%;
   overflow-y: scroll;
   .bottomButton {
     display: block;
@@ -88,9 +84,3 @@
 .normalLogin {
   color: white;
 }
-
-//.bottomButton {
-  ///position: absolute;
-  //bottom: 3%;
-  //left: 40%;
-//}
