@@ -1,0 +1,76 @@
+@niceGrey: hsl( 220 , 50% , 55% );
+
+.wholeLogicPage {
+  height: 100%;
+  width: 100%;
+}
+
+.logicPageTitle {
+  position: absolute;
+  //display: flex;
+  height: 6%;
+  width: 100%;
+  background-color: @niceGrey;
+  color: white;
+  font-size: 100%;
+  align-items: center;
+  font-family: Arvo;
+}
+
+.title {
+  position: absolute;
+  left: 5%;
+  font-size: 25px;
+}
+.goback {
+  position: absolute;
+  right: 8%;
+  font-size: 25px;
+}
+
+.leftNavigation {
+  position: absolute;
+  top: 6%;
+  left: 0;
+  bottom: 0;
+  width: 12%;
+  background: @niceGrey;
+  font-size: 25px;
+  text-align: center;
+}
+
+.picture {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.username {
+  color: white;
+  font-size: 20px;
+}
+
+.normalText , .chosedText {
+  font-size: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: white;
+  //list-style-type: none;  //去掉 li 标签前面的圆点
+}
+
+.chosedText {
+  background: orange;
+}
+
+.mainContent {
+  position: absolute;
+  top: 8%;
+  left: 12%;
+  height: 92%;
+  width: 88%;
+  overflow-y: scroll;
+}
+
+.userInfo {
+  position: absolute;
+  top: 10%;
+}

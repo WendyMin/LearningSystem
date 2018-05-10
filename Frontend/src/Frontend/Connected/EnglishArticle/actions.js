@@ -110,7 +110,7 @@ export const translateWords = () => ( dispatch , getState ) => {
     }
   }
   dispatch( translateWordsStart() );
-  fetch( '/api/getWord' , {
+  fetch( '/api/eng_getWord' , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -178,7 +178,7 @@ export const loadContent = () => ( dispatch , getState ) => {
     }
   }
   dispatch( loadContentStart() );
-  fetch( '/api/getSentence' , {
+  fetch( '/api/eng_getSentence' , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

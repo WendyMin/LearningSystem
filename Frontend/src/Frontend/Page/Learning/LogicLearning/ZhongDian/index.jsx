@@ -27,6 +27,9 @@ import {
   view as PortTest,
   actions as PortTestActions
 } from 'Connected/PortTest';
+import {
+  actions as LearningTypeSelectActions
+} from 'Connected/LearningTypeSelect';
 
 import TextAndImag from 'UI/TextAndImag';
 //import SingleQuestion from 'UI/SingleQuestion';
@@ -139,7 +142,8 @@ class ZhongDian extends React.PureComponent {
       ined,
       questions,
       content,
-      setChoice
+      setChoice,
+      setLearningType
     } = this.props;
     console.log(this.props)
     //console.log(questions)
@@ -168,7 +172,8 @@ class ZhongDian extends React.PureComponent {
                 <h4 className = {style.dalei}> {content.chapter_name} </h4>
                 <p>{content.shuxu}</p>
                 <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test"/>
-                <Button className = {style.button} text = {"确认提交"} onClick={this.submitQuestions}/>
+                <Button className = {style.submitButton} text = {"确认提交"} onClick={this.submitQuestions}/>
+                <Button className = {style.enterNextButton} text = {"进入强化练习"} onClick = {() => setLearningType("强化练习")}/>
               </div>
             </SlideRL>
           </Loading>
@@ -228,7 +233,8 @@ export default applyHOCs([
     }),
     dispatch => ({
       ...bindActionCreators( SingleOptionQuestionsActions , dispatch ),
-      ...bindActionCreators( PortTestActions , dispatch )
+      ...bindActionCreators( PortTestActions , dispatch ),
+      ...bindActionCreators( LearningTypeSelectActions , dispatch )
     })
   )],
   ZhongDian

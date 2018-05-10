@@ -59,15 +59,15 @@ class LearningTypeSelect extends React.PureComponent {
 
           <div className = {style.fangkuang3}>
             <div className = {style.tupianPosition}><img className = {style.tupian} src = "/static/images/admin.jpg"/></div>
-            <div className = {TextStyle[3]}
+            <div className = {TextStyle[2]}
                  onMouseOver = {() => this.setState({changeColor3: true})} onMouseLeave = {() => this.setState({changeColor4: false})}
-                 onClick = {() => this.setState({typeselect: false , yuedu: false , benkexuexi: false , chtoeng: false })}>
+                 onClick = {() => this.setState({typeselect: false , yuedu: false , benkexuexi: false , chtoeng: true })}>
                  点击查看<br/>汉译英
             </div>
           </div>
         </div>:
         this.state.yuedu ? <YueDu/>:
-        this.state.chtoeng ? <Benkefuxi/>:
+        this.state.benkexuexi ? <Benkexuexi/>:
         this.state.chtoeng ? <ChtoEng/>: null
       }
 

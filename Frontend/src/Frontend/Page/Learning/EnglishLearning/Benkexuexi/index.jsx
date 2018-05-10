@@ -9,7 +9,7 @@ class Benkexuexi extends React.PureComponent {
   render(){
     return(
       <React.Fragment>
-        <div><div> chart </div></div>
+        <div><div> 本课学习 </div></div>
 
       </React.Fragment>
     )

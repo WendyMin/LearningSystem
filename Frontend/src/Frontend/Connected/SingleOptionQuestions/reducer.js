@@ -47,7 +47,7 @@ export default ( state = {
 
     case __LOCK_QUESTION:
     case __UNLOCK_QUESTION:
-      
+
       return {
         ...state,
         content: content.map(

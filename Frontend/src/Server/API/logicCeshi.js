@@ -1,12 +1,12 @@
 const callPython = require("./callPython");
 
-const pythonFilename = "offer_logic_ceshi1.py";
+const pythonFilename = "offer_logic_ceshi2.py";
 
 module.exports = ( req, res ) => {
-  const { username } = req.body;
+  const { username , chapter_name } = req.body;
   const [ errCode, result ] = callPython(
     pythonFilename,
-    `${username}`
+    `${username} ${chapter_name}`
   );
   if( errCode ){
     res.status(500).end();

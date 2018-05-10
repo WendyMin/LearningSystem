@@ -14,8 +14,12 @@ import {
   view as PortTest,
   actions as PortTestActions
 } from 'Connected/PortTest';
+import {
+  actions as LearningTypeSelectActions
+} from 'Connected/LearningTypeSelect';
 import TextAndImag from 'UI/TextAndImag';
 import Info from 'UI/Info';
+import Button from 'UI/Button';
 
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
@@ -33,7 +37,8 @@ class Knowledge extends React.PureComponent {
     this.props.loadPortContent({
       url: "/api/logicZhishidian",
       body: {
-        username: this.props.username
+        username: this.props.username,
+        chapter_name: this.props.chapter_name
       },
     });
   }
@@ -50,9 +55,10 @@ class Knowledge extends React.PureComponent {
       loadContent,
       loadContentState,
       total_content,
-      ined
+      ined,
+      setLearningType
     } = this.props;
-    console.log(total_content.content)
+    //onsole.log(total_content.content)
 
     return (
       <React.Fragment>
@@ -80,7 +86,8 @@ class Knowledge extends React.PureComponent {
                     {total_content.xiaolei == undefined ? null:  <TextAndImag list = {total_content.xiaolei[key]} />}
                   </div>)}</div>
                 }
-              </div>
+                <Button className = {style.enterNextButton} text = {"进入重点习题"} onClick = {() => setLearningType("重点习题")}/>
+                </div>
               </SlideRL>
             </Loading>
           </div>
@@ -100,11 +107,13 @@ export default applyHOCs([
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
+      chapter_name: state.ZhentiPerYearTongji.tongji,
       total_content: state.PortTest.content,
       loadContentState: state.PortTest.loadState,
     }),
     dispatch => ({
-      ...bindActionCreators( PortTestActions , dispatch )
+      ...bindActionCreators( PortTestActions , dispatch ),
+      ...bindActionCreators( LearningTypeSelectActions , dispatch )
     })
   )],
   Knowledge

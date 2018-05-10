@@ -9,7 +9,7 @@ class ChtoEng extends React.PureComponent {
   render(){
     return(
       <React.Fragment>
-        <div className={style.wrapper}> ChtoEng!!! </div>
+        <div> ChtoEng </div>
 
       </React.Fragment>
     )

@@ -1,6 +1,6 @@
 const callPython = require("./callPython");
 
-const pythonFilename = "jieshou_logic_user_test1.py";
+const pythonFilename = "jieshou_logic_user_test2.py";
 
 module.exports = ( req, res ) => {
   const { username , right_rate0 , right_rate1 , right_rate2 , right_rate3 , right_rate4 , right_rate5 , right_rate6 , right_rate7 ,

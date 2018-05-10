@@ -1,6 +1,6 @@
 const callPython = require("./callPython");
 
-const pythonFilename = "offer_lunzheng_all_year_zhenti.py";
+const pythonFilename = "offer_lunzheng_zhenti_mingcheng.py";
 
 module.exports = ( req, res ) => {
   const [ errCode, result ] = callPython( pythonFilename );

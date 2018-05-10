@@ -164,7 +164,8 @@ class UnitTest extends React.PureComponent {
               <SlideRL play={ined}>
                 <div>
                   <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test"/>
-                  <Button className = {style.button} text = {"确认提交"} onClick={this.submitQuestions}/>
+                  <Button className = {style.submitButton} text = {"确认提交"} onClick={this.submitQuestions}/>
+                  <Button className = {style.viewStatistics} text = {"查看本章数据统计"}/>
                 </div>
               </SlideRL>
             </Loading>

@@ -1,0 +1,48 @@
+@niceGrey: hsl( 220 , 50% , 55% );
+.typeSelect {
+  font-size: 20px;
+  color: blue;
+  text-align: center;
+}
+
+.fangkuang1 , .fangkuang2 , .fangkuang3 , .fangkuang4 {
+  position: absolute;
+  width: 15%;
+  height: 50%;
+  top: 25%;
+  font-size: 30px;
+  text-align: center;
+  border: solid 1px;
+  border-radius: 4px;
+  border-color: @niceGrey;
+  background-color: orange;
+  background: url("/static/images/background.jpg");
+  .tupianPosition{
+    position: relative;
+    height: 70%;
+    top: 15%;
+    .tupian{
+      border-radius: 50%;
+    }
+  }
+}
+.fangkuang1 {
+  position: absolute;
+  left: 8%;
+}
+.fangkuang2 {
+  left: 31%;
+}
+.fangkuang3 {
+  left: 54%;
+}
+.fangkuang4 {
+  left: 77%;
+}
+
+.normal_type {
+   color: black;
+}
+.choosed_type {
+  color: blue;
+}

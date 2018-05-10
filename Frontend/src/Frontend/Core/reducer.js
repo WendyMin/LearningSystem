@@ -11,6 +11,8 @@ import { reducer as PortTest } from 'Connected/PortTest';
 import { reducer as SubjectSelect } from 'Connected/SubjectSelect';
 import { reducer as ZhentiPerYearTongji } from 'Connected/ZhentiPerYearTongji';
 import { reducer as ZhentiAllYearTongji } from 'Connected/ZhentiAllYearTongji';
+import { reducer as PageDesign } from 'Connected/PageDesign';
+import { reducer as LearningTypeSelect } from 'Connected/LearningTypeSelect';
 //import { reducer as ... } from 'Connected/...';
 
 export default {
@@ -26,6 +28,8 @@ export default {
   SubjectSelect: SubjectSelect,
   ZhentiPerYearTongji: ZhentiPerYearTongji,
   ZhentiAllYearTongji: ZhentiAllYearTongji,
+  PageDesign: PageDesign,
+  LearningTypeSelect: LearningTypeSelect
 
   //others
 };

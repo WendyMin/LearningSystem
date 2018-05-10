@@ -5,12 +5,17 @@ import { Prompt } from 'react-router';
 import style from 'style';
 
 import LogicTest from 'Page/Learning/LogicLearning/LogicTest';
-import LearningTypeSelect from 'Page/Learning/LogicLearning/LearningTypeSelect';
+import EnterLearning from 'Page/Learning/LogicLearning/EnterLearning';
+import Knowledge from 'Page/Learning/LogicLearning/Knowledge';
+import ZhongDian from 'Page/Learning/LogicLearning/ZhongDian';
+import QiangHua from 'Page/Learning/LogicLearning/QiangHua';
+import UnitTest from 'Page/Learning/LogicLearning/UnitTest';
 import LogicReview from 'Page/Learning/LogicLearning/LogicReview';
 import LogicHelp from 'UI/Help/LogicHelp';
-import Button from 'UI/Button';
+//import Button from 'UI/Button';
 import Info from 'UI/Info';
-//import LearningTypeSelect from 'UI/LearningTypeSelect';
+//import EnterLearning from 'UI/EnterLearning';
+import { view as PageDesign } from 'Connected/PageDesign';
 
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
@@ -20,9 +25,9 @@ import applyHOCs from 'direct-core/applyHOCs';
 //import UserManagerWindow from "Windows/UserManager";
 //import { view as UserManager } from 'Connected/UserManager';
 import Login from 'Page/Login';
-import  {
-  view as SubjectSelect
-} from 'Connected/SubjectSelect';
+//import  {
+  //view as SubjectSelect
+//} from 'Connected/SubjectSelect';
 
 class LogicLearning extends React.PureComponent {
   constructor( props ){
@@ -36,14 +41,15 @@ class LogicLearning extends React.PureComponent {
       username,
       logined,
       newTo,
-      choice
+      choice,
+      learningType
     } = this.props;
     //console.log(this.props);
     return (
       <React.Fragment>
-      { logined == false ?  <Login/> :
+      { logined == false ?  <Login/> :<div><PageDesign subjectFunctions = {this.type}/>
 
-        <div className = {style.wholeLogicPage}>
+        {/*<div className = {style.wholeLogicPage}>
 
           <div className = {style.logicPageTitle}>
             <div className = {style.title}> 学习系统 </div>
@@ -54,13 +60,16 @@ class LogicLearning extends React.PureComponent {
             <br/><img className = {style.picture} src = "/static/images/admin.jpg"/>
             <br/><div className = {style.username}> {username} </div><br/>
             <SubjectSelect text = {this.type} normalStyle = {style.normalText} choosedStyle = {style.chosedText} />
-          </div>
+          </div></div>*/}
 
           <div className = {style.mainContent}>
             {choice == 0 ?
               newTo[1] == 1 ?
               <LogicTest/> : <Info info = {"您已经完成测试!"} /> :
-             choice == 1 ? <LearningTypeSelect/> :
+             choice == 1 ?
+               //learningType == "知识点精要" ? <Knowledge/>:learningType == "重点练习" ? <ZhongDian/>:learningType == "强化练习" ? <QiangHua/>:learningType == "单元测试" ?<UnitTest/>
+            ///  :
+            <EnterLearning learningType = ""/>:
              choice == 2 ? <LogicReview/> : <LogicHelp/>
             }
           </div>
@@ -103,7 +112,8 @@ export default applyHOCs([
       logined: state.UserManager.logined,
       username: state.UserManager.name,
       newTo: state.UserManager.newTo,
-      choice: state.SubjectSelect.choice
+      choice: state.SubjectSelect.choice,
+      //learningType: state.LearningTypeSelect.choice
     }),
     dispatch => ({
       //...bindActionCreators( ButtonExpandActions , dispatch),

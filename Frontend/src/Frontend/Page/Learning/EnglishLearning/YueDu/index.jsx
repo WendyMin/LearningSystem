@@ -59,7 +59,7 @@ class YueDu extends React.PureComponent {
   loadQuestions = () => {
     console.log(typeof(this.props.articleId))
     this.props.loadQuestions({
-      url: "/api/getQuestion",
+      url: "/api/eng_getQuestion",
       body: {
         username: this.props.username,
         lock: 0,
@@ -128,7 +128,7 @@ class YueDu extends React.PureComponent {
       }
     }
     this.props.submitQuestions({
-      url: "/api/recordWrongQuestion",
+      url: "/api/eng_recordWrongQuestion",
       body: {
         username: username,
         article_id: articleId.toString(),

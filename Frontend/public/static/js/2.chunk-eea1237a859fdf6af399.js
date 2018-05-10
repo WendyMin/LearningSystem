@@ -1,0 +1,6 @@
+/*!
+ * Direct.js
+ * Antinux Innovation
+ * Author: Eric Deng
+ */
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{528:function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var o=d(a(11)),n=d(a(4)),l=d(a(10)),r=d(a(3)),i=d(a(5)),u=d(a(1)),c=d(a(495));function d(e){return e&&e.__esModule?e:{default:e}}var f=function(e){function t(e){return(0,n.default)(this,t),(0,r.default)(this,(t.__proto__||(0,o.default)(t)).call(this,e))}return(0,i.default)(t,e),(0,l.default)(t,[{key:"componentWillMount",value:function(){this.state={config:{chart:{plotBackgroundColor:null,plotBorderWidth:null,plotShadow:!1},title:{text:"2014 某网站各浏览器浏览量占比"},tooltip:{headerFormat:"{series.name}<br>",pointFormat:"{point.name}: <b>{point.percentage:.1f}%</b>"},plotOptions:{pie:{allowPointSelect:!0,cursor:"pointer",dataLabels:{enabled:!0,format:"<b>{point.name}</b>: {point.percentage:.1f} %",style:{color:c.default.theme&&c.default.theme.contrastTextColor||"black"}}}},series:[{type:"pie",name:"浏览器访问量占比",data:[["Firefox",45],["IE",26.8],{name:"Chrome",y:12.8,sliced:!0,selected:!0},["Safari",8.5],["Opera",6.2],["其他",.7]]}]}}}},{key:"render",value:function(){return u.default.createElement("div",{className:"chart"},u.default.createElement(c.default,{config:this.state.config}))}}]),t}(u.default.Component);t.default=f}}]);
