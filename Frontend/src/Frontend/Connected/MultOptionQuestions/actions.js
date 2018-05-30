@@ -12,6 +12,7 @@ import {
   __UNLOCK_QUESTION,
   __ASYNC_LOAD_QUESTIONS,
   __ASYNC_SUBMIT_QUESTIONS,
+  __HIDE_ALL_OPTIONS
 } from 'actionTypes';
 
 //import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
@@ -237,3 +238,13 @@ export const loadQuestions = ({ url , body , parser , headers  , initState }) =>
 defineAsyncActionCreator loadQuestions end
 */
 // I hope to download the earlieast request
+
+/* 隐藏用户的选项 */
+let hideAllMulOptionsCounter = 0;
+export const hideAllMulOptions = ( ) => ({
+    type: __HIDE_ALL_OPTIONS,
+    payload: {
+
+    },
+    id: hideAllMulOptionsCounter++
+});

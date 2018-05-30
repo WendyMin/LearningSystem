@@ -30,7 +30,6 @@ const loadWriteKnowledgeRejected = ( reason , detail ) => ({
 
 
 export const loadWriteKnowledge = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
-//export const loadButtonContents = ({ url , body ,headers  , initState }) => ( dispatch , getState ) => {
     const reqId = ++loadWriteKnowledgeCounter;
     const dispatchLastest = action => {
       if( reqId === loadWriteKnowledgeCounter ){
@@ -58,7 +57,6 @@ export const loadWriteKnowledge = ({ url , body , parser , headers  , initState 
     .then( json => dispatchLastest( loadWriteKnowledgeResolved(  json  , initState ) ) )
     .catch( err => {
       dispatchLastest( loadWriteKnowledgeRejected( "json" , err ) )
-    //console.log(response)
   });
   })
   .catch( err => {

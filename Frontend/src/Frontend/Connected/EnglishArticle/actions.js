@@ -6,9 +6,8 @@ import {
   __HIDE_TRANSLATE,
   __ASYNC_TRANSLATE_WORDS,
   __HIDE_ALL,
-  __ASYNC_LOAD_CONTENT
+  __ASYNC_LOAD_CONTENT,
 } from 'actionTypes';
-
 
 /*
 defineSyncActionCreator hideAllTranslate start
@@ -110,7 +109,7 @@ export const translateWords = () => ( dispatch , getState ) => {
     }
   }
   dispatch( translateWordsStart() );
-  fetch( '/api/eng_getWord' , {
+  fetch( '/api/eng_getWordAndRecord' , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -119,7 +118,9 @@ export const translateWords = () => ( dispatch , getState ) => {
       },
       // body: 'query_words=' + oldState.EnglishArticle.choosedWords.toArray().join(' ')
       body: JSON.stringify({
-         query_words: oldState.EnglishArticle.choosedWords.toArray().join(' ')
+         all_words: oldState.EnglishArticle.choosedWords.toArray().join(' '),
+         username: oldState.UserManager.name,
+         article_id: oldState.EnglishArticle.articleId
       })
   })
   .then( response => {
@@ -137,6 +138,7 @@ export const translateWords = () => ( dispatch , getState ) => {
       dispatchLastest( translateWordsRejected( "network" , err ) );
   });
 }
+
 let translateSentenceCounter = 0;
 export const translateSentence = () => ({
     type: __TRANSLATE_SENTENCES,

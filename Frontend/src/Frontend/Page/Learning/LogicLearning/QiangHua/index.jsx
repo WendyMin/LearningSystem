@@ -27,6 +27,11 @@ import {
 import {
   actions as LearningTypeSelectActions
 } from 'Connected/LearningTypeSelect';
+import {
+  actions as LogicStateActions
+} from 'Connected/LogicState';
+import ZhongDian from 'Page/Learning/LogicLearning/ZhongDian';
+import EnterLearning from 'Page/Learning/LogicLearning/EnterLearning';
 
 import TextAndImag from 'UI/TextAndImag';
 import SingleQuestion from 'UI/SingleQuestion';
@@ -44,7 +49,8 @@ class QiangHua extends React.PureComponent {
 
     this.questions = [];
     this.state = {
-      end: false
+      end: false,
+    //  learning: false
     };
   }
 
@@ -52,13 +58,15 @@ class QiangHua extends React.PureComponent {
     this.props.loadPortContent({
       url: "/api/logicQianghua",
       body: {
-        username: this.props.username
+        username: this.props.username,
+        chapter_name: this.props.chapter_name
       },
     });
     this.props.loadQuestions({
       url: "/api/logicQianghua",
       body: {
-        username: this.props.username
+        username: this.props.username,
+        chapter_name: this.props.chapter_name
       },
 
       parser: response => {
@@ -100,13 +108,12 @@ class QiangHua extends React.PureComponent {
     var RightOrWrong = "";
     for ( var i = 0 ; i < questions.length ; i++ ){
       question_id += `${questions[i].questionId}*`;
-      if( questions[i].choosed !== questions[i].rightKey ){
-        RightOrWrong += `${1}*`;
-      }
-      if( questions[i].choosed == questions[i].rightKey ){
+      if( questions[i].choosed !== undefined && questions[i].choosed.toString() === questions[i].rightKey ){
         RightOrWrong += `${0}*`;
       }
-
+      else {
+        RightOrWrong += `${1}*`;
+      }
     }
 
     console.log(username,content.chapter_name,question_id,RightOrWrong)
@@ -125,6 +132,16 @@ class QiangHua extends React.PureComponent {
         lockAndShow( questions[i].questionId );
       }
     //}
+  }
+
+  FinishTestNote_qianghua = () =>{
+    alert("您还没有完成入口测试，请先完成入口测试!");
+    //this.setState({learning: true})
+  }
+  FinishZhongDianNote_qianghua = () =>{
+    alert("您还没有完成重点习题，请先完成重点习题!");
+    //this.props.setLearningType("重点习题")
+    //this.setState({learning: true})
   }
 
  componentDidMount(){
@@ -154,7 +171,7 @@ class QiangHua extends React.PureComponent {
           when={end==false}
           message="you need to do it again, are you sure to quit?"
         />
-        {content.flag == 1 ?
+        {content.flag === 1 ?
         <div>
 
         <div className = {style.pageTitle}> 强化练习 </div>
@@ -171,7 +188,8 @@ class QiangHua extends React.PureComponent {
               <div>
                 <h4 className = {style.dalei}> {content.chapter_name} </h4>
                 <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test"/>
-                <Button className = {style.submitButton} text = {"确认提交"} onClick={this.submitQuestions}/>
+                <strong align = "center"><div style = {{"color":"red"}}>请先确认提交，再做单元测试</div></strong>
+                <Button className = {style.submitButton} text = {"确认提交"} onClick={() => {this.props.setSubmitQianghua(true);this.submitQuestions()}}/>
                 <Button className = {style.enterNextButton} text = {"进入单元测试"} onClick = {() => setLearningType("单元测试")}/>
               </div>
             </SlideRL>
@@ -179,8 +197,20 @@ class QiangHua extends React.PureComponent {
         </div>
       </div>
       :
-      content.flag == 2 ? <Info info = "您还没有完成入口测试，请先完成入口测试！"/> :
-      <Info info = "您还没有完成重点习题，请先完成重点习题！"/>
+      content.flag === 2 ?
+      <div>
+        {/* {this.FinishTestNote_qianghua()} */}
+        <Info info = "您还没有完成入口测试，请先完成入口测试！"/>
+
+      </div> :
+      content.flag === 3 ?
+      <div>
+        {/* {this.FinishZhongDianNote_qianghua()} */}
+        <Info info = "您还没有完成重点习题，请先完成重点习题！"/>
+        {/* <EnterLearning/> */}
+        {/* <ZhongDian/> */}
+        {/* <button onClick = {() => this.setLearningType}>返回学习页面</button> */}
+    </div>:null
     }
 
 
@@ -232,11 +262,13 @@ export default applyHOCs([
       submitQuestionState: state.SingleOptionQuestions.submitState,
       content: state.PortTest.content,
       loadContentState: state.PortTest.loadState,
+      chapter_name: state.LearningTypeSelect.chapter_name
     }),
     dispatch => ({
       ...bindActionCreators( SingleOptionQuestionsActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch ),
-      ...bindActionCreators( LearningTypeSelectActions , dispatch )
+      ...bindActionCreators( LearningTypeSelectActions , dispatch ),
+      ...bindActionCreators( LogicStateActions , dispatch )
     })
   )],
   QiangHua

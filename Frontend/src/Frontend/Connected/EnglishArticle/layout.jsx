@@ -6,11 +6,23 @@ import Sentence from 'UI/Sentence';
 import Button from 'UI/Button';
 import Info from "UI/Info";
 import style from 'style';
+import { actions as PortTestActions } from 'Connected/PortTest';
 
 class EnglishArticle extends React.PureComponent {
   constructor( props ){
     super( props );
     this.isChoosedSentence = this.isChoosedSentence.bind( this );
+  }
+
+  function = ( sentenceId ) => {
+    this.props.loadPortContent2({
+      url: "/api/eng_storageHardSentence",
+      body: {
+        username:  this.props.username,
+        articleId: this.props.articleId,
+        hardSentenceIds: sentenceId,
+      }
+    })
   }
 
   render(){
@@ -61,7 +73,11 @@ class EnglishArticle extends React.PureComponent {
                   {
                     showSentencesTranslates &&
                     this.isChoosedSentence( sentenceId )
-                    ?<Info info={sentencesTranslates[sentenceId]} />
+                    ?
+                    <div>
+                      { this.function(sentenceId)}
+                      <Info info={sentencesTranslates[sentenceId]} />
+                    </div>
                     :null
                   }
                 </div>
@@ -106,7 +122,15 @@ export default connect(
     showSentencesTranslates: ownState.showSentencesTranslates,
     showAllTranslates: ownState.showAllTranslates,
     allTranslates: ownState.allTranslates,
-    sentencesTranslates: ownState.sentencesTranslates
+    sentencesTranslates: ownState.sentencesTranslates,
+    portTestContent: state.PortTest.content2,
+    articleId: ownState.articleId,
+    username: state.UserManager.name,
   }),
-  dispatch => bindActionCreators( actionsCreators , dispatch )
+  // dispatch => bindActionCreators( actionsCreators , dispatch )
+  dispatch => ({
+    ...bindActionCreators( actionsCreators , dispatch ),
+    ...bindActionCreators( PortTestActions , dispatch),
+    // ...bindActionCreators( EnglishArticleActions , dispatch ),
+  })
 )( EnglishArticle );

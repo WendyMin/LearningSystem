@@ -5,13 +5,17 @@ import { Prompt } from 'react-router';
 import style from 'style';
 
 import Button from 'UI/Button';
-import WriteGraph from 'UI/WriteGraph';
 
 import Loading from 'Animation/Loading';
 import SlideLR from 'Animation/SlideLR';
 import SlideRL from 'Animation/SlideRL';
 import SlideDU from 'Animation/SlideDU';
 import SlideUD from 'Animation/SlideUD';
+
+import {
+  view as EnglishArticle,
+  actions as EnglishArticleActions
+} from 'Connected/EnglishArticle';
 
 import UserManagerWindow from "Windows/UserManager";
 
@@ -21,181 +25,202 @@ import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
 import {
-  view as ButtonExpand,
-  actions as ButtonExpandActions
-} from 'Connected/ButtonExpand';
+  view as PortTest,
+  actions as PortTestActions
+} from 'Connected/PortTest';
 
 class UITest extends React.PureComponent {
-
   constructor( props ){
     super( props );
     this.state = {
-      processStep: 0,
+      showButton:-1,
+      showReviewList: true,
+      showWordAndSentence: false,
+      showArticle: false,
     };
   }
-/*function = () => {
-  this.props.loadButtonContents({
-    //module.exports = ({ req , res }) => {
-      //const { name,password } = req.body;
-      //const [ errCode , res ] = callPython("login.py",`${name} $password`);
-      //const[errCode , res ] = callPython("offer_lunzheng_zhenti_mingcheng.py");
-      //if(errCode){
-        //res.status(500).end();
-      //} else {
-        //res.send(res);
-      //}
-    url: "http://59.110.23.212/LearningSystem/BackEnd/logic_test_new1.php",
-    //url: "http://59.110.23.212/LearningSystem/BackEnd/lunzheng_zhenti.php",
-    //body: {
-      //username: "lxq"
-    //}
-  })
-}*/
 
-// function = () => {
-//   this.props.loadButtonContents({
-//     url: "http://59.110.23.212/LearningSystem/BackEnd/word_test.php",
-//   })
-// }
-function2 = () => {
-  const {username} = this.props;
-  console.log(username)
-  this.props.loadButtonContents({
-    url: "/api/logicCeshi",
-    //url: "http://59.110.23.212/LearningSystem/BackEnd/logic_ceshi.php",
-    body: {
-      username: this.props.username,
-      //articleId: 1
-    }
-  })
-}
-
-function1 = () => {
-  const {username} = this.props;
-  console.log(username)
-  this.props.loadButtonContents({
-    url: "/api/getWriteTest",
-    body: {
-      username: "lxq",
-      articleId: 1
-    }
-  })
-}
-
-function_tijiao = () => {
-  var form = document.getElementById("form2");
-  var field = form.elements["test2"];
-  var result = [];
-  var option = null;
-  for (var i = 0; i < field.length; i++) {
-    option = field[i];
-    if (option.checked) {
-      result.push(option);
-   }
- }
- console.log(result)
-  var message = "";
-  for (var i = 0, len = option.length; i < len; i++) {
-  message += "Select id:" + option[i].id + "\nSelected name:" + option[i].name + "\nSelected value:" + option[i].value + "\n\n";
+  componentDidMount(){
+    this.loadReviewList();
   }
- alert(message);
-  /*鑾峰彇閫変腑鐨勯€夐」*/
-  //function getSelectedOption(selectform, selectionfield) {
 
-  //return result;
-
-//  }
-}
-/*function_tijiao = () => {
-  var form = document.getElementById("form2");
-  var field = form.elements["test2"];
-  var option = getSelectedOption(form, field);
-  var message = "";
-  for (var i = 0, len = option.length; i < len; i++) {
-  message += "Select id:" + option[i].id + "\nSelected name:" + option[i].name + "\nSelected value:" + option[i].value + "\n\n";
+  loadReviewList = () => {
+    this.props.loadPortContent({
+      url: "/api/eng_getReviewList",
+      body: {
+        username:  this.props.username,
+      }
+    })
   }
- alert(message);
-  /*鑾峰彇閫変腑鐨勯€夐」*/
-/*  function getSelectedOption(selectform, selectionfield) {
-  var result = [];
-  var option = null;
-  for (var i = 0; i < selectionfield.length; i++) {
- option = selectionfield[i];
- if (option.checked) {
-  result.push(option);
-  }
- }
-  return result;
 
+  changeButtonId = (showButton, key) => {
+    if(showButton==-1) return key;
+    else return -1;
   }
-}*/
 
+  getHardWord = (articleId) => {
+    this.props.loadPortContent2({
+      url: "/api/eng_getCoreWord",
+      body: {
+        articleId:  articleId,
+      }
+    })
+  }
+
+  getHardSentence = (articleId) => {
+    this.props.loadPortContent3({
+      url: "/api/eng_engToCh",
+      body: {
+        articleId:  articleId,
+      }
+    })
+  }
 
   render(){
-    const { processStep } = this.state;
 
     const {
-      ined
+      reviewlist,
+      hardword,
+      hardsentence,
     } = this.props;
 
-    return (
+    const{
+      showButton,
+      showReviewList,
+      showWordAndSentence,
+      showArticle,
+    } = this.state;
+
+    console.log(hardsentence);
+
+    return(
       <React.Fragment>
-        <Prompt
-          when={processStep !== 0 && processStep !== this.actions.length - 1}
-          message="you need to do it again, are you sure to quit?"
-        />
+        <div>
+          {
+            showReviewList == true ?
+            <div>
 
-        <p>hi</p>
-        <Button text="测试" onClick={this.function} />
+              <div className={style.pageTitle}>复习</div>
+              <br/>
 
-        <form id='form2'>
-          <label>彩电</label><input id='aaaaa' type='checkbox' name='test2' value='1'/>
-          <label htmlFor='aaaaa'>冰箱</label><input id='bbbbb' type='checkbox' name='test2' value='2'/>
-          <label htmlFor='bbbbb'>洗衣机</label><input id='ccccc' type='checkbox' name='test2' value='3'/>
-          <label htmlFor='ccccc'>电话</label><input id='ddddd' type='checkbox' name='test2' value='4'/>
-          <label htmlFor='ddddd'>手边</label><input id='eeeee' type='checkbox' name='test2' value='5'/>
-          <label htmlFor='eeeee'>方法</label><input id='fffff' type='checkbox' name='test2' value='6'/>
-        </form>
-        <Button text="提交" onClick={this.function_tijiao} />
-        <WriteGraph/>
+              {
+                reviewlist == undefined?null:
+                reviewlist.map((list, key)=>
+                <div key = {key} className={style.chtoengall} >
+                  <li
+                    // style = {list == choice ? {"color":"blue"} : null}
+                      onClick = {() => {this.setState({showButton: this.changeButtonId(showButton,key)})}}
+                    >
+                    Unit{list.unit} Course{list.course}
+                  </li>
+                  {
+                    showButton != key ? null :
+                    <div>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <Button text="查看核心词汇、重点句"
+                        onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
+                      this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }} />
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <Button text="查看阅读文章"
+                      onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}  />
+                    </div>
+                  }
+                  <br/>
+                </div>
+                )
+              }
 
+            </div>
+
+
+            :
+            showWordAndSentence == true ?
+            <div>
+              <div className={style.pageTitle}>核心词汇</div>
+                {
+                  hardword.length==0?null:
+                  hardword.map((word, key)=>
+                  <div key = {key} className={style.chtoengall}>
+                    单词：
+                    { word.word }
+                    <br/>
+                    翻译：
+                    { word.translate }
+                  </div>
+                  )
+                }
+
+              <br/>
+
+              <div className={style.pageTitle}>重点句</div>
+                {
+                  hardsentence.length==0?null:
+                  hardsentence.map((sentence, key)=>
+                  <div key = {key} className={style.chtoengall}>
+                    句子：
+                    { sentence.english }
+                    <br/>
+                    中文：
+                    { sentence.chinese }
+                    <br/>
+                    解析：
+                    { sentence.analysis }
+                  </div>
+                  )
+                }
+
+              <div className={style.ShowEngAndReturn}>
+                <Button text="返回列表页面"
+                onClick = {() =>  {this.setState({showReviewList: true , showWordAndSentence: false, showArticle: false})}} />
+              </div>
+              
+            </div>
+
+
+            :
+            showArticle == true ?
+            <div>
+              <div className={style.pageTitle}>英语文章</div>
+              <div className={style.ShowEngAndReturn}>
+                <Button text="返回列表页面"
+                onClick = {() =>  {this.setState({showReviewList: true , showWordAndSentence: false, showArticle: false})}} />
+              </div>
+            </div>
+
+            :
+            null
+
+          }
+
+        </div>
 
       </React.Fragment>
-    );
+    )
   }
-};
 
+
+
+
+}
+
+
+// export default EngReview
 export default applyHOCs([
   asyncProcessControl({
   }),
-/*  protect({
-    logined: {
-      satisfy: l => l === true,
-      block: ({ openWindow , history, closeMask , openMask }) => {
-        openWindow( UserManagerWindow,
-          {
-            width: '380px',
-            height: '300px',
-            position: {
-              top: 'calc( 50% - 190px)',
-              left: 'calc( 50% - 150px)'
-            },
-            onCancel: () => history.goBack() || closeMask(),
-            onSuccess: closeMask,
-          }
-        );
-        openMask();
-      }
-    }
-  }),*/
   makePage,
   connect(
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
+      articleId: state.EnglishArticle.articleId,
+      reviewlist: state.PortTest.content,
+      hardword: state.PortTest.content2,
+      hardsentence: state.PortTest.content3,
     }),
     dispatch => ({
-      ...bindActionCreators( ButtonExpandActions , dispatch),
+      ...bindActionCreators( EnglishArticleActions , dispatch ),
+      ...bindActionCreators( PortTestActions , dispatch),
     })
   )],
   UITest

@@ -5,18 +5,27 @@ class LogicTestChart extends React.PureComponent{
     const { chartTitle , chartData } = this.props;
     //console.log(chartData);
     return(
-      <table border="1">
-        <tr>
-          <th> 类型 </th>
-          <th> 正确率 </th>
-        </tr>
-        {chartData.map((one , key) =>
-          <tr key = {key}>
-            <td>{chartTitle[key]}</td>
-            <td>{one}</td>
-          </tr>)
+      <table border="1" align = "center">
+        {chartTitle == undefined ? null :
+          <tr>
+            <th>类别名称</th>
+            {chartTitle.map((oneType , key) =>
+              <th key = {key}> {oneType} </th>)
+            }
+          </tr>
         }
+
+        {chartData == undefined ? null :
+          <tr>
+            <th>正确率</th>
+            {chartData.map((oneError , key) =>
+              <th key = {key}> {oneError} </th>)
+            }
+          </tr>
+        }
+
       </table>
+
     )
   }
 }

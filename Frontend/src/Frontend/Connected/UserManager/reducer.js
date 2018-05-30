@@ -1,5 +1,6 @@
 import {
-  LOGIN
+  LOGIN,
+  __SET_USER
 } from 'actionTypes';
 
 export default ( state = {
@@ -18,6 +19,16 @@ export default ( state = {
 } , { type , payload , id } ) => {
   const { content } = state;
   switch( type ){
+    case __SET_USER:{
+      let {username,logined} = payload;
+      console.log(username,logined)
+      return{
+        ...state,
+        name: username,
+        logined: logined
+      }
+    }
+
     case LOGIN.pending:
       return {
         ...state,
@@ -31,7 +42,8 @@ export default ( state = {
       };
 
     case LOGIN.resolved:
-      switch( payload.response.state ){
+      // switch( payload.response.state ){
+      switch( payload.response ){
         case "success":
           return {
             ...state,

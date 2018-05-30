@@ -5,7 +5,8 @@ import {
   __UNLOCK_AND_HIDE,
   __ASYNC_SUBMIT_QUESTIONS,
   __NEXT,
-  __AUTO_NEXT
+  __AUTO_NEXT,
+  __FORCE_END
 } from 'actionTypes';
 
 import nextQuestion from "Algorithm/decideNextQuestion";
@@ -175,6 +176,19 @@ export default ( state = {
 
 
     }
+
+    case __FORCE_END: {
+      return {
+        ...state,
+        testendState: false,
+        nowAt:{
+          qtype: "luojiyuyan",
+          level: 1
+        },
+        //content: {}
+      };
+    };
+
     default:
       return state;
   }

@@ -29,7 +29,6 @@ const loadWriteContentsRejected = ( reason , detail ) => ({
 
 
 export const loadWriteContents = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
-//export const loadButtonContents = ({ url , body ,headers  , initState }) => ( dispatch , getState ) => {
     const reqId = ++loadWriteContentsCounter;
     const dispatchLastest = action => {
       if( reqId === loadWriteContentsCounter ){
@@ -57,7 +56,6 @@ export const loadWriteContents = ({ url , body , parser , headers  , initState }
     .then( json => dispatchLastest( loadWriteContentsResolved(  json  , initState ) ) )
     .catch( err => {
       dispatchLastest( loadWriteContentsRejected( "json" , err ) )
-    //console.log(response)
   });
   })
   .catch( err => {

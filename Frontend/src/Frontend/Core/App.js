@@ -5,10 +5,10 @@ export default {
   },
   persistentState: {
     UserManager: {
-      logined: true,
-      name: true,
-      password: true,
-      newTo: true
+      // logined: true,
+      // name: true,
+      // password: true,
+      // newTo: true
     }
   },
   onAppWillMount( socket , dispatch ){

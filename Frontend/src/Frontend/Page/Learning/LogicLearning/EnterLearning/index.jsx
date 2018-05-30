@@ -23,12 +23,26 @@ import applyHOCs from 'direct-core/applyHOCs';
 class EnterLearning extends React.PureComponent {
   constructor( props ){
     super( props );
+    this.type = "";
     this.state = {
+      type1Selected: false,
+      type2Selected: false,
       typeSelectShow: true
     }
   }
 
   getLogicChapterName = ( num ) => {
+    //var xingshi = "";
+    this.type = num;
+    //num == undefined ? xingshi == this.type : xingshi = num ;
+    //if(num==1){this.props.recordXingshiOrLunzheng("形式逻辑")}
+    //if(num==0) {this.props.recordXingshiOrLunzheng("论证逻辑")}
+    //if (this.props.xingshiOrLunzheng == "形式逻辑") xingshi = 1;
+    //else if (this.props.xingshiOrLunzheng == "论证逻辑") xingshi = 0;
+    //else xingshi = num;
+    //console.log(this.props.username,xingshi)
+    console.log(this.props.username,num)
+    if(num !== undefined){
     this.props.getChapterName({
       url: "/api/logicGetChapterName",
       body: {
@@ -37,14 +51,42 @@ class EnterLearning extends React.PureComponent {
       },
     })
   }
+  }
+
+  TypeSelectNote = () =>{
+    alert("您还没有选择要学习的类型，请选择您要学习的类型!");
+    this.setState({typeSelectShow: true})
+  }
+
+  FinishTestNote = () =>{
+    alert("您还没有完成入口测试，请先完成入口测试!");
+    this.setState({typeSelectShow: true})
+  }
+  FinishXingshiNote = () =>{
+    alert("您已经完成所有形式逻辑的学习!");
+    this.setState({typeSelectShow: true})
+  }
+  FinishLunzhengNote = () =>{
+    alert("您已经完成所有论证逻辑的学习!");
+    this.setState({typeSelectShow: true})
+  }
+  FinishAllNote = () =>{
+    alert("您已经完成了所有形式逻辑和论证逻辑的学习!");
+    this.setState({typeSelectShow: true})
+  }
+
+  componentDidMount(){
+    this.getLogicChapterName();
+  }
 
 
   render(){
     const {
       setLearningType,
-      learningType
+      learningType,
+      finished_level_test
     } = this.props;
-    console.log(learningType)
+    //console.log(learningType)
 
     var TextStyle = [];
     for( var i = 0 ; i < 4 ; i++ ){
@@ -54,28 +96,29 @@ class EnterLearning extends React.PureComponent {
       learningType == "测试" ? TextStyle[3] = style.choosed_type : TextStyle[3] = style.normal_type ;
     }
 
+
     return(
       <React.Fragment>
         <div className = {style.whole}>
           {
-            this.state.typeSelectShow ?
+            this.state.typeSelectShow || learningType == "知识点" || learningType == "重点" || learningType == "强化" || learningType == "测试" ?
             <div>
               <Info info = "请点击选择您要学习的类型："/>
               <div className = {style.typeSelect}><br/>
-                <span style = {learningType == "形式逻辑" ? {"color":"orange"} : null}
-                      onMouseOver = {() => setLearningType("形式逻辑")}
-                      onClick = {() => this.getLogicChapterName(1)}> 形式逻辑
+                <span style = {this.state.type1Selected ? {"color":"orange"} : null}
+                      //onMouseOver = {() => setLearningType("形式逻辑")}
+                      onClick = {() => {this.setState({type1Selected: true,type2Selected: false});this.getLogicChapterName(1)}}> 形式逻辑
                 </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <span style = {learningType == "论证逻辑" ? {"color":"orange"} : null}
-                      onMouseOver = {() => setLearningType("论证逻辑")}
-                      onClick = {() => this.getLogicChapterName(0)}> 论证逻辑
+                <span style = {this.state.type2Selected ? {"color":"orange"} : null}
+                      //onMouseOver = {() => setLearningType("论证逻辑")}
+                      onClick = {() => {this.setState({type2Selected: true,type1Selected: false});this.getLogicChapterName(0)}}> 论证逻辑
                 </span>
               </div>
 
               <div className = {style.fangkuang1}>
                 <div className = {style.tupianPosition}><img className = {style.tupian} src = "/static/images/admin.jpg"/></div>
                 <div className = {TextStyle[0]}
-                     onMouseOver = {() => setLearningType("知识点")}
+                     onMouseOver = {() => {setLearningType("知识点") ; this.setState({typeSelectShow: true})}}
                      onClick = {() => {setLearningType("知识点精要") ; this.setState({typeSelectShow: false})}}>
                      点击进入<br/>知识点精要
                 </div>
@@ -84,7 +127,7 @@ class EnterLearning extends React.PureComponent {
               <div className = {style.fangkuang2}>
                 <div className = {style.tupianPosition}><img className = {style.tupian} src = "/static/images/admin.jpg"/></div>
                 <div  className = {TextStyle[1]}
-                      onMouseOver = {() => setLearningType("重点")}
+                      onMouseOver = {() => {setLearningType("重点") ; this.setState({typeSelectShow: true})}}
                       onClick = {() => {setLearningType("重点习题") ; this.setState({typeSelectShow: false})}}>
                        点击进入<br/>重点习题
                 </div>
@@ -93,7 +136,7 @@ class EnterLearning extends React.PureComponent {
               <div className = {style.fangkuang3}>
                 <div className = {style.tupianPosition}><img className = {style.tupian} src = "/static/images/admin.jpg"/></div>
                 <div  className = {TextStyle[2]}
-                      onMouseOver = {() => setLearningType("强化")}
+                      onMouseOver = {() => {setLearningType("强化") ; this.setState({typeSelectShow: true})}}
                       onClick = {() => {setLearningType("强化练习") ; this.setState({typeSelectShow: false})}}>
                       点击进入<br/>强化练习
                 </div>
@@ -102,30 +145,25 @@ class EnterLearning extends React.PureComponent {
               <div className = {style.fangkuang4}>
                 <div className = {style.tupianPosition}><img className = {style.tupian} src = "/static/images/admin.jpg"/></div>
                 <div className = {TextStyle[3]}
-                     onMouseOver = {() => setLearningType("测试")}
+                     onMouseOver = {() => {setLearningType("测试") ; this.setState({typeSelectShow: true})}}
                      onClick = {() => {setLearningType("单元测试") ; this.setState({typeSelectShow: false})}}>
                      点击进入<br/>单元测试
                 </div>
               </div>
             </div>
             :
+            this.state.type1Selected == false && this.state.type2Selected == false && (learningType == "知识点精要" || learningType == "重点习题" || learningType == "强化练习" || learningType == "单元测试") ?
+            <div>{this.TypeSelectNote()}</div>
+            :
+            finished_level_test == 0 ? <div>{this.FinishTestNote()}</div>:
+            finished_level_test == 2 && this.state.type1Selected == true ? <div>{this.FinishXingshiNote()}</div>:
+            finished_level_test == 3 && this.state.type2Selected == true ? <div>{this.FinishLunzhengNote()}</div>:
+            finished_level_test == 4 ? <div>{this.FinishAllNote()}</div>:
             learningType == "知识点精要" ? <Knowledge/> :
             learningType == "重点习题" ? <ZhongDian/> :
             learningType == "强化练习" ? <QiangHua/> :
-            learningType == "单元测试" ? <UnitTest/> : null
-
+            learningType == "单元测试" ? <UnitTest xingshiOrLunzheng = {this.type}/> : null
           }
-
-
-
-
-        {/*
-        this.state.zhishidian ? <KnowLedge/>:
-        this.state.zhongdian ? <ZhongDian/>:
-        this.state.qianghua ? <QiangHua/>:
-        this.state.ceshi ? <UnitTest/> : null
-    */  }
-
 
         </div>
       </React.Fragment>
@@ -143,7 +181,9 @@ export default applyHOCs([
     state => ({
       //logined: state.UserManager.logined,
       username: state.UserManager.name,
-      learningType: state.LearningTypeSelect.learningType
+      xingshiOrLunzheng: state.LearningTypeSelect.xingshiOrLunzheng,
+      learningType: state.LearningTypeSelect.learningType,
+      finished_level_test: state.LearningTypeSelect.finished_level_test
     }),
     dispatch => ({
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),

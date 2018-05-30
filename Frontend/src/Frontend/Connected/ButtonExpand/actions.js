@@ -1,6 +1,7 @@
 import {
   __ASYNC_LOAD_BUTTON_CONTENTS,
-  __SET_BUTTON_CHOICE
+  __SET_BUTTON_CHOICE,
+  __FORCE_DISAPPEAR_CHOICE
 } from 'actionTypes';
 //import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
 
@@ -11,6 +12,15 @@ export const setButtonChoice = ( choice ) => ({
       choice
     },
     id: setButtonChoiceCounter++
+});
+
+let forceDisappearChoiceCounter = 0;
+export const forceDisappearChoice = () => ({
+    type: __FORCE_DISAPPEAR_CHOICE,
+    payload: {
+
+    },
+    id: forceDisappearChoiceCounter++
 });
 
 let loadButtonContentsCounter = 0;

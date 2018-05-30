@@ -37,20 +37,21 @@
     overflow-y: scroll;
     display: flex;
     flex-direction: row;
+    //background-color: red;
 
     .title {
       width: 70%;
       border-right: 2px dashed black;
       margin-right: 1%;
       overflow-y: scroll;
-    //  background: green;
+      //background: green;
 
       .option {
         left: 70%;
         width: 30%;
         margin-left: 1%;
         overflow-y: scroll;
-      //  background-color: yellow;
+        //background-color: yellow;
 
 
       }
@@ -132,23 +133,35 @@
 
 
 .egArticleText {
-  text-align: center;
-  font-size: 30px;
+  //text-align: center;
+  font-size: 25px;
   color: blue;
 }
 .egArticle {
   position: fixed;
+  padding-left: 2%;
   z-index: 10;
   font-size: 18px;
   overflow-y: scroll;
-  width: 26%;
+  width: 28%;
   right: 1%;
-  top: 25%;
-  bottom: 5%;
-  border: solid 1px;
-  border-radius: 3%;
+  top: 15%;
+  bottom: 3%;
   background-color: white;
 }
+// .egArticle {
+//   position: fixed;
+//   z-index: 10;
+//   font-size: 18px;
+//   overflow-y: scroll;
+//   width: 26%;
+//   right: 1%;
+//   top: 25%;
+//   bottom: 5%;
+//   border: solid 1px;
+//   border-radius: 3%;
+//   background-color: white;
+// }
 .article_title {
   font-size: 20px;
   color: red;
@@ -195,4 +208,16 @@
 
 .juzhong {
   text-align: center;
+}
+
+.inputBox {
+  position: fixed;
+  right: 1%;
+  width: 27%;
+  height: 75%;
+}
+.saveOrSubmit {
+  position: fixed;
+  bottom: 3%;
+  right: 7%;
 }

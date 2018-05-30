@@ -13,6 +13,11 @@ import { reducer as ZhentiPerYearTongji } from 'Connected/ZhentiPerYearTongji';
 import { reducer as ZhentiAllYearTongji } from 'Connected/ZhentiAllYearTongji';
 import { reducer as PageDesign } from 'Connected/PageDesign';
 import { reducer as LearningTypeSelect } from 'Connected/LearningTypeSelect';
+import { reducer as LogicReviewModel } from 'Connected/LogicReviewModel';
+import { reducer as LogicTestTongji } from 'Connected/LogicTestTongji';
+import { reducer as EditText } from 'Connected/EditText';
+import { reducer as ViewFinishedText } from 'Connected/ViewFinishedText';
+import { reducer as LogicState } from 'Connected/LogicState';
 //import { reducer as ... } from 'Connected/...';
 
 export default {
@@ -29,7 +34,12 @@ export default {
   ZhentiPerYearTongji: ZhentiPerYearTongji,
   ZhentiAllYearTongji: ZhentiAllYearTongji,
   PageDesign: PageDesign,
-  LearningTypeSelect: LearningTypeSelect
+  LearningTypeSelect: LearningTypeSelect,
+  LogicReviewModel: LogicReviewModel,
+  LogicTestTongji: LogicTestTongji,
+  EditText: EditText,
+  ViewFinishedText: ViewFinishedText,
+  LogicState: LogicState
 
   //others
 };

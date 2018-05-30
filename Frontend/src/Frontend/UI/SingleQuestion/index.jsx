@@ -146,6 +146,8 @@ class SingleQuestion extends React.PureComponent<Props> {
                <div className = {style.logic_analysis}>
                  <TextAndImag list={analysis}/>
                </div> :
+               subject == "logic_review" ?
+               <TextAndImag list={analysis}/>:
                <Info info={analysis} />
              }
            {/*subject == "logic_test" ?

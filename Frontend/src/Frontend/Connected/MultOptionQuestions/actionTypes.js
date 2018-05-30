@@ -15,6 +15,7 @@ export const __ASYNC_SUBMIT_QUESTIONS = {
   rejected: "MultOptionQuestons/__SUBMIT_QUESTIONS_REJECTED",
 };
 
+export const __HIDE_ALL_OPTIONS = "MultOptionQuestons/__HIDE_ALL_OPTIONS";
 //export const __ASYNC_LOAD_QUESTIONS = {
   //pending: "SingleOptionQuestions/__LOAD_QUESTIONS_PENDING",
   //resolved: "SingleOptionQuestions/__LOAD_QUESTIONS_RESOVLED",

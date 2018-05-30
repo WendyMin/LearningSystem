@@ -6,7 +6,7 @@ import {
   __ASYNC_TRANSLATE_WORDS,
   __HIDE_TRANSLATE,
   __HIDE_ALL,
-  __ASYNC_LOAD_CONTENT
+  __ASYNC_LOAD_CONTENT,
 } from 'actionTypes';
 
 import TrieTree from 'DataStructure/TrieTree';

@@ -1,0 +1,6 @@
+/*!
+ * Direct.js
+ * Antinux Innovation
+ * Author: Eric Deng
+ */
+(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{585:function(e,t,a){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var n=c(a(11)),o=c(a(4)),l=c(a(10)),r=c(a(3)),u=c(a(5)),i=c(a(1)),d=c(a(571));function c(e){return e&&e.__esModule?e:{default:e}}var p=function(e){function t(e){return(0,o.default)(this,t),(0,r.default)(this,(t.__proto__||(0,n.default)(t)).call(this,e))}return(0,u.default)(t,e),(0,l.default)(t,[{key:"componentWillMount",value:function(){}},{key:"render",value:function(){var e={chart:{plotBackgroundColor:null,plotBorderWidth:null,plotShadow:!1},title:{text:"累计生词类型分析"},tooltip:{headerFormat:"{series.name}<br>",pointFormat:"{point.name}: <b>{point.percentage:.1f}%</b>"},plotOptions:{pie:{allowPointSelect:!0,cursor:"pointer",dataLabels:{enabled:!0,format:"<b>{point.name}</b>: {point.percentage:.1f} %",style:{color:d.default.theme&&d.default.theme.contrastTextColor||"black"}}}},series:[{type:"pie",name:"生词类型占比",data:[["中考",45],["高考",26.8],{name:"四级",y:12.8,sliced:!0,selected:!0},["六级",8.5],["考研",6.2],["超纲",.7]]}]};return i.default.createElement("div",{className:"chart"},i.default.createElement(d.default,{config:e}))}}]),t}(i.default.Component);t.default=p}}]);

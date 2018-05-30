@@ -30,6 +30,11 @@ import {
 import {
   view as TranslatedWords
 } from 'Connected/TranslatedWords';
+import {  actions as PortTestActions} from 'Connected/PortTest';
+import {
+  view as LearningTypeSelect,
+  actions as LearningTypeSelectActions
+} from 'Connected/LearningTypeSelect';
 
 import mergeArraysIntoOne from 'direct-core/Algorithm/mergeArraysIntoOne';
 
@@ -43,11 +48,24 @@ class YueDu extends React.PureComponent {
   constructor( props ){
     super( props );
     this.actions =
-    [ this.submitQuestions , props.translateWords , () => { this.confirm(); this.setState({displayByWords:false})} , () => { props.translateSentences(); this.confirm() } , () => { props.hideTranslate();this.confirm() }, this.submitQuestions , [ this.confirm , props.translateAll ] ,  [ this.quit , this.doMore ]];
+    [ this.submitQuestions , props.translateWords ,
+      () => { this.confirm(); this.setState({displayByWords:false})} ,
+      () => { props.translateSentences(); this.confirm() } ,
+      () => { props.hideTranslate();this.confirm() },
+      this.submitQuestions ,
+      [ this.confirm , props.translateAll ] ,
+      [ this.quit , this.doMore ]
+    ];
     this.texts =
-    [ "submit" , "translate words" , "confirm" , "translate sentences" , "confirm" , "submit" , [ "confirm" , "translate all" ] ,  [ "end" , "do more" ] ];
+    [ "提交答案" , "翻译生词" , "下一步" , "翻译难句" , "下一步" , "提交答案" , [ "查看统计" , "翻译全文" ] ,  [ "结束" , "进入生词难句" ] ];
     this.describes =
-    ["read this page, and try to answer the questions in right, and then submit.","choose your unknown words","read the explaination", "choose the sentences you do not understand well" , "check all translates again" , "do these questions again" , "check your answers and see analysises" , "want to do more?"];
+    ["阅读文章，可标记不会的生词，并在右侧点击认为相对正确的题目答案",
+    "确认自己不明白的单词，确认全部点击后，提交系统，等待翻译",
+    "请阅读生词解释",
+    "选择自己不理解的句子，点击，提交系统，等待翻译" , "请阅读难句解释" ,
+    "再次完成试题，如果觉得刚才选的有误，可修改答案，点击确认后，查看正确答案和解析" ,
+    "请仔细阅读正确答案和解析，如需查看全文翻译，请点击翻译全文按钮，否则请点击查看统计" ,
+    "想做更多吗？"];
     this.state = {
       processStep: 0,
       displayByWords: true
@@ -57,14 +75,14 @@ class YueDu extends React.PureComponent {
 
 
   loadQuestions = () => {
-    console.log(typeof(this.props.articleId))
+    // console.log(typeof(this.props.articleId))
     this.props.loadQuestions({
       url: "/api/eng_getQuestion",
       body: {
         username: this.props.username,
         lock: 0,
         article_id: this.props.articleId,
-        //articleId: 0
+        //articleId: articleId+1
       },
       parser: questions => questions.map( q => ({
         questionId: q.questionid,
@@ -86,27 +104,49 @@ class YueDu extends React.PureComponent {
     this.nextStep();
   }
 
-  quit = () => {
-    for( var i = 0; i < questions.length ; i++ ){
-      unlockAndHide( questions[i].questionId );
-    }
-    hideAllTranslate();
-    this.props.history.goBack();
-  }
+  // quit = () => {
+  //   for( var i = 0; i < questions.length ; i++ ){
+  //     unlockAndHide( questions[i].questionId );
+  //   }
+  //   hideAllTranslate();
+  //   this.props.history.goBack();
+  // }
 
-  doMore = () => {
-    const { unlockAndHide , loadContent , questions , hideAllTranslate } = this.props;
-    loadContent();
-    this.loadQuestions();
-    for( var i = 0; i < questions.length ; i++ ){
+//  doMore = () => {
+  //  const { unlockAndHide , loadContent , questions , hideAllTranslate } = this.props;
+    //loadContent();
+    //this.loadQuestions();
+  //  for( var i = 0; i < questions.length ; i++ ){
+    //  unlockAndHide( questions[i].questionId );
+    //}
+  //  hideAllTranslate();
+    //this.setState({
+    //  processStep: 0, // 0 ->
+    //  displayByWords: true
+  //  });
+//  }
+
+quit = () => {
+  const { unlockAndHide  , questions , hideAllTranslate } = this.props;
+  for( var i = 0; i < questions.length ; i++ ){
       unlockAndHide( questions[i].questionId );
     }
     hideAllTranslate();
-    this.setState({
-      processStep: 0, // 0 ->
-      displayByWords: true
-    });
-  }
+  this.props.setLearningType("英语主页面");
+}
+
+   doMore = () => {
+      const { unlockAndHide  , questions , hideAllTranslate } = this.props;
+       for( var i = 0; i < questions.length ; i++ ){
+         unlockAndHide( questions[i].questionId );
+        }
+       hideAllTranslate();
+      this.setState({
+       processStep: 0, // 0 ->
+       displayByWords: true
+      });
+     this.props.setLearningType("英语生词难句");
+   }
 
   submitQuestions = () => {
     const {
@@ -143,11 +183,20 @@ class YueDu extends React.PureComponent {
     }
   }
 
+  function = () => {
+    this.props.loadPortContent({
+      url: "/api/eng_getUnit",
+      body:{
+        username: this.props.username,
+      }
+    });
+  }
+
   componentDidMount(){
     this.props.loadContent();
     this.loadQuestions();
+    this.function();
   }
-
 
   render(){
     const { processStep } = this.state;
@@ -159,6 +208,9 @@ class YueDu extends React.PureComponent {
       translateSentences,
       loadArticleState,
       loadContent,
+      UnitAndCourse,
+      setLearningType,
+      learningType,
       ined
     } = this.props;
     var { displayByWords } = this.state;
@@ -186,15 +238,18 @@ class YueDu extends React.PureComponent {
       };
     }
 
+    // this.props.changeArticleId(this.props.getArticleId.artid);
+    console.log(this.props.articleId)
+
     return (
       <React.Fragment>
         <Prompt
           when={processStep !== 0 && processStep !== this.actions.length - 1}
-          message="you need to do it again, are you sure to quit?"
+          message="你需要再做一遍，确定退出吗?"
         />
 
         <div className={style.HUD}>
-          Step {processStep + 1}: {this.describes[processStep]}
+          [Unit {UnitAndCourse.unit} Course {UnitAndCourse.course}] Step {processStep + 1}: {this.describes[processStep]}
         </div>
         <div className={style.wrapper}>
           <div className={style.leftPane}>
@@ -262,7 +317,7 @@ class YueDu extends React.PureComponent {
                               lastFailed={translateWordsState.lastFailed}
                               wasLoaded={translateWordsState.resolved}
                               reloader={translateWords}
-                              info="Click on the word you don't know"
+                              info="点击不认识的单词"
                             />
                           </div>
                         </div>
@@ -274,7 +329,7 @@ class YueDu extends React.PureComponent {
                       );
                     case 3:
                       return (
-                        <Info info="Click on the sentence you don't know"/>
+                        <Info info="点击不理解的句子"/>
                       );
                     case 7:
                       return (
@@ -343,19 +398,21 @@ export default applyHOCs([
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
-      // logined: true,
-      // username: "lxq",
       questions: state.SingleOptionQuestions.content,
       showSentencesTranslates: state.EnglishArticle.showSentencesTranslates,
       loadQuestionState: state.SingleOptionQuestions.loadState,
       submitQuestionState: state.SingleOptionQuestions.submitState,
       loadArticleState: state.EnglishArticle.loadState,
       translateWordsState: state.EnglishArticle.translateWordsState,
-      articleId: state.EnglishArticle.articleId
+      articleId: state.EnglishArticle.articleId,
+      UnitAndCourse: state.PortTest.content,
+      learningType: state.LearningTypeSelect.learningType,
     }),
     dispatch => ({
       ...bindActionCreators( SingleOptionQuestionsActions , dispatch ),
-      ...bindActionCreators( EnglishArticleActions , dispatch )
+      ...bindActionCreators( EnglishArticleActions , dispatch ),
+      ...bindActionCreators( PortTestActions , dispatch),
+      ...bindActionCreators( LearningTypeSelectActions , dispatch ),
     })
   )],
   YueDu

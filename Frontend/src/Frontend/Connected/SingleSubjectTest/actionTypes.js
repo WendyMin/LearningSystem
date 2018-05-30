@@ -20,3 +20,4 @@ export const __ASYNC_LOAD_QUESTIONS = {
 
 export const __NEXT = "SingleSubjectTest/__NEXT";
 export const __AUTO_NEXT = "SingleSubjectTest/__AUTO_NEXT";
+export const __FORCE_END = "SingleSubjectTest/__FORCE_END";

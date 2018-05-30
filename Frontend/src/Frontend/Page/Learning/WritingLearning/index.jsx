@@ -4,8 +4,11 @@ import { bindActionCreators } from 'redux';
 import { Prompt } from 'react-router';
 import style from 'style';
 
+import Info from 'UI/Info';
+import Login from 'Page/Login';
+import { actions as UserManagerActions } from 'Connected/UserManager';
 import WriteHelp from 'UI/Help/WriteHelp';
-import WriteGraph from "UI/WriteGraph";
+import { view as PageDesign } from 'Connected/PageDesign';
 
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
@@ -16,64 +19,62 @@ class WritingPage extends React.PureComponent {
 
   constructor( props ){
     super( props );
-
-    this.subject = ["入口测试" , "进入学习"  , "查看帮助"];
-    this.state = {
-      test : true,
-      learning : false,
-      help : false
-    }
-  }
-
-  showIntroduction = (num) => {
-    num == 0 ? this.setState({test: true , learning: false , help : false }) :
-    num == 1 ? this.setState({test: false , learning: true , help : false }) :
-    this.setState({test: false , learning: false , help : true})
+    this.type = ["入口测试" , "进入学习"  , "查看帮助"];
   }
 
   render(){
-    const {username} = this.props;
-
-    var TextStyle = [];
-    this.state.test ? TextStyle[0] = style.chosedText : TextStyle[0] = style.normalText;
-    this.state.learning ? TextStyle[1] = style.chosedText : TextStyle[1] = style.normalText;
-    this.state.help ? TextStyle[2] = style.chosedText : TextStyle[2] = style.normalText;
+    const {
+      username,
+      logined,
+      choice
+    } = this.props;
+    // console.log(this.props);
+    // console.log(sessionStorage.getItem("user"))
+    // console.log(sessionStorage.getItem("user") == "")
+    // console.log(sessionStorage.getItem("user") == "undefined")
+    var user = sessionStorage.getItem("user");
+    if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" || sessionStorage.getItem("user") == null){
+      <Login/>
+    }
+    else{
+      this.props.setUser(user , true);
+      sessionStorage.setItem("user",user);
+      console.log(sessionStorage.getItem("user"))
+    }
+    // var user = sessionStorage.getItem("user");
+    // if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" ){
+    // // if(sessionStorage.getItem("user") == "" ){
+    //   <Login/>
+    // }
+    // else{
+    //   this.props.setUser(user)
+    // }
 
     return (
       <React.Fragment>
         <div className = {style.wholePage}>
-
-          <div className={style.HUD}>
-            <div className={style.title}> 学习系统 </div>
-            <div className = {style.goback} onClick = {() => history.back()}> 返回 </div>
-          </div>
-
-          <div className = {style.subjectText}>
-            <br/><img className = {style.picture} src = "/static/images/admin.jpg"/>
-            <br/><div className = {style.username}> {username } </div><br/>
+          {logined !== true ?
             <div>
-              {this.subject.map((sub , key) =>
-                <div key = {key} className = {TextStyle[key]}
-                    onMouseMove = { () => this.showIntroduction(key) }
-                    onClick = { () => this.showIntroduction(key) }
-                >{sub}</div>
-              )}
-            </div>
-          </div>
+              <Info info = "您还没有登录，请先登录，再进行学习!"/>
+              {/* <Login/> */}
+            </div> :
+          // {sessionStorage.getItem("user") == "undefined" ?  <Login/> :
+          <div>
+
+          <PageDesign subjectFunctions = {this.type}/>
 
           <div className = {style.mainContent}>
-            {this.state.test ? <div>测试</div> :
-            this.state.learning ?
-              <div>
-                <a href = "/learning/writing/lunzheng"> 论证有效性分析 </a>
-                <a href = "/learning/writing/lunshuo"> 论说文 </a>
-              </div>
-            :
-            <WriteHelp />
+          {
+            choice == 0 ? <div>入口测试</div> :
+            choice == 1 ?
+            <div>
+              &nbsp;&nbsp;&nbsp;&nbsp;<a href = "/learning/writing/lunzheng"> 论证有效性分析 </a><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<a href = "/learning/writing/lunshuo"> 论说文 </a>
+            </div> :
+            <WriteHelp/>
           }
           </div>
-
-
+        </div>}
 
         </div>
       </React.Fragment>
@@ -84,34 +85,36 @@ class WritingPage extends React.PureComponent {
 export default applyHOCs([
   asyncProcessControl({
   }),
-  protect({
-    logined: {
-      satisfy: l => l === true,
-      block(){
-        const { openWindow , history, closeMask , openMask } = this.props;
-        openWindow( UserManagerWindow,
-          {
-            width: '380px',
-            height: '300px',
-            position: {
-              top: 'calc( 50% - 190px)',
-              left: 'calc( 50% - 150px)'
-            },
-            onCancel: () => history.goBack() || closeMask(),
-            onSuccess: closeMask,
-          }
-        );
-        openMask();
-      }
-    }
-  }),
+  // protect({
+  //   logined: {
+  //     satisfy: l => l === true,
+  //     block(){
+  //       const { openWindow , history, closeMask , openMask } = this.props;
+  //       openWindow( UserManagerWindow,
+  //         {
+  //           width: '380px',
+  //           height: '300px',
+  //           position: {
+  //             top: 'calc( 50% - 190px)',
+  //             left: 'calc( 50% - 150px)'
+  //           },
+  //           onCancel: () => history.goBack() || closeMask(),
+  //           onSuccess: closeMask,
+  //         }
+  //       );
+  //       openMask();
+  //     }
+  //   }
+  // }),
   makePage,
   connect(
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
+      choice: state.SubjectSelect.choice,
     }),
     dispatch => ({
+      ...bindActionCreators( UserManagerActions , dispatch )
       //...bindActionCreators( ButtonExpandActions , dispatch),
     })
   )],

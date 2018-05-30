@@ -13,7 +13,7 @@ import SlideDU from 'Animation/SlideDU';
 import SlideUD from 'Animation/SlideUD';
 
 import UserManagerWindow from "Windows/UserManager";
-
+import { actions as UserManagerActions } from 'Connected/UserManager';
 import {
   view as ButtonExpand,
   actions as ButtonExpandActions
@@ -30,6 +30,14 @@ import {
   view as PortTest,
   actions as PortTestActions
 } from 'Connected/PortTest';
+import {
+  view as EditText,
+  actions as EditTextActions
+} from 'Connected/EditText';
+import {
+  view as ViewFinishedText,
+  actions as ViewFinishedTextActions
+} from 'Connected/ViewFinishedText';
 
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
@@ -53,13 +61,13 @@ class LunShuo extends React.PureComponent {
       zhentiDisplay: false,
       gongguShow: false,
       zhentiShow: false,
-      ///contentDisplay: false,
       titleContentDisplay: false,
-      //optionContentDisplay: false,
       acknowledgeDisplay: false,
       gongguEgArticle: false,
+      userUploadText: false,
       zhentiEgarticle: false,
       zhentiEgComment: false,
+      userFileEdit: false,
       userFileDisplay: false,
       userGongguFile: false
     };
@@ -96,25 +104,21 @@ class LunShuo extends React.PureComponent {
     else if ( num == 1) {
       this.props.loadButtonContents({
         url: "/api/lunshuoShentiliyi",
-        //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_shentiliyi.php",
       });
     }
     else if ( num == 2) {
       this.props.loadButtonContents({
         url: "/api/lunshuoJingdianmuban",
-        //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_jingdianmuban.php",
       });
     }
     else if ( num == 3) {
       this.props.loadButtonContents({
         url: "/api/lunshuoHualongdianjing",
-        //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_hualongdianjing.php",
       });
     }
     else if ( num == 4) {
       this.props.loadButtonContents({
         url: "/api/lunshuoSucaibaodian",
-        //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_sucaibaodian.php",
       });
     }
 
@@ -132,7 +136,6 @@ class LunShuo extends React.PureComponent {
     });
     this.props.loadButtonContents({
       url: "/api/lunshuoGonggu"
-        //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_gonggu.php"
       });
   }
 
@@ -148,7 +151,6 @@ class LunShuo extends React.PureComponent {
     });
     this.props.loadButtonContents({
       url: "/api/lunshuoZhenti"
-        //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_zhenti.php"
       });
   }
 
@@ -168,7 +170,6 @@ class LunShuo extends React.PureComponent {
    });
     this.props.loadWriteContents({
       url: "/api/lunShuoZhenTiContent",
-      //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_zhenti_content.php",
       body: {
         requestQuestion: choice
       }
@@ -188,7 +189,6 @@ class LunShuo extends React.PureComponent {
    });
     this.props.loadWriteContents({
       url: "/api/lunShuoGongGuContent",
-      //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_gonggu_content.php",
       body: {
         requestQuestion: choice
       }
@@ -201,14 +201,11 @@ class LunShuo extends React.PureComponent {
       zhaocuoDisplay: false,
       gongguShow: false,
       zhentiShow: false,
-      //titleContentDisplay: false ,
-      //optionContentDisplay: false,
       acknowledgeDisplay: true
     });
     if ( this.jiqiao == 0 ) {
       this.props.loadWriteKnowledge({
         url: "/api/lunShuoTiXingTuPoContent",
-        //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_tixingtupo_content.php",
         body: {
           requestQuestion: choice
         }
@@ -217,7 +214,6 @@ class LunShuo extends React.PureComponent {
     else if ( this.jiqiao == 1) {
       this.props.loadWriteKnowledge({
         url: "/api/lunShuoShenTiLiYiContent",
-        //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_shentiliyi_content.php",
         body: {
           requestQuestion: choice
         }
@@ -226,7 +222,6 @@ class LunShuo extends React.PureComponent {
     else if ( this.jiqiao == 2) {
       this.props.loadWriteKnowledge({
         url: "/api/lunShuoJingDianMuBanContent",
-        //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_jingdianmuban_content.php",
         body: {
           requestQuestion: choice
         }
@@ -235,7 +230,6 @@ class LunShuo extends React.PureComponent {
     else if ( this.jiqiao == 3) {
       this.props.loadWriteKnowledge({
         url: "/api/lunShuoHuaLongDianJingContent",
-        //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_hualongdianjing_content.php",
         body: {
           requestQuestion: choice
         }
@@ -244,7 +238,6 @@ class LunShuo extends React.PureComponent {
     else if ( this.jiqiao == 4) {
       this.props.loadWriteKnowledge({
         url: "/api/lunShuoSuCaiBaoDianContent",
-        //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_sucaibaodian_content.php",
         body: {
           requestQuestion: choice
         }
@@ -254,10 +247,9 @@ class LunShuo extends React.PureComponent {
   }
 
   cankaoliyi = ( choice ) => {
-    this.setState({zhentiEgComment: !this.state.zhentiEgComment , userFileDisplay: false});
+    this.setState({zhentiEgComment: !this.state.zhentiEgComment , userFileEdit:false , userFileDisplay: false});
     this.props.loadPortContent({
       url: "/api/lunshuoLiyi",
-      //url: "http://59.110.23.212/LearningSystem/BackEnd/lunshuo_liyi.php",
       body: {
         requestQuestion: choice
       }
@@ -281,10 +273,43 @@ class LunShuo extends React.PureComponent {
     //console.log(this.RightLiyi)
   }
 
+  loadLastSaveTextContent = () => {
+    console.log(this.props.username,this.props.choice)
+    this.props.loadLastSaveText({
+      url: "/api/lunShuoZanCunContent",
+      body: {
+        username: this.props.username,
+        choice: this.props.choice
+      }
+    })
+  }
+
+  saveOrSubmitTextContent = ( flag ) => {
+    console.log(this.props.username,this.props.choice,this.props.userInputText,flag)
+    this.props.saveOrSubmitText({
+      url: "/api/lunShuoSaveOrSubmitText",
+      body: {
+        username: this.props.username,
+        choice: this.props.choice,
+        text: this.props.userInputText,
+        saveOrSubmit: flag  // flag=0 暂存  , flag=1 提交
+      }
+    });
+  }
+
+  loadAllSubmitText = () => {
+    this.props.loadAllSubmitText({
+      url: "/api/lunShuoAllSubmitText",
+      body: {
+        username: this.props.username,
+        choice: this.props.choice
+      }
+    });
+  }
+
 
   render(){
     const {
-      //processStep,
       jiqiaoDisplay,
       zhaocuoDisplay,
       gongguDisplay,
@@ -292,7 +317,6 @@ class LunShuo extends React.PureComponent {
       zhentiShow,
       gongguShow,
       titleContentDisplay,
-      //optionContentDisplay,
       acknowledgeDisplay,
       gongguEgArticle
      } = this.state;
@@ -306,10 +330,19 @@ class LunShuo extends React.PureComponent {
       example_article,
       example_comment,
       example_liyi,
-      //right_liyi,
       showContent
     } = this.props;
-    console.log(example_liyi.right_liyi)
+    // console.log(example_liyi.right_liyi)
+
+    var user = sessionStorage.getItem("user");
+    if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" || sessionStorage.getItem("user") == null){
+      <Login/>
+    }
+    else{
+      this.props.setUser(user , true);
+      sessionStorage.setItem("user",user);
+      console.log(sessionStorage.getItem("user"))
+    }
 
 
     return (
@@ -324,8 +357,8 @@ class LunShuo extends React.PureComponent {
 
           <div className={style.leftPane}>
             <Button className={style.button1} text={"写作技巧精讲"} onClick={this.jiqiao_type} /><br/>
-            <Button className={style.button2} text={"巩固强化练习"} onClick={this.loadButtonContents_gonggu}/><br/>
-            <Button className={style.button3} text={"近年真题演练"} onClick={this.loadButtonContents_zhenti} />
+            <Button className={style.button2} text={"巩固强化练习"} onClick={()=>{this.loadButtonContents_gonggu();this.setState({gongguEgArticle: false,userGongguFile: false,userUploadText: false})}}/><br/>
+            <Button className={style.button3} text={"近年真题演练"} onClick={()=>{this.loadButtonContents_zhenti();this.setState({zhentiEgarticle: false,zhentiEgComment:false, userFileEdit:false , userFileDisplay: false})}} />
           </div>
 
           <div className={style.rightPane}>
@@ -390,35 +423,49 @@ class LunShuo extends React.PureComponent {
              gongguShow?
              <div className={style.option}>
                <div className={style.juzhong}>
-               <input type="file" accept =".doc,.pdf" style={{"right":"0"}}/><br/><span style={{"color":"red"}}>请上传一个word或pdf文件</span><br/>
-               <label className = {style.egArticleText} onClick = {() => this.setState({gongguEgArticle:false,userGongguFile: !this.state.userGongguFile})}>已传文件</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <label className = {style.egArticleText} onClick = {() => this.setState({gongguEgArticle: !this.state.gongguEgArticle})}> 参考范文 </label>
-             </div>
-               {this.state.userGongguFile ?
-                 <div className = {style.egArticle}>
-                   此处应该显示用户上传的文件内容
-                 </div>
-                 :
-                 null
-               }
-               {this.state.gongguEgArticle ?
-                 <div className = {style.egArticle}>
-                   <p className = {style.article_title}>{name}</p>
-                   {example_article.map((onePara , key) =>
-                     <p key = {key}> &nbsp;&nbsp;&nbsp;&nbsp;{onePara} </p>
-                   )}
-                 </div>
-                 :
-                 null
-               }
+               {/* <input type="file" accept =".doc,.pdf" style={{"right":"0"}}/><br/><span style={{"color":"red"}}>请上传一个word或pdf文件</span><br/> */}
+                 <label className = {style.egArticleText} onClick = {() => this.setState({gongguEgArticle:false,userGongguFile:false,userUploadText: !this.state.userUploadText})}>上传文章</label>&nbsp;&nbsp;&nbsp;
+                 <label className = {style.egArticleText} onClick = {() => {this.setState({gongguEgArticle:false,userGongguFile: !this.state.userGongguFile});this.loadAllSubmitText()}}>已传文章</label>&nbsp;&nbsp;&nbsp;
+                 <label className = {style.egArticleText} onClick = {() => this.setState({gongguEgArticle: !this.state.gongguEgArticle})}> 参考范文 </label>
+               </div>
+               <div className = {style.egArticle}>
+                 {this.state.userUploadText ?
+                   <div>
+                     <EditText inputSizeStyle = {style.inputBox} buttonStyle = {style.saveOrSubmit}
+                               loadLastSaveTextContent = {() => this.loadLastSaveTextContent()}
+                               saveText = {() => this.saveOrSubmitTextContent(0)} submitText = {() => this.saveOrSubmitTextContent(1)}
+                     />
+                   </div>
+                   :
+                   null
+                 }
+                 {this.state.userGongguFile ?
+                   <div className = {style.egArticle}>
+                     <ViewFinishedText/>
+                     {/* 此处应该显示用户上传的文件内容 */}
+                   </div>
+                   :
+                   null
+                 }
+                 {this.state.gongguEgArticle ?
+                   <div className = {style.egArticle}>
+                     <p className = {style.article_title}>{name}</p>
+                     {example_article.map((onePara , key) =>
+                       <p key = {key}> &nbsp;&nbsp;&nbsp;&nbsp;{onePara} </p>
+                     )}
+                   </div>
+                   :
+                   null
+                 }
+               </div>
+
              </div>
              :
              null
            }
 
-           {
+           {// <div className = {style.rightPane}></div>
              zhentiShow?
-             <div className = {style.rightPane}>
              <div className={style.title}>
                 <div className={style.biaoti}>{choice}</div>
                 <WriteContent className={style.content}  loader={this.loadWriteContents}/>
@@ -436,17 +483,22 @@ class LunShuo extends React.PureComponent {
                    onClick = {() => this.setState({zhentiEgarticle: !this.state.zhentiEgarticle})}
                   > 参考范文 </div>
               </div>
+              :null
+            }
 
+            {zhentiShow ?
               <div className={style.option}>
-                <div className={style.juzhong}>
-                <input type="file" accept =".doc,.pdf" style={{"right":"0"}}/><br/><span style={{"color":"red"}}>请上传一个word或pdf文件</span><br/>
-                <label className = {style.egArticleText} onClick = {() => this.setState({userFileDisplay: !this.state.userFileDisplay})}>已传文件</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <label className = {style.egArticleText}
-                  onClick = {() => this.cankaoliyi( choice )}
-                 > 参考立意 </label>
-               </div>
+                {/* <div> */}
+                {/* <div className={style.juzhong}> */}
+                {/* <input type="file" accept =".doc,.pdf" style={{"right":"0"}}/><br/><span style={{"color":"red"}}>请上传一个word或pdf文件</span><br/> */}
+                <label className = {style.egArticleText} onClick = {() => this.setState({userFileEdit: !this.state.userFileEdit,userFileDisplay: false,zhentiEgComment: false })}>上传文章</label>&nbsp;&nbsp;&nbsp;
+                <label className = {style.egArticleText} onClick = {() => {this.setState({userFileDisplay: !this.state.userFileDisplay,userFileEdit: false,zhentiEgComment: false});this.loadAllSubmitText()}}>已传文章</label>&nbsp;&nbsp;&nbsp;
+                <label className = {style.egArticleText} onClick = {() => this.cankaoliyi( choice )}> 参考立意 </label>
+               {/* </div> */}
+               <div className = {style.egArticle}>
                 {this.state.zhentiEgComment ?
-                  <div className = {style.egLiyiArticle}>
+                  <div>
+                   {/* <div className = {style.egLiyiArticle}> */}
                     <p className = {style.liyi}>正确立意</p>
                     {example_liyi.right_liyi == undefined ? null :
                       <div>
@@ -468,14 +520,27 @@ class LunShuo extends React.PureComponent {
                   :
                   null
                 }
+                {
+                  this.state.userFileEdit ?
+                  <EditText inputSizeStyle = {style.inputBox} buttonStyle = {style.saveOrSubmit}
+                            loadLastSaveTextContent = {() => this.loadLastSaveTextContent()}
+                            saveText = {() => this.saveOrSubmitTextContent(0)} submitText = {() => this.saveOrSubmitTextContent(1)}
+                  />
+                  : null
+                }
 
                 {
                   this.state.userFileDisplay ?
-                  <div className = {style.userFile}>已传文件</div>:null
+                  <div>
+                    <ViewFinishedText/>
+                  {/* <div className = {style.userFile}><div className = {style.userFile}>已传文件</div> </div>*/}
+                  </div>
+                  :null
                 }
 
               </div>
-            </div>:null}
+            </div>
+            :null}
 
 
 
@@ -503,27 +568,27 @@ class LunShuo extends React.PureComponent {
 
 export default applyHOCs([
 
-  protect({
-    logined: {
-      satisfy: l => l === true,
-      block(){
-        const { openWindow , history, closeMask , openMask } = this.props;
-        openWindow( UserManagerWindow,
-          {
-            width: '380px',
-            height: '300px',
-            position: {
-              top: 'calc( 50% - 190px)',
-              left: 'calc( 50% - 150px)'
-            },
-            onCancel: () => history.goBack() || closeMask(),
-            onSuccess: closeMask,
-          }
-        );
-        openMask();
-      }
-    }
-  }),
+  // protect({
+  //   logined: {
+  //     satisfy: l => l === true,
+  //     block(){
+  //       const { openWindow , history, closeMask , openMask } = this.props;
+  //       openWindow( UserManagerWindow,
+  //         {
+  //           width: '380px',
+  //           height: '300px',
+  //           position: {
+  //             top: 'calc( 50% - 190px)',
+  //             left: 'calc( 50% - 150px)'
+  //           },
+  //           onCancel: () => history.goBack() || closeMask(),
+  //           onSuccess: closeMask,
+  //         }
+  //       );
+  //       openMask();
+  //     }
+  //   }
+  // }),
   makePage,
   connect(
     state => ({
@@ -540,12 +605,20 @@ export default applyHOCs([
       //mainContent: state.WriteContent.content,
       loadWriteContentsState: state.WriteContent.loadState,
       showContent: state.ButtonExpand.showContent,
+      userInputText: state.EditText.userInputText,
+      lastSaveText: state.EditText.lastSaveText,
+      allSubmitTextName: state.ViewFinishedText.allSubmitTextName,
+      allSubmitText: state.ViewFinishedText.allSubmitText,
+      whichTextToView: state.EditText.whichTextToView
     }),
     dispatch => ({
+      ...bindActionCreators( UserManagerActions , dispatch ),
       ...bindActionCreators( ButtonExpandActions , dispatch ),
       ...bindActionCreators( WriteContentActions , dispatch ),
       ...bindActionCreators( WriteKnowledgeActions , dispatch),
-      ...bindActionCreators( PortTestActions , dispatch)
+      ...bindActionCreators( PortTestActions , dispatch),
+      ...bindActionCreators( EditTextActions , dispatch ),
+      ...bindActionCreators( ViewFinishedTextActions , dispatch )
     })
 
   )],

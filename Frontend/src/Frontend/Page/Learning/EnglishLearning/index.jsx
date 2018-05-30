@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import { Prompt } from 'react-router';
 import style from 'style';
 
-import LogicTest from 'Page/Learning/LogicLearning/LogicTest';
-import LearningTypeSelect from 'Page/Learning/EnglishLearning/LearningTypeSelect';
-import LogicReview from 'Page/Learning/LogicLearning/LogicReview';
+import EngTest from 'Page/Learning/EnglishLearning/EngTest';
+import EngLearningTypeSelect from 'Page/Learning/EnglishLearning/EngLearningTypeSelect';
+import EngReview from 'Page/Learning/EnglishLearning/EngReview';
 import EngChart from 'Page/Learning/EnglishLearning/EngChart';
 import EnglishHelp from 'UI/Help/EnglishHelp';
 import Button from 'UI/Button';
@@ -19,7 +19,10 @@ import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
 //import UserManagerWindow from "Windows/UserManager";
-//import { view as UserManager } from 'Connected/UserManager';
+import {
+  // view as UserManager,
+  actions as UserManagerActions
+} from 'Connected/UserManager';
 import Login from 'Page/Login';
 import  {
   view as SubjectSelect
@@ -40,9 +43,24 @@ class EnglishLearning extends React.PureComponent {
       choice
     } = this.props;
     //console.log(this.props);
+
+    var user = sessionStorage.getItem("user");
+    if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" ){
+      <Login/>
+    }
+    else{
+      this.props.setUser(user,true);
+      sessionStorage.setItem("user",user);
+    }
+
     return (
       <React.Fragment>
-      { logined == false ?  <Login/> :
+      {
+        logined !== true ?
+          <div>
+            <Info info = "您还没有登录，请先登录，再进行学习!"/>
+            {/* <Login/> */}
+          </div> :          
 
         <div className = {style.wholePage}>
 
@@ -59,10 +77,11 @@ class EnglishLearning extends React.PureComponent {
 
           <div className = {style.mainContent}>
             {choice == 0 ?
-              newTo[0] == 1 ?
-              <LogicTest/> : <Info info = {"您已经完成测试!"} /> :
-             choice == 1 ? <LearningTypeSelect/> :
-             choice == 2 ? <LogicReview/> :
+              // newTo[0] == 1 ?
+              <EngTest/> :
+              // <Info info = {"您已经完成测试!"} /> :
+             choice == 1 ? <EngLearningTypeSelect/> :
+             choice == 2 ? <EngReview/> :
              choice == 3 ? <EngChart/>:
              <EnglishHelp/>
             }
@@ -110,6 +129,7 @@ export default applyHOCs([
     }),
     dispatch => ({
       //...bindActionCreators( ButtonExpandActions , dispatch),
+      ...bindActionCreators( UserManagerActions , dispatch ),
     })
   )],
   EnglishLearning

@@ -34,6 +34,7 @@ class Knowledge extends React.PureComponent {
   }
 
   loadContent = () => {
+    console.log(this.props.username,this.props.chapter_name)
     this.props.loadPortContent({
       url: "/api/logicZhishidian",
       body: {
@@ -110,6 +111,7 @@ export default applyHOCs([
       chapter_name: state.ZhentiPerYearTongji.tongji,
       total_content: state.PortTest.content,
       loadContentState: state.PortTest.loadState,
+      chapter_name: state.LearningTypeSelect.chapter_name
     }),
     dispatch => ({
       ...bindActionCreators( PortTestActions , dispatch ),

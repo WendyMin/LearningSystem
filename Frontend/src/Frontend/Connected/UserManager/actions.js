@@ -1,7 +1,15 @@
 import {
-  LOGIN
+  LOGIN,
+  __SET_USER
 } from 'actionTypes';
 
+export const setUser = ( username , logined ) => ({
+  type: __SET_USER,
+  payload: {
+    username,
+    logined
+  }
+});
 
 const startLogin = ({ username , password }) => ({
   type: LOGIN.pending,

@@ -13,11 +13,11 @@ class UserManager extends React.PureComponent {
     login: true
   }
 
-  //componentWillReceiveProps( nextProps ){
-    //if( nextProps.logined && !this.props.logined ){
-      //this.props.onSuccess();
-    //}
-  //}
+  // componentWillReceiveProps( nextProps ){
+  //   if( nextProps.logined !== this.props.logined ){
+  //     this.props.onSuccess();
+  //   }
+  // }
 
   signup = () => {
     this.setState({
@@ -33,7 +33,7 @@ class UserManager extends React.PureComponent {
   render(){
     //const { onCancel , login , signup , logined , logining , usernameExist , name , password , failed } = this.props;
     const { loginOrSignup , onCancel , login , signup , logined , logining , usernameExist , name , password , failed } = this.props;
-    console.log(this.props)
+    //console.log(this.props)
     return (
       <React.Fragment>
       {

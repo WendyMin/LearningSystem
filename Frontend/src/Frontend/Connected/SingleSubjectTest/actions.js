@@ -7,11 +7,16 @@ import {
   __ASYNC_SUBMIT_QUESTIONS,
   __NEXT,
   __AUTO_NEXT,
-  __CLEAR_AUTO_NEXT
+  __CLEAR_AUTO_NEXT,
+  __FORCE_END
 } from 'actionTypes';
 
 //import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
-
+export const forceEnd = () => ({
+    type: __FORCE_END,
+    payload: {
+    }
+});
 export const forceNext = () => ( dispatch , getState ) => {
   const { SingleSubjectTest: { clear } } = getState();
   clearTimeout( clear );
@@ -134,39 +139,39 @@ export const submitQuestions = ({ url , body , headers }) => ( dispatch , getSta
   });
 };
 
-let loadQuestionsCounter = 0;
-const loadQuestionsStart = () => ({
+let loadTestQuestionsCounter = 0;
+const loadTestQuestionsStart = () => ({
     type: __ASYNC_LOAD_QUESTIONS.pending,
     payload: {
 
     },
-    id: loadQuestionsCounter
+    id: loadTestQuestionsCounter
 });
-const loadQuestionsResolved = ( response , initState ) => ({
+const loadTestQuestionsResolved = ( response , initState ) => ({
     type: __ASYNC_LOAD_QUESTIONS.resolved,
     payload: {
       response,
       initState
     },
-    id: loadQuestionsCounter
+    id: loadTestQuestionsCounter
 });
-const loadQuestionsRejected = ( reason , detail ) => ({
+const loadTestQuestionsRejected = ( reason , detail ) => ({
     type: __ASYNC_LOAD_QUESTIONS.rejected,
     payload: {
       reason,
       detail
     },
-    id: loadQuestionsCounter
+    id: loadTestQuestionsCounter
 });
 
-export const loadQuestions = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
-  const reqId = ++loadQuestionsCounter;
+export const loadTestQuestions = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+  const reqId = ++loadTestQuestionsCounter;
   const dispatchLastest = action => {
-    if( reqId === loadQuestionsCounter ){
+    if( reqId === loadTestQuestionsCounter ){
       dispatch( action );
     }
   }
-  dispatch( loadQuestionsStart() );
+  dispatch( loadTestQuestionsStart() );
   if( typeof body === "object" ){
     body = JSON.stringify( body );
   }
@@ -180,17 +185,17 @@ export const loadQuestions = ({ url , body , parser , headers  , initState }) =>
   })
   .then( response => {
     if( !response.ok ){
-      dispatchLastest( loadQuestionsRejected( "server" , response.status ) );
+      dispatchLastest( loadTestQuestionsRejected( "server" , response.status ) );
       return;
     }
     response.json()
-    //.then( json => dispatchLastest( loadQuestionsResolved( parser( json ) , initState ) ) )
-    .then( json => dispatchLastest( loadQuestionsResolved( json  , initState ) ) )
+    //.then( json => dispatchLastest( loadTestQuestionsResolved( parser( json ) , initState ) ) )
+    .then( json => dispatchLastest( loadTestQuestionsResolved( json  , initState ) ) )
     .catch( err => {
-      dispatchLastest( loadQuestionsRejected( "json" , err ) )
+      dispatchLastest( loadTestQuestionsRejected( "json" , err ) )
     });
   })
   .catch( err => {
-      dispatchLastest( loadQuestionsRejected( "network" , err ) );
+      dispatchLastest( loadTestQuestionsRejected( "network" , err ) );
   });
 };

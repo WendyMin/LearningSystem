@@ -50,7 +50,6 @@ export default connect(
     content: ownState.content,
     name2: ownState.name2,
     name3: ownState.name3,
-    //loadingData: ownState.loadingData,
   }),
   dispatch => bindActionCreators( actionCreators , dispatch )
 )( WriteKnowledge );

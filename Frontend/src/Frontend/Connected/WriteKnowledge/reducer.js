@@ -3,13 +3,9 @@ import {
 } from 'actionTypes';
 
 export default ( state = {
-    content: [],
-    name2: [],
-    name3: [],
-    //title: [],
-  //  title_article: [],
-    //name: [],
-    //example_article: [],
+    content: [],  // 知识点的所有内容
+    name2: [],  // 二级标题
+    name3: [],  // 三级标题
 
     loadState: {
       pending: 0,
@@ -34,11 +30,7 @@ export default ( state = {
     }
     case __ASYNC_LOAD_WRITE_KNOWLEDGE.resolved: {
       let { response , initState } = payload;
-      initState = initState || {
-        lock: false,
-        show: false,
-        choice: -1
-      };
+      initState = initState;
       let loadState = {...state.loadState };
       loadState.resolved++;
       loadState.pending--;
@@ -47,14 +39,7 @@ export default ( state = {
         loadState,
         content: response.all_content,
         name2: response.section_name2,
-        name3: response.section_name3,
-        //content: response
-        //content: {
-          //title: response.title,
-          //title_article: response.title_article,
-          //name: response.name,
-          //example_article: response.content
-        //}
+        name3: response.section_name3
       };
     }
     case __ASYNC_LOAD_WRITE_KNOWLEDGE.rejected: {

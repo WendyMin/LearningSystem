@@ -5,3 +5,5 @@ export const __ASYNC_LOAD_BUTTON_CONTENTS = {
   resolved: "ButtonExpand/__LOAD_BUTTON_CONTENTS_RESOLVED",
   rejected: "ButtonExpand/__LOAD_BUTTON_CONTENTS_REJECTED",
 };
+
+export const __FORCE_DISAPPEAR_CHOICE = "BUTTON_EXPAND/__FORCE_DISAPPEAR_CHOICE"

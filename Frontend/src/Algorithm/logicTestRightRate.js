@@ -1,5 +1,6 @@
 import changeAlpToNum from 'changeAlpToNum';
 function logicTestRightRate( questions ){
+  console.log(questions);
   let table = {
     0 : "luojiyuyan",
     1 : "mingtiluoji",
@@ -24,7 +25,7 @@ function logicTestRightRate( questions ){
   };
 
   var right_rate = [];
-  var all_type_num = Object.keys(questions).length;
+  var all_type_num = Object.keys(questions).length;  // 总共多少大类
   for (var i = 0 ; i < all_type_num ; i++){
     right_rate.push(0);
   }
@@ -32,15 +33,29 @@ function logicTestRightRate( questions ){
   for (var type in questions){
     var num = changeTypeToNum(type);
     for (var index in questions[type]){
-      if( questions[type][index].choosed == changeAlpToNum( questions[type][index].answer ) ){
-        questions[type][index].nanyi == "易" ? right_rate[num] += 0.22 :
-        questions[type][index].nanyi == "中" ? right_rate[num] += 0.33 :
-        questions[type][index].nanyi == "难" ? right_rate[num] += 0.45 :
-        right_rate[type][0] += 0
+      if( questions[type][index].nanyi == "易" ){
+        questions[type][index].choosed != changeAlpToNum( questions[type][index].answer ) ? right_rate[num] += 0 : right_rate[num] += 0.22 ;
+      }
+      if( questions[type][index].nanyi == "难" ){
+        questions[type][index].choosed == changeAlpToNum( questions[type][index].answer ) ? right_rate[num] += 0.67 : right_rate[num] += 0 ;
+      }
+      if( questions[type][index].nanyi == "中" ){
+        questions[type][index].choosed == changeAlpToNum( questions[type][index].answer ) ? right_rate[num] += 0.33  : right_rate[num] += 0 ;
       }
     }
   }
 
+  // for (var type in questions){
+  //   var num = changeTypeToNum(type);
+  //   for (var index in questions[type]){
+  //     if( questions[type][index].choosed == changeAlpToNum( questions[type][index].answer ) ){
+  //       questions[type][index].nanyi == "易" ? right_rate[num] += 0.22 :
+  //       questions[type][index].nanyi == "中" ? right_rate[num] += 0.33 :
+  //       questions[type][index].nanyi == "难" ? right_rate[num] += 0.45 :
+  //       right_rate[type][0] += 0
+  //     }
+  //   }
+  // }
 
   return right_rate
 }

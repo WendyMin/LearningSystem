@@ -13,22 +13,28 @@ class ButtonExpand extends React.PureComponent {
       buttonTexts,
       loader,
       requestData,
-      setButtonChoice
+      setButtonChoice,
+      buttonDisappear
     } = this.props;
     console.log(this.props)
 
 
     return (
-      <div className="container">
+      // <div className="container">
+      <div className = {style.expandButton}>
+        {/* {buttonDisappear ? null :
+          <div> */}
+            {buttonTexts.map(( oneway , key ) =>
+              <div key = {key}>
+                <Button className = {style.buttonSize} text={oneway}
+                        onClick = {() => {setButtonChoice(oneway);requestData( oneway )} }
+                /><br/>
+              </div>
+              )
+            }
+          {/* </div>
+        } */}
 
-        {buttonTexts.map(( oneway , key ) =>
-          <div key = {key}>
-            <Button className = {style.buttonSize} text={oneway}
-                    onClick = {() => {setButtonChoice(oneway);requestData( oneway )} }
-            /><br/>
-          </div>
-          )
-        }
 
 
       {/*
@@ -40,7 +46,8 @@ class ButtonExpand extends React.PureComponent {
            </div>
         )
       */}
-      </div>
+      {/* // </div> */}
+    </div>
     );
   }
 };

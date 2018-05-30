@@ -15,7 +15,7 @@ class TranslatedWords extends React.PureComponent {
         <div className="container">
         {
           words.length === 0
-          ? <Info info="You do not have unknown words, great!"/>
+          ? <Info info="You do not have unknown words, congratulations!"/>
           :words.map( wordObj =>
             <div
               className={style.oneItem}

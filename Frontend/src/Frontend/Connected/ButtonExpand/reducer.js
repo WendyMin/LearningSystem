@@ -1,12 +1,14 @@
 import {
   __ASYNC_LOAD_BUTTON_CONTENTS,
-  __SET_BUTTON_CHOICE
+  __SET_BUTTON_CHOICE,
+  __FORCE_DISAPPEAR_CHOICE
 } from 'actionTypes';
 
 export default ( state = {
     content: [],
     choice: "",
-    showContent: false,
+  //  buttonDisappear: false,
+    //showContent: false,
     loadState: {
       pending: 0,
       resolved: 0,
@@ -26,11 +28,18 @@ export default ( state = {
       ...state,
       content: content,
       choice: choice,
+      //buttonDisappear: true,
       //choice: Object.entries(content).map(([key,value]) =>
       //  value==choice? choice:null
       //),
-      showContent: true
+      //showContent: true
     };
+
+    case __FORCE_DISAPPEAR_CHOICE:
+      return {
+        ...state,
+        choice: "",
+      };
 
     case __ASYNC_LOAD_BUTTON_CONTENTS.pending: {
       let loadState = {...state.loadState };

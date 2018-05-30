@@ -21,6 +21,11 @@ import {
   view as SingleSubjectTest,
   actions as SingleSubjectTestActions
 } from 'Connected/SingleSubjectTest';
+import {
+  view as LogicTestTongji,
+  actions as LogicTestTongjiActions
+} from 'Connected/LogicTestTongji';
+import EnterLearning from 'Page/Learning/LogicLearning/EnterLearning';
 
 import changeAlpToNum from 'Algorithm/changeAlpToNum';
 import decideNextQuestion from 'Algorithm/decideNextQuestion';
@@ -35,12 +40,31 @@ class LogicTest extends React.PureComponent {
 
   constructor( props ){
     super( props );
+    this.state = {
+      enterTest: true,
+      enterLearning: false,
+      testAgain: false
+    }
   }
 
   loadQuestions = () => {
-    this.props.loadQuestions({
+    this.props.loadTestQuestions({
       url: "/api/logicTest",
     })
+  }
+  loadTestResult = () => {
+    this.props.loadTestTongjiContent({
+      url: "/api/logicTestTongji",
+      body: {
+        username: this.props.username
+      }
+    });
+    this.props.loadTestMeanTongjiContent({
+      url: "/api/logicTestMeanTongji",
+      body: {
+        username: this.props.username
+      }
+    });
   }
 
   submitQuestions = () => {
@@ -79,7 +103,7 @@ class LogicTest extends React.PureComponent {
     right_rate13 += right_rate[13];
     right_rate14 += right_rate[14];
 
-
+   console.log(right_rate0,right_rate1,right_rate2,right_rate3,right_rate4,right_rate5,right_rate6,right_rate7,right_rate8,right_rate9,right_rate10,right_rate11,right_rate12,right_rate13,right_rate14)
    this.props.submitQuestions({
       url: "/api/logicTestRightRate",
       body: {
@@ -102,14 +126,30 @@ class LogicTest extends React.PureComponent {
       }
     });
 
+    this.props.loadTestTongjiContent({
+      url: "/api/logicTestTongji",
+      body: {
+        username: this.props.username
+      }
+    });
+    this.props.loadTestMeanTongjiContent({
+      url: "/api/logicTestMeanTongji",
+      body: {
+        username: this.props.username
+      }
+    });
+
   }
 
   componentDidMount(){
     this.loadQuestions();
+    this.loadTestResult();
   }
   componentWillReceiveProps( NextProps ){
-    if(this.props.testend !== NextProps.testend){
-      this.submitQuestions()
+    // if(this.props.testend !== NextProps.testend){
+    if(this.props.testend == false && NextProps.testend == true){
+      //alert("Submit")
+      this.submitQuestions();
     }
   }
 
@@ -122,56 +162,61 @@ class LogicTest extends React.PureComponent {
       questions,
       next,
       forceNext,
+      forceEnd,
       testend,
-      username
+      username,
+      whetherDidTest
     } = this.props;
     //console.log(this.props)
-
-    var all_type = ["逻辑语言" , "命题逻辑" , "词项逻辑" , "逻辑应用" , "演绎推理" , "归纳逻辑" ,
-                    "假设" , "支持" , "削弱" , "评价" , "解释" , "推论" , "比较" , "描述" , "综合"];
-
+    //this.setState({enterTest: !whetherDidTest});
+    //console.log(this.state.enterTest);
+    //console.log(this.state.enterLearning)
+    //console.log(this.state.testAgain)
+    //console.log(this.state.resetestend)
+    //console.log(testend)
     return (
       <React.Fragment>
         <Prompt
-          when = {testend !== true}
+          when = {(this.state.enterTest && !whetherDidTest || this.state.testAgain && !testend) !== true}
           message = "you need to do it again, are you sure to quit?"
         />
 
         <div className={style.wrapper}>
-            {  testend ?
-               <div>
-                 <Info info = "您的各类题型正确率统计如下："/>
-                 <div className = {style.chart}>
-                   <LogicTestChart  chartTitle = {all_type}
-                                    chartData = {logicTestRightRate( questions)}
-                   />
-                 </div>
-               </div>
-                 :
-                 <div>
-                 <div className={style.question}>
-                   <Loading
-                      loading = {loadQuestionState.pending}
-                      wasLoaded = {loadQuestionState.resolved}
-                      lastFailed = {loadQuestionState.lastFailed}
-                      reloader = {this.loadQuestions}
-                      center
-                   >
-                     <SlideRL play = {ined}>
-                        <SingleSubjectTest
-                          submiter = { this.submitQuestions }
-                          loader = {this.loadQuestions}
-                        />
-                     </SlideRL>
-                  </Loading>
+         {
+           this.state.enterTest && whetherDidTest || this.state.enterTest && testend || this.state.testAgain && testend ?
+           <div className = {style.tongji}>
+             <LogicTestTongji loadTestResult = {() => this.loadTestResult()}/>
+             <br/><br/><span style = {{"color":"blue"}}>&nbsp;&nbsp;&nbsp;&nbsp;请选择再次测试还是开始章节内容的学习：</span>
+             <span><Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , enterLearning: false , testAgain: true});this.props.forceEnd();this.loadQuestions()}}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+             <Button text = "开始学习" onClick = {() => {this.setState({enterTest: false , enterLearning: true , testAgain: false })}}/></span>
+           </div> :
+           this.state.enterTest && !whetherDidTest || this.state.testAgain && !testend ?
+           <div className={style.question}>
+              <Loading
+                  loading = {loadQuestionState.pending}
+                  wasLoaded = {loadQuestionState.resolved}
+                  lastFailed = {loadQuestionState.lastFailed}
+                  reloader = {this.loadQuestions}
+                  center
+              >
+                <SlideRL play = {ined}>
+                  <SingleSubjectTest
+                      //submiter = { this.submitQuestions }
+                      loader = {this.loadQuestions}
+                  />
+                </SlideRL>
+              </Loading>
 
-                   <Button className = {style.nextQuestion}
-                           text = {"下一题"}
-                           onClick = {forceNext}
-                   />
-                 </div>
-              </div>
-            }
+              <Button className = {style.nextQuestion}
+                      text = {"下一题"}
+                      onClick = {forceNext}
+              />
+           </div>
+           : null
+         }
+
+         {this.state.enterLearning ? <EnterLearning/> :null}
+
         </div>
       </React.Fragment>
     );
@@ -190,10 +235,12 @@ export default applyHOCs([
       submitQuestionState: state.SingleSubjectTest.submitState,
       lock: state.SingleSubjectTest.lock,
       show: state.SingleSubjectTest.show,
-      testend: state.SingleSubjectTest.testendState
+      testend: state.SingleSubjectTest.testendState,
+      whetherDidTest: state.LogicTestTongji.flag
     }),
     dispatch => ({
       ...bindActionCreators( SingleSubjectTestActions , dispatch ),
+      ...bindActionCreators( LogicTestTongjiActions , dispatch )
     })
   )],
   LogicTest
