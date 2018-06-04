@@ -22,7 +22,7 @@ export default {
     page: LearningSystem,
     nested
   },
-  "/loginOrSignup": {
+  "/login": {
     page: Login,
   },
   "/ui": {

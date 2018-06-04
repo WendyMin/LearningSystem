@@ -1,3 +1,4 @@
+import { reducer as SubjectFunctionSelect } from 'Connected/SubjectFunctionSelect';
 import { reducer as SingleOptionQuestions} from 'Connected/SingleOptionQuestions';
 //import { reducer as MultOptionsQuestions } from 'Connected/MultOptionsQuestions';
 import { reducer as UserManager } from 'Connected/UserManager';
@@ -21,6 +22,7 @@ import { reducer as LogicState } from 'Connected/LogicState';
 //import { reducer as ... } from 'Connected/...';
 
 export default {
+  SubjectFunctionSelect: SubjectFunctionSelect,
   SingleOptionQuestions: SingleOptionQuestions,
   //MultOptionsQuestions: MultOptionsQuestions,
   UserManager: UserManager,

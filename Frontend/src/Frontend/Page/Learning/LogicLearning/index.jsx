@@ -1,65 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Prompt } from 'react-router';
 import style from 'style';
 
 import { actions as UserManagerActions } from 'Connected/UserManager';
-import Login from 'Page/Login';
-import { view as PageDesign } from 'Connected/PageDesign';
-import { actions as SubjectSelectActions } from 'Connected/SubjectSelect';
-import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
+import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import LogicTest from 'Page/Learning/LogicLearning/LogicTest';
 import EnterLearning from 'Page/Learning/LogicLearning/EnterLearning';
 import LogicReview from 'Page/Learning/LogicLearning/LogicReview';
 import SimulationTest from 'Page/Learning/LogicLearning/SimulationTest';
 import LogicStatistics from 'Page/Learning/LogicLearning/LogicStatistics';
 import LogicHelp from 'UI/Help/LogicHelp';
-import Info from 'UI/Info';
 
-import protect from 'direct-core/protect';
-import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
 
 class LogicLearning extends React.PureComponent {
-  constructor( props ){
-    super( props );
-    this.type = ["入口测试" , "进入学习" , "开始复习" , "模拟测试" , "数据统计" , "查看帮助"];
-  }
-
-  componentWillReceiveProps(NextProps){
-    // console.log(this.props.choice !== NextProps.choice && this.props.learningType === "重点习题" && this.props.submitZhongdian == false ||
-    // this.props.choice !== NextProps.choice && this.props.learningType === "强化练习" && this.props.submitQianghua == false ||
-    // this.props.choice !== NextProps.choice && this.props.learningType === "单元测试" && this.props.submitUnitTest == false )
-      if(this.props.choice !== NextProps.choice && this.props.learningType === "重点习题" && this.props.submitZhongdian == false ||
-      this.props.choice !== NextProps.choice && this.props.learningType === "强化练习" && this.props.submitQianghua == false ||
-      this.props.choice !== NextProps.choice && this.props.learningType === "单元测试" && this.props.submitUnitTest == false )
-      {
-        //  if(window.confirm("您还没有提交答案，是否要退出当前学习?")) {this.props.setLearningType("")}
-        // // else{}
-        //  // else{NextProps.choice=this.props.choice}
-        // else{this.props.setSubject( 1 );this.props.setLearningType(this.props.learningType)}
-        // console.log(this.props.learningType)
-      }
-
-     // }
-
-  }
+  // constructor( props ){
+  //   super( props );
+  //   this.type = ["入口测试" , "进入学习" , "开始复习" , "模拟测试" , "数据统计" , "查看帮助"];
+  // }
 
   render(){
     const{
       username,
       logined,
-      newTo,
       choice,
-      learningType
     } = this.props;
-    //console.log(this.props);
-    // console.log(sessionStorage.getItem("user"))
-    // console.log(sessionStorage.getItem("user") == "")
-    // console.log(sessionStorage.getItem("user") == "undefined")
+
     var user = sessionStorage.getItem("user");
     if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" ){
       <Login/>
@@ -69,76 +38,191 @@ class LogicLearning extends React.PureComponent {
       sessionStorage.setItem("user",user);
     }
     return (
-      <React.Fragment>
-        {/* {sessionStorage.getItem("user") == "undefined"?  <Login/> : */}
-       { logined !== true ?
-         <div>
-           <Info info = "您还没有登录，请先登录，再进行学习!"/>
-           {/* <Login/> */}
-         </div> :
-        <div>
-          <PageDesign subjectFunctions = {this.type}/>
+      <div id="wrapper">
+        <div className="topbar">
 
-          <div className = {style.mainContent}>
-            {
-             choice == 0 ? <LogicTest/> :
-             choice == 1 ? <EnterLearning learningType = ""/>:
-             choice == 2 ? <LogicReview/> :
-             choice == 3 ? <SimulationTest/> :
-             choice == 4 ? <LogicStatistics/> :
-             <LogicHelp/>
-            }
+          <div className="topbar-left">
+            <a href="/learning/logic" className="logo"><span>Learning<span>System</span></span><i className="zmdi zmdi-layers"></i></a>
+            <div style={{"color":"orange"}}>Logic</div>
           </div>
 
+          <div className="navbar navbar-default" role="navigation">
+            <div className="container">
+
+              <ul className="nav navbar-nav navbar-left">
+                <li>
+                  <button className="button-menu-mobile open-left">
+                    <i className="zmdi zmdi-menu"></i>
+                  </button>
+                </li>
+                <li>
+                  <h4 className="page-title">
+                    {choice==0 ? <div>入口测试</div> :
+                     choice==1 ? <div>进入学习</div> :
+                     choice==2 ? <div>开始复习</div> :
+                     choice==3 ? <div>模拟测试</div> :
+                     choice==4 ? <div>数据统计</div> :
+                     <div>科目帮助</div>}
+                  </h4>
+                </li>
+              </ul>
+
+              <ul className="nav navbar-nav navbar-right">
+                <li>
+                  <div className="notification-box">
+                    <ul className="list-inline m-b-0">
+                      <li>
+                        <a href="javascript:void(0);" className="right-bar-toggle">
+                          <i className="zmdi zmdi-notifications-none"></i>
+                        </a>
+                        <div className="noti-dot">
+                          <span className="dot"></span>
+                          <span className="pulse"></span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                </li>
+                <li className="hidden-xs">
+                  <form role="search" className="app-search">
+                    <input type="text" placeholder="Search..." className="form-control"/>
+                      <a href=""><i className="fa fa-search"></i></a>
+                  </form>
+                </li>
+              </ul>
+
+            </div>
+          </div>
         </div>
-      }
-      </React.Fragment>
+
+        {/* topbar end */}
+
+        <div className="left side-menu">
+          <div className="sidebar-inner slimscrollleft">
+
+            <div className="user-box">
+               <div className="user-img">
+                  <img src="/static/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" className="img-circle img-thumbnail img-responsive"/>
+                  <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
+               </div>
+               <h5><a href="#">{this.props.username}</a> </h5>
+
+               <ul className="list-inline">
+                  <li>
+                    <a href="#" >
+                      <i className="zmdi zmdi-settings"></i>
+                    </a>
+                  </li>
+
+                  <li>
+                    <a href="#" className="text-custom">
+                      <i className="zmdi zmdi-power"></i>
+                    </a>
+                  </li>
+                </ul>
+
+            </div>
+            {/* userInfo end , include user imag , name and the two icons  */}
+
+            <div id="sidebar-menu">
+              <ul>
+                <li>
+                  <a //href="javascript:void(0);"
+                    className="waves-effect"><i className="zmdi zmdi-layers"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(0)}> 入口测试 </span></a>
+                </li>
+
+                <li>
+                  <a //href="javascript:void(0);"
+                     className="waves-effect"><i className="zmdi zmdi-library"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(1)}> 进入学习 </span> </a>
+                </li>
+
+                <li>
+                  <a //href="javascript:void(0);"
+                    className="waves-effect"><i className="zmdi zmdi-book"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(2)}> 开始复习 </span> </a>
+                </li>
+
+                <li>
+                  <a //href="javascript:void(0);"
+                  className="waves-effect"><i className="zmdi zmdi-graduation-cap"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(3)}> 模拟测试 </span> </a>
+                </li>
+
+                <li>
+                  <a //href="javascript:void(0);"
+                  className="waves-effect"><i className="zmdi zmdi-chart"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(4)}> 数据统计 </span> </a>
+                 </li>
+
+                <li>
+                  <a //href="javascript:void(0);"
+                  className="waves-effect"><i className="zmdi  zmdi-pin-help"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(5)}> 查看帮助 </span> </a>
+                </li>
+
+                {/* <li>
+                  <a href="javascript:void(0);" className="waves-effect"><i className="zmdi zmdi-phone"></i><span onClick={()=>this.props.setSubjectFunctionSelect(6)}> 反馈信息 </span> </a>
+                </li> */}
+
+              </ul>
+             <div className="clearfix"></div>
+            </div>
+
+
+            <div className="clearfix"></div>
+
+         </div>
+
+        </div>
+        {/*left menu end*/}
+
+        <div className="content-page">
+          <div className="content">
+           <div className="container">
+
+              <div className="row">
+
+                       {/* <div className="col-lg-3 col-md-6"> */}
+
+                       <div className="card-box">
+         {choice==0 ? <div className="card-box"><LogicTest/></div> :
+                         choice==1 ? <div className="card-box"><EnterLearning/></div> :
+                         choice==2 ? <div className="card-box"><LogicReview/></div> :
+                         choice==3 ? <div className="card-box"><SimulationTest/></div> :
+                         choice==4 ? <div className="card-box"><LogicStatistics/></div> :
+                          <div className="card-box"><LogicHelp/></div>
+                        }
+                      </div>
+                    </div>
+                  {/* </div> */}
+                </div>
+
+
+          <footer className="footer text-right">
+              2017 - 2018 © 都学网所有
+          </footer>
+
+       </div>
+     </div>
+   </div>
+
+
+
+
     );
   }
 };
 
 export default applyHOCs([
-  asyncProcessControl({
-  }),
-  /*protect({
-    logined: {
-      satisfy: l => l === true,
-      block: ({ openWindow , history, closeMask , openMask }) => {
-        openWindow( UserManagerWindow,
-          {
-            width: '40%',
-            height: '70%',
-            position: {
-              top: 'calc( 50% - 190px)',
-              left: 'calc( 50% - 150px)'
-              //top: 'calc( 50% - 190px)',
-              //left: 'calc( 50% - 150px)'
-            },
-            onCancel: () => history.goBack() || closeMask(),
-            onSuccess: closeMask,
-          }
-        );
-        openMask();
-      }
-    }
-  }),*/
-  makePage,
+   makePage,
   connect(
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
-      newTo: state.UserManager.newTo,
-      choice: state.SubjectSelect.choice,
-      submitZhongdian: state.LogicState.submitZhongdian,
-      submitQianghua: state.LogicState.submitQianghua,
-      submitUnitTest: state.LogicState.submitUnitTest,
-      learningType: state.LearningTypeSelect.learningType
+      choice: state.SubjectFunctionSelect.choice
     }),
     dispatch => ({
-      //...bindActionCreators( ButtonExpandActions , dispatch),
       ...bindActionCreators( UserManagerActions , dispatch ),
-      ...bindActionCreators( SubjectSelectActions , dispatch ),
-      ...bindActionCreators( LearningTypeSelectActions , dispatch )
+      ...bindActionCreators( SubjectFunctionSelectActions , dispatch )
+      // ...bindActionCreators( SubjectSelectActions , dispatch ),
+      // ...bindActionCreators( LearningTypeSelectActions , dispatch )
     })
   )],
   LogicLearning

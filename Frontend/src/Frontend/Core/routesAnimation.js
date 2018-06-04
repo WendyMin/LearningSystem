@@ -17,7 +17,7 @@ export default {
       },
       time: 800,
       timingFunction: "ease",
-      toAnimate: "all"
+      // toAnimate: "all"
     },
     from: {
       "/notFound": {

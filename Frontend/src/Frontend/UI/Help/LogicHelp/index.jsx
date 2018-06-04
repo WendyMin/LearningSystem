@@ -9,7 +9,7 @@ class LogicHelp extends React.PureComponent<Props> {
   render(){
     return (
       <div className = {style.help}>
-        <h4 className = {style.title}> 逻辑科目学习指南 </h4>
+        {/* <h4 className = {style.title}> 逻辑科目学习指南 </h4> */}
         <span className = {style.part}> 水平测试 </span><br/>
 					<ol>
 						<li>用户首次进行逻辑科目的学习时，系统会强制进行测试</li>

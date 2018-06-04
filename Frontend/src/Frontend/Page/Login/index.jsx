@@ -18,10 +18,10 @@ class Login extends React.PureComponent {
   constructor( props ){
     super( props );
 
-    this.state = {
-      login_Show: true,
-      signup_Show: false
-    }
+    // this.state = {
+    //   login_Show: true,
+    //   signup_Show: false
+    // }
   }
 
 
@@ -29,77 +29,87 @@ class Login extends React.PureComponent {
     const {username,logined} = this.props;
     //console.log(this.props);
     if(logined) {
-      console.log(username)
+      //console.log(username)
       sessionStorage.setItem("user",username);  //保存 用户名
-      console.log(sessionStorage.getItem("user"))
+      //console.log(sessionStorage.getItem("user"))
       // this.setState({loginShow: false , signupShow: false})
     }
 
     return (
-      <React.Fragment>
-        { /*alert ("您还没有登录，请先登录!")*/}
-        <div className = {style.wholePage}>
+      <div className="smallscreen">
+      {/* // <React.Fragment> */}
+        <div className="account-pages"></div>
+      <div className="clearfix"></div>
+      <div className="wrapper-page">
+          <div className="text-center">
+              <a href="index.html" className="logo"><span>Learning<span>System</span></span></a>
+              <h5 className="text-muted m-t-0 font-600">Welcome to login</h5>
+          </div>
+        <div className="m-t-40 card-box">
+              <div className="text-center">
+                  <h4 className="text-uppercase font-bold m-b-0">Sign In</h4>
+              </div>
+              <div className="panel-body">
+                  <form className="form-horizontal m-t-20" action="index.html">
 
-          <div className={style.HUD}>
-            {/*<div className={style.loginOrSignup}>
-              <a href = "/login"> 登录 </a> <a>&nbsp;&nbsp;&nbsp;</a>
-              <a href = "/login"> 注册 </a>
-            </div>*/}
+                      <div className="form-group ">
+                          <div className="col-xs-12">
+                              <input className="form-control" type="text" required="" placeholder="Username"/>
+                          </div>
+                      </div>
+
+                      <div className="form-group">
+                          <div className="col-xs-12">
+                              <input className="form-control" type="password" required="" placeholder="Password"/>
+                          </div>
+                      </div>
+
+                      <div className="form-group ">
+                          <div className="col-xs-12">
+                              <div className="checkbox checkbox-custom">
+                                  <input id="checkbox-signup" type="checkbox"/>
+                                  <label htmlFor="checkbox-signup">
+                                      Remember me
+                                  </label>
+                              </div>
+
+                          </div>
+                      </div>
+
+                      <div className="form-group text-center m-t-30">
+                          <div className="col-xs-12">
+                              <button className="btn btn-custom btn-bordred btn-block waves-effect waves-light" type="submit" onClick={()=>this.log()}>Log In</button>
+                          </div>
+                      </div>
+
+                      <div className="form-group m-t-30 m-b-0">
+                          <div className="col-sm-12">
+                              <a href="page-recoverpw.html" className="text-muted"><i className="fa fa-lock m-r-5"></i> Forgot your password?</a>
+                          </div>
+                      </div>
+                  </form>
+
+              </div>
           </div>
 
 
-          {this.state.login_Show ?
-          <div className = {style.login}>
-            <UserManager loginOrSignup = "login"
-                         onSuccess = { () => {this.setState({ login_Show: false});sessionStorage.setItem("user",username);alert("登录成功!")}}
-                         signup = { () => this.setState({ signup_Show: true , login_Show: false })}
-                         onCancel = { () => history.back()}
-            />
+          <div className="row">
+              <div className="col-sm-12 text-center">
+                  <p className="text-muted">Don't have an account? <a href="page-register.html" className="text-primary m-l-5"><b>Sign Up</b></a></p>
+              </div>
           </div>
-          :
-          null
-          }
-          {this.state.signup_Show ?
-          <div className = {style.login}>
-            <UserManager loginOrSignup = "signup"
-                         onCancel = { () => this.setState({ signup_Show: false , login_Show: true })}
-            />
-          </div>
-          :
-          null
-          }
+
+      </div>
+
+      {/* // </React.Fragment> */}
+    </div>
 
 
-        </div>
-      </React.Fragment>
     );
   }
 };
 
 export default applyHOCs([
-/*  asyncProcessControl({
-  }),
-  protect({
-    logined: {
-      satisfy: l => l === true,
-      block(){
-        const { openWindow , history, closeMask , openMask } = this.props;
-        openWindow( UserManagerWindow,
-          {
-            width: '380px',
-            height: '300px',
-            position: {
-              top: 'calc( 50% - 190px)',
-              left: 'calc( 50% - 150px)'
-            },
-            onCancel: () => history.goBack() || closeMask(),
-            onSuccess: closeMask,
-          }
-        );
-        openMask();
-      }
-    }
-  }),*/
   makePage,
   connect(
     state => ({

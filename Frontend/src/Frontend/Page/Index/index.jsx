@@ -27,6 +27,8 @@ class IndexPage extends React.Component {
         <br/>
         <Link to="/learningsystem">主页面</Link>
         <br/>
+        <Link to="/login">登录页面</Link>
+        <br/>
         <Link to="/nowhere">nowhere</Link>
 
       </React.Fragment>
