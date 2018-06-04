@@ -38,7 +38,8 @@ class LogicLearning extends React.PureComponent {
       sessionStorage.setItem("user",user);
     }
     return (
-      <div id="wrapper">
+      <div id="wrapper" //className="enlarged"
+        >
         <div className="topbar">
 
           <div className="topbar-left">
@@ -99,6 +100,7 @@ class LogicLearning extends React.PureComponent {
         {/* topbar end */}
 
         <div className="left side-menu">
+          <div className="slimScrollDiv">
           <div className="sidebar-inner slimscrollleft">
 
             <div className="user-box">
@@ -128,7 +130,7 @@ class LogicLearning extends React.PureComponent {
             <div id="sidebar-menu">
               <ul>
                 <li>
-                  <a //href="javascript:void(0);"
+                  <a //href="/login"
                     className="waves-effect"><i className="zmdi zmdi-layers"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(0)}> 入口测试 </span></a>
                 </li>
 
@@ -169,6 +171,7 @@ class LogicLearning extends React.PureComponent {
             <div className="clearfix"></div>
 
          </div>
+       </div>
 
         </div>
         {/*left menu end*/}
@@ -181,7 +184,7 @@ class LogicLearning extends React.PureComponent {
 
                        {/* <div className="col-lg-3 col-md-6"> */}
 
-                       <div className="card-box">
+                       {/* <div className="card-box"> */}
          {choice==0 ? <div className="card-box"><LogicTest/></div> :
                          choice==1 ? <div className="card-box"><EnterLearning/></div> :
                          choice==2 ? <div className="card-box"><LogicReview/></div> :
@@ -189,7 +192,7 @@ class LogicLearning extends React.PureComponent {
                          choice==4 ? <div className="card-box"><LogicStatistics/></div> :
                           <div className="card-box"><LogicHelp/></div>
                         }
-                      </div>
+                      {/* </div> */}
                     </div>
                   {/* </div> */}
                 </div>
