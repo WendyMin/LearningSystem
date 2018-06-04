@@ -50,8 +50,8 @@ class SingleSubjectTest extends React.PureComponent {
     return (
       <div className="container" //style={questionSize} style={"text_align": "center"}
         >
-        <strong> &nbsp;&nbsp;&nbsp;&nbsp; <label>{question.type}</label>
-        &nbsp;&nbsp;&nbsp;&nbsp; <label>{question.level}</label></strong>
+        {/* <strong> &nbsp;&nbsp;&nbsp;&nbsp; <label>{question.type}</label>
+        &nbsp;&nbsp;&nbsp;&nbsp; <label>{question.level}</label></strong> */}
         <Question
           {...question}
           subject = "logic_test"

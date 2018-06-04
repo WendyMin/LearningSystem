@@ -31,24 +31,26 @@ class LogicTestTongji extends React.PureComponent {
 
     return (
       <div className="container">
-        <Info info = "您最新一次测试的各类题型正确率统计如下："/>
-        <LogicTestChart  chartTitle = {all_type}
+        <div align = "center">您最新一次测试的各类题型正确率统计如下：</div>
+        {/* <Info info = "您最新一次测试的各类题型正确率统计如下："/> */}
+        <LogicTestChart  //tableName = {""}
+                         chartTitle = {all_type}
                          chartData = {this_rightRate}
                            //chartData = {logicTestRightRate( questions)}
         /><br/>
 
-        <div align = "center">在开始学习之前,您总共做过&nbsp;&nbsp;<span style = {{"color":"red"}}>{count}</span>&nbsp;&nbsp;次测试</div>
-        <Info info = "平均各类题型正确率统计如下："/>
+        <div align = "center">在开始学习之前,您总共做过&nbsp;&nbsp;<span style = {{"color":"red"}}>{count}</span>&nbsp;&nbsp;次测试&nbsp;,&nbsp;平均各类题型正确率统计如下：</div>
+        {/* <Info info = "平均各类题型正确率统计如下："/> */}
         <LogicTestChart  chartTitle = {all_type}
                          chartData = {mean_rightRate}
                            //chartData = {logicTestRightRate( questions)}
         /><br/>
 
-        <div style = {{"color":"blue"}} align = "center">根据您的测试情况，系统规划的学习路径如下:</div>
+        <div style = {{"color":"#71b6f9"}} align = "center">根据您的测试情况，系统规划的学习路径如下:</div>
         {/* <div style = {{"color":"red"}} align = "center">系统规划的路径依据开始学习之前的测试数据,选择进入学习之后，路径不会再发生改变</div> */}
-        <br/><div style = {{"color":"orange"}}>形式逻辑</div>
+        <br/><div style = {{"color":"#f9c851"}}>形式逻辑</div>
           {xingshi.map((oneChapter , key) => <li className = {style.onetype} key = {key}>{oneChapter}&nbsp;&nbsp;&nbsp;&nbsp;</li>)}
-        <br/><br/><div style = {{"color":"orange"}}>论证逻辑</div>
+        <br/><br/><div style = {{"color":"#f9c851"}}>论证逻辑</div>
           {lunzheng.map((oneChapter , key) => <li className = {style.onetype} key = {key}>{oneChapter}&nbsp;&nbsp;&nbsp;&nbsp;</li>)}
 
       </div>

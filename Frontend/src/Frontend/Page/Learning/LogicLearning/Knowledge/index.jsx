@@ -64,7 +64,7 @@ class Knowledge extends React.PureComponent {
     return (
       <React.Fragment>
         {total_content.flag == 1 ?
-        <div>
+        <div className="card-box">
           <div className={style.pageTitle}> 知识点精要 </div>
 
           <div className = {style.logic_knowledge}>

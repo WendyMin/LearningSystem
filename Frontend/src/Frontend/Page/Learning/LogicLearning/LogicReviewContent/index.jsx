@@ -134,7 +134,48 @@ class LogicReviewContent extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <h4 className = {style.dalei} style = {{"color":"red"}}> {chapter_name} </h4>
+        <div className="row">
+            <h4 className = {style.dalei} style = {{"color":"red"}}> {chapter_name} </h4>
+            <div className="col-lg-6">
+
+              <div className="card-box">
+
+                 <h4 align = "center" className="header-title m-t-0 m-b-30">知识点精要</h4>
+                 {total_content.content == undefined ? null : <TextAndImag list = {total_content.content}/>}
+                 {
+                   total_content.shunxu == undefined ? null :
+                   <div>{total_content.shunxu.map((onetype , key) =>
+                   <div key = {key}>
+                     <div className = {style.logic_knowledge_title}> {onetype} </div>
+                     {total_content.xiaolei == undefined ? null:  <TextAndImag list = {total_content.xiaolei[key]} />}
+                   </div>)}</div>
+                 }
+
+              </div>
+            </div>
+            {/* <!-- end col --> */}
+
+            <div className="col-lg-6">
+              <div className="card-box">
+
+                <h4 align = "center" className="header-title m-t-0 m-b-30">错题集锦</h4>
+                {
+                  questions.length == 0 ? <Info info = "您在本章没有错题！"/> :
+                  <div>
+                    <SingleOptionQuestions loader = {this.requestChapterContent} subject = "logic_review"/>
+                    <Button className = {style.submitButton} text = {"确认提交"} onClick={this.submitQuestions}/>
+                  </div>
+                }
+
+
+
+
+              </div>
+            </div>
+            {/* <!-- end col --> */}
+
+          </div>
+        {/* <h4 className = {style.dalei} style = {{"color":"red"}}> {chapter_name} </h4>
         <div className = {style.zhishidian}>
           <h4 className = {style.fuxibiaoti}>知识点精要</h4>
           {total_content.content == undefined ? null : <TextAndImag list = {total_content.content}/>}
@@ -158,7 +199,7 @@ class LogicReviewContent extends React.PureComponent {
             </div>
           }
 
-        </div>
+        </div> */}
 
       </React.Fragment>
     );

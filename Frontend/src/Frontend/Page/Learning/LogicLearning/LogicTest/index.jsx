@@ -176,21 +176,25 @@ class LogicTest extends React.PureComponent {
     //console.log(testend)
     return (
       <React.Fragment>
-        <Prompt
+        {/* <Prompt
           when = {(this.state.enterTest && !whetherDidTest || this.state.testAgain && !testend) !== true}
           message = "you need to do it again, are you sure to quit?"
-        />
+        /> */}
 
         <div className={style.wrapper}>
          {
            this.state.enterTest && whetherDidTest || this.state.enterTest && testend || this.state.testAgain && testend ?
-           <div className = {style.tongji}>
-             <LogicTestTongji loadTestResult = {() => this.loadTestResult()}/>
-             <br/><br/><span style = {{"color":"blue"}}>&nbsp;&nbsp;&nbsp;&nbsp;请选择再次测试还是开始章节内容的学习：</span>
-             <span><Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , enterLearning: false , testAgain: true});this.props.forceEnd();this.loadQuestions()}}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-             <Button text = "开始学习" onClick = {() => {this.setState({enterTest: false , enterLearning: true , testAgain: false })}}/></span>
-           </div> :
+           <div className="card-box">
+             <div className = {style.tongji}>
+               <LogicTestTongji loadTestResult = {() => this.loadTestResult()}/>
+               <br/><br/><span>&nbsp;&nbsp;&nbsp;&nbsp;请选择再次测试还是开始章节内容的学习：&nbsp;&nbsp;</span>
+               <span><Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , enterLearning: false , testAgain: true});this.props.forceEnd();this.loadQuestions()}}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <Button text = "开始学习" onClick = {() => {this.setState({enterTest: false , enterLearning: true , testAgain: false })}}/></span>
+             </div>
+           </div>
+            :
            this.state.enterTest && !whetherDidTest || this.state.testAgain && !testend ?
+           <div className="card-box">
            <div className={style.question}>
               <Loading
                   loading = {loadQuestionState.pending}
@@ -212,6 +216,7 @@ class LogicTest extends React.PureComponent {
                       onClick = {forceNext}
               />
            </div>
+          </div>
            : null
          }
 

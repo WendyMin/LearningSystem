@@ -16,13 +16,12 @@ class MyButton extends React.PureComponent<Props> {
   render(){
       const { className , text , onClick } = this.props;
       return (
-        <Button
-          bsStyle="primary"
-          className={style.basic + ' ' + className}
-          onClick={onClick}
+        <button type="button"
+                className="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                onClick={onClick}
         >
-          {text}
-        </Button>
+        {text}
+        </button>
       );
   }
 };

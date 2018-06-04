@@ -187,7 +187,7 @@ class ZhongDian extends React.PureComponent {
           message = "you need to do it again, are you sure to quit?"
         />
         {content.flag == 1 ?
-        <div>
+        <div className="card-box">
 
         <div className = {style.pageTitle}> 重点题型 </div>
 

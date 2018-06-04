@@ -69,46 +69,58 @@ class LogicReview extends React.PureComponent {
 
     return(
       <React.Fragment>
-      {
-        //choice == "" ?
-        //whetherHaveFinishedChapter == 0 ? <Info info = "您目前还没有学习完成的章节"/> : <LogicReviewModel/>:<LogicReviewContent/>
-        this.state.reviewContent ? <LogicReviewContent/> :
+        {this.state.reviewContent ? <LogicReviewContent/> :
         this.state.tongjiShow ? <LogicReviewError data = {data}/> :
         whetherHaveFinishedChapter == 0 ? <Info info = "您目前还没有学习完成的章节"/> :
         <div>
-          <div className = {style.zhongdianReview}>
-            <h4 className = {style.biaoti}>重点复习</h4>
-            {
-              importantChapterName.length == 0 ? <Info info = "您目前没有需要重点复习的章节"/> :
-              <div>
-                <strong align = "center"><div style = {{"color":"red"}}>请点击选择要复习的章节</div></strong>
-                {importantChapterName.map((oneChapter , key) =>
-                <div key = {key}><br/><li style = {oneChapter == choice ? {"color":"blue"} : null}
-                  onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter)}}
-                  //onClick = {() => {setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
-                  >{oneChapter}</li></div>)}
-              </div>
-            }
-          </div>
+        <div className="row">
+            <div className="col-lg-6">
+              <div className="card-box">
 
-          <div className = {style.putongReview}>
-            <h4 className = {style.biaoti}>一般复习</h4>
-            {
-              ordinaryChapterName.length == 0 ? <Info info = "您目前没有需要一般复习的章节"/> :
-              <div>
-                <strong align = "center"><div style = {{"color":"red"}}>请点击选择要复习的章节</div></strong>
-                {ordinaryChapterName.map((oneChapter , key) =>
-                <div key = {key}><br/><li style = {oneChapter == choice ? {"color":"blue"} : null}
-                  onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter)}}
-                //  onClick = {() => {setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
-                  >{oneChapter}</li></div>)}
-              </div>
-            }
-          </div>
+                 <h4 align = "center" className="header-title m-t-0 m-b-30">重点复习</h4>
+                 {
+                   importantChapterName.length == 0 ? <Info info = "您目前没有需要重点复习的章节"/> :
+                   <div>
+                     <strong align = "center"><div style = {{"color":"#f9c851"}}>请点击选择要复习的章节</div></strong>
+                     {importantChapterName.map((oneChapter , key) =>
+                     <div key = {key}><br/><li style = {oneChapter == choice ? {"color":"#71b6f9"} : null}
+                       onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter)}}
+                       //onClick = {() => {setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
+                       >{oneChapter}</li></div>)}
+                   </div>
+                 }
 
-          <Button className = {style.chakanTongjiButton} text = "点击查看复习数据统计" onClick = {this.getReviewTongji}/>
+              </div>
+            </div>
+            {/* <!-- end col --> */}
+
+            <div className="col-lg-6">
+              <div className="card-box">
+
+                <h4 align = "center" className="header-title m-t-0 m-b-30">一般复习</h4>
+                {
+                  ordinaryChapterName.length == 0 ? <Info info = "您目前没有需要一般复习的章节"/> :
+                  <div>
+                    <strong align = "center"><div style = {{"color":"#f9c851"}}>请点击选择要复习的章节</div></strong>
+                    {ordinaryChapterName.map((oneChapter , key) =>
+                    <div key = {key}><br/><li style = {oneChapter == choice ? {"color":"#71b6f9"} : null}
+                      onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter)}}
+                    //  onClick = {() => {setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
+                      >{oneChapter}</li></div>)}
+                  </div>
+                }
+
+
+
+              </div>
+            </div>
+            {/* <!-- end col --> */}
+
+          </div>
+          {/* <Button classNameName = {style.chakanTongjiButton} text = "点击查看复习数据统计" onClick = {this.getReviewTongji}/> */}
         </div>
-      }
+        }
+        
       </React.Fragment>
     )
   }

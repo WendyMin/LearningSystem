@@ -63,7 +63,30 @@ class LogicStatistics extends React.PureComponent{
               {lastData.tongji.map((oneChapter , key) =>
                 <div key = {key} align = "center">
                   <br/><h5 style = {{"color":"blue"}}>{lastData.finish_chapter[key]}</h5><span>最新一次总错误率<span>{oneChapter.total_mba}</span></span>
-                  <table border="1" >
+                  <table className="table table-bordered m-0" align = "center" //style="table-layout:fixed;"
+                    >
+
+                      <thead>
+                          <tr>
+                              <th>小类名称</th>
+                              {oneChapter.mba_type.map((onetype , key) =>
+                                <th key = {key}>{onetype}</th>
+                              )}
+
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                            <th>最新一次错误率</th>
+                            {oneChapter.xiaolei_mba.map((oneerror , key) =>
+                              <td key = {key}>{oneerror}</td>
+                            )}
+
+                          </tr>
+
+                      </tbody>
+                  </table><br/>
+                  {/* <table border="1" >
                   <tr>
                     <th>小类名称</th>
                     {oneChapter.mba_type.map((onetype , key) =>
@@ -78,10 +101,34 @@ class LogicStatistics extends React.PureComponent{
                     )}
                   </tr>
 
-                </table>
+                </table> */}
 
                 <span>平均总错误率<span>{data.tongji[key].total_mba}</span></span>
-                <table border="1" >
+                <table className="table table-bordered m-0" align = "center" //style="table-layout:fixed;"
+                  >
+
+                    <thead>
+                        <tr>
+                          <th>小类名称</th>
+                          {data.tongji[key].mba_type.map((onetype , key) =>
+                            <th key = {key}>{onetype}</th>
+                          )}
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <th>平均错误率</th>
+                          {data.tongji[key].xiaolei_mba.map((oneerror , key) =>
+                            <td key = {key}>{oneerror}</td>
+                          )}
+
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                {/* <table border="1" >
                 <tr>
                   <th>小类名称</th>
                   {data.tongji[key].mba_type.map((onetype , key) =>
@@ -95,7 +142,7 @@ class LogicStatistics extends React.PureComponent{
                     <th key = {key}>{oneerror}</th>
                   )}
                 </tr>
-              </table>
+              </table> */}
                 </div>
               )}
 

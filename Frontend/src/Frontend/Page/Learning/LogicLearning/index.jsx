@@ -44,7 +44,7 @@ class LogicLearning extends React.PureComponent {
 
           <div className="topbar-left">
             <a href="/learning/logic" className="logo"><span>Learning<span>System</span></span><i className="zmdi zmdi-layers"></i></a>
-            <div style={{"color":"orange"}}>Logic</div>
+            {/* <div style={{"color":"orange"}}>Logic</div> */}
           </div>
 
           <div className="navbar navbar-default" role="navigation">
@@ -58,18 +58,18 @@ class LogicLearning extends React.PureComponent {
                 </li>
                 <li>
                   <h4 className="page-title">
-                    {choice==0 ? <div>入口测试</div> :
-                     choice==1 ? <div>进入学习</div> :
-                     choice==2 ? <div>开始复习</div> :
-                     choice==3 ? <div>模拟测试</div> :
-                     choice==4 ? <div>数据统计</div> :
-                     <div>科目帮助</div>}
+                    {choice==0 ? <div>逻辑 > 入口测试</div> :
+                     choice==1 ? <div>逻辑 > 进入学习</div> :
+                     choice==2 ? <div>逻辑 > 开始复习</div> :
+                     choice==3 ? <div>逻辑 > 模拟测试</div> :
+                     choice==4 ? <div>逻辑 > 数据统计</div> :
+                     <div>逻辑 > 科目帮助</div>}
                   </h4>
                 </li>
               </ul>
 
               <ul className="nav navbar-nav navbar-right">
-                <li>
+                {/* <li>
                   <div className="notification-box">
                     <ul className="list-inline m-b-0">
                       <li>
@@ -90,7 +90,7 @@ class LogicLearning extends React.PureComponent {
                     <input type="text" placeholder="Search..." className="form-control"/>
                       <a href=""><i className="fa fa-search"></i></a>
                   </form>
-                </li>
+                </li> */}
               </ul>
 
             </div>
@@ -131,32 +131,32 @@ class LogicLearning extends React.PureComponent {
               <ul>
                 <li>
                   <a //href="/login"
-                    className="waves-effect"><i className="zmdi zmdi-layers"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(0)}> 入口测试 </span></a>
+                    className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(0)}><i className="zmdi zmdi-layers"></i> <span> 入口测试 </span></a>
                 </li>
 
                 <li>
                   <a //href="javascript:void(0);"
-                     className="waves-effect"><i className="zmdi zmdi-library"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(1)}> 进入学习 </span> </a>
+                     className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(1)}><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
                 </li>
 
                 <li>
                   <a //href="javascript:void(0);"
-                    className="waves-effect"><i className="zmdi zmdi-book"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(2)}> 开始复习 </span> </a>
+                    className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(2)}><i className="zmdi zmdi-book"></i> <span> 开始复习 </span> </a>
                 </li>
 
                 <li>
                   <a //href="javascript:void(0);"
-                  className="waves-effect"><i className="zmdi zmdi-graduation-cap"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(3)}> 模拟测试 </span> </a>
+                  className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(3)}><i className="zmdi zmdi-graduation-cap"></i> <span> 模拟测试 </span> </a>
                 </li>
 
                 <li>
                   <a //href="javascript:void(0);"
-                  className="waves-effect"><i className="zmdi zmdi-chart"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(4)}> 数据统计 </span> </a>
+                  className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(4)}><i className="zmdi zmdi-chart"></i> <span> 数据统计 </span> </a>
                  </li>
 
                 <li>
                   <a //href="javascript:void(0);"
-                  className="waves-effect"><i className="zmdi  zmdi-pin-help"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(5)}> 查看帮助 </span> </a>
+                  className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(5)}><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
                 </li>
 
                 {/* <li>
@@ -185,9 +185,9 @@ class LogicLearning extends React.PureComponent {
                        {/* <div className="col-lg-3 col-md-6"> */}
 
                        {/* <div className="card-box"> */}
-         {choice==0 ? <div className="card-box"><LogicTest/></div> :
-                         choice==1 ? <div className="card-box"><EnterLearning/></div> :
-                         choice==2 ? <div className="card-box"><LogicReview/></div> :
+                        {choice==0 ? <LogicTest/> :
+                         choice==1 ? <EnterLearning/> :
+                         choice==2 ? <LogicReview/> :
                          choice==3 ? <div className="card-box"><SimulationTest/></div> :
                          choice==4 ? <div className="card-box"><LogicStatistics/></div> :
                           <div className="card-box"><LogicHelp/></div>
@@ -224,8 +224,6 @@ export default applyHOCs([
     dispatch => ({
       ...bindActionCreators( UserManagerActions , dispatch ),
       ...bindActionCreators( SubjectFunctionSelectActions , dispatch )
-      // ...bindActionCreators( SubjectSelectActions , dispatch ),
-      // ...bindActionCreators( LearningTypeSelectActions , dispatch )
     })
   )],
   LogicLearning
