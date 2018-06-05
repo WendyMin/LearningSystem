@@ -101,14 +101,14 @@ class WritingPage extends React.PureComponent {
               <div id="sidebar-menu">
                 <ul>
 
-                  <li>
+                  <li onClick={()=>this.props.setSubjectFunctionSelect(0)}>
                     <a //href="javascript:void(0);"
-                       className="waves-effect"><i className="zmdi zmdi-library"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(0)}> 进入学习 </span> </a>
+                       className="waves-effect"><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
                   </li>
 
-                  <li>
+                  <li onClick={()=>this.props.setSubjectFunctionSelect(1)}>
                     <a //href="javascript:void(0);"
-                    className="waves-effect" ><i className="zmdi  zmdi-pin-help"></i> <span onClick={()=>this.props.setSubjectFunctionSelect(1)}> 查看帮助 </span> </a>
+                    className="waves-effect" ><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
                   </li>
 
                 </ul>
