@@ -6,6 +6,8 @@ import { Link , Route } from 'react-router-dom';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
+import { actions as UserManagerActions } from 'Connected/UserManager';
+
 class IndexPage extends React.Component {
   constructor( props ){
     super( props );
@@ -72,11 +74,25 @@ class IndexPage extends React.Component {
 
                         {/* <!-- User --> */}
                         <div className="user-box">
-                            <div className="user-img">
-                                <img src="/static/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" className="img-circle img-thumbnail img-responsive"/>
-                                <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
-                            </div>
-                            <h5><a href="#">用户名</a> </h5>
+                          <div className="user-img">
+                           <img src="/static/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" className="img-circle img-thumbnail img-responsive"/>
+                           <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
+                          </div>
+                          <h5><a href="#">{this.props.username}</a> </h5>
+
+                          <ul className="list-inline">
+                           <li>
+                             <a href="#" >
+                               <i className="zmdi zmdi-settings"></i>
+                             </a>
+                           </li>
+
+                           <li>
+                             <a href="#" className="text-custom">
+                               <i className="zmdi zmdi-power"></i>
+                             </a>
+                           </li>
+                          </ul>
                         </div>
                         {/* <!-- End User --> */}
 
@@ -125,10 +141,10 @@ class IndexPage extends React.Component {
 
 
                             <div className="row">
-                                <div className="col-lg-4">
+                                <div className="col-lg-4"><Link to="/learning/english">
                                     <div className="card-box project-box">
                                         <div className="label label-success">Uncompleted</div>
-                                  <h4 className="m-t-0 m-b-5"><Link to="/learning/english"><a href="" className="text-inverse">英语</a></Link></h4>
+                                  <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse">英语</a></h4>
 
                                         <p className="text-success text-uppercase m-b-20 font-13">English</p>
                                         <p className="text-muted font-13">包含阅读、汉译英，以及中考、高考、四级、六级、考研词汇
@@ -148,13 +164,13 @@ class IndexPage extends React.Component {
                                         {/* <!-- /.progress .no-rounded --> */}
 
                                     </div>
-                                </div>
+                                </Link></div>
                                 {/* <!-- end col--> */}
 
-                                <div className="col-lg-4">
+                                <div className="col-lg-4"><Link to="/learning/logic">
                                     <div className="card-box project-box">
                                         <div className="label label-primary">Uncompleted</div>
-                                  <h4 className="m-t-0 m-b-5"><Link to="/learning/logic"><a href="" className="text-inverse"> 逻辑</a></Link></h4>
+                                  <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse"> 逻辑</a></h4>
                                         <p className="text-primary text-uppercase m-b-20 font-13">Logic</p>
                                         <p className="text-muted font-13">包含形式逻辑和论证逻辑。其中形式逻辑包括词项逻辑、演绎推理、逻辑应用、命题逻辑、逻辑语言，论证逻辑包括归纳逻辑、假设、削弱、推论、比较、综合、支持、评价、解释、描述
                                              {/* <a href="#" className="font-600 text-muted">view more</a> */}
@@ -173,13 +189,13 @@ class IndexPage extends React.Component {
                                         {/* <!-- /.progress .no-rounded --> */}
 
                                     </div>
-                                </div>
+                                </Link></div>
                                 {/* <!-- end col--> */}
 
-                                <div className="col-lg-4">
+                                <div className="col-lg-4"><Link to="/learning/writing">
                                     <div className="card-box project-box">
                                         <div className="label label-pink">Uncompleted</div>
-                                  <h4 className="m-t-0 m-b-5"><Link to="/learning/writing"><a href="" className="text-inverse">写作</a></Link></h4>
+                                  <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse">写作</a></h4>
                                         <p className="text-pink text-uppercase m-b-20 font-13">Writing</p>
                                         <p className="text-muted font-13">写作包括论证有效性分析和论说文两部分，其中含有近十来年真题
                                             {/* <a href="#" className="font-600 text-muted">view more</a> */}
@@ -198,7 +214,7 @@ class IndexPage extends React.Component {
                                         {/* <!-- /.progress .no-rounded --> */}
 
                                     </div>
-                                </div>
+                                </Link></div>
                                 {/* <!-- end col--> */}
                             </div>
                             {/* <!-- end row --> */}
@@ -263,4 +279,18 @@ class IndexPage extends React.Component {
 
 };
 
-export default makePage( IndexPage );
+// export default makePage( IndexPage );
+export default applyHOCs([
+  makePage,
+  connect(
+    state => ({
+      logined: state.UserManager.logined,
+      username: state.UserManager.name,
+    }),
+    dispatch => ({
+      //...bindActionCreators( ButtonExpandActions , dispatch),
+      ...bindActionCreators( UserManagerActions , dispatch ),
+    })
+  )],
+  IndexPage
+);

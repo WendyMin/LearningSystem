@@ -242,7 +242,8 @@ export default applyHOCs([
       logined: state.UserManager.logined,
       username: state.UserManager.name,
       newTo: state.UserManager.newTo,
-      choice: state.SubjectSelect.choice
+      // choice: state.SubjectSelect.choice
+      choice: state.SubjectFunctionSelect.choice
     }),
     dispatch => ({
       //...bindActionCreators( ButtonExpandActions , dispatch),
