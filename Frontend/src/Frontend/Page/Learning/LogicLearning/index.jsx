@@ -38,13 +38,12 @@ class LogicLearning extends React.PureComponent {
       sessionStorage.setItem("user",user);
     }
     return (
-      <div id="wrapper" //className="enlarged"
-        >
+      <React.Fragment>
+      <div id="wrapper">
         <div className="topbar">
 
           <div className="topbar-left">
             <a href="/learning/logic" className="logo"><span>Learning<span>System</span></span><i className="zmdi zmdi-layers"></i></a>
-            {/* <div style={{"color":"orange"}}>Logic</div> */}
           </div>
 
           <div className="navbar navbar-default" role="navigation">
@@ -206,7 +205,7 @@ class LogicLearning extends React.PureComponent {
      </div>
    </div>
 
-
+</React.Fragment>
 
 
     );
