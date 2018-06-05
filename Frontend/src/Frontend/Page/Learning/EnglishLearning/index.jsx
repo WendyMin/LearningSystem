@@ -206,12 +206,13 @@ class EnglishLearning extends React.PureComponent {
 
                 <div className="row">
 
-                      {choice==0 ? <EngTest/> :
-                       choice==1 ? <EngLearningTypeSelect/> :
-                       choice==2 ? <EngReview/> :
-                       choice==3 ? <EngChart/> :
-                        <div className="card-box"><EnglishHelp/></div>
-                      }
+                  {
+                    choice==0 ? <EngTest/> :
+                    choice==1 ? <EngLearningTypeSelect/> :
+                    choice==2 ? <EngReview/> :
+                    choice==3 ? <EngChart/> :
+                    <EnglishHelp/>
+                  }
 
                 </div>
 
@@ -235,30 +236,6 @@ class EnglishLearning extends React.PureComponent {
 };
 
 export default applyHOCs([
-  asyncProcessControl({
-  }),
-  /*protect({
-    logined: {
-      satisfy: l => l === true,
-      block: ({ openWindow , history, closeMask , openMask }) => {
-        openWindow( UserManagerWindow,
-          {
-            width: '40%',
-            height: '70%',
-            position: {
-              top: 'calc( 50% - 190px)',
-              left: 'calc( 50% - 150px)'
-              //top: 'calc( 50% - 190px)',
-              //left: 'calc( 50% - 150px)'
-            },
-            onCancel: () => history.goBack() || closeMask(),
-            onSuccess: closeMask,
-          }
-        );
-        openMask();
-      }
-    }
-  }),*/
   makePage,
   connect(
     state => ({
