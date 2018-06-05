@@ -39,173 +39,145 @@ class LogicLearning extends React.PureComponent {
     }
     return (
       <React.Fragment>
-      <div id="wrapper">
-        <div className="topbar">
+        <div id="wrapper">
+          <div className="topbar">
 
-          <div className="topbar-left">
-            <a href="/learning/logic" className="logo"><span>Learning<span>System</span></span><i className="zmdi zmdi-layers"></i></a>
-          </div>
-
-          <div className="navbar navbar-default" role="navigation">
-            <div className="container">
-
-              <ul className="nav navbar-nav navbar-left">
-                <li>
-                  <button className="button-menu-mobile open-left">
-                    <i className="zmdi zmdi-menu"></i>
-                  </button>
-                </li>
-                <li>
-                  <h4 className="page-title">
-                    {choice==0 ? <div>逻辑 > 入口测试</div> :
-                     choice==1 ? <div>逻辑 > 进入学习</div> :
-                     choice==2 ? <div>逻辑 > 开始复习</div> :
-                     choice==3 ? <div>逻辑 > 模拟测试</div> :
-                     choice==4 ? <div>逻辑 > 数据统计</div> :
-                     <div>逻辑 > 科目帮助</div>}
-                  </h4>
-                </li>
-              </ul>
-
-              <ul className="nav navbar-nav navbar-right">
-                {/* <li>
-                  <div className="notification-box">
-                    <ul className="list-inline m-b-0">
-                      <li>
-                        <a href="javascript:void(0);" className="right-bar-toggle">
-                          <i className="zmdi zmdi-notifications-none"></i>
-                        </a>
-                        <div className="noti-dot">
-                          <span className="dot"></span>
-                          <span className="pulse"></span>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-
-                </li>
-                <li className="hidden-xs">
-                  <form role="search" className="app-search">
-                    <input type="text" placeholder="Search..." className="form-control"/>
-                      <a href=""><i className="fa fa-search"></i></a>
-                  </form>
-                </li> */}
-              </ul>
-
+            <div className="topbar-left">
+              <a href="/" className="logo"><span>Learning<span>System</span></span><i className="zmdi zmdi-layers"></i></a>
             </div>
-          </div>
-        </div>
 
-        {/* topbar end */}
+            <div className="navbar navbar-default" role="navigation">
+              <div className="container">
 
-        <div className="left side-menu">
-          <div className="slimScrollDiv">
-          <div className="sidebar-inner slimscrollleft">
-
-            <div className="user-box">
-               <div className="user-img">
-                  <img src="/static/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" className="img-circle img-thumbnail img-responsive"/>
-                  <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
-               </div>
-               <h5><a href="#">{this.props.username}</a> </h5>
-
-               <ul className="list-inline">
+                <ul className="nav navbar-nav navbar-left">
                   <li>
-                    <a href="#" >
-                      <i className="zmdi zmdi-settings"></i>
-                    </a>
+                    <button className="button-menu-mobile open-left">
+                      <i className="zmdi zmdi-menu"></i>
+                    </button>
                   </li>
-
                   <li>
-                    <a href="#" className="text-custom">
-                      <i className="zmdi zmdi-power"></i>
-                    </a>
+                    <h4 className="page-title">
+                      {choice==0 ? <div>逻辑  > 入口测试</div> :
+                       choice==1 ? <div>逻辑  > 进入学习</div> :
+                       choice==2 ? <div>逻辑  > 开始复习</div> :
+                       choice==3 ? <div>逻辑  > 模拟测试</div> :
+                       choice==4 ? <div>逻辑  > 数据统计</div> :
+                       <div>逻辑  > 科目帮助</div>}
+                    </h4>
                   </li>
                 </ul>
 
+              </div>
             </div>
-            {/* userInfo end , include user imag , name and the two icons  */}
+          </div>
 
-            <div id="sidebar-menu">
-              <ul>
-                <li>
-                  <a //href="/login"
-                    className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(0)}><i className="zmdi zmdi-layers"></i> <span> 入口测试 </span></a>
-                </li>
+          {/* topbar end */}
 
-                <li>
-                  <a //href="javascript:void(0);"
-                     className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(1)}><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
-                </li>
+          <div className="left side-menu">
+            <div className="slimScrollDiv">
+              <div className="sidebar-inner slimscrollleft">
 
-                <li>
-                  <a //href="javascript:void(0);"
-                    className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(2)}><i className="zmdi zmdi-book"></i> <span> 开始复习 </span> </a>
-                </li>
+                <div className="user-box">
+                <div className="user-img">
+                 <img src="/static/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" className="img-circle img-thumbnail img-responsive"/>
+                 <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
+                </div>
+                <h5><a href="#">{this.props.username}</a> </h5>
 
-                <li>
-                  <a //href="javascript:void(0);"
-                  className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(3)}><i className="zmdi zmdi-graduation-cap"></i> <span> 模拟测试 </span> </a>
-                </li>
-
-                <li>
-                  <a //href="javascript:void(0);"
-                  className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(4)}><i className="zmdi zmdi-chart"></i> <span> 数据统计 </span> </a>
+                <ul className="list-inline">
+                 <li>
+                   <a href="#" >
+                     <i className="zmdi zmdi-settings"></i>
+                   </a>
                  </li>
 
-                <li>
-                  <a //href="javascript:void(0);"
-                  className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(5)}><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
-                </li>
+                 <li>
+                   <a href="#" className="text-custom">
+                     <i className="zmdi zmdi-power"></i>
+                   </a>
+                 </li>
+                </ul>
+                </div>
+               {/* userInfo end , include user imag , name and the two icons  */}
 
-                {/* <li>
-                  <a href="javascript:void(0);" className="waves-effect"><i className="zmdi zmdi-phone"></i><span onClick={()=>this.props.setSubjectFunctionSelect(6)}> 反馈信息 </span> </a>
-                </li> */}
+                <div id="sidebar-menu">
+                  <ul>
+                    <li>
+                      <a //href="/login"
+                        className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(0)}><i className="zmdi zmdi-layers"></i> <span> 入口测试 </span></a>
+                    </li>
 
-              </ul>
-             <div className="clearfix"></div>
-            </div>
+                    <li>
+                      <a //href="javascript:void(0);"
+                         className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(1)}><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
+                    </li>
 
+                    <li>
+                      <a //href="javascript:void(0);"
+                        className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(2)}><i className="zmdi zmdi-book"></i> <span> 开始复习 </span> </a>
+                    </li>
 
-            <div className="clearfix"></div>
+                    <li>
+                      <a //href="javascript:void(0);"
+                      className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(3)}><i className="zmdi zmdi-graduation-cap"></i> <span> 模拟测试 </span> </a>
+                    </li>
 
-         </div>
-       </div>
+                    <li>
+                      <a //href="javascript:void(0);"
+                      className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(4)}><i className="zmdi zmdi-chart"></i> <span> 数据统计 </span> </a>
+                     </li>
 
-        </div>
-        {/*left menu end*/}
+                    <li>
+                      <a //href="javascript:void(0);"
+                      className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(5)}><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
+                    </li>
 
-        <div className="content-page">
-          <div className="content">
-           <div className="container">
+                    {/* <li>
+                      <a href="javascript:void(0);" className="waves-effect"><i className="zmdi zmdi-phone"></i><span onClick={()=>this.props.setSubjectFunctionSelect(6)}> 反馈信息 </span> </a>
+                    </li> */}
 
-              <div className="row">
-
-                       {/* <div className="col-lg-3 col-md-6"> */}
-
-                       {/* <div className="card-box"> */}
-                        {choice==0 ? <LogicTest/> :
-                         choice==1 ? <EnterLearning/> :
-                         choice==2 ? <LogicReview/> :
-                         choice==3 ? <div className="card-box"><SimulationTest/></div> :
-                         choice==4 ? <div className="card-box"><LogicStatistics/></div> :
-                          <div className="card-box"><LogicHelp/></div>
-                        }
-                      {/* </div> */}
-                    </div>
-                  {/* </div> */}
+                  </ul>
+                 <div className="clearfix"></div>
                 </div>
 
 
-          <footer className="footer text-right">
-              2017 - 2018 © 都学网所有
-          </footer>
+                <div className="clearfix">
+                </div>
 
-       </div>
-     </div>
-   </div>
+              </div>
+            </div>
+          </div>
+          {/*left menu end*/}
 
-</React.Fragment>
+          <div className="content-page">
+            <div className="content">
+              <div className="container">
+
+                <div className="row">
+
+                      {choice==0 ? <LogicTest/> :
+                       choice==1 ? <EnterLearning/> :
+                       choice==2 ? <LogicReview/> :
+                       choice==3 ? <div className="card-box"><SimulationTest/></div> :
+                       choice==4 ? <div className="card-box"><LogicStatistics/></div> :
+                        <div className="card-box"><LogicHelp/></div>
+                      }
+
+                </div>
+
+              </div>
+
+
+              <footer className="footer text-right">
+                  2017 - 2018 © 都学网所有
+              </footer>
+
+            </div>
+          </div>
+
+        </div>
+
+      </React.Fragment>
 
 
     );
