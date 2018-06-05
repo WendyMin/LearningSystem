@@ -58,7 +58,44 @@ class ZhentiAllYearTongji extends React.PureComponent {
               <div>
               <strong><p style = {{"color" : "blue"}}>您的做题情况统计如下：</p></strong>
               <p>您总共做过 <strong style = {{"color" : "red"}}>{tongji.year}</strong> 年真题&nbsp;,&nbsp;各选项的错选次数、漏选次数统计如下：</p>
-              <table border="1" align = "center">
+              <table className="table table-bordered m-0" align = "center">
+
+                  <thead>
+                      <tr>
+                          <th>选项</th>
+                          {options.map((oneOption , key) =>
+                            <th key = {key}> {oneOption} </th>)
+                          }
+
+                      </tr>
+                  </thead>
+
+                      {tongji.cuoxuanlv == undefined ? null :
+                        <tbody>
+                      <tr>
+                        <th>错选次数</th>
+                        {tongji.cuoxuanlv.map((oneOption , key) =>
+                          <th key = {key}> {oneOption} </th>)
+                        }
+
+                      </tr>
+                      <tr>
+                        <th>漏选次数</th>
+                        {tongji.louxuanlv.map((oneOption , key) =>
+                          <th key = {key}> {oneOption} </th>)
+                        }
+                      </tr>
+
+                      <tr>
+                        <th>正确率</th>
+                        {tongji.zhengquelv.map((oneRightRate , key) =>
+                          <th key = {key}> {oneRightRate} </th>)
+                        }
+                      </tr>
+
+                  </tbody>}
+              </table>
+              {/* <table border="1" align = "center">
                 <tr>
                   <th>选项</th>
                   {options.map((oneOption , key) =>
@@ -92,7 +129,7 @@ class ZhentiAllYearTongji extends React.PureComponent {
                     }
                   </tr>
                 }
-              </table>
+              </table> */}
 
               <br/><div style = {{"color":"red"}}>根据您的做题情况，系统建议您需要重点关注的知识点如下(点击可查看)：</div><br/>
               {
