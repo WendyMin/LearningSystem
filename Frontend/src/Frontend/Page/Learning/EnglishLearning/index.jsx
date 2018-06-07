@@ -44,7 +44,7 @@ class EnglishLearning extends React.PureComponent {
       choice
     } = this.props;
 
-    console.log(choice);
+    // console.log(username);
 
     var user = sessionStorage.getItem("user");
     if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" ){
@@ -135,10 +135,10 @@ class EnglishLearning extends React.PureComponent {
 
                 <div className="user-box">
                   <div className="user-img">
-                   <img src="/static/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" className="img-circle img-thumbnail img-responsive"/>
+                   <img src="/static/images/users/avatar-1.jpg" alt="user-img" title={this.props.username} className="img-circle img-thumbnail img-responsive"/>
                    <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
                   </div>
-                  <h5><a href="#">{this.props.username}</a> </h5>
+                  <h5>{this.props.username}</h5>
 
                   <ul className="list-inline">
                    <li>
