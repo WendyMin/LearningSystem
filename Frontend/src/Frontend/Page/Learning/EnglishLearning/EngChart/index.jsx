@@ -59,7 +59,7 @@ class EngChart extends React.PureComponent {
       <React.Fragment>
         {
           <div>
-            <div className={style.title}>累计生词类型分析</div>
+            <p className={style.title}>累计生词类型分析</p>
             {/* <WriteGraph/> */}
             <br/>
             <p className={style.title1}>不认识的单词在各单词库占比</p>

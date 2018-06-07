@@ -80,6 +80,7 @@ loadChtoEng = () => {
                 content.length==0?null:
                 content.map((chtoeng, key)=>
                 <div key = {key} className={style.chtoengall}>
+                  <div className="card-box">
                   { chtoeng.chinese }
                   <br/>
                   <textarea  aria-label="With textarea" className = {style.textarea}></textarea>
@@ -89,6 +90,7 @@ loadChtoEng = () => {
                     :
                     null
                   }
+                </div>
                 </div>
                 )
               }

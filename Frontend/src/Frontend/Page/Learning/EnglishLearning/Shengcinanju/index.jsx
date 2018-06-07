@@ -111,7 +111,7 @@ class Shengcinanju extends React.PureComponent {
 
           <br/>
 
-          <div className={style.pageTitle}>本课难句：</div>
+          <div className={style.title}>本课难句：</div>
           <br/>
           <div className={style.chtoengall}>
           {

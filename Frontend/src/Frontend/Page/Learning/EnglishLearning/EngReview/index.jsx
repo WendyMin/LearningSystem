@@ -108,27 +108,67 @@ class EngReview extends React.PureComponent {
               {
                 reviewlist == undefined?null:
                 reviewlist.map((list, key)=>
-                <div key = {key} className={style.wordandsentence} >
-                  <li
-                    style = {courseSelect == key ? {"color":"orange"} : {"color":"blue"}}
-                      onClick = {() => {this.setState({showButton: this.changeButtonId(showButton,key),courseSelect:this.changeButtonId(courseSelect,key)})}}
-                    >
-                    <u>Unit{list.unit} Course{list.course}</u>
-                  </li>
-                  {
-                    showButton != key ? null :
-                    <div className={style.buttons}>
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      <Button text="查看核心词汇、重点句"
-                        onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
-                      this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }} />
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      {/* <Button text="查看阅读文章"
-                      onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}  /> */}
+
+                <div key = {key} className="col-md-4" >
+                  <div className="card-box kanban-box">
+                    <div className="kanban-detail">
+                        <span className="label label-primary pull-right">Finished</span>
+                        <div className={style.title18}>
+                          Unit{list.unit} Course{list.course}
+                        </div>
+                        <ul className="list-inline m-b-0">
+                            <li>
+                                {/* <a href="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Username">
+                                    <img src="/static/images/users/avatar-2.jpg" alt="img" className="thumb-sm img-circle"/>
+                                </a> */}
+                                {/* <Button text="查看核心词汇、重点句"
+                                        onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
+                                      this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }}
+                                    />
+                                &nbsp;&nbsp;
+                                <Button text="查看阅读文章"
+                                     onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}
+                                   /> */}
+                                 <a href="javascript:void(0);">
+                                   <div className="text-primary"
+                                   onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
+                                       this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }}
+                                     >查看核心词汇、重点句</div>
+                                 </a>
+                                 <br/>
+                                 <a href="javascript:void(0);">
+                                   <div className="text-primary"
+                                    onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}
+                                    >查看阅读文章</div>
+                                 </a>
+                            </li>
+                        </ul>
                     </div>
-                  }
-                  <br/>
+                  </div>
                 </div>
+
+
+                // <div key = {key} className={style.wordandsentence} >
+                //   <li
+                //     style = {courseSelect == key ? {"color":"orange"} : {"color":"blue"}}
+                //       onClick = {() => {this.setState({showButton: this.changeButtonId(showButton,key),courseSelect:this.changeButtonId(courseSelect,key)})}}
+                //     >
+                //     <u>Unit{list.unit} Course{list.course}</u>
+                //   </li>
+                //   {
+                //     showButton != key ? null :
+                //     <div className={style.buttons}>
+                //       &nbsp;&nbsp;&nbsp;&nbsp;
+                //       <Button text="查看核心词汇、重点句"
+                //         onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
+                //       this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }} />
+                //       &nbsp;&nbsp;&nbsp;&nbsp;
+                //       {/* <Button text="查看阅读文章"
+                //       onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}  /> */}
+                //     </div>
+                //   }
+                //   <br/>
+                // </div>
                 )
               }
 
@@ -138,7 +178,7 @@ class EngReview extends React.PureComponent {
             :
             showWordAndSentence == true ?
             <div>
-              <div className={style.pageTitle}>核心词汇</div>
+              <div className={style.title}>核心词汇</div>
                 {
                   hardword.length==0?null:
                   hardword.map((word, key)=>
@@ -155,7 +195,7 @@ class EngReview extends React.PureComponent {
 
               <br/>
 
-              <div className={style.pageTitle}>重点句</div>
+              <div className={style.title}>重点句</div>
                 {
                   hardsentence.length==0?null:
                   hardsentence.map((sentence, key)=>
