@@ -7,6 +7,7 @@ import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSele
 import Info from 'UI/Info';
 
 import LunZhengKnowledge from 'Page/Learning/WritingLearning/LunZheng/LunZhengKnowledge';
+import LunZhengGongGuSelect from 'Page/Learning/WritingLearning/LunZheng/LunZhengGongGuSelect';
 import LunZhengGonggu from 'Page/Learning/WritingLearning/LunZheng/LunZhengGonggu';
 import LunZhengZhenTi from 'Page/Learning/WritingLearning/LunZheng/LunZhengZhenTi';
 import LunZhengZhenTiSelect from 'Page/Learning/WritingLearning/LunZheng/LunZhengZhenTiSelect';
@@ -171,7 +172,7 @@ class EnterLearning extends React.PureComponent {
                          </div>    :
 
                         learningType =="论证技巧"?<LunZhengKnowledge/>:
-                        learningType =="论证巩固"?<LunZhengGonggu/>:
+                        learningType =="论证巩固"?<LunZhengGongGuSelect/>:
                         learningType =="论证真题"?<LunZhengZhenTiSelect/>:
                         learningType =="论证数据"?<LunZhengTongji/>:
 

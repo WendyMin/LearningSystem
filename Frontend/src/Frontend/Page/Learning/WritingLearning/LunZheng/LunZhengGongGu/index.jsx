@@ -107,6 +107,51 @@ class LunZhengGongGu extends React.PureComponent {
       <React.Fragment>
         {choice !== "" ?
         <div>
+          <div className="col-sm-8">
+            <div className="bg-picture card-box">
+          {/* <div className={style.title}> */}
+            <div className={style.zhentiMingcheng}>{choice}</div>
+            <WriteContent className={style.zhentiContent}  loader={this.loadWriteContents}/>
+          </div>
+          </div>
+
+          {/* <div className={style.option}> */}
+          <div className="col-sm-4">
+            <div className="card-box">
+            {/* <div className = {style.egArticleText}> */}
+              <span onClick={() => this.setState({uploadText: true , viewText: false , viewEgArticle: false})}> 上传文章 </span>&nbsp;&nbsp;&nbsp;
+              <span onClick={() => {this.setState({uploadText: false , viewText: true , viewEgArticle: false});this.loadAllSubmitText()}}> 已传文章 </span>&nbsp;&nbsp;&nbsp;
+              <span onClick = {() => this.setState({uploadText: false , viewText: false , viewEgArticle: true})}> 参考范文 </span>
+            {/* </div> */}
+
+            {/* <div className = {style.egArticle}> */}
+            {
+              this.state.uploadText ?
+              <EditText inputSizeStyle = {style.inputBox} buttonStyle = {style.saveOrSubmit}
+                        loadLastSaveTextContent = {() => this.loadLastSaveTextContent()}
+                        saveText = {() => this.saveOrSubmitTextContent(0)} submitText = {() => this.saveOrSubmitTextContent(1)}
+              />
+              :
+            this.state.viewText ?
+            <ViewFinishedText/>
+            // <FinishedText allSubmitTextName = {allSubmitTextName} allSubmitText = {allSubmitText} whichTextToView = {whichTextToView}/>
+            :
+              this.state.viewEgArticle ?
+              <div>
+                <p className = {style.article_title}>{name}</p>
+                {example_article.map((onePara , key) =>
+                  <p key = {key}> &nbsp;&nbsp;&nbsp;&nbsp;{onePara} </p>
+                )}
+              </div>
+              :
+              null
+            }
+            </div>
+          </div>
+        {/* </div> */}
+        </div> : null}
+        {/* {choice !== "" ?
+        <div>
           <div className={style.title}>
             <div className={style.zhentiMingcheng}>{choice}</div>
             <WriteContent className={style.zhentiContent}  loader={this.loadWriteContents}/>
@@ -143,7 +188,7 @@ class LunZhengGongGu extends React.PureComponent {
             }
             </div>
           </div>
-        </div> : null}
+        </div> : null} */}
 
       </React.Fragment>
     )

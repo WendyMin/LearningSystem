@@ -12,6 +12,7 @@ class ZhentiTuijianZhishidian extends React.PureComponent{
     } = this.props;
     console.log(this.props)
     return(
+      <div className="card-box">
       <div className = {style.wholeZhishidian}>
         <div className = {style.tuijianZhishidianName}>{tuijianZhishidianName}</div><br/>
         {tuijianZhishidianContent_fenxi.map((oneFenxi , key) =>
@@ -21,6 +22,7 @@ class ZhentiTuijianZhishidian extends React.PureComponent{
           <p className = {key == 0 ? style.xiaobiaoti : null}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{oneLiti}</p>
         )}
       </div>
+    </div>
     )
   }
 }

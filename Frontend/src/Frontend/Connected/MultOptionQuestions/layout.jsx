@@ -194,6 +194,8 @@ class MultOptionQuestions extends React.PureComponent {
 
     return (
       <div className="container">
+        {/* <div className="col-sm-4">
+          <div className="card-box"> */}
         {/*<div className = {style.option_area}
         >
         {this.options.map( (oneOption , key) =>
@@ -205,7 +207,8 @@ class MultOptionQuestions extends React.PureComponent {
       </div>*/}
 
 
-      <form id = "form1" className = {style.leftOption}>
+      {/* <form id = "form1" > */}
+          <form id = "form1" className = {style.leftOption}>
         {this.left_options.map( (oneOption , key) =>
           <div key = {key}>
             <input id = {key} className = {style.checkbox} name = "leftOptions" type="checkbox" readOnly = {this.state.lock ? 'readonly' : ''} disabled = {this.state.lock ? "disabled" :null} value = {key}/>
@@ -214,8 +217,8 @@ class MultOptionQuestions extends React.PureComponent {
         )}
       </form>
 
-
       <form id = "form2" className = {style.rightOption}>
+      {/* <form id = "form2" > */}
       {this.right_options.map( (oneOption , key) =>
         <div key = {key}>
           <input id = {key+7} className = {style.checkbox} name = "rightOptions" type="checkbox" readOnly = {this.state.lock ? 'readonly' : ''} disabled = {this.state.lock ? "disabled" :null} value = {key+7}/>
@@ -309,7 +312,9 @@ class MultOptionQuestions extends React.PureComponent {
 
 
 
-      </div>
+      {/* </div>
+    </div> */}
+  </div>
 
 
     );

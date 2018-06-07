@@ -52,12 +52,21 @@ class EditText extends React.PureComponent {
 
     return (
       <div className="container">
+        <span class="input-icon icon-right">
+                                        <textarea id="eml" rows="20" className="form-control" placeholder="Post a new message" onKeyUp = {()=>this.SwapTxt()} onChange = {() => this.SwapTxt()}></textarea>
+                                    </span>
+                                    <div className="p-t-10 pull-right">
+                                        <a className="btn btn-sm btn-primary waves-effect waves-light" onClick = {saveText}>暂存文本</a>
+                                    </div>
+                                    <div className="p-t-10 pull-right">
+                                        <a className="btn btn-sm btn-primary waves-effect waves-light" onClick = {submitText}>确认提交</a>
+                                    </div>
         {/* <input type = "txt" id = "eml"/> */}
-        <textarea id = "eml" className = {inputSizeStyle} onKeyUp = {()=>this.SwapTxt()} onChange = {() => this.SwapTxt()}></textarea>
+        {/* <textarea id = "eml" className = {inputSizeStyle} onKeyUp = {()=>this.SwapTxt()} onChange = {() => this.SwapTxt()}></textarea>
         <div className = {buttonStyle}>
           <button onClick = {saveText}> 暂存文本 </button>&nbsp;&nbsp;
           <button onClick = {submitText}> 确认提交 </button>
-        </div>
+        </div> */}
       </div>
     );
   }

@@ -78,7 +78,7 @@ class LunZhengTongji extends React.PureComponent {
     //console.log(this.props.title.length === 0)
     return (
       <React.Fragment>
-        <div className="card-box">
+        {/* <div className="card-box"> */}
         <ZhentiAllYearTongji/>
         {/* <div className = {style.whoZhentiPart}>
         <div className={style.title}>
@@ -93,7 +93,7 @@ class LunZhengTongji extends React.PureComponent {
         }
 
         </div> */}
-      </div>
+      {/* </div> */}
       </React.Fragment>
     )
   }

@@ -54,8 +54,15 @@ class WritingPage extends React.PureComponent {
                     </button>
                   </li>
                   <li>
-                    <h4 className="page-title">
-                      {choice==0 ? <div>写作 > 进入学习</div> :
+                    <h4 className="page-title" id="expand-function">
+                      {choice==0 ?
+                        <div>
+                          写作 > 进入学习
+                          {/* <span>写作 </span>
+                          <span onClick={()=>this.props.setSubjectFunctionSelect(100)}>进入学习</span>
+                          <span>  {this.props.learningType}</span>
+                          <span>  {this.props.type}</span> */}
+                        </div> :
                        <div>写作 > 科目帮助</div>}
                     </h4>
                   </li>
@@ -129,7 +136,7 @@ class WritingPage extends React.PureComponent {
              <div className="container">
 
                 <div className="row">
-                  {choice==0 ?
+                  {choice===0 ?
                   <EnterLearning/> :
                   <div className="card-box"><WriteHelp/></div>
                   }
@@ -181,7 +188,9 @@ export default applyHOCs([
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
-      choice: state.SubjectFunctionSelect.choice
+      choice: state.SubjectFunctionSelect.choice,  // 代表用户选择的左侧导航栏的按钮，是选择了进入学习还是查看帮助
+      learningType: state.LearningTypeSelect.learningType, // 代表用户选择的是论证或论说的哪一项功能，是写作技巧精讲还是巩固还是真题等
+      type: state.ButtonExpand.choice // 代表用户具体选择的是哪一个小知识点或者具体哪一年的真题
     }),
     dispatch => ({
       ...bindActionCreators( UserManagerActions , dispatch ),

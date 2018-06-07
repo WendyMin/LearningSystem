@@ -93,7 +93,10 @@ class LunZhengKnowledge extends React.PureComponent {
       zhaoCuoChoice,
       moBanChoice
     } = this.props;
+    console.log(zhaoCuoChoice)
     //console.log(this.props.title.length === 0)
+    // document.getElementById("expand-function").innerHTML=<div>"找错"</div>
+    //document.getElementById("select_group").innerHTML = document.getElementById("select_group").innerHTML+oo;
     return (
       <React.Fragment>
       {

@@ -69,7 +69,26 @@ class LunZhengZhenTi extends React.PureComponent {
     //console.log(this.props.title.length === 0)
     return (
       <React.Fragment>
-        <div className = {style.whoZhentiPart}>
+        <div className="col-sm-8">
+          <div className="bg-picture card-box">
+        {/* <div className = {style.whoZhentiPart}>
+        <div className={style.title}> */}
+          <div className={style.zhentiMingcheng}>{choice}</div>
+          <WriteContent className={style.zhentiContent}  loader={this.loadWriteContents}/>
+        </div>
+      </div>
+      {/* <div className="col-sm-4">
+        <div className="card-box"> */}
+        {
+          this.props.title.length === 0 ? null :
+          <div className={style.option}>
+         <MultOptionQuestons/>
+         </div>
+        }
+      {/* </div> */}
+
+        {/* </div> */}
+        {/* <div className = {style.whoZhentiPart}>
         <div className={style.title}>
           <div className={style.zhentiMingcheng}>{choice}</div>
           <WriteContent className={style.zhentiContent}  loader={this.loadWriteContents}/>
@@ -81,7 +100,7 @@ class LunZhengZhenTi extends React.PureComponent {
           </div>
         }
 
-        </div>
+        </div> */}
       </React.Fragment>
     )
   }

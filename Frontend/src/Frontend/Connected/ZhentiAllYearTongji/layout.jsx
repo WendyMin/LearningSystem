@@ -50,12 +50,12 @@ class ZhentiAllYearTongji extends React.PureComponent {
     return (
       <div className = {style.tongjiPlace}>
         {/* <div className="container"> */}
-        {tongji.year == 0 ? <div>您还没有做完任何一年的真题!</div> :
+        {tongji.year == 0 ? <div className="card-box">您还没有做完任何一年的真题!</div> :
           <div>
             {
               this.state.tongji ?
               // chosed_zhishidianName === "" && chosed_articleName === "" ?
-              <div>
+              <div className="card-box"> 
               <strong><p style = {{"color" : "blue"}}>您的做题情况统计如下：</p></strong>
               <p>您总共做过 <strong style = {{"color" : "red"}}>{tongji.year}</strong> 年真题&nbsp;,&nbsp;各选项的错选次数、漏选次数统计如下：</p>
               <table className="table table-bordered m-0" align = "center">
