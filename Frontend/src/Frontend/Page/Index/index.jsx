@@ -141,7 +141,7 @@ class IndexPage extends React.Component {
                                 <p className="text-muted font-13">包含阅读、汉译英，以及中考、高考、四级、六级、考研词汇
                                     {/* <a href="#" className="font-600 text-muted">view more</a> */}
                                 </p>
-                                <br/><br/><br/><br/><br/>
+                                <br/><br/><br/><br/>
 
                                 <p className="font-600 m-b-5">Progress <span className="text-success pull-right">80%</span></p>
                                 <div className="progress progress-bar-success-alt progress-sm m-b-5">
