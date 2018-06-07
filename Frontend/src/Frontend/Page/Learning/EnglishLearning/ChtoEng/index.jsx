@@ -80,7 +80,7 @@ loadChtoEng = () => {
                 content.length==0?null:
                 content.map((chtoeng, key)=>
                 <div key = {key} className={style.chtoengall}>
-                  <div className="card-box">
+                  {/* <div className="card-box"> */}
                   { chtoeng.chinese }
                   <br/>
                   <textarea  aria-label="With textarea" className = {style.textarea}></textarea>
@@ -90,16 +90,15 @@ loadChtoEng = () => {
                     :
                     null
                   }
-                </div>
+                  {/* </div> */}
                 </div>
                 )
               }
               {
                 <div className={style.ShowEngAndReturn}>
-
-                <Button text="返回英语学习主页面" onClick={() => {setLearningType("英语主页面")}}/>
-                &nbsp;&nbsp;
-                <Button text="显示答案" onClick={() => this.setState({submit: true}) }/>
+                  <Button text="返回英语学习主页面" onClick={() => {setLearningType("英语主页面")}}/>
+                  &nbsp;&nbsp;
+                  <Button text="显示答案" onClick={() => this.setState({submit: true}) }/>
                 </div>
               }
             </div>
