@@ -134,25 +134,25 @@ class EnglishLearning extends React.PureComponent {
               <div className="sidebar-inner slimscrollleft">
 
                 <div className="user-box">
-                <div className="user-img">
-                 <img src="/static/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" className="img-circle img-thumbnail img-responsive"/>
-                 <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
-                </div>
-                <h5><a href="#">{this.props.username}</a> </h5>
+                  <div className="user-img">
+                   <img src="/static/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" className="img-circle img-thumbnail img-responsive"/>
+                   <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
+                  </div>
+                  <h5><a href="#">{this.props.username}</a> </h5>
 
-                <ul className="list-inline">
-                 <li>
-                   <a href="#" >
-                     <i className="zmdi zmdi-settings"></i>
-                   </a>
-                 </li>
+                  <ul className="list-inline">
+                   <li>
+                     <a href="#" >
+                       <i className="zmdi zmdi-settings"></i>
+                     </a>
+                   </li>
 
-                 <li>
-                   <a href="#" className="text-custom">
-                     <i className="zmdi zmdi-power"></i>
-                   </a>
-                 </li>
-                </ul>
+                   <li>
+                     <a href="#" className="text-custom">
+                       <i className="zmdi zmdi-power"></i>
+                     </a>
+                   </li>
+                  </ul>
                 </div>
                {/* userInfo end , include user imag , name and the two icons  */}
 
