@@ -59,30 +59,35 @@ class EngChart extends React.PureComponent {
       <React.Fragment>
         {
           <div>
-            <div className={style.pageTitle}>累计生词类型分析</div>
+            <div className={style.title}>累计生词类型分析</div>
             {/* <WriteGraph/> */}
+            <br/>
             <p className={style.title1}>不认识的单词在各单词库占比</p>
             <div>
               {
                 content == undefined ? null :
                 <div>
-                  <table border="1" align = "center">
-                    <tr>
-                      <th>中考</th>
-                      <th>高考</th>
-                      <th>四级</th>
-                      <th>六级</th>
-                      <th>考研</th>
-                      <th>超纲</th>
-                    </tr>
-                    <tr>
-                      <th>{content.zhongkao_rate}</th>
-                      <th>{content.gaokao}</th>
-                      <th>{content.siji}</th>
-                      <th>{content.liuji}</th>
-                      <th>{content.kaoyan}</th>
-                      <th>{content.chaogang}</th>
-                    </tr>
+                  <table className="table table-bordered m-0" align = "center">
+                    <thead>
+                      <tr>
+                        <th>中考</th>
+                        <th>高考</th>
+                        <th>四级</th>
+                        <th>六级</th>
+                        <th>考研</th>
+                        <th>超纲</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>{content.zhongkao_rate}</th>
+                        <th>{content.gaokao}</th>
+                        <th>{content.siji}</th>
+                        <th>{content.liuji}</th>
+                        <th>{content.kaoyan}</th>
+                        <th>{content.chaogang}</th>
+                      </tr>
+                    </tbody>
                   </table>
                   <br/>
                 </div>

@@ -94,7 +94,7 @@ class Shengcinanju extends React.PureComponent {
     return(
       <React.Fragment>
         <div>
-          <div className={style.pageTitle}>本课生词：</div>
+          <div className={style.title}>本课生词：</div>
           <br/>
           <div className={style.chtoengall}>
             {

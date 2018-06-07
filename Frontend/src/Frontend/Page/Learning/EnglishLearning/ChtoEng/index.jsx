@@ -73,7 +73,7 @@ loadChtoEng = () => {
 
         {
             <div>
-              <div className={style.pageTitle}> 汉译英 </div>
+              <div className={style.title}> 汉译英 </div>
               <br/>
               {
                 // content[0] == undefined?null:

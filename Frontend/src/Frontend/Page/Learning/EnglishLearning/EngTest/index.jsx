@@ -48,7 +48,7 @@ class EngTest extends React.PureComponent {
 
         {
             <div>
-              <div className={style.pageTitle}> 词汇量测试 </div>
+              <div className={style.title}> 词汇量测试 </div>
             </div>
         }
 

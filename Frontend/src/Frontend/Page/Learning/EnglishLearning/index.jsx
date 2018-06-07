@@ -56,44 +56,6 @@ class EnglishLearning extends React.PureComponent {
     }
 
     return (
-      // <React.Fragment>
-      // {
-      //   logined !== true ?
-      //     <div>
-      //       <Info info = "您还没有登录，请先登录，再进行学习!"/>
-      //       {/* <Login/> */}
-      //     </div> :
-      //
-      //   <div className = {style.wholePage}>
-      //
-      //     <div className = {style.pagetitle}>
-      //       <div className = {style.title}> 学习系统 </div>
-      //       <div className = {style.goback} onClick = {() => history.back()}> 返回 </div>
-      //     </div>
-      //
-      //   <div className = {style.subjectText}>
-      //       <br/><img className = {style.picture} src = "/static/images/admin.jpg"/>
-      //       <br/><div className = {style.username}> {username} </div><br/>
-      //       <SubjectSelect text = {this.type} normalStyle = {style.normalText} choosedStyle = {style.chosedText} />
-      //     </div>
-      //
-      //     <div className = {style.mainContent}>
-      //       {choice == 0 ?
-      //         // newTo[0] == 1 ?
-      //         <EngTest/> :
-      //         // <Info info = {"您已经完成测试!"} /> :
-      //        choice == 1 ? <EngLearningTypeSelect/> :
-      //        choice == 2 ? <EngReview/> :
-      //        choice == 3 ? <EngChart/>:
-      //        <EnglishHelp/>
-      //       }
-      //     </div>
-      //
-      //
-      //   </div>}
-      // </React.Fragment>
-
-
 
       <React.Fragment>
         <div id="wrapper">
@@ -207,11 +169,11 @@ class EnglishLearning extends React.PureComponent {
                 <div className="row">
 
                   {
-                    choice==0 ? <EngTest/> :
+                    choice==0 ? <div className="card-box"><EngTest/></div> :
                     choice==1 ? <EngLearningTypeSelect/> :
-                    choice==2 ? <EngReview/> :
-                    choice==3 ? <EngChart/> :
-                    <EnglishHelp/>
+                    choice==2 ? <div className="card-box"><EngReview/></div> :
+                    choice==3 ? <div className="card-box"><EngChart/></div> :
+                    <div className="card-box"><EnglishHelp/></div>
                   }
 
                 </div>

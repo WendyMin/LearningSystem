@@ -102,7 +102,7 @@ class EngReview extends React.PureComponent {
             showReviewList == true ?
             <div>
 
-              <div className={style.pageTitle}>复习</div>
+              <div className={style.title}>复习</div>
               <br/>
 
               {

@@ -9,7 +9,7 @@ class LogicHelp extends React.PureComponent<Props> {
   render(){
     return (
       <div className = {style.help}>
-        {/* <h4 className = {style.title}> 逻辑科目学习指南 </h4> */}
+        <h4 className = {style.title}> 逻辑科目学习指南 </h4>
         <span className = {style.part}> 水平测试 </span><br/>
 					<ol>
 						<li>用户首次进行逻辑科目的学习时，系统会强制进行测试</li>
@@ -26,7 +26,7 @@ class LogicHelp extends React.PureComponent<Props> {
 						<li>重点题型涵盖本单元涉及到所有小类的题目</li>
 						<li>强化练习是对本单元学习知识的巩固</li>
 						<li>单元测试是用户对本单元所学习内容的自我检测,
-                <span style={{"color":"red"}}>系统会根据测试的情况,推荐用户留在本章的学习还是进入下一章;但要留在本章还是进入下一章由用户自己决定</span></li>
+                <span className={style.strong}>系统会根据测试的情况,推荐用户留在本章的学习还是进入下一章;但要留在本章还是进入下一章由用户自己决定</span></li>
 					</ol>
 
           <span className = {style.part}> 复习 </span><br/>
