@@ -158,29 +158,29 @@ class EnglishLearning extends React.PureComponent {
 
                 <div id="sidebar-menu">
                   <ul>
-                    <li>
+                    <li onClick={()=>this.props.setSubjectFunctionSelect(0)}>
                       <a //href="/login"
-                        className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(0)}><i className="zmdi zmdi-layers"></i> <span> 词汇测试 </span></a>
+                        className="waves-effect"><i className="zmdi zmdi-layers"></i> <span> 词汇测试 </span></a>
                     </li>
 
-                    <li>
+                    <li onClick={()=>this.props.setSubjectFunctionSelect(1)}>
                       <a //href="javascript:void(0);"
-                         className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(1)}><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
+                         className="waves-effect"><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
                     </li>
 
-                    <li>
+                    <li onClick={()=>this.props.setSubjectFunctionSelect(2)}>
                       <a //href="javascript:void(0);"
-                        className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(2)}><i className="zmdi zmdi-book"></i> <span> 开始复习 </span> </a>
+                        className="waves-effect"><i className="zmdi zmdi-book"></i> <span> 开始复习 </span> </a>
                     </li>
 
-                    <li>
+                    <li onClick={()=>this.props.setSubjectFunctionSelect(3)}>
                       <a //href="javascript:void(0);"
-                      className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(3)}><i className="zmdi zmdi-chart"></i> <span> 统计图表 </span> </a>
+                      className="waves-effect"><i className="zmdi zmdi-chart"></i> <span> 统计图表 </span> </a>
                      </li>
 
-                    <li>
+                    <li onClick={()=>this.props.setSubjectFunctionSelect(4)}>
                       <a //href="javascript:void(0);"
-                      className="waves-effect" onClick={()=>this.props.setSubjectFunctionSelect(4)}><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
+                      className="waves-effect"><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
                     </li>
 
                     {/* <li>
