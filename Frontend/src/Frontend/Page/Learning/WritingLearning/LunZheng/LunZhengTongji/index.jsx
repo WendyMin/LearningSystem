@@ -4,23 +4,6 @@ import { bindActionCreators } from 'redux';
 import { Prompt } from 'react-router';
 import style from 'style';
 
-import Loading from 'Animation/Loading';
-import SlideLR from 'Animation/SlideLR';
-import SlideRL from 'Animation/SlideRL';
-import SlideDU from 'Animation/SlideDU';
-import SlideUD from 'Animation/SlideUD';
-//
-// import {
-//   view as WriteContent,
-//   actions as WriteContentActions
-// } from 'Connected/WriteContent';
-// import {
-//   actions as PortTestActions
-// } from 'Connected/PortTest';
-// import {
-//   view as MultOptionQuestons,
-//   actions as MultOptionQuestionsActions
-// } from 'Connected/MultOptionQuestions';
 import {
   view as ZhentiAllYearTongji,
   actions as ZhentiAllYearTongjiActions
@@ -57,7 +40,6 @@ class LunZhengTongji extends React.PureComponent {
       }
     });
   }
-
 
 
   componentDidMount(){
@@ -100,28 +82,6 @@ class LunZhengTongji extends React.PureComponent {
 }
 
 export default applyHOCs([
-
-  // protect({
-  //   logined: {
-  //     satisfy: l => l === true,
-  //     block(){
-  //       const { openWindow , history, closeMask , openMask } = this.props;
-  //       openWindow( UserManagerWindow,
-  //         {
-  //           width: '380px',
-  //           height: '300px',
-  //           position: {
-  //             top: 'calc( 50% - 190px)',
-  //             left: 'calc( 50% - 150px)'
-  //           },
-  //           onCancel: () => history.goBack() || closeMask(),
-  //           onSuccess: closeMask,
-  //         }
-  //       );
-  //       openMask();
-  //     }
-  //   }
-  // }),
   makePage,
   connect(
     state => ({

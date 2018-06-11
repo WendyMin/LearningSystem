@@ -3,20 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import style from 'style';
 
-// import {
-//   actions as PortTestActions
-// } from 'Connected/PortTest';
 import {
   view as WriteContent,
   actions as WriteContentActions
 } from 'Connected/WriteContent';
-import {
-  actions as PortTestActions
-} from 'Connected/PortTest';
-import {
-  // view as ButtonExpand,
-  actions as ButtonExpandActions
-} from 'Connected/ButtonExpand';
+import { actions as ButtonExpandActions } from 'Connected/ButtonExpand';
 import LunZhengGongGu from 'Page/Learning/WritingLearning/LunZheng/LunZhengGongGu';
 
 import makePage from 'direct-core/makePage';
@@ -43,9 +34,6 @@ class LunZhengGongGuSelect extends React.PureComponent {
   }
 
   loadGongGuContent = ( choice ) => {
-   //  this.setState({
-   //    Display: false,
-   // });
     this.props.loadWriteContents({
       url: "/api/lunZhengGongGuContent",
       body: {
@@ -53,24 +41,6 @@ class LunZhengGongGuSelect extends React.PureComponent {
       }
     });
   }
-
-  // loadGongGuContent = ( choice ) => {
-  //   this.setState({
-  //     GongGuDisplay: false
-  //  });
-  //   this.props.loadWriteContents({
-  //     url: "/api/lunZhengGongGuContent",
-  //     body: {
-  //       requestQuestion: choice
-  //     }
-  //   });
-  //   this.props.loadPortContent({
-  //     url: "/api/lunZhengGongGuError",
-  //     body: {
-  //       requestQuestion: choice
-  //     }
-  //   });
-  // }
 
 
   render(){
@@ -83,7 +53,7 @@ class LunZhengGongGuSelect extends React.PureComponent {
     return (
       <React.Fragment>
       {
-        this.state.GongGuSelect ?
+        this.state.GongGuSelect || choice === "" ?
         <div className="col-md-12">
           {/* <div className="card-box taskboard-box"> */}
           {/* <div> */}
@@ -117,14 +87,11 @@ export default applyHOCs([
       username: state.UserManager.name,
       LunZhengGongGuName: state.ButtonExpand.content,
       choice: state.ButtonExpand.choice,
-      // title: state.WriteContent.title
     }),
     dispatch => ({
       ...bindActionCreators( WriteContentActions , dispatch ),
-      ...bindActionCreators( PortTestActions , dispatch ),
       ...bindActionCreators( ButtonExpandActions , dispatch )
     })
-
   )],
   LunZhengGongGuSelect
 );

@@ -16,10 +16,10 @@ class ZhentiTuijianZhishidian extends React.PureComponent{
       <div className = {style.wholeZhishidian}>
         <div className = {style.tuijianZhishidianName}>{tuijianZhishidianName}</div><br/>
         {tuijianZhishidianContent_fenxi.map((oneFenxi , key) =>
-          <p className = {key == 0 ? style.xiaobiaoti : null}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{oneFenxi}</p>
+          <p key = {key} className = {key == 0 ? style.xiaobiaoti : null}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{oneFenxi}</p>
         )}
         {tuijianZhishidianContent_liti.map((oneLiti , key) =>
-          <p className = {key == 0 ? style.xiaobiaoti : null}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{oneLiti}</p>
+          <p key = {key} className = {key == 0 ? style.xiaobiaoti : null}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{oneLiti}</p>
         )}
       </div>
     </div>

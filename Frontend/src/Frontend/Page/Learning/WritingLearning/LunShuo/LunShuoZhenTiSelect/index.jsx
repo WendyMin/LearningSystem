@@ -17,12 +17,12 @@ import {
   // view as ButtonExpand,
   actions as ButtonExpandActions
 } from 'Connected/ButtonExpand';
-import LunZhengZhenTi from 'Page/Learning/WritingLearning/LunZheng/LunZhengZhenTi';
+import LunShuoZhenTi from 'Page/Learning/WritingLearning/LunShuo/LunShuoZhenTi';
 
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
-class LunZhengZhenTiSelect extends React.PureComponent {
+class LunShuoZhenTiSelect extends React.PureComponent {
 
   constructor( props ){
     super( props );
@@ -34,7 +34,7 @@ class LunZhengZhenTiSelect extends React.PureComponent {
   /*** 近年真题演练按钮展开的内容  */
   loadZhenTiName = () => {
     this.props.loadButtonContents({
-      url: "/api/lunzhengZhenti"
+      url: "/api/lunshuoZhenti"
     });
   }
   componentDidMount(){
@@ -44,19 +44,25 @@ class LunZhengZhenTiSelect extends React.PureComponent {
   loadZhentiContent = ( choice ) => {
     this.setState({
       zhentiDisplay: false
-   });
+    });
     this.props.loadWriteContents({
-      url: "/api/lunZhengZhenTiContent",
+      url: "/api/lunShuoZhenTiContent",
       body: {
         requestQuestion: choice
       }
     });
-    this.props.loadPortContent({
-      url: "/api/lunZhengZhenTiError",
-      body: {
-        requestQuestion: choice
-      }
-    });
+    // this.props.loadWriteContents({
+    //   url: "/api/lunZhengZhenTiContent",
+    //   body: {
+    //     requestQuestion: choice
+    //   }
+    // });
+    // this.props.loadPortContent({
+    //   url: "/api/lunZhengZhenTiError",
+    //   body: {
+    //     requestQuestion: choice
+    //   }
+    // });
   }
 
 
@@ -70,7 +76,7 @@ class LunZhengZhenTiSelect extends React.PureComponent {
     return (
       <React.Fragment>
       {
-        this.state.zhenTiSelect || choice === ""?
+        this.state.zhenTiSelect || choice === "" ?
         <div className="col-md-12">
           {/* <div className="card-box taskboard-box"> */}
           {/* <div> */}
@@ -89,7 +95,7 @@ class LunZhengZhenTiSelect extends React.PureComponent {
           {/* </div> */}
         </div>
         :
-        <LunZhengZhenTi/>
+        <LunShuoZhenTi/>
       }
       </React.Fragment>
     )
@@ -113,5 +119,5 @@ export default applyHOCs([
     })
 
   )],
-  LunZhengZhenTiSelect
+  LunShuoZhenTiSelect
 );

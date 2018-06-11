@@ -336,7 +336,7 @@ class LunShuo extends React.PureComponent {
 
     var user = sessionStorage.getItem("user");
     if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" || sessionStorage.getItem("user") == null){
-      <Login/>
+      // <Login/>
     }
     else{
       this.props.setUser(user , true);

@@ -1,14 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Prompt } from 'react-router';
 import style from 'style';
-
-import Loading from 'Animation/Loading';
-import SlideLR from 'Animation/SlideLR';
-import SlideRL from 'Animation/SlideRL';
-import SlideDU from 'Animation/SlideDU';
-import SlideUD from 'Animation/SlideUD';
 
 import {
   view as WriteContent,
@@ -23,7 +16,6 @@ import {
   actions as ViewFinishedTextActions
 } from 'Connected/ViewFinishedText';
 
-import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
@@ -72,7 +64,8 @@ class LunZhengGongGu extends React.PureComponent {
     });
   }
 
-  loadAllSubmitText = () => {
+  loadAllSubmitTextContent = () => {
+    console.log(this.props.username,this.props.choice)
     this.props.loadAllSubmitText({
       url: "/api/lunZhengAllSubmitText",
       body: {
@@ -82,15 +75,15 @@ class LunZhengGongGu extends React.PureComponent {
     });
   }
 
-  componentWillReceiveProps(NextProps){
-    if(this.props.choice !== NextProps.choice){
-      this.setState({
-        uploadText: false,
-        viewText: false,
-        viewEgArticle: false
-      })
-    }
-  }
+  // componentWillReceiveProps(NextProps){
+  //   if(this.props.choice !== NextProps.choice){
+  //     this.setState({
+  //       uploadText: false,
+  //       viewText: false,
+  //       viewEgArticle: false
+  //     })
+  //   }
+  // }
 
   render(){
     const{
@@ -109,23 +102,47 @@ class LunZhengGongGu extends React.PureComponent {
         <div>
           <div className="col-sm-8">
             <div className="bg-picture card-box">
-          {/* <div className={style.title}> */}
-            <div className={style.zhentiMingcheng}>{choice}</div>
-            <WriteContent className={style.zhentiContent}  loader={this.loadWriteContents}/>
-          </div>
+              {/* <div className={style.zhentiMingcheng}>{choice}</div> */}
+              <WriteContent className={style.zhentiContent}  loader={this.loadWriteContents}/>
+            </div>
           </div>
 
-          {/* <div className={style.option}> */}
           <div className="col-sm-4">
             <div className="card-box">
-            {/* <div className = {style.egArticleText}> */}
-              <span onClick={() => this.setState({uploadText: true , viewText: false , viewEgArticle: false})}> 上传文章 </span>&nbsp;&nbsp;&nbsp;
+              <ul className="nav nav-tabs">
+                 <li role="presentation" className="active">
+                     <a href="#uploadArticle" role="tab" data-toggle="tab">上传文章</a>
+                 </li>
+                 <li role="presentation">
+                     <a href="#viewArticle" role="tab" data-toggle="tab">已传文章</a>
+                 </li>
+                 <li role="presentation">
+                    <a href="#EgArticle" role="tab" data-toggle="tab">参考范文</a>
+                 </li>
+             </ul>
+             <div className="tab-content">
+                <div role="tabpanel" className="tab-pane fade in active" id="uploadArticle">
+                  <EditText inputSizeStyle = {style.inputBox} buttonStyle = {style.saveOrSubmit}
+                            loadLastSaveTextContent = {() => this.loadLastSaveTextContent()}
+                            saveText = {() => this.saveOrSubmitTextContent(0)} submitText = {() => this.saveOrSubmitTextContent(1)}
+                  />
+                </div>
+                <div role="tabpanel" className="tab-pane fade" id="viewArticle">
+                  <ViewFinishedText loadAllSubmitTextContent = {() => this.loadAllSubmitTextContent()}/>
+                </div>
+                <div role="tabpanel" className="tab-pane fade" id="EgArticle">
+                  <p className = {style.article_title}>{name}</p>
+                  {example_article.map((onePara , key) =>
+                    <p key = {key}> &nbsp;&nbsp;&nbsp;&nbsp;{onePara} </p>
+                  )}
+                </div>
+             </div>
+                                       {/* </div> */}
+                                       {/* <!-- end col --> */}
+              {/* <span onClick={() => this.setState({uploadText: true , viewText: false , viewEgArticle: false})}> 上传文章 </span>&nbsp;&nbsp;&nbsp;
               <span onClick={() => {this.setState({uploadText: false , viewText: true , viewEgArticle: false});this.loadAllSubmitText()}}> 已传文章 </span>&nbsp;&nbsp;&nbsp;
-              <span onClick = {() => this.setState({uploadText: false , viewText: false , viewEgArticle: true})}> 参考范文 </span>
-            {/* </div> */}
-
-            {/* <div className = {style.egArticle}> */}
-            {
+              <span onClick = {() => this.setState({uploadText: false , viewText: false , viewEgArticle: true})}> 参考范文 </span> */}
+             {/* {
               this.state.uploadText ?
               <EditText inputSizeStyle = {style.inputBox} buttonStyle = {style.saveOrSubmit}
                         loadLastSaveTextContent = {() => this.loadLastSaveTextContent()}
@@ -134,7 +151,6 @@ class LunZhengGongGu extends React.PureComponent {
               :
             this.state.viewText ?
             <ViewFinishedText/>
-            // <FinishedText allSubmitTextName = {allSubmitTextName} allSubmitText = {allSubmitText} whichTextToView = {whichTextToView}/>
             :
               this.state.viewEgArticle ?
               <div>
@@ -145,50 +161,11 @@ class LunZhengGongGu extends React.PureComponent {
               </div>
               :
               null
-            }
+            } */}
             </div>
           </div>
-        {/* </div> */}
-        </div> : null}
-        {/* {choice !== "" ?
-        <div>
-          <div className={style.title}>
-            <div className={style.zhentiMingcheng}>{choice}</div>
-            <WriteContent className={style.zhentiContent}  loader={this.loadWriteContents}/>
-          </div>
-
-          <div className={style.option}>
-            <div className = {style.egArticleText}>
-              <span onClick={() => this.setState({uploadText: true , viewText: false , viewEgArticle: false})}> 上传文章 </span>&nbsp;&nbsp;&nbsp;
-              <span onClick={() => {this.setState({uploadText: false , viewText: true , viewEgArticle: false});this.loadAllSubmitText()}}> 已传文章 </span>&nbsp;&nbsp;&nbsp;
-              <span onClick = {() => this.setState({uploadText: false , viewText: false , viewEgArticle: true})}> 参考范文 </span>
-            </div>
-
-            <div className = {style.egArticle}>
-            {
-              this.state.uploadText ?
-              <EditText inputSizeStyle = {style.inputBox} buttonStyle = {style.saveOrSubmit}
-                        loadLastSaveTextContent = {() => this.loadLastSaveTextContent()}
-                        saveText = {() => this.saveOrSubmitTextContent(0)} submitText = {() => this.saveOrSubmitTextContent(1)}
-              />
-              :
-            this.state.viewText ?
-            <ViewFinishedText/>
-            // <FinishedText allSubmitTextName = {allSubmitTextName} allSubmitText = {allSubmitText} whichTextToView = {whichTextToView}/>
-            :
-              this.state.viewEgArticle ?
-              <div>
-                <p className = {style.article_title}>{name}</p>
-                {example_article.map((onePara , key) =>
-                  <p key = {key}> &nbsp;&nbsp;&nbsp;&nbsp;{onePara} </p>
-                )}
-              </div>
-              :
-              null
-            }
-            </div>
-          </div>
-        </div> : null} */}
+        </div> : null
+      }
 
       </React.Fragment>
     )
@@ -196,28 +173,6 @@ class LunZhengGongGu extends React.PureComponent {
 }
 
 export default applyHOCs([
-
-  // protect({
-  //   logined: {
-  //     satisfy: l => l === true,
-  //     block(){
-  //       const { openWindow , history, closeMask , openMask } = this.props;
-  //       openWindow( UserManagerWindow,
-  //         {
-  //           width: '380px',
-  //           height: '300px',
-  //           position: {
-  //             top: 'calc( 50% - 190px)',
-  //             left: 'calc( 50% - 150px)'
-  //           },
-  //           onCancel: () => history.goBack() || closeMask(),
-  //           onSuccess: closeMask,
-  //         }
-  //       );
-  //       openMask();
-  //     }
-  //   }
-  // }),
   makePage,
   connect(
     state => ({
@@ -237,7 +192,6 @@ export default applyHOCs([
       ...bindActionCreators( EditTextActions , dispatch ),
       ...bindActionCreators( ViewFinishedTextActions , dispatch )
     })
-
   )],
   LunZhengGongGu
 );

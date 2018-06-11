@@ -40,6 +40,13 @@ class LunShuoGongGu extends React.PureComponent {
     }
   }
 
+  /**加载巩固强化练习的名称，例 " 管理类联考1999年真题" ， 只提供名称*/
+  loadButtonContents_gonggu = () => {
+    this.props.loadButtonContents({
+      url: "/api/lunshuoGonggu"
+    });
+    }
+
   loadGongguContent = ( choice ) => {
     this.props.loadWriteContents({
       url: "/api/lunZhengGongGuContent",
@@ -72,7 +79,7 @@ class LunShuoGongGu extends React.PureComponent {
     });
   }
 
-  loadAllSubmitText = () => {
+  loadAllSubmitTextContent = () => {
     this.props.loadAllSubmitText({
       url: "/api/lunZhengAllSubmitText",
       body: {
@@ -107,7 +114,46 @@ class LunShuoGongGu extends React.PureComponent {
       <React.Fragment>
         {choice !== "" ?
         <div>
-          <div className={style.title}>
+          <div className="col-sm-8">
+            <div className="bg-picture card-box">
+              {/* <div className={style.zhentiMingcheng}>{choice}</div> */}
+              <WriteContent className={style.zhentiContent}  loader={this.loadWriteContents}/>
+            </div>
+          </div>
+
+          <div className="col-sm-4">
+            <div className="card-box">
+              <ul className="nav nav-tabs">
+                 <li role="presentation" className="active">
+                     <a href="#uploadArticle" role="tab" data-toggle="tab">上传文章</a>
+                 </li>
+                 <li role="presentation">
+                     <a href="#viewArticle" role="tab" data-toggle="tab">已传文章</a>
+                 </li>
+                 <li role="presentation">
+                    <a href="#EgArticle" role="tab" data-toggle="tab">参考范文</a>
+                 </li>
+             </ul>
+             <div className="tab-content">
+                <div role="tabpanel" className="tab-pane fade in active" id="uploadArticle">
+                  <EditText inputSizeStyle = {style.inputBox} buttonStyle = {style.saveOrSubmit}
+                            loadLastSaveTextContent = {() => this.loadLastSaveTextContent()}
+                            saveText = {() => this.saveOrSubmitTextContent(0)} submitText = {() => this.saveOrSubmitTextContent(1)}
+                  />
+                </div>
+                <div role="tabpanel" className="tab-pane fade" id="viewArticle">
+                  <ViewFinishedText loadAllSubmitTextContent = {() => this.loadAllSubmitTextContent()}/>
+                </div>
+                <div role="tabpanel" className="tab-pane fade" id="EgArticle">
+                  <p className = {style.article_title}>{name}</p>
+                  {example_article.map((onePara , key) =>
+                    <p key = {key}> &nbsp;&nbsp;&nbsp;&nbsp;{onePara} </p>
+                  )}
+                </div>
+             </div>
+            </div>
+          </div>
+          {/* <div className={style.title}>
             <div className={style.zhentiMingcheng}>{choice}</div>
             <WriteContent className={style.zhentiContent}  loader={this.loadWriteContents}/>
           </div>
@@ -142,7 +188,7 @@ class LunShuoGongGu extends React.PureComponent {
               null
             }
             </div>
-          </div>
+          </div> */}
         </div> : null}
 
       </React.Fragment>
@@ -151,28 +197,6 @@ class LunShuoGongGu extends React.PureComponent {
 }
 
 export default applyHOCs([
-
-  // protect({
-  //   logined: {
-  //     satisfy: l => l === true,
-  //     block(){
-  //       const { openWindow , history, closeMask , openMask } = this.props;
-  //       openWindow( UserManagerWindow,
-  //         {
-  //           width: '380px',
-  //           height: '300px',
-  //           position: {
-  //             top: 'calc( 50% - 190px)',
-  //             left: 'calc( 50% - 150px)'
-  //           },
-  //           onCancel: () => history.goBack() || closeMask(),
-  //           onSuccess: closeMask,
-  //         }
-  //       );
-  //       openMask();
-  //     }
-  //   }
-  // }),
   makePage,
   connect(
     state => ({

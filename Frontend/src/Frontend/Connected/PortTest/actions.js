@@ -2,6 +2,8 @@ import {
   __ASYNC_LOAD_PORT_CONTENT,
   __ASYNC_LOAD_PORT_CONTENT2,
   __ASYNC_LOAD_PORT_CONTENT3,
+  __ASYNC_LOAD_PORT_CONTENT4,
+  __ASYNC_LOAD_PORT_CONTENT5,
 } from 'actionTypes';
 //import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
 
@@ -201,5 +203,134 @@ export const loadPortContent3= ({ url , body , parser , headers  , initState }) 
   })
   .catch( err => {
       dispatchLastest3( loadPortContentRejected3( "network" , err ) );
+ });
+};
+
+
+
+let loadPortContentCounter4 = 0;
+const loadPortContentStart4 = () => ({
+    type: __ASYNC_LOAD_PORT_CONTENT4.pending,
+    payload: {
+
+    },
+    id: loadPortContentCounter4
+});
+const loadPortContentResolved4 = ( response , initState ) => ({
+    type: __ASYNC_LOAD_PORT_CONTENT4.resolved,
+    payload: {
+      response,
+      initState
+    },
+    id: loadPortContentCounter4
+});
+const loadPortContentRejected4 = ( reason , detail ) => ({
+    type: __ASYNC_LOAD_PORT_CONTENT4.rejected,
+    payload: {
+      reason,
+      detail
+    },
+    id: loadPortContentCounter4
+});
+
+
+export const loadPortContent4= ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+//export const loadButtonContents = ({ url , body ,headers  , initState }) => ( dispatch , getState ) => {
+    const reqId4 = ++loadPortContentCounter4;
+    const dispatchLastest4 = action => {
+      if( reqId4 === loadPortContentCounter4 ){
+        dispatch( action );
+      }
+    }
+    dispatch( loadPortContentStart4() );
+    if( typeof body === "object" ){
+      body = JSON.stringify( body );
+    }
+    fetch( url , {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers
+        },
+        body: body
+    })
+  .then( response => {
+    if( !response.ok ){
+      dispatchLastest4( loadPortContentRejected4( "server" , response.status ) );
+      return;
+    }
+   response.json()
+    .then( json => dispatchLastest4( loadPortContentResolved4(  json  , initState ) ) )
+    .catch( err => {
+      dispatchLastest4( loadPortContentRejected4( "json" , err ) )
+    //console.log(response)
+  });
+  })
+  .catch( err => {
+      dispatchLastest4( loadPortContentRejected4( "network" , err ) );
+ });
+};
+
+
+let loadPortContentCounter5 = 0;
+const loadPortContentStart5 = () => ({
+    type: __ASYNC_LOAD_PORT_CONTENT5.pending,
+    payload: {
+
+    },
+    id: loadPortContentCounter5
+});
+const loadPortContentResolved5 = ( response , initState ) => ({
+    type: __ASYNC_LOAD_PORT_CONTENT5.resolved,
+    payload: {
+      response,
+      initState
+    },
+    id: loadPortContentCounter5
+});
+const loadPortContentRejected5 = ( reason , detail ) => ({
+    type: __ASYNC_LOAD_PORT_CONTENT5.rejected,
+    payload: {
+      reason,
+      detail
+    },
+    id: loadPortContentCounter5
+});
+
+
+export const loadPortContent5= ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+//export const loadButtonContents = ({ url , body ,headers  , initState }) => ( dispatch , getState ) => {
+    const reqId5 = ++loadPortContentCounter5;
+    const dispatchLastest5 = action => {
+      if( reqId5 === loadPortContentCounter5 ){
+        dispatch( action );
+      }
+    }
+    dispatch( loadPortContentStart5() );
+    if( typeof body === "object" ){
+      body = JSON.stringify( body );
+    }
+    fetch( url , {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers
+        },
+        body: body
+    })
+  .then( response => {
+    if( !response.ok ){
+      dispatchLastest5( loadPortContentRejected5( "server" , response.status ) );
+      return;
+    }
+   response.json()
+    .then( json => dispatchLastest5( loadPortContentResolved5(  json  , initState ) ) )
+    .catch( err => {
+      dispatchLastest5( loadPortContentRejected5( "json" , err ) )
+    //console.log(response)
+  });
+  })
+  .catch( err => {
+      dispatchLastest5( loadPortContentRejected5( "network" , err ) );
  });
 };

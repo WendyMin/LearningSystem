@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import style from 'style';
 
-// import {
-//   actions as PortTestActions
-// } from 'Connected/PortTest';
 import {
   view as WriteContent,
   actions as WriteContentActions
@@ -14,45 +11,37 @@ import {
   actions as PortTestActions
 } from 'Connected/PortTest';
 import {
-  // view as ButtonExpand,
   actions as ButtonExpandActions
 } from 'Connected/ButtonExpand';
-import LunZhengZhenTi from 'Page/Learning/WritingLearning/LunZheng/LunZhengZhenTi';
+import LunShuoGongGu from 'Page/Learning/WritingLearning/LunShuo/LunShuoGongGu';
 
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
-class LunZhengZhenTiSelect extends React.PureComponent {
+class LunZhengGongGuSelect extends React.PureComponent {
 
   constructor( props ){
     super( props );
     this.state = {
-      zhenTiSelect: true
+      GongGuSelect: true
     }
   }
 
-  /*** 近年真题演练按钮展开的内容  */
-  loadZhenTiName = () => {
+  /*** 巩固强化练习按钮展开的内容  */
+  loadGongGuName = () => {
     this.props.loadButtonContents({
-      url: "/api/lunzhengZhenti"
+      url: "/api/lunshuoGonggu"
     });
-  }
-  componentDidMount(){
-    this.loadZhenTiName()
   }
 
-  loadZhentiContent = ( choice ) => {
-    this.setState({
-      zhentiDisplay: false
-   });
+
+  componentDidMount(){
+    this.loadGongGuName()
+  }
+
+  loadGongGuContent = ( choice ) => {
     this.props.loadWriteContents({
-      url: "/api/lunZhengZhenTiContent",
-      body: {
-        requestQuestion: choice
-      }
-    });
-    this.props.loadPortContent({
-      url: "/api/lunZhengZhenTiError",
+      url: "/api/lunShuoGongGuContent",
       body: {
         requestQuestion: choice
       }
@@ -63,24 +52,24 @@ class LunZhengZhenTiSelect extends React.PureComponent {
   render(){
     const{
       choice,
-      LunZhengZhenTiName,
+      LunZhengGongGuName,
       setButtonChoice
     } = this.props;
     //console.log(this.props.title.length === 0)
     return (
       <React.Fragment>
       {
-        this.state.zhenTiSelect || choice === ""?
+        this.state.GongGuSelect || choice === "" ?
         <div className="col-md-12">
           {/* <div className="card-box taskboard-box"> */}
           {/* <div> */}
-            {LunZhengZhenTiName.map(( oneYearZhenTi , key ) =>
+            {LunZhengGongGuName.map(( oneYearGongGu , key ) =>
               <div key = {key}>
                 <div className="col-md-4">
                     <div className="card-box kanban-box">
                         <div className="kanban-detail">
                             <span className="label label-danger pull-right">Begin</span>
-                            <h4><a onClick = {() => {setButtonChoice(oneYearZhenTi);this.loadZhentiContent( oneYearZhenTi );this.setState({zhenTiSelect:false})}}>{oneYearZhenTi}</a> </h4>
+                            <h4><a onClick = {() => {setButtonChoice(oneYearGongGu);this.loadGongGuContent( oneYearGongGu );this.setState({GongGuSelect:false})}}>{oneYearGongGu}</a> </h4>
                         </div>
                     </div>
                   </div>
@@ -89,7 +78,7 @@ class LunZhengZhenTiSelect extends React.PureComponent {
           {/* </div> */}
         </div>
         :
-        <LunZhengZhenTi/>
+        <LunShuoGongGu/>
       }
       </React.Fragment>
     )
@@ -102,7 +91,7 @@ export default applyHOCs([
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
-      LunZhengZhenTiName: state.ButtonExpand.content,
+      LunZhengGongGuName: state.ButtonExpand.content,
       choice: state.ButtonExpand.choice,
       // title: state.WriteContent.title
     }),
@@ -113,5 +102,5 @@ export default applyHOCs([
     })
 
   )],
-  LunZhengZhenTiSelect
+  LunZhengGongGuSelect
 );
