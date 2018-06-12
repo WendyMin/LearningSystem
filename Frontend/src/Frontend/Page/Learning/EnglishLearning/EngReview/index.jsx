@@ -121,15 +121,16 @@ class EngReview extends React.PureComponent {
                                 {/* <a href="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Username">
                                     <img src="/static/images/users/avatar-2.jpg" alt="img" className="thumb-sm img-circle"/>
                                 </a> */}
-                                {/* <Button text="查看核心词汇、重点句"
+                                <br/>
+                                <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
                                         onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
                                       this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }}
-                                    />
-                                &nbsp;&nbsp;
-                                <Button text="查看阅读文章"
+                                    >查看核心词汇、重点句</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
                                      onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}
-                                   /> */}
-                                 <a href="javascript:void(0);">
+                                   >查看阅读文章</button>
+                                 {/* <a href="javascript:void(0);">
                                    <div className="text-primary"
                                    onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
                                        this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }}
@@ -140,7 +141,7 @@ class EngReview extends React.PureComponent {
                                    <div className="text-primary"
                                     onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}
                                     >查看阅读文章</div>
-                                 </a>
+                                 </a> */}
                             </li>
                         </ul>
                     </div>

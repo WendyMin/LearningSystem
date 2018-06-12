@@ -63,6 +63,7 @@ class EnglishLearning extends React.PureComponent {
 
             <div className="topbar-left">
               <a href="/" className="logo"><span>Learning<span>System</span></span><i className="zmdi zmdi-layers"></i></a>
+
             </div>
 
             <div className="navbar navbar-default" role="navigation">
