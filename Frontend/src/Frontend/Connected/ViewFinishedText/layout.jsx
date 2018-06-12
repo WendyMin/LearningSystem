@@ -8,9 +8,14 @@ class ViewFinishedText extends React.PureComponent {
   constructor( props ){
     super( props );
   }
+  componentWillMount() {
+    const {loadAllSubmitTextContent} = this.props;
+    loadAllSubmitTextContent();
+  }
 
   render(){
     const {
+      // loadAllSubmitText,
       allSubmitTextName,   // 所有提交的文本的名称 ， eg 第一次提交文本 ...
       allSubmitText,  // 具体的提交内容
       recordUserChosedWhichTextToView, // 动作
@@ -28,8 +33,8 @@ class ViewFinishedText extends React.PureComponent {
               allSubmitTextName.length == 0 ? <h6>您还没有提交过文件</h6>
               :
               <div>
-                <h5 style = {{"color":"red"}} align = "center"> 您已经上传过的文章列表如下： </h5>
-                <h6 style = {{"color":"blue"}} align = "center"> 点击可查看 </h6>
+                <div className = {style.article_title}> 您已经上传过的文章列表如下(点击可查看)： </div>
+                {/* <h6 style = {{"color":"blue"}} align = "center"> 点击可查看 </h6> */}
                 {
                   allSubmitTextName.map((oneText , key) =>
                   <li key = {key} className = {whichTextToView === key ? style.chosedSubmitText : style.normalSubmitText} onClick = {() => recordUserChosedWhichTextToView(key)}

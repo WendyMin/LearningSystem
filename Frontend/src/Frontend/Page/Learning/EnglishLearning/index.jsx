@@ -121,6 +121,7 @@ class EnglishLearning extends React.PureComponent {
 
                 <div id="sidebar-menu">
                   <ul>
+                    <li className="text-muted menu-title">英语</li>
                     <li onClick={()=>this.props.setSubjectFunctionSelect(0)}>
                       <a //href="/login"
                         className="waves-effect"><i className="zmdi zmdi-layers"></i> <span> 词汇测试 </span></a>

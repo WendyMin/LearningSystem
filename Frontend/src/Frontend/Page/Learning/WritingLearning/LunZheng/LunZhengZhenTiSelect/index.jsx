@@ -70,7 +70,7 @@ class LunZhengZhenTiSelect extends React.PureComponent {
     return (
       <React.Fragment>
       {
-        this.state.zhenTiSelect ?
+        this.state.zhenTiSelect || choice === ""?
         <div className="col-md-12">
           {/* <div className="card-box taskboard-box"> */}
           {/* <div> */}

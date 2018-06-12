@@ -1,6 +1,6 @@
 export default {
   UserManager: {
-    logined: false,
+    //logined: false,
     logined: true,
     name: "testdzh",
     password: "testdzh",

@@ -21,6 +21,14 @@ import {
   view as MultOptionQuestons,
   actions as MultOptionQuestionsActions
 } from 'Connected/MultOptionQuestions';
+import {
+  view as EditText,
+  actions as EditTextActions
+} from 'Connected/EditText';
+import {
+  view as ViewFinishedText,
+  actions as ViewFinishedTextActions
+} from 'Connected/ViewFinishedText';
 
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
@@ -51,6 +59,40 @@ class LunZhengZhenTi extends React.PureComponent {
     });
   }
 
+  loadLastSaveTextContent = () => {
+    //console.log(this.props.username,this.props.choice)
+    this.props.loadLastSaveText({
+      url: "/api/lunZhengZanCunContent",
+      body: {
+        username: this.props.username,
+        choice: this.props.choice
+      }
+    })
+  }
+
+  saveOrSubmitTextContent = ( flag ) => {
+    this.props.saveOrSubmitText({
+      url: "/api/lunZhengSaveOrSubmitText",
+      body: {
+        username: this.props.username,
+        choice: this.props.choice,
+        //text: this.usertext,
+        text: this.props.userInputText,
+        saveOrSubmit: flag  // flag=0 暂存  , flag=1 提交
+      }
+    });
+  }
+
+  loadAllSubmitTextContent = () => {
+    this.props.loadAllSubmitText({
+      url: "/api/lunZhengAllSubmitText",
+      body: {
+        username: this.props.username,
+        choice: this.props.choice
+      }
+    });
+  }
+
   componentDidMount(){
     this.loadZhentiContent()
   }
@@ -64,12 +106,79 @@ class LunZhengZhenTi extends React.PureComponent {
 
   render(){
     const{
-      choice
+      choice,
+      article_analysis,
+      name,
+      example_article
     } = this.props;
     //console.log(this.props.title.length === 0)
     return (
       <React.Fragment>
-        <div className = {style.whoZhentiPart}>
+        <div className="col-sm-8">
+          <div className="bg-picture card-box">
+            <WriteContent className={style.zhentiContent}  loader={this.loadWriteContents}/>
+          </div>
+        </div>
+        <div className="col-sm-4">
+          <div className="card-box">
+            <ul className="nav nav-tabs">
+              <li role="presentation"  className="active">
+                  <a href="#multiOption" role="tab" data-toggle="tab">多项选择</a>
+              </li>
+              <li role="presentation">
+                 <a href="#AnswerAnalysis" role="tab" data-toggle="tab">答案解析</a>
+              </li>
+               <li role="presentation">
+                   <a href="#uploadArticle" role="tab" data-toggle="tab">上传文章</a>
+               </li>
+               <li role="presentation">
+                   <a href="#viewArticle" role="tab" data-toggle="tab">已传文章</a>
+               </li>
+               <li role="presentation">
+                  <a href="#EgArticle" role="tab" data-toggle="tab">参考范文</a>
+               </li>
+           </ul>
+           <div className="tab-content">
+             <div role="tabpanel" className="tab-pane fade in active" id="multiOption">
+               <MultOptionQuestons/>
+             </div>
+             <div role="tabpanel" className="tab-pane fade" id="AnswerAnalysis">
+               {article_analysis.map((onePara , key) =>
+               <div key = {key}>
+                 <p className = {style.type}> &nbsp;&nbsp;&nbsp;&nbsp;{onePara.error_type} </p>
+                 <p> &nbsp;&nbsp;&nbsp;&nbsp;{onePara.error_analysis} </p>
+               </div>
+               )}
+             </div>
+             <div role="tabpanel" className="tab-pane fade" id="uploadArticle">
+                <EditText inputSizeStyle = {style.inputBox} buttonStyle = {style.saveOrSubmit}
+                          loadLastSaveTextContent = {() => this.loadLastSaveTextContent()}
+                          saveText = {() => this.saveOrSubmitTextContent(0)} submitText = {() => this.saveOrSubmitTextContent(1)}
+                />
+            </div>
+            <div role="tabpanel" className="tab-pane fade" id="viewArticle">
+               <ViewFinishedText loadAllSubmitTextContent = {() => this.loadAllSubmitTextContent()}/>
+            </div>
+            <div role="tabpanel" className="tab-pane fade" id="EgArticle">
+              <p className = {style.article_title}>{name}</p>
+              {example_article.map((onePara , key) =>
+                <p key = {key}> &nbsp;&nbsp;&nbsp;&nbsp;{onePara} </p>
+              )}
+            </div>
+           </div>
+          </div>
+        </div>
+        {/* <div className="col-sm-4">
+          <div className="card-box">
+          {
+            this.props.title.length === 0 ? null :
+            <div className={style.option}>
+               <MultOptionQuestons/>
+            </div>
+           }
+          </div>
+        </div> */}
+        {/* <div className = {style.whoZhentiPart}>
         <div className={style.title}>
           <div className={style.zhentiMingcheng}>{choice}</div>
           <WriteContent className={style.zhentiContent}  loader={this.loadWriteContents}/>
@@ -81,7 +190,7 @@ class LunZhengZhenTi extends React.PureComponent {
           </div>
         }
 
-        </div>
+        </div> */}
       </React.Fragment>
     )
   }
@@ -94,11 +203,17 @@ export default applyHOCs([
       logined: state.UserManager.logined,
       username: state.UserManager.name,
       choice: state.ButtonExpand.choice,
-      title: state.WriteContent.title
+      title: state.WriteContent.title,
+      article_analysis: state.PortTest.content, // 文章的答案分析
+      name: state.WriteContent.name, // 参考范文的题目
+      example_article: state.WriteContent.example_article, // 参考范文的具体内容
+      userInputText: state.EditText.userInputText, // 用户输入到文本框中的文字内容
     }),
     dispatch => ({
       ...bindActionCreators( WriteContentActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch ),
+      ...bindActionCreators( EditTextActions , dispatch ),
+      ...bindActionCreators( ViewFinishedTextActions , dispatch )
     })
 
   )],

@@ -22,6 +22,7 @@ import {
   view as ViewFinishedText,
   actions as ViewFinishedTextActions
 } from 'Connected/ViewFinishedText';
+import Button from 'UI/Button';
 
 import judgeWhichOption from 'Algorithm/judgeWhichOption';
 import AppearUD from 'Animation/AppearUD';
@@ -194,6 +195,8 @@ class MultOptionQuestions extends React.PureComponent {
 
     return (
       <div className="container">
+        {/* <div className="col-sm-12">
+          <div className="card-box"> */}
         {/*<div className = {style.option_area}
         >
         {this.options.map( (oneOption , key) =>
@@ -203,9 +206,12 @@ class MultOptionQuestions extends React.PureComponent {
           </div>
         )}
       </div>*/}
+      <div className="row">
 
+      <div className="col-sm-6">
 
-      <form id = "form1" className = {style.leftOption}>
+      {/* <form id = "form1" > */}
+          <form id = "form1" className = {style.leftOption}>
         {this.left_options.map( (oneOption , key) =>
           <div key = {key}>
             <input id = {key} className = {style.checkbox} name = "leftOptions" type="checkbox" readOnly = {this.state.lock ? 'readonly' : ''} disabled = {this.state.lock ? "disabled" :null} value = {key}/>
@@ -213,9 +219,10 @@ class MultOptionQuestions extends React.PureComponent {
           </div>
         )}
       </form>
-
-
+    </div>
+<div className="col-sm-6">
       <form id = "form2" className = {style.rightOption}>
+      {/* <form id = "form2" > */}
       {this.right_options.map( (oneOption , key) =>
         <div key = {key}>
           <input id = {key+7} className = {style.checkbox} name = "rightOptions" type="checkbox" readOnly = {this.state.lock ? 'readonly' : ''} disabled = {this.state.lock ? "disabled" :null} value = {key+7}/>
@@ -223,6 +230,9 @@ class MultOptionQuestions extends React.PureComponent {
         </div>
       )}
      </form>
+   </div>
+ </div>
+     <Button text="确认提交" onClick={() => {this.setState({lock: true});this.submitMultiOptions()}}/>
 
 
      {/*<div className={style.commit}>
@@ -237,26 +247,28 @@ class MultOptionQuestions extends React.PureComponent {
        <label onClick = { () => this.setState({fileShow: !this.state.fileShow}) }> 查看文件 </label>&nbsp;&nbsp;&nbsp;
        <label onClick = { () => this.setState({exampleShow: !this.state.exampleShow}) } > 参考范文 </label>
      </div>*/}
-     <div className = {style.commit}>
+     {/* <div className = {style.commit}>
        <label onClick = { () => {this.setState({lock: true , analysisShow: false , uploadShow: false , fileShow: false , exampleShow: false});this.submitMultiOptions()}}> 确认提交 </label>&nbsp;&nbsp;&nbsp;
        <label onClick = { () => this.setState({analysisShow: !this.state.analysisShow , uploadShow: false , fileShow: false , exampleShow: false}) }> 答案解析 </label>
-     </div>
-     <div className = {style.uploadfile}>
+     </div> */}
+     {/* <div className = {style.uploadfile}>
 
        <label onClick = { () => this.setState({analysisShow: false , uploadShow: !this.state.uploadShow, fileShow: false , exampleShow: false})}> 上传文章 </label>&nbsp;&nbsp;&nbsp;
        <label onClick = { () => {this.setState({analysisShow: false , uploadShow: false , fileShow: !this.state.fileShow , exampleShow: false});this.loadAllSubmitText() }}> 已传文章 </label>&nbsp;&nbsp;&nbsp;
        <label onClick = { () => this.setState({analysisShow: false , uploadShow: false , fileShow: false , exampleShow: !this.state.exampleShow}) } > 参考范文 </label>
-     </div>
+     </div> */}
      {
        this.state.lock ?
-       <div className = {style.tongji}>
+       <div>
+       {/* <div className = {style.tongji}> */}
          <ZhentiPerYearTongji />
-       </div>
+     {/* </div> */}
+     </div>
        :
        null
      }
 
-     {
+     {/* {
        this.state.analysisShow ?
        <div className = {style.egArticle}>
 
@@ -269,9 +281,9 @@ class MultOptionQuestions extends React.PureComponent {
        </div>
        :
        null
-     }
+     } */}
 
-     {
+     {/* {
        this.state.uploadShow ?
        <div>
          <EditText inputSizeStyle = {style.inputBox} buttonStyle = {style.saveOrSubmit}
@@ -280,21 +292,21 @@ class MultOptionQuestions extends React.PureComponent {
          />
        {/* <div className = {style.egArticle}>
          <br/><input type = "file" accept =".doc,.pdf"/><span style={{"color":"red"}}>请上传一个word或pdf文件</span>
-       </div> */}</div>
+       </div> </div>
 
        :null
-     }
+     } */}
 
-     {
+     {/* {
        this.state.fileShow ?
        <div className = {style.egArticle}>
          <ViewFinishedText/>
-          {/* 此处应该显示用户上传的文件内容 */}
+          // 此处应该显示用户上传的文件内容
        </div>
        :null
-     }
+     } */}
 
-     {
+     {/* {
        this.state.exampleShow ?
        <div className = {style.egArticle}>
          <p className = {style.article_title}>{name}</p>
@@ -304,12 +316,14 @@ class MultOptionQuestions extends React.PureComponent {
        </div>
        :
        null
-     }
+     } */}
 
 
 
 
       </div>
+  //   </div>
+  // </div>
 
 
     );

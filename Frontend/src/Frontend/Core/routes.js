@@ -5,6 +5,7 @@ import Index from 'Page/Index';
 
 const LearningSystem = asyncLoad( () => import('Page/LearningSystem') );
 const Login = asyncLoad( () => import('Page/Login') );
+const SignUp = asyncLoad( () => import('Page/SignUp') );
 const Learning = asyncLoad( () => import('Page/Learning') );
 const UITest = asyncLoad( () => import('Page/UITest') );
 const NotFound = asyncLoad( () => import('Page/NotFound') );
@@ -24,6 +25,9 @@ export default {
   },
   "/login": {
     page: Login,
+  },
+  "/signup": {
+    page: SignUp,
   },
   "/ui": {
     page: UITest

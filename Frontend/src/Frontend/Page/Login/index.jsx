@@ -95,7 +95,7 @@ class Login extends React.PureComponent {
 
           <div className="row">
               <div className="col-sm-12 text-center">
-                  <p className="text-muted">Don't have an account? <a href="page-register.html" className="text-primary m-l-5"><b>Sign Up</b></a></p>
+                  <p className="text-muted">Don't have an account? <a href="/signup" className="text-primary m-l-5"><b>Sign Up</b></a></p>
               </div>
           </div>
 

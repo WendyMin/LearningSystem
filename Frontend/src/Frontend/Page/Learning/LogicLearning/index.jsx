@@ -104,6 +104,7 @@ class LogicLearning extends React.PureComponent {
 
                 <div id="sidebar-menu">
                   <ul>
+                    <li className="text-muted menu-title">逻辑</li>
                     <li onClick={()=>this.props.setSubjectFunctionSelect(0)}>
                       <a //href="/login"
                         className="waves-effect"><i className="zmdi zmdi-layers"></i> <span> 入口测试 </span></a>

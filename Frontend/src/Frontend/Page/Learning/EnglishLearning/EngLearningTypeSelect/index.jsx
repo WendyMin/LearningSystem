@@ -74,7 +74,7 @@ class EngLearningTypeSelect extends React.PureComponent {
                          <p class="text-muted">
                              开始一篇英语阅读吧！<br/>
                              根据目前英语水平进行推荐，请认真做题哟~可查看生词、难句、题目解析、全文翻译
-                         </p><br/><br/>
+                         </p><br/>
                      </div>
                  </div>
                 </a>

@@ -1,27 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { Prompt } from 'react-router';
 import style from 'style';
-//
-// import Loading from 'Animation/Loading';
-// import SlideLR from 'Animation/SlideLR';
-// import SlideRL from 'Animation/SlideRL';
-// import SlideDU from 'Animation/SlideDU';
-// import SlideUD from 'Animation/SlideUD';
 
 import { actions as ButtonExpandActions } from 'Connected/ButtonExpand';
-// import {
-//   view as WriteContent,
-//   actions as WriteContentActions
-// } from 'Connected/WriteContent';
 import { actions as PortTestActions } from 'Connected/PortTest';
 import {
   view as WriteKnowledge,
   actions as WriteKnowledgeActions
 } from 'Connected/WriteKnowledge';
 
-// import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
@@ -44,12 +32,9 @@ class LunZhengKnowledge extends React.PureComponent {
 
   /*** 写作模板按钮展开的内容  */
   loadButtonContents_moban = () => {
-    this.props.loadPortContent({
+    this.props.loadPortContent2({
       url: "/api/lunzhengTemplate"
     });
-    // this.props.loadButtonContents({
-    //   url: "/api/lunzhengTemplate"
-    // });
   }
 
   componentDidMount(){
@@ -59,10 +44,6 @@ class LunZhengKnowledge extends React.PureComponent {
 
   /* 加载用户选择的某一具体找错析错类型的具体内容 */
   loadZhaocuoContent = ( choice ) => {
-   //  this.setState({
-   //    zhaocuoDisplay: false,
-   //    jiqiaoDisplay: false
-   // });
     this.props.loadWriteKnowledge({
       url: "/api/lunZhengZhaoCuoXiCuoContent",
       body: {
@@ -70,12 +51,8 @@ class LunZhengKnowledge extends React.PureComponent {
       }
     });
   }
-    /* 加载用户选择的某一具体写作模板类型的具体内容 */
+  /* 加载用户选择的某一具体写作模板类型的具体内容 */
   loadMobanContent = ( choice ) => {
-   //  this.setState({
-   //    mobanDisplay: false,
-   //    jiqiaoDisplay: false,
-   // });
     this.props.loadWriteKnowledge({
       url: "/api/lunZhengTemplateContent",
       body: {
@@ -90,14 +67,16 @@ class LunZhengKnowledge extends React.PureComponent {
       zhaoCuoName,
       moBanName,
       setButtonChoice,
-      zhaoCuoChoice,
-      moBanChoice
+      choice
     } = this.props;
+    console.log(choice)
     //console.log(this.props.title.length === 0)
+    // document.getElementById("expand-function").innerHTML=<div>"找错"</div>
+    //document.getElementById("select_group").innerHTML = document.getElementById("select_group").innerHTML+oo;
     return (
       <React.Fragment>
       {
-        this.state.typeSelect ?
+        this.state.typeSelect || choice === "" ?
         <div>
         <div className="col-md-6">
           <div className="card-box taskboard-box">
@@ -144,7 +123,7 @@ class LunZhengKnowledge extends React.PureComponent {
       </div>
       :
       <div className="card-box">
-        <div className = {style.centerbiaoti}>{zhaoCuoChoice}</div>
+        <div className = {style.centerbiaoti}>{choice}</div>
         <WriteKnowledge loader={this.loadWriteContents}/>
       </div>
     }
@@ -161,16 +140,14 @@ export default applyHOCs([
       logined: state.UserManager.logined,
       username: state.UserManager.name,
       zhaoCuoName: state.ButtonExpand.content,
-      moBanName: state.PortTest.content,
-      zhaoCuoChoice: state.ButtonExpand.choice,
-      moBanChoice: state.PortTest.choice
+      moBanName: state.PortTest.content2,
+      choice: state.ButtonExpand.choice,
     }),
     dispatch => ({
       ...bindActionCreators( ButtonExpandActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch ),
       ...bindActionCreators( WriteKnowledgeActions , dispatch )
     })
-
   )],
   LunZhengKnowledge
 );

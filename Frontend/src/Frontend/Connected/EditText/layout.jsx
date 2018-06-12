@@ -51,14 +51,31 @@ class EditText extends React.PureComponent {
     //console.log(this.props);
 
     return (
-      <div className="container">
+      <div>
+        <span className="input-icon icon-right">
+            <textarea id="eml" rows="20" className="form-control" placeholder="Post a new article" onKeyUp = {()=>this.SwapTxt()} onChange = {() => this.SwapTxt()}></textarea>
+        </span>
+        {/* <div className="p-t-10 pull-right"> */}
+        <br/>&nbsp;&nbsp;<Button onClick = {saveText} text = "暂存文本"/>&nbsp;&nbsp;&nbsp;&nbsp;
+        {/* </div> */}
+        {/* <div className="p-t-10 pull-right"> */}
+        <Button onClick = {submitText} text = "确认提交"/>
+        {/* </div> */}
+        {/* <div className="p-t-10 pull-right">
+            <a className="btn btn-sm btn-primary waves-effect waves-light" onClick = {saveText}>暂存文本&nbsp;&nbsp;&nbsp;&nbsp;</a>
+        </div>
+        <div className="p-t-10 pull-right">
+            <a className="btn btn-sm btn-primary waves-effect waves-light" onClick = {submitText}>确认提交</a>
+        </div> */}
+        <ul className="nav nav-pills profile-pills m-t-10">
+        </ul>
         {/* <input type = "txt" id = "eml"/> */}
-        <textarea id = "eml" className = {inputSizeStyle} onKeyUp = {()=>this.SwapTxt()} onChange = {() => this.SwapTxt()}></textarea>
+        {/* <textarea id = "eml" className = {inputSizeStyle} onKeyUp = {()=>this.SwapTxt()} onChange = {() => this.SwapTxt()}></textarea>
         <div className = {buttonStyle}>
           <button onClick = {saveText}> 暂存文本 </button>&nbsp;&nbsp;
           <button onClick = {submitText}> 确认提交 </button>
-        </div>
-      </div>
+        </div> */}
+     </div>
     );
   }
 };
