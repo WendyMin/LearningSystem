@@ -6,6 +6,7 @@ import style from 'style';
 import YueDu from 'Page/Learning/EnglishLearning/YueDu';
 import Shengcinanju from 'Page/Learning/EnglishLearning/Shengcinanju';
 import ChtoEng from 'Page/Learning/EnglishLearning/ChtoEng';
+import EngExtraArticle from 'Page/Learning/EnglishLearning/EngExtraArticle';
 import EngChart from 'Page/Learning/EnglishLearning/EngChart';
 
 import {
@@ -71,10 +72,10 @@ class EngLearningTypeSelect extends React.PureComponent {
                            onMouseOver = {() => this.setState({changeColor1: true})} onMouseLeave = {() => this.setState({changeColor1: false})}
                            >
                            英语阅读</h4>
-                         <p class="text-muted">
+                         <p className={style.text_muted1}>
                              开始一篇英语阅读吧！<br/>
                              根据目前英语水平进行推荐，请认真做题哟~可查看生词、难句、题目解析、全文翻译
-                         </p><br/>
+                         </p>
                      </div>
                  </div>
                 </a>
@@ -89,10 +90,10 @@ class EngLearningTypeSelect extends React.PureComponent {
                             onMouseOver = {() => this.setState({changeColor2: true})} onMouseLeave = {() => this.setState({changeColor2: false})}
                             >
                               生词难句</h4>
-                          <p class="text-muted">
+                          <p className={style.text_muted1}>
                               本课阅读过程中遇到的生词和难句，我们都帮你记录好了<br/>
                               快来点击查看吧！
-                          </p><br/><br/>
+                          </p>
                        </div>
                   </div>
                 </a>
@@ -107,17 +108,17 @@ class EngLearningTypeSelect extends React.PureComponent {
                           onMouseOver = {() => this.setState({changeColor3: true})} onMouseLeave = {() => this.setState({changeColor3: false})}
                           >
                             汉译英</h4>
-                        <p class="text-muted">
+                        <p className={style.text_muted1}>
                             给中文，写英文，so easy~<br/>
                             每课将给出3句中文，可查看答案，巩固你的写作技能
-                        </p><br/><br/>
+                        </p>
                     </div>
                  </div>
                </a>
 
                <a href="javascript:void(0);">
                  <div class="col-sm-6 col-lg-3 col-md-4 natural creative">
-                    <div class="gal-detail thumb" onClick = {() => {setLearningType("英语汉译英"); this.setState({typeselect: false})}} >
+                    <div class="gal-detail thumb" onClick = {() => {setLearningType("英语课后阅读材料"); this.setState({typeselect: false})}} >
                         <div class="image-popup">
                             <img src="/static/images/gallery/8.jpg" class="thumb-img" alt="work-thumbnail"/>
                         </div>
@@ -125,10 +126,10 @@ class EngLearningTypeSelect extends React.PureComponent {
                           onMouseOver = {() => this.setState({changeColor4: true})} onMouseLeave = {() => this.setState({changeColor4: false})}
                           >
                             课后阅读材料</h4>
-                        <p class="text-muted">
+                        <p className={style.text_muted1}>
                             还意犹未尽吗？<br/>
                             这里有本课阅读的延伸阅读哦，快来点击查看吧
-                        </p><br/><br/>
+                        </p>
                     </div>
                  </div>
                </a>
@@ -140,7 +141,8 @@ class EngLearningTypeSelect extends React.PureComponent {
           :
           learningType == "英语阅读" ? <div className="card-box"><YueDu/></div>:
           learningType == "英语生词难句" ? <div className="card-box"><Shengcinanju/></div>:
-          learningType == "英语汉译英" ? <div className="card-box"> <ChtoEng/></div>
+          learningType == "英语汉译英" ? <div className="card-box"> <ChtoEng/></div>:
+          learningType == "英语课后阅读材料" ? <div className="card-box"> <EngExtraArticle/></div>
           :null
         }
         </div>

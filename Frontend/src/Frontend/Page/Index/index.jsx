@@ -142,10 +142,6 @@ class IndexPage extends React.Component {
                                 <p className={style.text_muted1}>包含阅读、汉译英，以及中考、高考、四级、六级、考研词汇
                                     {/* <a href="#" className="font-600 text-muted">view more</a> */}
                                 </p>
-<<<<<<< HEAD
-=======
-                                <br/><br/><br/><br/>
->>>>>>> f95b196a58435569198734e145cc9fa4a24a89c0
 
                                 <p className="font-600 m-b-5">Progress <span className="text-success pull-right">80%</span></p>
                                 <div className="progress progress-bar-success-alt progress-sm m-b-5">
@@ -232,7 +228,7 @@ class IndexPage extends React.Component {
                                 </p>
 
 
-                                <p className="font-600 m-b-5">Progress <span className="text-custom pull-right">45%</span></p>
+                                <p className="font-600 m-b-5">Progress <span className="text-custom pull-right">0%</span></p>
                                 <div className="progress progress-bar-custom-alt progress-sm m-b-5">
                                     <div className="progress-bar progress-bar-custom progress-animated wow animated animated"
                                          role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"

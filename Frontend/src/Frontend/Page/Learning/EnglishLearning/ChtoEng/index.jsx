@@ -99,6 +99,8 @@ loadChtoEng = () => {
                   <Button text="返回英语学习主页面" onClick={() => {setLearningType("英语主页面")}}/>
                   &nbsp;&nbsp;
                   <Button text="显示答案" onClick={() => this.setState({submit: true}) }/>
+                  &nbsp;&nbsp;
+                  <Button text="进入课后阅读材料" onClick={() => {setLearningType("英语课后阅读材料")} }/>
                 </div>
               }
             </div>

@@ -41,37 +41,14 @@ class UITest extends React.PureComponent {
   }
 
   componentDidMount(){
-    this.loadReviewList();
+    this.loadExtraArticle();
   }
 
-  loadReviewList = () => {
+  loadExtraArticle = () => {
     this.props.loadPortContent({
-      url: "/api/eng_getReviewList",
+      url: "/api/eng_getExtraArticle",
       body: {
-        username:  this.props.username,
-      }
-    })
-  }
-
-  changeButtonId = (showButton, key) => {
-    if(showButton==-1) return key;
-    else return -1;
-  }
-
-  getHardWord = (articleId) => {
-    this.props.loadPortContent2({
-      url: "/api/eng_getCoreWord",
-      body: {
-        articleId:  articleId,
-      }
-    })
-  }
-
-  getHardSentence = (articleId) => {
-    this.props.loadPortContent3({
-      url: "/api/eng_engToCh",
-      body: {
-        articleId:  articleId,
+        articleId:  1,
       }
     })
   }
@@ -79,120 +56,17 @@ class UITest extends React.PureComponent {
   render(){
 
     const {
-      reviewlist,
-      hardword,
-      hardsentence,
+      content
     } = this.props;
 
-    const{
-      showButton,
-      showReviewList,
-      showWordAndSentence,
-      showArticle,
-    } = this.state;
-
-    console.log(hardsentence);
+    console.log(content);
 
     return(
       <React.Fragment>
-        <div>
-          {
-            showReviewList == true ?
-            <div>
-
-              <div className={style.pageTitle}>复习</div>
-              <br/>
-
-              {
-                reviewlist == undefined?null:
-                reviewlist.map((list, key)=>
-                <div key = {key} className={style.chtoengall} >
-                  <li
-                    // style = {list == choice ? {"color":"blue"} : null}
-                      onClick = {() => {this.setState({showButton: this.changeButtonId(showButton,key)})}}
-                    >
-                    Unit{list.unit} Course{list.course}
-                  </li>
-                  {
-                    showButton != key ? null :
-                    <div>
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      <Button text="查看核心词汇、重点句"
-                        onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
-                      this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }} />
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      <Button text="查看阅读文章"
-                      onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}  />
-                    </div>
-                  }
-                  <br/>
-                </div>
-                )
-              }
-
-            </div>
-
-
-            :
-            showWordAndSentence == true ?
-            <div>
-              <div className={style.pageTitle}>核心词汇</div>
-                {
-                  hardword.length==0?null:
-                  hardword.map((word, key)=>
-                  <div key = {key} className={style.chtoengall}>
-                    单词：
-                    { word.word }
-                    <br/>
-                    翻译：
-                    { word.translate }
-                  </div>
-                  )
-                }
-
-              <br/>
-
-              <div className={style.pageTitle}>重点句</div>
-                {
-                  hardsentence.length==0?null:
-                  hardsentence.map((sentence, key)=>
-                  <div key = {key} className={style.chtoengall}>
-                    句子：
-                    { sentence.english }
-                    <br/>
-                    中文：
-                    { sentence.chinese }
-                    <br/>
-                    解析：
-                    { sentence.analysis }
-                  </div>
-                  )
-                }
-
-              <div className={style.ShowEngAndReturn}>
-                <Button text="返回列表页面"
-                onClick = {() =>  {this.setState({showReviewList: true , showWordAndSentence: false, showArticle: false})}} />
-              </div>
-              
-            </div>
-
-
-            :
-            showArticle == true ?
-            <div>
-              <div className={style.pageTitle}>英语文章</div>
-              <div className={style.ShowEngAndReturn}>
-                <Button text="返回列表页面"
-                onClick = {() =>  {this.setState({showReviewList: true , showWordAndSentence: false, showArticle: false})}} />
-              </div>
-            </div>
-
-            :
-            null
-
-          }
-
-        </div>
+        <p>{content.title} </p>
+        <p>{content.title_translate}</p>
+        <p>{content.content}</p>
+        <p>{content.content_translate}</p>
 
       </React.Fragment>
     )
@@ -214,9 +88,7 @@ export default applyHOCs([
       logined: state.UserManager.logined,
       username: state.UserManager.name,
       articleId: state.EnglishArticle.articleId,
-      reviewlist: state.PortTest.content,
-      hardword: state.PortTest.content2,
-      hardsentence: state.PortTest.content3,
+      content: state.PortTest.content,
     }),
     dispatch => ({
       ...bindActionCreators( EnglishArticleActions , dispatch ),
