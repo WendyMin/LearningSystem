@@ -120,7 +120,7 @@ class EngLearningTypeSelect extends React.PureComponent {
                  <div class="col-sm-6 col-lg-3 col-md-4 natural creative">
                     <div class="gal-detail thumb" onClick = {() => {setLearningType("英语课后阅读材料"); this.setState({typeselect: false})}} >
                         <div class="image-popup">
-                            <img src="/static/images/gallery/8.jpg" class="thumb-img" alt="work-thumbnail"/>
+                            <img src="/static/images/gallery/3.jpg" class="thumb-img" alt="work-thumbnail"/>
                         </div>
                         <h4 className = {TextStyle[3]}
                           onMouseOver = {() => this.setState({changeColor4: true})} onMouseLeave = {() => this.setState({changeColor4: false})}
@@ -140,9 +140,9 @@ class EngLearningTypeSelect extends React.PureComponent {
             // {/* <!-- End row --> */}
           :
           learningType == "英语阅读" ? <div className="card-box"><YueDu/></div>:
-          learningType == "英语生词难句" ? <div className="card-box"><Shengcinanju/></div>:
-          learningType == "英语汉译英" ? <div className="card-box"> <ChtoEng/></div>:
-          learningType == "英语课后阅读材料" ? <div className="card-box"> <EngExtraArticle/></div>
+          learningType == "英语生词难句" ? <Shengcinanju/>:
+          learningType == "英语汉译英" ?  <ChtoEng/>:
+          learningType == "英语课后阅读材料" ? <EngExtraArticle/>
           :null
         }
         </div>

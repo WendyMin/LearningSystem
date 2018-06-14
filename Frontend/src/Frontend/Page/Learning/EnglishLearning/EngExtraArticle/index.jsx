@@ -79,24 +79,51 @@ class EngExtraArticle extends React.PureComponent {
     return(
       <React.Fragment>
         <div>
-          <div className={style.title}>{extraArticle.title}</div>
-          <br/>
-          <p className={style.articleContent}>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {extraArticle.content}</p>
-          <br/>
+          <div className="row">
 
-          <div className={style.title}>{extraArticle.title_translate}</div>
-          <br/>
-          <div className={style.articleContent}>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {extraArticle.content_translate}</div>
-          <br/>
+            <div className="col-md-6" >
+              <div className="card-box kanban-box">
+                <div className="kanban-detail">
+                  {/* <span className="label label-primary pull-right">Translate</span> */}
+                  <p className={style.title}>{extraArticle.title}</p>
+                  <ul className="list-inline m-b-0">
+                    <li>
+                      <p className={style.title18}>{extraArticle.content}</p>
+                      <br/>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 
-          <div className={style.ShowEngAndReturn}>
+            <div className="col-md-6" >
+              <div className="card-box kanban-box">
+                <div className="kanban-detail">
+                  {/* <span className="label label-primary pull-right">Translate</span> */}
+                  <p className={style.title}>{extraArticle.title_translate}</p>
+                  <ul className="list-inline m-b-0">
+                    <li>
+                      <p className={style.title18}>{extraArticle.content_translate}</p>
+                      <br/>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          {/* <div className={style.ShowEngAndReturn}>
           <Button text="返回英语学习主页面" onClick={() => {setLearningType("英语主页面")}}/>
-          {/* &nbsp;&nbsp; */}
-          {/* <Button text="进入汉译英" onClick={() => {setLearningType("英语汉译英")} }/> */}
+          </div> */}
+
+          <div className="row">
+            <div className={style.buttonright}>
+              <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                  onClick={() => {setLearningType("英语主页面")}} >
+                  返回英语学习主页面</button>
+            </div>
           </div>
 
         </div>

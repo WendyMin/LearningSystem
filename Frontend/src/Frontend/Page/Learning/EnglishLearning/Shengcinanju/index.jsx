@@ -94,36 +94,24 @@ class Shengcinanju extends React.PureComponent {
     return(
       <React.Fragment>
         <div>
-          <div className={style.title}>本课生词：</div>
-          <br/>
-
-          {/* {
-            shengci[0] == undefined?null:
-            shengci.map((word, key)=>
-            <div key={key} className="col-md-4" >
-              <div className="card-box kanban-box">
-                <div className="kanban-detail">
-                  <span className="label label-primary pull-right">Word</span>
-                  <div className={style.title18}>{word.word_l}</div>
-                  <ul className="list-inline m-b-0">
-                    <li>
-                      <br/>
-                      <p className={style.title18}>{word.translate}</p>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          } */}
-          
-          <div className={style.chtoengall}>
+          <div className="row">
+            <div className={style.title}>本课生词</div>
+            <br/>
             {
               shengci[0] == undefined?null:
               shengci.map((word, key)=>
-              <div key = {key} >
-                <b>{ word.word_l }</b>
-                <br/>
-                <p>{ word.translate }</p>
+              <div key={key} className="col-md-3" >
+                <div className={style.cardboxfix}>
+                  <div className="kanban-detail">
+                    <span className="label label-primary pull-right">Word</span>
+                    <p className={style.title18}>{word.word_l}</p>
+                    <ul className="list-inline m-b-0">
+                      <li>
+                        <p className={style.title16}>{word.translate}</p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
               )
             }
@@ -131,27 +119,47 @@ class Shengcinanju extends React.PureComponent {
 
           <br/>
 
-          <div className={style.title}>本课难句：</div>
+          <div className="row">
+            <div className={style.title}>本课难句</div>
+            <br/>
+            {
+              nanju == undefined?null:
+              nanju.map((sentence, key)=>
+              <div key={key} className="col-md-12" >
+                <div className="card-box kanban-box">
+                  <div className="kanban-detail">
+                    <span className="label label-primary pull-right">Sentence</span>
+                    <p className={style.title18}>
+                      {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+                      {sentence.sentence}</p>
+                    <ul className="list-inline m-b-0">
+                      <li>
+                        <br/>
+                        <p className={style.title16}><strong>翻译：</strong>{sentence.translate}</p>
+                        <br/>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              )
+            }
+          </div>
+
           <br/>
-          <div className={style.chtoengall}>
-          {
-            nanju == undefined?null:
-            nanju.map((sentence, key)=>
-            <div key = {key} >
-              <b>{ sentence.sentence }</b>
-              <br/>
-              <p>{ sentence.translate }</p>
+
+          <div className="row">
+            <div className={style.buttonright}>
+              <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                  onClick={() => {setLearningType("英语主页面")}} >
+                  返回英语学习主页面</button>
+            {/* <Button text="返回英语学习主页面" onClick={() => {setLearningType("英语主页面")}}/> */}
+            &nbsp;&nbsp;
+            <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                onClick={() => {setLearningType("英语汉译英")}} >
+                进入汉译英</button>
+            {/* <Button text="进入汉译英" onClick={() => {setLearningType("英语汉译英")} }/> */}
             </div>
-            )
-          }
-        </div>
-          <br/>
-
-
-          <div className={style.ShowEngAndReturn}>
-          <Button text="返回英语学习主页面" onClick={() => {setLearningType("英语主页面")}}/>
-          &nbsp;&nbsp;
-          <Button text="进入汉译英" onClick={() => {setLearningType("英语汉译英")} }/>
           </div>
 
         </div>

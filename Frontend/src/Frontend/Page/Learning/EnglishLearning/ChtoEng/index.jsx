@@ -73,28 +73,40 @@ loadChtoEng = () => {
 
         {
             <div>
-              <div className={style.title}> 汉译英 </div>
-              <br/>
-              {
-                // content[0] == undefined?null:
-                content.length==0?null:
-                content.map((chtoeng, key)=>
-                <div key = {key} className={style.chtoengall}>
-                  {/* <div className="card-box"> */}
-                  { chtoeng.chinese }
-                  <br/>
-                  <textarea  aria-label="With textarea" className = {style.textarea}></textarea>
-                  {
-                    this.state.submit?
-                    <p> { chtoeng.english }</p>
-                    :
-                    null
-                  }
-                  {/* </div> */}
-                </div>
-                )
-              }
-              {
+
+              <div className="row">
+                <div className={style.title}>汉译英 </div>
+                <br/>
+                {
+                  content.length==0?null:
+                  content.map((chtoeng, key)=>
+                  <div key={key} className="col-md-4" >
+                    <div className="card-box kanban-box">
+                      <div className="kanban-detail">
+                        {/* <span className="label label-primary pull-right">Translate</span> */}
+                        <p className={style.title18}>
+                          {chtoeng.chinese}</p>
+                        <ul className="list-inline m-b-0">
+                          <textarea rows="5" class="form-control" placeholder="Write your answer"></textarea>
+                          <li>
+                            <br/>
+                            {
+                              this.state.submit?
+                              <p className={style.title16}><strong>参考答案：</strong>{chtoeng.english}</p>
+                              :null
+                            }
+                            {/* <p className={style.title16}><strong>翻译：</strong>{chtoeng.english}</p> */}
+                            <br/>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  )
+                }
+              </div>
+
+              {/* <div className="row">
                 <div className={style.ShowEngAndReturn}>
                   <Button text="返回英语学习主页面" onClick={() => {setLearningType("英语主页面")}}/>
                   &nbsp;&nbsp;
@@ -102,7 +114,24 @@ loadChtoEng = () => {
                   &nbsp;&nbsp;
                   <Button text="进入课后阅读材料" onClick={() => {setLearningType("英语课后阅读材料")} }/>
                 </div>
-              }
+              </div> */}
+
+              <div className="row">
+                <div className={style.buttonright}>
+                  <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                      onClick={() => {setLearningType("英语主页面")}} >
+                      返回英语学习主页面</button>
+                &nbsp;&nbsp;
+                <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                    onClick={() => this.setState({submit: true})} >
+                    显示答案</button>
+                &nbsp;&nbsp;
+                <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                    onClick={() => {setLearningType("英语课后阅读材料")}} >
+                    进入课后阅读材料</button>
+                </div>
+              </div>
+
             </div>
         }
 

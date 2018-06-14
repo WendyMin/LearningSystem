@@ -77,12 +77,24 @@ class EngReview extends React.PureComponent {
     })
   }
 
+  getArticle = (articleid) => {
+    this.props.loadPortContent4({
+      url: "/api/eng_getSentence",
+      body: {
+        username: this.props.username,
+        lock: 1,
+        articleId:  articleid,
+      }
+    })
+  }
+
   render(){
 
     const {
       reviewlist,
       hardword,
       hardsentence,
+      article,
     } = this.props;
 
     const{
@@ -125,7 +137,8 @@ class EngReview extends React.PureComponent {
                                     >查看核心词汇、重点句</button>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                                     onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}
+                                     onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true});
+                                     this.getArticle(list.articleid) }}
                                    >查看阅读文章</button>
                             </li>
                         </ul>
@@ -148,7 +161,6 @@ class EngReview extends React.PureComponent {
                   hardword.length==0?null:
                   hardword.map((word, key)=>
                   <div key={key} className="col-md-3" >
-                    {/* <div className="card-box kanban-box"> */}
                     <div className={style.cardboxfix}>
                       <div className="kanban-detail">
                         <span className="label label-primary pull-right">Word</span>
@@ -176,7 +188,9 @@ class EngReview extends React.PureComponent {
                     <div className="card-box kanban-box">
                       <div className="kanban-detail">
                         <span className="label label-primary pull-right">Sentence</span>
-                        <p className={style.title18}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sentence.english}</p>
+                        <p className={style.title18}>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          {sentence.english}</p>
                         <ul className="list-inline m-b-0">
                           <li>
                             <br/>
@@ -192,11 +206,15 @@ class EngReview extends React.PureComponent {
                   )
                 }
 
-              <br/>
-              <div className={style.buttonright}>
-                <Button text="返回列表页面"
-                onClick = {() =>  {this.setState({showReviewList: true , showWordAndSentence: false, showArticle: false})}} />
+
+              <div className="row">
+                <div className={style.buttonright}>
+                <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                    onClick = {() =>  {this.setState({showReviewList: true , showWordAndSentence: false, showArticle: false})}} >
+                    返回列表页面</button>
+                </div>
               </div>
+
 
             </div>
 
@@ -204,12 +222,43 @@ class EngReview extends React.PureComponent {
             :
             showArticle == true ?
             <div>
-              <div className={style.pageTitle}>英语文章</div>
-              <div className={style.wordandsentence}>暂无</div>
-              <div className={style.buttonright}>
-                <Button text="返回列表页面"
-                onClick = {() =>  {this.setState({showReviewList: true , showWordAndSentence: false, showArticle: false})}} />
+              <div className={style.title}>英语文章</div>
+              <br/>
+              <div className="row">
+                <p>暂无</p>
+                {
+                  // article.length==0?null:
+                  // <div className="col-md-6" >
+                  //   <div className="card-box kanban-box">
+                  //     <div className="kanban-detail">
+                  //       {/* <span className="label label-primary pull-right">Word</span> */}
+                  //       <p className={style.title18}>文章</p>
+                  //       <ul className="list-inline m-b-0">
+                  //         <li>
+                  //         {
+                  //           article.map((articleAll, key)=>
+                  //           <div key={key}>
+                  //             <p className={style.title16}>{articleAll.sentence}</p>
+                  //           </div>
+                  //           )
+                  //         }
+                  //       </li>
+                  //     </ul>
+                  //     </div>
+                  //   </div>
+                  // </div>
+                }
               </div>
+
+              <br/>
+              <div className="row">
+                <div className={style.buttonright}>
+                <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                    onClick = {() =>  {this.setState({showReviewList: true , showWordAndSentence: false, showArticle: false})}} >
+                    返回列表页面</button>
+                </div>
+              </div>
+
             </div>
 
             :
@@ -242,6 +291,7 @@ export default applyHOCs([
       reviewlist: state.PortTest.content,
       hardword: state.PortTest.content2,
       hardsentence: state.PortTest.content3,
+      article: state.PortTest.content4,
     }),
     dispatch => ({
       ...bindActionCreators( EnglishArticleActions , dispatch ),
