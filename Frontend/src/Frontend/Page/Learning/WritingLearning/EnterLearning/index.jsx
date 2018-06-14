@@ -83,6 +83,7 @@ class EnterLearning extends React.PureComponent {
            {/* <!-- end col --> */}
 
            <div className="col-lg-6">
+            {/* <div className={style.text_area}> */}
            <div className="text-center card-box">
               <div>
                 <img src="/static/images/users/avatar-9.jpg" className="img-circle thumb-xl img-thumbnail m-b-10" alt="profile-image"/>
