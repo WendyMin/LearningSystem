@@ -63,10 +63,7 @@ class UITest extends React.PureComponent {
 
     return(
       <React.Fragment>
-        <p>{content.title} </p>
-        <p>{content.title_translate}</p>
-        <p>{content.content}</p>
-        <p>{content.content_translate}</p>
+        <p>{"Hello\n\n\nHello\r\n"}</p>
 
       </React.Fragment>
     )

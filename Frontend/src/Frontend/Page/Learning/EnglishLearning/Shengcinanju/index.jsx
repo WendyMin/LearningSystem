@@ -96,6 +96,26 @@ class Shengcinanju extends React.PureComponent {
         <div>
           <div className={style.title}>本课生词：</div>
           <br/>
+
+          {/* {
+            shengci[0] == undefined?null:
+            shengci.map((word, key)=>
+            <div key={key} className="col-md-4" >
+              <div className="card-box kanban-box">
+                <div className="kanban-detail">
+                  <span className="label label-primary pull-right">Word</span>
+                  <div className={style.title18}>{word.word_l}</div>
+                  <ul className="list-inline m-b-0">
+                    <li>
+                      <br/>
+                      <p className={style.title18}>{word.translate}</p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          } */}
+          
           <div className={style.chtoengall}>
             {
               shengci[0] == undefined?null:

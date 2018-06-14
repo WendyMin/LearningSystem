@@ -59,20 +59,20 @@ class EngReview extends React.PureComponent {
     else return -1;
   }
 
-  getHardWord = (articleId) => {
+  getHardWord = (articleid) => {
     this.props.loadPortContent2({
       url: "/api/eng_getCoreWord",
       body: {
-        articleId:  articleId,
+        articleId:  articleid,
       }
     })
   }
 
-  getHardSentence = (articleId) => {
+  getHardSentence = (articleid) => {
     this.props.loadPortContent3({
       url: "/api/eng_engToCh",
       body: {
-        articleId:  articleId,
+        articleId:  articleid,
       }
     })
   }
@@ -118,9 +118,6 @@ class EngReview extends React.PureComponent {
                         </div>
                         <ul className="list-inline m-b-0">
                             <li>
-                                {/* <a href="" data-toggle="tooltip" data-placement="top" title="" data-original-title="Username">
-                                    <img src="/static/images/users/avatar-2.jpg" alt="img" className="thumb-sm img-circle"/>
-                                </a> */}
                                 <br/>
                                 <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
                                         onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
@@ -130,86 +127,67 @@ class EngReview extends React.PureComponent {
                                 <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
                                      onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}
                                    >查看阅读文章</button>
-                                 {/* <a href="javascript:void(0);">
-                                   <div className="text-primary"
-                                   onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
-                                       this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }}
-                                     >查看核心词汇、重点句</div>
-                                 </a>
-                                 <br/>
-                                 <a href="javascript:void(0);">
-                                   <div className="text-primary"
-                                    onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}
-                                    >查看阅读文章</div>
-                                 </a> */}
                             </li>
                         </ul>
                     </div>
                   </div>
                 </div>
 
-
-                // <div key = {key} className={style.wordandsentence} >
-                //   <li
-                //     style = {courseSelect == key ? {"color":"orange"} : {"color":"blue"}}
-                //       onClick = {() => {this.setState({showButton: this.changeButtonId(showButton,key),courseSelect:this.changeButtonId(courseSelect,key)})}}
-                //     >
-                //     <u>Unit{list.unit} Course{list.course}</u>
-                //   </li>
-                //   {
-                //     showButton != key ? null :
-                //     <div className={style.buttons}>
-                //       &nbsp;&nbsp;&nbsp;&nbsp;
-                //       <Button text="查看核心词汇、重点句"
-                //         onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
-                //       this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }} />
-                //       &nbsp;&nbsp;&nbsp;&nbsp;
-                //       {/* <Button text="查看阅读文章"
-                //       onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true}) }}  /> */}
-                //     </div>
-                //   }
-                //   <br/>
-                // </div>
                 )
               }
 
             </div>
 
-
             :
             showWordAndSentence == true ?
             <div>
-              <div className={style.title}>核心词汇</div>
+              <div className="row">
+                <div className={style.title}>核心词汇</div>
+                <br/>
                 {
                   hardword.length==0?null:
                   hardword.map((word, key)=>
-                  <div key = {key} className={style.wordandsentence}>
-                    单词：
-                    { word.word }
-                    <br/>
-                    翻译：
-                    { word.translate }
-                    <br/><br/>
+                  <div key={key} className="col-md-3" >
+                    {/* <div className="card-box kanban-box"> */}
+                    <div className={style.cardboxfix}>
+                      <div className="kanban-detail">
+                        <span className="label label-primary pull-right">Word</span>
+                        <p className={style.title18}>{word.word}</p>
+                        <ul className="list-inline m-b-0">
+                          <li>
+                            <p className={style.title16}>{word.translate}</p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                   )
                 }
+              </div>
 
               <br/>
 
               <div className={style.title}>重点句</div>
+              <br/>
                 {
                   hardsentence.length==0?null:
                   hardsentence.map((sentence, key)=>
-                  <div key = {key} className={style.wordandsentence}>
-                    句子：
-                    { sentence.english }
-                    <br/>
-                    中文：
-                    { sentence.chinese }
-                    <br/>
-                    解析：
-                    { sentence.analysis }
-                    <br/><br/>
+                  <div key={key} className="col-md-12" >
+                    <div className="card-box kanban-box">
+                      <div className="kanban-detail">
+                        <span className="label label-primary pull-right">Sentence</span>
+                        <p className={style.title18}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{sentence.english}</p>
+                        <ul className="list-inline m-b-0">
+                          <li>
+                            <br/>
+                            <p className={style.title16}><strong>翻译：</strong>{sentence.chinese}</p>
+                            <br/>
+                            <p className={style.title16}><strong>解析：</strong>{sentence.analysis}</p>
+                            <br/>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                   )
                 }
