@@ -45,15 +45,15 @@ class EnterLearning extends React.PureComponent {
           this.state.typeSelectShow || learningType == "" ?
           <div className="row"><br/>
             <div className="col-lg-6">
-              <div className="text-center card-box">
+              <div className="text-center card-box" style={{"height":"500px"}}>
                  <div>
                      <img src="/static/images/users/avatar-10.jpg" className="img-circle thumb-xl img-thumbnail m-b-10" alt="profile-image"/>
                      <h4>论证有效性分析</h4><br/>
-                     <p className="text-muted font-13 m-b-30">
+                     <p className="text-muted font-13 m-b-30" style={{"height":"30px"}}>
                        论证有效性分析主要包括写作技巧精讲、巩固强化练习、近年真题演练及数据统计四个部分
                      </p>
 
-                     <div className="text-left">
+                     <div className="text-left" style={{"height":"170px"}}>
                         <p className="text-muted font-13"><strong>写作技巧精讲 :</strong> <span className="m-l-15">分为找错析错和写作模板两个部分，可以查看对应的知识点</span></p>
 
                         <p className="text-muted font-13"><strong>巩固强化练习 :</strong><span className="m-l-15">查看参考范文，也可以自己上传文章</span></p>
@@ -84,16 +84,16 @@ class EnterLearning extends React.PureComponent {
 
            <div className="col-lg-6">
             {/* <div className={style.text_area}> */}
-           <div className="text-center card-box">
+           <div className="text-center card-box" style={{"height":"500px"}}>
               <div>
                 <img src="/static/images/users/avatar-9.jpg" className="img-circle thumb-xl img-thumbnail m-b-10" alt="profile-image"/>
                 <h4>论说文</h4><br/>
-                <p className="text-muted font-13 m-b-30">
+                <p className="text-muted font-13 m-b-30" style={{"height":"30px"}}>
                  论说文主要包括写作技巧精讲、巩固强化练习、近年真题演练三个部分
-                </p><br/>
+                </p>
 
-                <div className="text-left">
-                   <p className="text-muted font-13"><strong>Introduction :</strong></p>
+                <div className="text-left" style={{"height":"170px"}}>
+                   {/* <p className="text-muted font-13"><strong>Introduction :</strong></p> */}
 
                    <p className="text-muted font-13"><strong>写作技巧精讲 :</strong> <span className="m-l-15">分为题型突破、审题立意等几部分，可以选择查看每一部分对应的知识点</span></p>
 
