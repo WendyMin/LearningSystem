@@ -1,19 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Prompt } from 'react-router';
+// import { Prompt } from 'react-router';
 import style from 'style';
 
 import Button from 'UI/Button';
 import Info from 'UI/Info';
-import ButtonControlPane from 'UI/ButtonControlPane';
+// import ButtonControlPane from 'UI/ButtonControlPane';
 import LogicTestChart from 'UI/LogicTestChart';
 
-import Loading from 'Animation/Loading';
-import SlideLR from 'Animation/SlideLR';
 import SlideRL from 'Animation/SlideRL';
-import SlideDU from 'Animation/SlideDU';
-import SlideUD from 'Animation/SlideUD';
+// import SlideDU from 'Animation/SlideDU';
+// import SlideUD from 'Animation/SlideUD';
 
 import UserManagerWindow from "Windows/UserManager";
 
@@ -26,6 +24,7 @@ import {
   actions as LogicTestTongjiActions
 } from 'Connected/LogicTestTongji';
 import EnterLearning from 'Page/Learning/LogicLearning/EnterLearning';
+import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 
 import changeAlpToNum from 'Algorithm/changeAlpToNum';
 import decideNextQuestion from 'Algorithm/decideNextQuestion';
@@ -141,14 +140,24 @@ class LogicTest extends React.PureComponent {
 
   }
 
+  endThisTest = () => {
+	  var r=confirm("您确定要结束本次测试吗?");
+	  if (r==true){
+      this.setState({enterTest: true , enterLearning: false , testAgain: false})
+		  // x="你按下了\"确定\"按钮!";
+	  }
+	  else{
+		  // x="你按下了\"取消\"按钮!";
+	  }
+	  // document.getElementById("demo").innerHTML=x;
+  }
+
   componentDidMount(){
     this.loadQuestions();
     this.loadTestResult();
   }
   componentWillReceiveProps( NextProps ){
-    // if(this.props.testend !== NextProps.testend){
     if(this.props.testend == false && NextProps.testend == true){
-      //alert("Submit")
       this.submitQuestions();
     }
   }
@@ -189,33 +198,40 @@ class LogicTest extends React.PureComponent {
                <LogicTestTongji loadTestResult = {() => this.loadTestResult()}/>
                <br/><br/><span>&nbsp;&nbsp;&nbsp;&nbsp;请选择再次测试还是开始章节内容的学习：&nbsp;&nbsp;</span>
                <span><Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , enterLearning: false , testAgain: true});this.props.forceEnd();this.loadQuestions()}}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <Button text = "开始学习" onClick = {() => {this.setState({enterTest: false , enterLearning: true , testAgain: false })}}/></span>
+               <Button text = "开始学习" onClick = {() => {this.setState({enterTest: false , enterLearning: true , testAgain: false });this.props.setSubjectFunctionSelect(1)}}/></span>
              </div>
            </div>
             :
            this.state.enterTest && !whetherDidTest || this.state.testAgain && !testend ?
-           <div className="card-box">
-           <div className={style.question}>
-              <Loading
-                  loading = {loadQuestionState.pending}
-                  wasLoaded = {loadQuestionState.resolved}
-                  lastFailed = {loadQuestionState.lastFailed}
-                  reloader = {this.loadQuestions}
-                  center
-              >
+           <div>
+           {/* <div className="card-box"> */}
+           {/* <div className={style.question}> */}
+
                 <SlideRL play = {ined}>
                   <SingleSubjectTest
                       //submiter = { this.submitQuestions }
                       loader = {this.loadQuestions}
                   />
                 </SlideRL>
-              </Loading>
+            {/* </div> */}
+            <div align="center">
+              <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success btn-lg m-b-5"
+                      onClick = {forceNext}
+              >下一题</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md btn-sm m-b-5"
+                      onClick = {() => this.endThisTest()}
+              >结束测试</button>
+            </div>
 
-              <Button className = {style.nextQuestion}
+              {/* <Button className = {style.nextQuestion}
                       text = {"下一题"}
                       onClick = {forceNext}
-              />
-           </div>
+              />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <Button className = {style.nextQuestion}
+                      text = {"结束测试"}
+                      onClick = {() => this.endThisTest()}
+              /> */}
+
           </div>
            : null
          }
@@ -245,7 +261,8 @@ export default applyHOCs([
     }),
     dispatch => ({
       ...bindActionCreators( SingleSubjectTestActions , dispatch ),
-      ...bindActionCreators( LogicTestTongjiActions , dispatch )
+      ...bindActionCreators( LogicTestTongjiActions , dispatch ),
+      ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
     })
   )],
   LogicTest

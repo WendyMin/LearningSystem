@@ -135,10 +135,10 @@ class LogicReviewContent extends React.PureComponent {
     return (
       <React.Fragment>
         <div className="row">
-            <h4 className = {style.dalei} style = {{"color":"red"}}> {chapter_name} </h4>
+            <h4 className = {style.dalei} style = {{"color":"#ff5b5b"}}> {chapter_name} </h4>
             <div className="col-lg-6">
 
-              <div className="card-box">
+              <div className="card-box" style={{"fontSize":"16px","lineHeight":"32px"}}>
 
                  <h4 align = "center" className="header-title m-t-0 m-b-30">知识点精要</h4>
                  {total_content.content == undefined ? null : <TextAndImag list = {total_content.content}/>}
@@ -162,8 +162,12 @@ class LogicReviewContent extends React.PureComponent {
                 {
                   questions.length == 0 ? <Info info = "您在本章没有错题！"/> :
                   <div>
-                    <SingleOptionQuestions loader = {this.requestChapterContent} subject = "logic_review"/>
-                    <Button className = {style.submitButton} text = {"确认提交"} onClick={this.submitQuestions}/>
+                    <SingleOptionQuestions loader = {this.requestChapterContent} //subject = "logic_review"
+                    layoutFormat="upDown"
+                    />
+                    <div align="center">
+                      <Button className = {style.submitButton} text = {"确认提交"} onClick={this.submitQuestions}/>
+                    </div>
                   </div>
                 }
 
@@ -173,6 +177,7 @@ class LogicReviewContent extends React.PureComponent {
               </div>
             </div>
             {/* <!-- end col --> */}
+            {/* <Button className = {style.submitButton} text = {"返回"} onClick={() => this.liebiao()}/> */}
 
           </div>
         {/* <h4 className = {style.dalei} style = {{"color":"red"}}> {chapter_name} </h4>

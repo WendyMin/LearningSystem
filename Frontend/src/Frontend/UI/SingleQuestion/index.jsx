@@ -1,11 +1,5 @@
-// @flow
-/*
-**   Antinux Innovation
-**   Author: Eric Deng
-*/
 import React from 'react';
 import style from 'style';
-import Info from "UI/Info";
 import TextAndImag from "UI/TextAndImag";
 
 type Props = {
@@ -28,7 +22,9 @@ class SingleQuestion extends React.PureComponent<Props> {
 
   render(){
     const {
-      subject,
+      layoutFormat,
+      //subject,
+      xuhao,
       questionId,
       options,
       question,
@@ -40,7 +36,7 @@ class SingleQuestion extends React.PureComponent<Props> {
       onSetChoice,
       onTryChange
     } = this.props;
-    //console.log(this.props)
+    // console.log(this.props)
 
     var checked = [];
     var highlighted = [];
@@ -69,52 +65,115 @@ class SingleQuestion extends React.PureComponent<Props> {
         questionStyle = style.wrongQuestion;
       }
     }
+    // console.log(highlighted)
     return (
       <div className="container">
-  	   {/*<form
-          id={questionId}
-          className={style.questionWrapper}
-        >
-        <div className={questionStyle}>{question}</div>
-  	  	{
-  	  	options.map( ( option , key ) =>
-  	  		<div
-            key={key}
-            className={highlighted[key]}
-            onClick={lock ? () => onTryChange( key ) : () => onSetChoice( key )}
-          >
-  	  			<input
-              type="radio"
-  	  			  id={`question${questionId}option${key}`}
-  	  			  name={`answerToComponentQuestion${questionId}`}
-  	  			  checked={checked[key]}
-              readOnly={ lock ? 'readonly' : ''}
-            />
-      			<label
-              htmlFor={`question${questionId}option${key}`}
-            >
-  	  			  {option}
-      		  </label>
+        {
+          layoutFormat === "leftRight" ?
+          <div className={style.wholeQuestion}>
+            <div className="col-sm-8">
+              <div className="card-box">
+              {question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}<br/>
+              {
+         	  	options.map( ( option , key ) =>
+         	  		<div
+                   key={key}
+                   className={highlighted[key]}
+                   onClick={lock ? () => onTryChange( key ) : () => onSetChoice( key )}
+                 >
+                   <div className="radio radio-custom">
+                      <input type="radio" //name="radio"
+                             id={`question${questionId}option${key}`} //value="option3"
+                             name={`answerToComponentQuestion${questionId}`}
+                             checked={checked[key]}
+                             readOnly={ lock ? 'readonly' : ''}
+                      />
+                      <label htmlFor={`question${questionId}option${key}`}>
+                          {option}
+                      </label>
+                   </div>
+                 </div>
+          	   	)
+         	   	 }
+
+              </div>
+            </div>
+            {
+              show ?
+              <div className="col-sm-4">
+                <div className="card-box">
+                  <TextAndImag list={analysis}/>
+                </div>
+              </div>
+              :
+              null
+            }
+
+        </div>
+          :
+          layoutFormat === "upDown" ?
+          <div className={style.wholeQuestion}>
+          <div className="col-sm-12">
+          <div className="card-box">
+            {question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}<br/>
+            {
+            options.map( ( option , key ) =>
+              <div
+                 key={key}
+                 className={highlighted[key]}
+                 onClick={lock ? () => onTryChange( key ) : () => onSetChoice( key )}
+               >
+                 <div className="radio radio-custom">
+                    <input type="radio" //name="radio"
+                           id={`question${questionId}option${key}`} //value="option3"
+                           name={`answerToComponentQuestion${questionId}`}
+                           checked={checked[key]}
+                           readOnly={ lock ? 'readonly' : ''}
+                    />
+                    <label htmlFor={`question${questionId}option${key}`}>
+                        {option}
+                    </label>
+                 </div>
+               </div>
+              )
+             }
+             {show ?
+              <div>
+                {/* {subject == "logic_test" ?
+                  <div className = {style.logic_analysis}> */}
+                    <TextAndImag list={analysis}/>
+                  {/* </div> :
+                  subject == "logic_review" ?
+                  <TextAndImag list={analysis}/>:
+                  <Info info={analysis} />
+                } */}
+              {/* subject == "logic_test" ?
+                <div className = {style.logic_analysis}>
+                  <br/><strong>{analysis.map((onePara , key) => <p key = {key}>{onePara}</p> )}</strong>
+                </div> :
+                <Info info={analysis} /> */}
+
+            </div>
+            :null }
           </div>
-   	   	  )
-  	   	 }
+        </div>
+        </div>
+          :
+          null
 
-  	     </form>
 
-           {show ? <Info info={analysis} /> : null}
-         */}
-
-          <form
+        }
+          {/* <form
              id={questionId}
              className={style.questionWrapper}
-             style={subject == "logic_test" ? {"width":"60%"} : {"width":"100%"}}
+             // style={subject == "logic_test" ? {"width":"60%"} : {"width":"100%"}}
            >
          <div className={questionStyle}>{question}</div>
-           {/*subject == "logic_test" ?
+           {subject == "logic_test" ?
            <div >{question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}</div>
            :
-           <div className={questionStyle}>{question}</div>
-           */}
+           <div className={questionStyle}>{question}</div>}
+
      	  	{
      	  	options.map( ( option , key ) =>
      	  		<div
@@ -150,14 +209,14 @@ class SingleQuestion extends React.PureComponent<Props> {
                <TextAndImag list={analysis}/>:
                <Info info={analysis} />
              }
-           {/*subject == "logic_test" ?
+           subject == "logic_test" ?
              <div className = {style.logic_analysis}>
                <br/><strong>{analysis.map((onePara , key) => <p key = {key}>{onePara}</p> )}</strong>
              </div> :
              <Info info={analysis} />
-           */}
+
          </div>
-         :null }
+         :null } */}
 
       </div>
     );

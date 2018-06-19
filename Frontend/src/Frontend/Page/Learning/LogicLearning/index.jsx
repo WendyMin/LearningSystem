@@ -5,6 +5,8 @@ import style from 'style';
 
 import { actions as UserManagerActions } from 'Connected/UserManager';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
+import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
+import { actions as ButtonExpandActions } from 'Connected/ButtonExpand';
 import LogicTest from 'Page/Learning/LogicLearning/LogicTest';
 import EnterLearning from 'Page/Learning/LogicLearning/EnterLearning';
 import LogicReview from 'Page/Learning/LogicLearning/LogicReview';
@@ -28,7 +30,6 @@ class LogicLearning extends React.PureComponent {
       logined,
       choice,
     } = this.props;
-
     // console.log(choice);
 
     var user = sessionStorage.getItem("user");
@@ -59,12 +60,28 @@ class LogicLearning extends React.PureComponent {
                   </li>
                   <li>
                     <h4 className="page-title">
-                      {choice==0 ? <div>逻辑  > 入口测试</div> :
-                       choice==1 ? <div>逻辑  > 进入学习</div> :
-                       choice==2 ? <div>逻辑  > 开始复习</div> :
-                       choice==3 ? <div>逻辑  > 模拟测试</div> :
-                       choice==4 ? <div>逻辑  > 数据统计</div> :
-                       <div>逻辑  > 科目帮助</div>}
+                      {choice==0 ? <div>逻辑 <i className="ti-angle-double-right"></i> 入口测试</div> :
+                       choice==1 ?
+                       <div>
+                         <span>逻辑 </span>
+                         <span onClick={()=>{this.props.setLearningType("");this.props.setButtonChoice("")}}><i className="ti-angle-double-right"></i> 进入学习 </span>
+                         {
+                           this.props.learningType === "" ? null :
+                           <span onClick={()=>{this.props.setLearningType(this.props.learningType);this.props.setButtonChoice("")}}><i className="ti-angle-double-right"></i>  {this.props.learningType} </span>
+                         }
+                       </div> :
+                       choice==2 ?
+                       <div>
+                         <span>逻辑 </span>
+                         <span onClick={()=>{this.props.setLearningType("");this.props.setButtonChoice("")}}><i className="ti-angle-double-right"></i> 开始复习 </span>
+                         {
+                           this.props.learningType === "" ? null :
+                           <span onClick={()=>{this.props.setLearningType(this.props.learningType);this.props.setButtonChoice("")}}><i className="ti-angle-double-right"></i>  {this.props.learningType} </span>
+                         }
+                      </div> :
+                       choice==3 ? <div>逻辑 <i className="ti-angle-double-right"></i> 模拟测试</div> :
+                       choice==4 ? <div>逻辑 <i className="ti-angle-double-right"></i> 数据统计</div> :
+                       <div>逻辑 <i className="ti-angle-double-right"></i> 科目帮助</div>}
                     </h4>
                   </li>
                 </ul>
@@ -106,39 +123,28 @@ class LogicLearning extends React.PureComponent {
                   <ul>
                     <li className="text-muted menu-title">逻辑</li>
                     <li onClick={()=>this.props.setSubjectFunctionSelect(0)}>
-                      <a //href="/login"
-                        className="waves-effect"><i className="zmdi zmdi-layers"></i> <span> 入口测试 </span></a>
+                      <a className="waves-effect"><i className="zmdi zmdi-layers"></i> <span> 入口测试 </span></a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(1)}>
-                      <a //href="javascript:void(0);"
-                         className="waves-effect"><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
+                      <a className="waves-effect"><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(2)}>
-                      <a //href="javascript:void(0);"
-                        className="waves-effect"><i className="zmdi zmdi-book"></i> <span> 开始复习 </span> </a>
+                      <a className="waves-effect"><i className="zmdi zmdi-book"></i> <span> 开始复习 </span> </a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(3)}>
-                      <a //href="javascript:void(0);"
-                      className="waves-effect"><i className="zmdi zmdi-graduation-cap"></i> <span> 模拟测试 </span> </a>
+                      <a className="waves-effect"><i className="zmdi zmdi-graduation-cap"></i> <span> 模拟测试 </span> </a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(4)}>
-                      <a //href="javascript:void(0);"
-                      className="waves-effect"><i className="zmdi zmdi-chart"></i> <span> 数据统计 </span> </a>
+                      <a className="waves-effect"><i className="zmdi zmdi-chart"></i> <span> 数据统计 </span> </a>
                      </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(5)}>
-                      <a //href="javascript:void(0);"
-                      className="waves-effect"><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
+                      <a className="waves-effect"><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
                     </li>
-
-                    {/* <li>
-                      <a href="javascript:void(0);" className="waves-effect"><i className="zmdi zmdi-phone"></i><span onClick={()=>this.props.setSubjectFunctionSelect(6)}> 反馈信息 </span> </a>
-                    </li> */}
-
                   </ul>
                  <div className="clearfix"></div>
                 </div>
@@ -155,21 +161,16 @@ class LogicLearning extends React.PureComponent {
           <div className="content-page">
             <div className="content">
               <div className="container">
-
                 <div className="row">
-
-                      {choice==0 ? <LogicTest/> :
-                       choice==1 ? <EnterLearning/> :
-                       choice==2 ? <LogicReview/> :
-                       choice==3 ? <div className="card-box"><SimulationTest/></div> :
-                       choice==4 ? <div className="card-box"><LogicStatistics/></div> :
-                        <div className="card-box"><LogicHelp/></div>
-                      }
-
+                {choice==0 ? <LogicTest/> :
+                 choice==1 ? <EnterLearning/> :
+                 choice==2 ? <LogicReview/> :
+                 choice==3 ? <div className="card-box"><SimulationTest/></div> :
+                 choice==4 ? <div className="card-box"><LogicStatistics/></div> :
+                  <div className="card-box"><LogicHelp/></div>
+                }
                 </div>
-
               </div>
-
 
               <footer className="footer text-right">
                   2017 - 2018 © 都学网所有
@@ -193,11 +194,15 @@ export default applyHOCs([
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
-      choice: state.SubjectFunctionSelect.choice
+      choice: state.SubjectFunctionSelect.choice,  // 代表用户选择的左侧导航栏的按钮，是选择了入口测试、进入学习还是等
+      learningType: state.LearningTypeSelect.learningType, // 三级按钮，代表具体某一章的类型，如是知识点精要还是重点，强化等
+      type: state.ButtonExpand.choice // 代表用户具体选择的是哪一个小知识点或者具体哪一年的真题
     }),
     dispatch => ({
       ...bindActionCreators( UserManagerActions , dispatch ),
-      ...bindActionCreators( SubjectFunctionSelectActions , dispatch )
+      ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
+      ...bindActionCreators( LearningTypeSelectActions , dispatch ),
+      ...bindActionCreators( ButtonExpandActions , dispatch )
     })
   )],
   LogicLearning

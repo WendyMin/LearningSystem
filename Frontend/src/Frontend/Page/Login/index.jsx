@@ -78,7 +78,7 @@ class Login extends React.PureComponent {
 
                       <div className="form-group text-center m-t-30">
                           <div className="col-xs-12">
-                              <button className="btn btn-custom btn-bordred btn-block waves-effect waves-light" type="submit" onClick={()=>this.log()}>Log In</button>
+                            <button className="btn btn-custom btn-bordred btn-block waves-effect waves-light" type="submit" onClick={()=>this.log()}>Log In</button>
                           </div>
                       </div>
 

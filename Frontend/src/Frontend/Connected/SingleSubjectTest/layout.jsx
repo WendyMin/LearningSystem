@@ -54,7 +54,8 @@ class SingleSubjectTest extends React.PureComponent {
         &nbsp;&nbsp;&nbsp;&nbsp; <label>{question.level}</label></strong> */}
         <Question
           {...question}
-          subject = "logic_test"
+          layoutFormat = "leftRight"
+          // subject = "logic_test"
           onSetChoice={ cid => {
               autoNext( cid , 10000 );
             }

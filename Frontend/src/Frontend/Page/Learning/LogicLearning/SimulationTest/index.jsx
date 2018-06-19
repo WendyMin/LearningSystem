@@ -186,21 +186,21 @@ class SimulationTest extends React.PureComponent {
         {
           content.flag === 1 ?
           <div>
-            <div className = {style.moniceshi}> 模拟测试 </div>
+            {/* <div className = {style.moniceshi}> 模拟测试 </div> */}
             {/* <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test"/> */}
 
-            <Loading
+            {/* <Loading
               loading = {loadQuestionState.pending}
               wasLoaded = {loadQuestionState.resolved}
               lastFailed = {loadQuestionState.lastFailed}
               reloader = {this.loadQuestions}
               center
-            >
-            <SlideRL play={ined}>
-              <div>
+            > */}
+            {/* <SlideRL play={ined}> */}
+              <div><br/>
                 {/* <h4 className = {style.dalei}> {content.chapter_name} </h4> */}
 
-               <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test"/>
+               <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight"/>
                <strong align = "center"><div style = {{"color":"red"}}>点击确认提交，查看正确答案</div></strong>
                <Button className = {style.submitButton} text = {"确认提交"} onClick = {this.submitQuestions}/>
           </div>
@@ -220,8 +220,8 @@ class SimulationTest extends React.PureComponent {
               <Button className = {style.submitButton} text = {"确认提交"} onClick = {this.submitQuestions}/>
               </div> */}
 
-            </SlideRL>
-            </Loading>
+            {/* </SlideRL> */}
+            {/* </Loading> */}
           </div>
           :
           <Info info = "您还没完成入口测试，请先完成入口测试!"/>

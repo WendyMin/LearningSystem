@@ -10,6 +10,7 @@ import {
 import {
   actions as ZhentiPerYearTongjiActions
 } from 'Connected/ZhentiPerYearTongji';
+import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 
 import Info from 'UI/Info';
 import Button from 'UI/Button';
@@ -63,14 +64,14 @@ class LogicReview extends React.PureComponent {
       importantChapterName,
       setChapter,
       choice,
-      data
+      data,
+      setLearningType
     } = this.props;
-    //console.log(this.props)
+    // console.log(this.props)
 
     return(
       <React.Fragment>
-        {this.state.reviewContent ? <LogicReviewContent/> :
-        this.state.tongjiShow ? <LogicReviewError data = {data}/> :
+        { this.props.learningType == "" ?
         whetherHaveFinishedChapter == 0 ? <Info info = "您目前还没有学习完成的章节"/> :
         <div>
         <div className="row">
@@ -84,7 +85,7 @@ class LogicReview extends React.PureComponent {
                      <strong align = "center"><div style = {{"color":"#f9c851"}}>请点击选择要复习的章节</div></strong>
                      {importantChapterName.map((oneChapter , key) =>
                      <div key = {key}><br/><li style = {oneChapter == choice ? {"color":"#71b6f9"} : null}
-                       onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter)}}
+                       onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter);setLearningType(oneChapter)}}
                        //onClick = {() => {setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
                        >{oneChapter}</li></div>)}
                    </div>
@@ -104,7 +105,7 @@ class LogicReview extends React.PureComponent {
                     <strong align = "center"><div style = {{"color":"#f9c851"}}>请点击选择要复习的章节</div></strong>
                     {ordinaryChapterName.map((oneChapter , key) =>
                     <div key = {key}><br/><li style = {oneChapter == choice ? {"color":"#71b6f9"} : null}
-                      onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter)}}
+                      onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter);setLearningType(oneChapter)}}
                     //  onClick = {() => {setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
                       >{oneChapter}</li></div>)}
                   </div>
@@ -118,9 +119,13 @@ class LogicReview extends React.PureComponent {
 
           </div>
           {/* <Button classNameName = {style.chakanTongjiButton} text = "点击查看复习数据统计" onClick = {this.getReviewTongji}/> */}
-        </div>
-        }
-        
+        </div>:
+          this.state.reviewContent ? <LogicReviewContent/> :
+        this.state.tongjiShow ? <LogicReviewError data = {data}/> : null
+
+
+    }
+
       </React.Fragment>
     )
   }
@@ -139,11 +144,13 @@ export default applyHOCs([
       ordinaryChapterName: state.LogicReviewModel.ordinaryChapterName,
       importantChapterName: state.LogicReviewModel.importantChapterName,
       choice: state.LogicReviewModel.choice,
-      data: state.ZhentiPerYearTongji.tongji
+      data: state.ZhentiPerYearTongji.tongji,
+      learningType: state.LearningTypeSelect.learningType,
     }),
     dispatch => ({
       ...bindActionCreators( LogicReviewModelActions , dispatch ),
-      ...bindActionCreators( ZhentiPerYearTongjiActions , dispatch )
+      ...bindActionCreators( ZhentiPerYearTongjiActions , dispatch ),
+      ...bindActionCreators( LearningTypeSelectActions , dispatch ),
     })
   )],
   LogicReview
