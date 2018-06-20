@@ -23,6 +23,8 @@ class SingleQuestion extends React.PureComponent<Props> {
   render(){
     const {
       layoutFormat,
+      questionLength,
+      paraLength,
       //subject,
       xuhao,
       questionId,
@@ -73,7 +75,10 @@ class SingleQuestion extends React.PureComponent<Props> {
           <div className={style.wholeQuestion}>
             <div className="col-sm-8">
               <div className="card-box">
-              {question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}<br/>
+                {questionLength === "single" ?  <div className={questionStyle}>{question}</div> :
+                <div>
+                {question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}
+              </div>}<br/>
               {
          	  	options.map( ( option , key ) =>
          	  		<div
@@ -102,7 +107,10 @@ class SingleQuestion extends React.PureComponent<Props> {
               show ?
               <div className="col-sm-4">
                 <div className="card-box">
+                  { paraLength === "single" ?
+                  <div>{analysis}</div>:
                   <TextAndImag list={analysis}/>
+                }
                 </div>
               </div>
               :
@@ -115,7 +123,10 @@ class SingleQuestion extends React.PureComponent<Props> {
           <div className={style.wholeQuestion}>
           <div className="col-sm-12">
           <div className="card-box">
-            {question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}<br/>
+            {questionLength === "single" ?  <div className={questionStyle}>{question}</div> :
+            <div>
+            {question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}
+          </div>}<br/>
             {
             options.map( ( option , key ) =>
               <div
@@ -139,9 +150,13 @@ class SingleQuestion extends React.PureComponent<Props> {
              }
              {show ?
               <div>
+                { paraLength === "single" ?
+                <div>{analysis}</div>:
+                <TextAndImag list={analysis}/>
+              }
                 {/* {subject == "logic_test" ?
                   <div className = {style.logic_analysis}> */}
-                    <TextAndImag list={analysis}/>
+                    {/* <TextAndImag list={analysis}/> */}
                   {/* </div> :
                   subject == "logic_review" ?
                   <TextAndImag list={analysis}/>:

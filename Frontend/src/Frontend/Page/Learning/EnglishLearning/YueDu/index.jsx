@@ -253,19 +253,19 @@ quit = () => {
         </div>
         <div className={style.wrapper}>
           <div className={style.leftPane}>
-            <Loading
+            {/* <Loading
               loading={loadArticleState.pending}
               wasLoaded={loadArticleState.resolved}
               lastFailed={loadArticleState.lastFailed}
               reloader={loadContent}
               center
-            >
+            > */}
               <SlideLR play={ined} >
                 <EnglishArticle
                   displayByWords={displayByWords}
                 />
               </SlideLR>
-            </Loading>
+            {/* </Loading> */}
             </div>
 
             <div className={style.rightPane}>
@@ -292,20 +292,23 @@ quit = () => {
                     case 5:
                     case 6:
                       return (
-                        <Loading
-                          loading={loadQuestionState.pending}
-                          wasLoaded={loadQuestionState.resolved}
-                          lastFailed={loadQuestionState.lastFailed}
-                          reloader={this.loadQuestions}
-                          center
-                        >
+                        // <Loading
+                        //   loading={loadQuestionState.pending}
+                        //   wasLoaded={loadQuestionState.resolved}
+                        //   lastFailed={loadQuestionState.lastFailed}
+                        //   reloader={this.loadQuestions}
+                        //   center
+                        // >
                           <SlideRL play={ined}>
                             <SingleOptionQuestions
                               submiter={this.submitQuestions}
                               loader={this.loadQuestions}
+                              layoutFormat="upDown"
+                              questionLength = "single"
+                              paraLength = "single"
                             />
                           </SlideRL>
-                        </Loading>
+                        // </Loading>
                       );
                     case 1:
                       return (

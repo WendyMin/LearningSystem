@@ -11,23 +11,17 @@ import EngChart from 'Page/Learning/EnglishLearning/EngChart';
 import EnglishHelp from 'UI/Help/EnglishHelp';
 import Button from 'UI/Button';
 import Info from 'UI/Info';
-//import LearningTypeSelect from 'UI/LearningTypeSelect';
 
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
-//import UserManagerWindow from "Windows/UserManager";
-import {
-  // view as UserManager,
-  actions as UserManagerActions
-} from 'Connected/UserManager';
+import { actions as UserManagerActions } from 'Connected/UserManager';
 import Login from 'Page/Login';
-import  {
-  view as SubjectSelect
-} from 'Connected/SubjectSelect';
+import  { view as SubjectSelect } from 'Connected/SubjectSelect';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
+import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 
 class EnglishLearning extends React.PureComponent {
   constructor( props ){
@@ -41,7 +35,8 @@ class EnglishLearning extends React.PureComponent {
       username,
       logined,
       newTo,
-      choice
+      choice,
+      learningType,
     } = this.props;
 
     // console.log(username);
@@ -78,7 +73,18 @@ class EnglishLearning extends React.PureComponent {
                   <li>
                     <h4 className="page-title">
                       {choice==0 ? <div>英语  > 词汇测试</div> :
-                       choice==1 ? <div>英语  > 进入学习</div> :
+                       choice==1 ?
+                        <div>
+                         <span>英语  > </span>
+                         <span onClick={()=>{this.props.setLearningType("英语主页面")}}>进入学习</span>
+                         {
+                           learningType == "" || learningType == "英语主页面" ? null :
+                           learningType == "英语生词难句" ? <span onClick={()=>{this.props.setLearningType(learningType)}}> > 生词难句</span> :
+                           learningType == "英语汉译英" ? <span onClick={()=>{this.props.setLearningType(learningType)}}> > 汉译英</span> :
+                           learningType == "英语课后阅读材料" ? <span onClick={()=>{this.props.setLearningType(learningType)}}> > 课后阅读材料</span> :
+                            <span onClick={()=>{this.props.setLearningType(learningType)}}> >  {learningType} </span>
+                         }
+                       </div> :
                        choice==2 ? <div>英语  > 开始复习</div> :
                        choice==3 ? <div>英语  > 统计图表</div> :
                        <div>英语  > 科目帮助</div>}
@@ -207,12 +213,14 @@ export default applyHOCs([
       username: state.UserManager.name,
       newTo: state.UserManager.newTo,
       // choice: state.SubjectSelect.choice
-      choice: state.SubjectFunctionSelect.choice
+      choice: state.SubjectFunctionSelect.choice,
+      learningType: state.LearningTypeSelect.learningType,
     }),
     dispatch => ({
       //...bindActionCreators( ButtonExpandActions , dispatch),
       ...bindActionCreators( UserManagerActions , dispatch ),
-      ...bindActionCreators( SubjectFunctionSelectActions , dispatch )
+      ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
+      ...bindActionCreators( LearningTypeSelectActions , dispatch ),
     })
   )],
   EnglishLearning

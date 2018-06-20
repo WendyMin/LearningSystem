@@ -25,6 +25,8 @@ class SingleOptionQuestions extends React.PureComponent {
   render(){
     const {
       layoutFormat,
+      questionLength,
+      paraLength,
       //subject,
       questions,
       setChoice,
@@ -40,6 +42,8 @@ class SingleOptionQuestions extends React.PureComponent {
           <div key={question.questionId} style={questionSize}>
             <Question
               layoutFormat={layoutFormat}
+              questionLength={questionLength}
+              paraLength = {paraLength}
               xuhao={xuhao}
               // subject = {subject}
               {...question}

@@ -153,12 +153,10 @@ class Shengcinanju extends React.PureComponent {
               <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
                   onClick={() => {setLearningType("英语主页面")}} >
                   返回英语学习主页面</button>
-            {/* <Button text="返回英语学习主页面" onClick={() => {setLearningType("英语主页面")}}/> */}
             &nbsp;&nbsp;
             <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
                 onClick={() => {setLearningType("英语汉译英")}} >
                 进入汉译英</button>
-            {/* <Button text="进入汉译英" onClick={() => {setLearningType("英语汉译英")} }/> */}
             </div>
           </div>
 

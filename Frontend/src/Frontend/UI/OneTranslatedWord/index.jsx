@@ -17,15 +17,24 @@ class OneTranslatedWord extends React.PureComponent {
     } = this.props;
     return (
       <React.Fragment>
-        <div className={style.word}>{word}&nbsp;|{pronouncation || "none"}|</div>
-        <div className={style.label}>Meaning:</div>
-        <div className={style.translate}>{translate  || "none" }</div>
-        <div className={style.label}>Example:</div>
-        <div className={style.example}>{example || "none" }</div>
-        <div className={style.label}>Meaning:</div>
-        <div className={style.exampleTranslate}>{exampleTranslate  || "none" }</div>
-        <div className={style.label}>RegularExpression:</div>
-        <div className={style.expression}>{expression  || "none" }</div>
+        {
+          word == null ? null :
+            <div className="col-sm-12">
+              <div className="card-box">
+                <div className={style.wordTranslateWord}><strong>{word}</strong></div>
+                <div style={{"font-size":"6px"}}>&nbsp;</div>
+                <div className={style.wordTranslate}>
+                  <div>发音：|{pronouncation || "none"}|</div>
+                  <div>中文：{translate  || "none" }</div>
+                  <div>常用短语：{expression  || "none" }</div>
+                  <div>例句：{example || "none" }</div>
+                  <div>例句翻译：{exampleTranslate  || "none" }</div>
+                </div>
+              </div>
+            </div>
+          }
+
+
       </React.Fragment>
     );
   }
