@@ -5,7 +5,7 @@ import Button from 'UI/Button';
 import * as actionCreators from 'actions';
 import style from 'style';
 import ZhentiTuijianZhishidian from  'UI/ZhentiTuijianZhishidian';
-import LunZhengZhenTi from 'Page/Learning/WritingLearning/LunZheng/LunZhengZhenTi';
+import LunZhengZhenTi from 'Page/Learning/WritingLearning/LunZhengZhenTi';
 import {actions as ButtonExpandActions} from 'Connected/ButtonExpand';
 
 class ZhentiAllYearTongji extends React.PureComponent {

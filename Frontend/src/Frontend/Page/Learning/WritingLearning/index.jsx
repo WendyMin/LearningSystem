@@ -75,9 +75,6 @@ class WritingPage extends React.PureComponent {
                   </li>
                 </ul>
 
-                {/* <ul className="nav navbar-nav navbar-right">
-                </ul> */}
-
               </div>
             </div>
           </div>
@@ -160,31 +157,6 @@ class WritingPage extends React.PureComponent {
          </div>
        </div>
      </div>
-        {/* <div className = {style.wholePage}>
-          {logined !== true ?
-            <div>
-              <Info info = "您还没有登录，请先登录，再进行学习!"/>
-              <Login/>
-            </div> :
-          {sessionStorage.getItem("user") == "undefined" ?  <Login/> :
-          <div>
-
-          <PageDesign subjectFunctions = {this.type}/>
-
-          <div className = {style.mainContent}>
-          {
-            choice == 0 ? <div>入口测试</div> :
-            choice == 1 ?
-            <div>
-              &nbsp;&nbsp;&nbsp;&nbsp;<a href = "/learning/writing/lunzheng"> 论证有效性分析 </a><br/>
-              &nbsp;&nbsp;&nbsp;&nbsp;<a href = "/learning/writing/lunshuo"> 论说文 </a>
-            </div> :
-            <WriteHelp/>
-          }
-          </div>
-        </div>}
-
-        </div> */}
       </React.Fragment>
     );
   }

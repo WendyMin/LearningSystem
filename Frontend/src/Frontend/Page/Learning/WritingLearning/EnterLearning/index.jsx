@@ -5,17 +5,17 @@ import style from 'style';
 
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 
-import LunZhengKnowledge from 'Page/Learning/WritingLearning/LunZheng/LunZhengKnowledge';
-import LunZhengGongGuSelect from 'Page/Learning/WritingLearning/LunZheng/LunZhengGongGuSelect';
-import LunZhengGonggu from 'Page/Learning/WritingLearning/LunZheng/LunZhengGonggu';
-import LunZhengZhenTi from 'Page/Learning/WritingLearning/LunZheng/LunZhengZhenTi';
-import LunZhengZhenTiSelect from 'Page/Learning/WritingLearning/LunZheng/LunZhengZhenTiSelect';
-import LunZhengTongji from 'Page/Learning/WritingLearning/LunZheng/LunZhengTongji';
-import LunShuoKnowledge from 'Page/Learning/WritingLearning/LunShuo/LunShuoKnowledge';
-import LunShuogGongGuSelect from 'Page/Learning/WritingLearning/LunShuo/LunShuoGongGuSelect';
-import LunShuoZhenTiSelect from 'Page/Learning/WritingLearning/LunShuo/LunShuoZhenTiSelect';
-import LunShuoZhenTi from 'Page/Learning/WritingLearning/LunShuo/LunShuoZhenTi';
-import LunShuoGongGu from 'Page/Learning/WritingLearning/LunShuo/LunShuoGonggu';
+import LunZhengKnowledge from 'Page/Learning/WritingLearning/LunZhengKnowledge';
+import LunZhengGongGuSelect from 'Page/Learning/WritingLearning/LunZhengGongGuSelect';
+import LunZhengGonggu from 'Page/Learning/WritingLearning/LunZhengGonggu';
+import LunZhengZhenTi from 'Page/Learning/WritingLearning/LunZhengZhenTi';
+import LunZhengZhenTiSelect from 'Page/Learning/WritingLearning/LunZhengZhenTiSelect';
+import LunZhengTongji from 'Page/Learning/WritingLearning/LunZhengTongji';
+import LunShuoKnowledge from 'Page/Learning/WritingLearning/LunShuoKnowledge';
+import LunShuogGongGuSelect from 'Page/Learning/WritingLearning/LunShuoGongGuSelect';
+import LunShuoZhenTiSelect from 'Page/Learning/WritingLearning/LunShuoZhenTiSelect';
+import LunShuoZhenTi from 'Page/Learning/WritingLearning/LunShuoZhenTi';
+import LunShuoGongGu from 'Page/Learning/WritingLearning/LunShuoGonggu';
 
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';

@@ -126,11 +126,11 @@ class LogicLearning extends React.PureComponent {
                       <a className="waves-effect"><i className="zmdi zmdi-layers"></i> <span> 入口测试 </span></a>
                     </li>
 
-                    <li onClick={()=>this.props.setSubjectFunctionSelect(1)}>
+                    <li onClick={()=>{this.props.setSubjectFunctionSelect(1);this.props.setLearningType("");this.props.setButtonChoice("")}}>
                       <a className="waves-effect"><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
                     </li>
 
-                    <li onClick={()=>this.props.setSubjectFunctionSelect(2)}>
+                    <li onClick={()=>{this.props.setSubjectFunctionSelect(2);this.props.setLearningType("");this.props.setButtonChoice("")}}>
                       <a className="waves-effect"><i className="zmdi zmdi-book"></i> <span> 开始复习 </span> </a>
                     </li>
 
