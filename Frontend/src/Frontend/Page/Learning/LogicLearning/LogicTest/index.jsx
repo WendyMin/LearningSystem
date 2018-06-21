@@ -14,7 +14,7 @@ import SlideRL from 'Animation/SlideRL';
 // import SlideUD from 'Animation/SlideUD';
 
 import UserManagerWindow from "Windows/UserManager";
-
+import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 import {
   view as SingleSubjectTest,
   actions as SingleSubjectTestActions
@@ -198,7 +198,7 @@ class LogicTest extends React.PureComponent {
                <LogicTestTongji loadTestResult = {() => this.loadTestResult()}/>
                <br/><br/><span>&nbsp;&nbsp;&nbsp;&nbsp;请选择再次测试还是开始章节内容的学习：&nbsp;&nbsp;</span>
                <span><Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , enterLearning: false , testAgain: true});this.props.forceEnd();this.loadQuestions()}}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <Button text = "开始学习" onClick = {() => {this.setState({enterTest: false , enterLearning: true , testAgain: false });this.props.setSubjectFunctionSelect(1)}}/></span>
+               <Button text = "开始学习" onClick = {() => {this.props.setLearningType("");this.setState({enterTest: false , enterLearning: true , testAgain: false });this.props.setSubjectFunctionSelect(1)}}/></span>
              </div>
            </div>
             :
@@ -263,6 +263,7 @@ export default applyHOCs([
       ...bindActionCreators( SingleSubjectTestActions , dispatch ),
       ...bindActionCreators( LogicTestTongjiActions , dispatch ),
       ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
+      ...bindActionCreators( LearningTypeSelectActions , dispatch ),
     })
   )],
   LogicTest
