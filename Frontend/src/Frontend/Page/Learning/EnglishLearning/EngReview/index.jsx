@@ -119,7 +119,7 @@ class EngReview extends React.PureComponent {
 
               {
                 // reviewlist == undefined ? null :
-                reviewlist.length === 0 ? null :
+                reviewlist.length == 0 ? null :
                 reviewlist.map((list, key)=>
 
                 <div key = {key} className="col-md-4" >

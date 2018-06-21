@@ -33,6 +33,7 @@ import applyHOCs from 'direct-core/applyHOCs';
 class Shengcinanju extends React.PureComponent {
   constructor( props ){
     super( props );
+    this.haveArticleId = false;
     this.state = {
       getArticleId: false,
     }
@@ -43,9 +44,10 @@ class Shengcinanju extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.articleId != undefined && nextProps.articleId != this.props.articleId){
+    if(nextProps.articleId != undefined && this.haveArticleId===false){
       this.loadShengCi(nextProps.articleId);
       this.loadNanJu(nextProps.articleId);
+      this.haveArticleId=true;
     }
   }
 

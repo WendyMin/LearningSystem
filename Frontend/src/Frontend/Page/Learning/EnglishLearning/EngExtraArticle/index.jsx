@@ -33,11 +33,9 @@ import applyHOCs from 'direct-core/applyHOCs';
 class EngExtraArticle extends React.PureComponent {
   constructor( props ){
     super( props );
+    this.haveArticleId=false;
     this.state = {
       getArticleId: false,
-    }
-    this.props = {
-      portTime: 0,
     }
   }
 
@@ -46,13 +44,9 @@ class EngExtraArticle extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
-    this.props={
-      portTime,
-    };
-    // if(nextProps.articleId != undefined && nextProps.articleId != this.props.articleId){
-    if(nextProps.articleId != undefined && portTime == 0){
+    if(nextProps.articleId != undefined && this.haveArticleId===false){
       this.loadExtraArticle(nextProps.articleId);
-      portTime = 1;
+      this.haveArticleId=true;
     }
   }
 
