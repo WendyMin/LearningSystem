@@ -248,126 +248,108 @@ quit = () => {
           message="你需要再做一遍，确定退出吗?"
         />
 
-        <div className="col-md-12" >
-          <div className="card-box kanban-box">
-            <div className={style.HUD}>
-              [Unit {UnitAndCourse.unit} Course {UnitAndCourse.course}] Step {processStep + 1}: {this.describes[processStep]}
+        <div className={style.HUD}>
+          [Unit {UnitAndCourse.unit} Course {UnitAndCourse.course}] Step {processStep + 1}: {this.describes[processStep]}
+        </div>
+        <div className={style.wrapper}>
+          <div className={style.leftPane}>
+            {/* <Loading
+              loading={loadArticleState.pending}
+              wasLoaded={loadArticleState.resolved}
+              lastFailed={loadArticleState.lastFailed}
+              reloader={loadContent}
+              center
+            > */}
+              <SlideLR play={ined} >
+                <EnglishArticle
+                  displayByWords={displayByWords}
+                />
+              </SlideLR>
+            {/* </Loading> */}
             </div>
+
+            <div className={style.rightPane}>
+            {
+              /*
+              processStep:
+              0 ->submit first
+              1 -> choose words and submit
+              2 -> confirm
+              3 -> choose sentence and submit
+              4 -> confirm
+              5 -> submit second time
+              6( no leading )  -> translateAll ( optional )
+              6 -> go writing
+              7 -> write english and confirm
+              8 -> write chinese and confirm
+              8( no leading ) -> check review ( optional )
+              9 -> do more
+
+              */
+                (() => {
+                  switch( processStep ){
+                    case 0:
+                    case 5:
+                    case 6:
+                      return (
+                        // <Loading
+                        //   loading={loadQuestionState.pending}
+                        //   wasLoaded={loadQuestionState.resolved}
+                        //   lastFailed={loadQuestionState.lastFailed}
+                        //   reloader={this.loadQuestions}
+                        //   center
+                        // >
+                          <SlideRL play={ined}>
+                            <SingleOptionQuestions
+                              submiter={this.submitQuestions}
+                              loader={this.loadQuestions}
+                              layoutFormat="upDown"
+                              questionLength = "single"
+                              paraLength = "single"
+                            />
+                          </SlideRL>
+                        // </Loading>
+                      );
+                    case 1:
+                      return (
+                        <div className="container">
+                          <div className="makeLoadingCenter">
+                            <Loading
+                              center
+                              loading={translateWordsState.pending}
+                              lastFailed={translateWordsState.lastFailed}
+                              wasLoaded={translateWordsState.resolved}
+                              reloader={translateWords}
+                              info="点击不认识的单词"
+                            />
+                          </div>
+                        </div>
+                      );
+                    case 2:
+                    case 4:
+                      return (
+                        <TranslatedWords />
+                      );
+                    case 3:
+                      return (
+                        <Info info="点击不理解的句子"/>
+                      );
+                    case 7:
+                      return (
+                          <EnglishLearningSummary />
+                      );
+                  }
+                })()
+            }
           </div>
         </div>
-
-        <div className="col-md-12" >
-          {/* <div className="card-box kanban-box"> */}
-
-            {/* leftPane */}
-            <div className="col-md-8" >
-              <div className="card-box kanban-box">
-                {/* <Loading
-                  loading={loadArticleState.pending}
-                  wasLoaded={loadArticleState.resolved}
-                  lastFailed={loadArticleState.lastFailed}
-                  reloader={loadContent}
-                  center
-                > */}
-                  {/* <SlideLR play={ined} > */}
-                    <EnglishArticle
-                      displayByWords={displayByWords}
-                    />
-                  {/* </SlideLR> */}
-                {/* </Loading> */}
-
-              </div>
-            </div>
-
-            {/* rightPane */}
-            <div className="col-md-4" >
-              <div className="card-box kanban-box">
-
-              {
-                /*
-                processStep:
-                0 ->submit first
-                1 -> choose words and submit
-                2 -> confirm
-                3 -> choose sentence and submit
-                4 -> confirm
-                5 -> submit second time
-                6( no leading )  -> translateAll ( optional )
-                6 -> go writing
-                7 -> write english and confirm
-                8 -> write chinese and confirm
-                8( no leading ) -> check review ( optional )
-                9 -> do more
-
-                */
-                  (() => {
-                    switch( processStep ){
-                      case 0:
-                      case 5:
-                      case 6:
-                        return (
-                          // <Loading
-                          //   loading={loadQuestionState.pending}
-                          //   wasLoaded={loadQuestionState.resolved}
-                          //   lastFailed={loadQuestionState.lastFailed}
-                          //   reloader={this.loadQuestions}
-                          //   center
-                          // >
-                            // <SlideRL play={ined}>
-                              <SingleOptionQuestions
-                                submiter={this.submitQuestions}
-                                loader={this.loadQuestions}
-                                layoutFormat="upDown"
-                                questionLength = "single"
-                                paraLength = "single"
-                              />
-                            // </SlideRL>
-                          // </Loading>
-                        );
-                      case 1:
-                        return (
-                          <div className="container">
-                            <div className="makeLoadingCenter">
-                              <Loading
-                                center
-                                loading={translateWordsState.pending}
-                                lastFailed={translateWordsState.lastFailed}
-                                wasLoaded={translateWordsState.resolved}
-                                reloader={translateWords}
-                                info="点击不认识的单词"
-                              />
-                            </div>
-                          </div>
-                        );
-                      case 2:
-                      case 4:
-                        return (
-                          <TranslatedWords />
-                        );
-                      case 3:
-                        return (
-                          <Info info="点击不理解的句子"/>
-                        );
-                      case 7:
-                        return (
-                            <EnglishLearningSummary />
-                        );
-                    }
-                  })()
-              }
-              </div>
-            </div>
-
-          {/* </div> */}
-        </div>
-
         <div className={style.controlPane}>
-          {/* <SlideDU play={ined}> */}
+          <SlideDU play={ined}>
             <ButtonControlPane
               mainAction={mainAction}
               additionalActions={additionalActions}
             />
-          {/* </SlideDU> */}
+          </SlideDU>
         </div>
       </React.Fragment>
     );

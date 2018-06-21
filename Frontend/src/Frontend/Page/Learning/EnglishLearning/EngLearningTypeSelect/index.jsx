@@ -139,7 +139,7 @@ class EngLearningTypeSelect extends React.PureComponent {
             </div>
             // {/* <!-- End row --> */}
           :
-          learningType == "英语阅读" ? <div className="card-box"><YueDu/></div>:
+          learningType == "英语阅读" ? <YueDu/>:
           learningType == "英语生词难句" ? <Shengcinanju/>:
           learningType == "英语汉译英" ?  <ChtoEng/>:
           learningType == "英语课后阅读材料" ? <EngExtraArticle/>

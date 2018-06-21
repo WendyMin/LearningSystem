@@ -74,9 +74,10 @@ class EnglishArticle extends React.PureComponent {
                     showSentencesTranslates &&
                     this.isChoosedSentence( sentenceId )
                     ?
-                    <div>
+                    <div className={style.choosedSentenceTranslate}>
                       { this.function(sentenceId)}
-                      <Info info={sentencesTranslates[sentenceId]} />
+                      {sentencesTranslates[sentenceId]}
+                      {/* <Info info={sentencesTranslates[sentenceId]} /> */}
                     </div>
                     :null
                   }

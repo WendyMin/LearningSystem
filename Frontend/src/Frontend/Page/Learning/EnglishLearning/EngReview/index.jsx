@@ -105,7 +105,7 @@ class EngReview extends React.PureComponent {
       courseSelect,
     } = this.state;
 
-    console.log(hardsentence);
+    console.log(reviewlist);
 
     return(
       <React.Fragment>
@@ -118,7 +118,8 @@ class EngReview extends React.PureComponent {
               <br/>
 
               {
-                reviewlist == undefined?null:
+                // reviewlist == undefined ? null :
+                reviewlist.length === 0 ? null :
                 reviewlist.map((list, key)=>
 
                 <div key = {key} className="col-md-4" >

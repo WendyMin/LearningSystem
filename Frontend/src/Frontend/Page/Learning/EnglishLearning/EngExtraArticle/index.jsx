@@ -36,6 +36,9 @@ class EngExtraArticle extends React.PureComponent {
     this.state = {
       getArticleId: false,
     }
+    this.props = {
+      portTime: 0,
+    }
   }
 
   componentWillMount(){
@@ -43,8 +46,13 @@ class EngExtraArticle extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.articleId != undefined && nextProps.articleId != this.props.articleId){
+    this.props={
+      portTime,
+    };
+    // if(nextProps.articleId != undefined && nextProps.articleId != this.props.articleId){
+    if(nextProps.articleId != undefined && portTime == 0){
       this.loadExtraArticle(nextProps.articleId);
+      portTime = 1;
     }
   }
 
