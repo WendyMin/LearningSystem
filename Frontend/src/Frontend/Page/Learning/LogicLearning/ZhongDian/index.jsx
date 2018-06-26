@@ -127,16 +127,6 @@ class ZhongDian extends React.PureComponent {
    this.loadQuestions();
  }
 
- // componentWillReceiveProps(NextProps){
- //   console.log(this.state.submit == false)
- //   console.log(this.props.choice !== NextProps.choice)
- //   console.log(this.state.submit == false && this.props.choice !== NextProps.choice)
- //   if(this.state.submit == false && this.props.choice !== NextProps.choice){
- //     alert("您还没有提交答案，是否要退出当前学习?")
- //   }
- // }
-
-
   render(){
     const { end , submit } = this.state;
     const {

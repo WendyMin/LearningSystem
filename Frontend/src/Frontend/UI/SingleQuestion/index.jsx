@@ -1,6 +1,7 @@
 import React from 'react';
 import style from 'style';
 import TextAndImag from "UI/TextAndImag";
+import UITest from 'Page/UITest';
 
 type Props = {
   questionId: number,
@@ -23,10 +24,9 @@ class SingleQuestion extends React.PureComponent<Props> {
   render(){
     const {
       layoutFormat,
-      questionLength,
-      paraLength,
-      //subject,
-      xuhao,
+      questionLength,  // 问题长度 single 代表 只有一段
+      paraLength,  // 解析长度 single 代表 只有一段
+      xuhao,  // 题目序号
       questionId,
       options,
       question,
@@ -36,7 +36,7 @@ class SingleQuestion extends React.PureComponent<Props> {
       rightKey,
       analysis,
       onSetChoice,
-      onTryChange
+      onTryChange,
     } = this.props;
     // console.log(this.props)
 
@@ -109,10 +109,13 @@ class SingleQuestion extends React.PureComponent<Props> {
                 <div className="card-box">
                   { paraLength === "single" ?
                   <div>{analysis}</div>:
-                  <TextAndImag list={analysis}/>
+                  <div>
+                  <TextAndImag list={analysis} showBigImg={() => this.setState({showBigImg: true})}/>
+                </div>
                 }
                 </div>
               </div>
+
               :
               null
             }
@@ -151,87 +154,19 @@ class SingleQuestion extends React.PureComponent<Props> {
              {show ?
               <div>
                 { paraLength === "single" ?
-                <div>{analysis}</div>:
-                <TextAndImag list={analysis}/>
-              }
-                {/* {subject == "logic_test" ?
-                  <div className = {style.logic_analysis}> */}
-                    {/* <TextAndImag list={analysis}/> */}
-                  {/* </div> :
-                  subject == "logic_review" ?
-                  <TextAndImag list={analysis}/>:
-                  <Info info={analysis} />
-                } */}
-              {/* subject == "logic_test" ?
-                <div className = {style.logic_analysis}>
-                  <br/><strong>{analysis.map((onePara , key) => <p key = {key}>{onePara}</p> )}</strong>
-                </div> :
-                <Info info={analysis} /> */}
-
-            </div>
-            :null }
+                  <div>{analysis}</div>:
+                  <TextAndImag list={analysis}/>
+                }
+              </div>
+              :null
+             }
           </div>
         </div>
         </div>
           :
           null
 
-
         }
-          {/* <form
-             id={questionId}
-             className={style.questionWrapper}
-             // style={subject == "logic_test" ? {"width":"60%"} : {"width":"100%"}}
-           >
-         <div className={questionStyle}>{question}</div>
-           {subject == "logic_test" ?
-           <div >{question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}</div>
-           :
-           <div className={questionStyle}>{question}</div>}
-
-     	  	{
-     	  	options.map( ( option , key ) =>
-     	  		<div
-               key={key}
-               className={highlighted[key]}
-               onClick={lock ? () => onTryChange( key ) : () => onSetChoice( key )}
-             >
-     	  			<input
-                 type="radio"
-     	  			  id={`question${questionId}option${key}`}
-     	  			  name={`answerToComponentQuestion${questionId}`}
-     	  			  checked={checked[key]}
-                 readOnly={ lock ? 'readonly' : ''}
-               />
-         			<label
-                 htmlFor={`question${questionId}option${key}`}
-               >
-     	  			  {option}
-         		  </label>
-             </div>
-      	   	  )
-     	   	 }
-
-         </form>
-
-          {show ?
-           <div>
-             {subject == "logic_test" ?
-               <div className = {style.logic_analysis}>
-                 <TextAndImag list={analysis}/>
-               </div> :
-               subject == "logic_review" ?
-               <TextAndImag list={analysis}/>:
-               <Info info={analysis} />
-             }
-           subject == "logic_test" ?
-             <div className = {style.logic_analysis}>
-               <br/><strong>{analysis.map((onePara , key) => <p key = {key}>{onePara}</p> )}</strong>
-             </div> :
-             <Info info={analysis} />
-
-         </div>
-         :null } */}
 
       </div>
     );

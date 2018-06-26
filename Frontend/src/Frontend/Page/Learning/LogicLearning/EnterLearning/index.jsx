@@ -19,6 +19,11 @@ class EnterLearning extends React.PureComponent {
   constructor( props ){
     super( props );
     this.type = "";
+    this.style = {
+      position: "",
+      width: "",
+      top: "",
+    }
     this.state = {
       type1Selected: false,
       type2Selected: false,
@@ -27,6 +32,7 @@ class EnterLearning extends React.PureComponent {
       changeColor2: false,
       changeColor3: false,
       changeColor4: false,
+      show: false
     }
   }
 
@@ -70,12 +76,31 @@ class EnterLearning extends React.PureComponent {
     this.getLogicChapterName();
   }
 
+  big = () => {
+    this.setState({show:true});
+    let smallPic = document.querySelector('.show-big-pic');
+  let bigPic = document.querySelector('.big-pic');
+  let bigImg = bigPic.querySelector('img');
+  smallPic.onclick = function(e) {
+    e.preventDefault();
+    bigImg.src = this.href;
+    bigPic.classList.add('active');
+  };
+  bigPic.onclick = function() {
+    if (bigPic.classList.contains('active')) {
+      bigPic.classList.remove('active');
+      bigImg.src = '';
+    }
+  };
+  }
+
 
   render(){
     const {
       setLearningType,
       learningType,
-      finished_level_test
+      finished_level_test,
+      showBigImg
     } = this.props;
     //console.log(learningType)
 
@@ -105,9 +130,10 @@ class EnterLearning extends React.PureComponent {
               <a href="javascript:void(0);">
                <div className="col-sm-6 col-lg-3 col-md-4 natural personal">
                    <div className="gal-detail thumb">
-                       <div className="image-popup">
-                           <img src="/static/images/gallery/2.jpg" className="thumb-img" alt="work-thumbnail"/>
-                       </div>
+                      {/* <a href="/static/images/gallery/2.jpg" className="image-popup" title="Screenshot-12"> */}
+                        <img src="/static/images/gallery/2.jpg" className="thumb-img" alt="work-thumbnail"/>
+                      {/* </a> */}
+
                        <h4 className = {TextStyle[0]}
                             onMouseOver = {() => this.setState({typeSelectShow: true , changeColor1: true})}
                             onMouseLeave = {() => this.setState({changeColor1: false})}
@@ -124,28 +150,29 @@ class EnterLearning extends React.PureComponent {
               <a href="javascript:void(0);">
               <div className="col-sm-6 col-lg-3 col-md-4 creative personal photography">
                   <div className="gal-detail thumb">
-                      <div className="image-popup">
-                          <img src="/static/images/gallery/5.jpg" className="thumb-img" alt="work-thumbnail"/>
-                      </div>
-                      <h4  className = {TextStyle[1]}
-                           onMouseOver = {() => this.setState({typeSelectShow: true , changeColor2: true})}
-                           onMouseLeave = {() => this.setState({changeColor2: false})}
-                           onClick = {() => {setLearningType("重点习题") ; this.setState({typeSelectShow: false})}}>
-                           重点习题
-                      </h4>
-                      <p className={style.text_muted1}>
-                          点击查看每一章节的重点习题，新用户需要完成入口测试才可以查看
-                      </p>
-                   </div>
+                    {/* <a href="/static/images/gallery/5.jpg" className="image-popup" title="Screenshot-5"> */}
+                      <img src="/static/images/gallery/5.jpg" className="thumb-img" alt="work-thumbnail"/>
+                    {/* </a> */}
+
+                    <h4  className = {TextStyle[1]}
+                         onMouseOver = {() => this.setState({typeSelectShow: true , changeColor2: true})}
+                         onMouseLeave = {() => this.setState({changeColor2: false})}
+                         onClick = {() => {setLearningType("重点习题") ; this.setState({typeSelectShow: false})}}>
+                         重点习题
+                    </h4>
+                    <p className={style.text_muted1}>
+                        点击查看每一章节的重点习题，新用户需要完成入口测试才可以查看
+                    </p>
+                  </div>
               </div>
               </a>
 
               <a href="javascript:void(0);">
                <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
                   <div className="gal-detail thumb">
-                      <div className="image-popup">
+                      {/* <div className="image-popup"> */}
                           <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
-                      </div>
+                      {/* </div> */}
                       <h4  className = {TextStyle[2]}
                            onMouseOver = {() => this.setState({typeSelectShow: true , changeColor3: true})}
                            onMouseLeave = {() => this.setState({changeColor3: false})}
@@ -162,9 +189,9 @@ class EnterLearning extends React.PureComponent {
               <a href="javascript:void(0);">
               <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
                   <div className="gal-detail thumb">
-                      <div className="image-popup">
+                      {/* <div className="image-popup"> */}
                           <img src="/static/images/gallery/3.jpg" className="thumb-img" alt="work-thumbnail"/>
-                      </div>
+                      {/* </div> */}
                       <h4 className = {TextStyle[3]}
                           onMouseOver = {() => this.setState({typeSelectShow: true , changeColor4: true})}
                           onMouseLeave = {() => this.setState({changeColor4: false})}
@@ -193,10 +220,11 @@ class EnterLearning extends React.PureComponent {
         finished_level_test == 3 && this.state.type2Selected == true ? <div>{this.FinishLunzhengNote()}</div>:
         finished_level_test == 4 ? <div>{this.FinishAllNote()}</div>:
         learningType == "知识点精要" ? <Knowledge/> :
-        learningType == "重点习题" ? <ZhongDian/> :
+        learningType == "重点习题" ? <ZhongDian showBigImg={showBigImg}/> :
         learningType == "强化练习" ? <QiangHua/> :
         learningType == "单元测试" ? <UnitTest xingshiOrLunzheng = {this.type}/> : null
       }
+
       </React.Fragment>
     )
   }

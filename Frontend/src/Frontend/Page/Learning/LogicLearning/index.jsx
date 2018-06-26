@@ -7,6 +7,7 @@ import { actions as UserManagerActions } from 'Connected/UserManager';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 import { actions as ButtonExpandActions } from 'Connected/ButtonExpand';
+
 import LogicTest from 'Page/Learning/LogicLearning/LogicTest';
 import EnterLearning from 'Page/Learning/LogicLearning/EnterLearning';
 import LogicReview from 'Page/Learning/LogicLearning/LogicReview';
@@ -31,6 +32,7 @@ class LogicLearning extends React.PureComponent {
       choice,
     } = this.props;
     // console.log(choice);
+    console.log(this.props.whetherEnlargeImag)
 
     var user = sessionStorage.getItem("user");
     if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" ){
@@ -196,13 +198,13 @@ export default applyHOCs([
       username: state.UserManager.name,
       choice: state.SubjectFunctionSelect.choice,  // 代表用户选择的左侧导航栏的按钮，是选择了入口测试、进入学习还是等
       learningType: state.LearningTypeSelect.learningType, // 三级按钮，代表具体某一章的类型，如是知识点精要还是重点，强化等
-      type: state.ButtonExpand.choice // 代表用户具体选择的是哪一个小知识点或者具体哪一年的真题
+      type: state.ButtonExpand.choice, // 代表用户具体选择的是哪一个小知识点或者具体哪一年的真题
     }),
     dispatch => ({
       ...bindActionCreators( UserManagerActions , dispatch ),
       ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
-      ...bindActionCreators( ButtonExpandActions , dispatch )
+      ...bindActionCreators( ButtonExpandActions , dispatch ),
     })
   )],
   LogicLearning

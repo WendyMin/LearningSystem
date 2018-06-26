@@ -27,12 +27,11 @@ class SingleOptionQuestions extends React.PureComponent {
       layoutFormat,
       questionLength,
       paraLength,
-      //subject,
       questions,
       setChoice,
       questionSize,
       submiter,
-      loader
+      loader,
     } = this.props;
 
     return (
@@ -45,11 +44,9 @@ class SingleOptionQuestions extends React.PureComponent {
               questionLength={questionLength}
               paraLength = {paraLength}
               xuhao={xuhao}
-              // subject = {subject}
               {...question}
               onSetChoice={( cid ) => setChoice( question.questionId , cid )}
             />
-            {/* <hr/> */}
           </div>
         )
       }

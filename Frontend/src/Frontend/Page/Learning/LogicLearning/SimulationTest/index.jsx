@@ -9,11 +9,11 @@ import Info from 'UI/Info';
 import ButtonControlPane from 'UI/ButtonControlPane';
 //import SingleQuestion from 'UI/SingleQuestion';
 
-import Loading from 'Animation/Loading';
-import SlideLR from 'Animation/SlideLR';
-import SlideRL from 'Animation/SlideRL';
-import SlideDU from 'Animation/SlideDU';
-import SlideUD from 'Animation/SlideUD';
+// import Loading from 'Animation/Loading';
+// import SlideLR from 'Animation/SlideLR';
+// import SlideRL from 'Animation/SlideRL';
+// import SlideDU from 'Animation/SlideDU';
+// import SlideUD from 'Animation/SlideUD';
 
 import UserManagerWindow from "Windows/UserManager";
 
@@ -187,41 +187,16 @@ class SimulationTest extends React.PureComponent {
           content.flag === 1 ?
           <div>
             {/* <div className = {style.moniceshi}> 模拟测试 </div> */}
-            {/* <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test"/> */}
-
-            {/* <Loading
-              loading = {loadQuestionState.pending}
-              wasLoaded = {loadQuestionState.resolved}
-              lastFailed = {loadQuestionState.lastFailed}
-              reloader = {this.loadQuestions}
-              center
-            > */}
-            {/* <SlideRL play={ined}> */}
               <div><br/>
                 {/* <h4 className = {style.dalei}> {content.chapter_name} </h4> */}
 
                <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight"/>
-               <strong align = "center"><div style = {{"color":"red"}}>点击确认提交，查看正确答案</div></strong>
-               <Button className = {style.submitButton} text = {"确认提交"} onClick = {this.submitQuestions}/>
+               <div align = "center">
+                 <strong><div style = {{"color":"red"}}>点击确认提交，查看正确答案</div></strong>
+                 <Button className = {style.submitButton} text = {"确认提交"} onClick = {this.submitQuestions}/>
+               </div>
           </div>
-                {/* <div>
-                {questions.map((onequestion , key) =>
-                  <div key = {key}>
-                   {console.log(onequestion)}
-                  <br/><h5 align = "center" style = {{"color":"blue"}}>{onequestion.type}</h5>
-                  {/* <SingleQuestion key = {onequestion.questionId} {...onequestion} subject = "logic_test" onSetChoice={( cid ) => setChoice( onequestion.questionId , cid )}/> */}
 
-                  {/* <SingleQuestion {...onequestion} subject = "logic_test" onSetChoice={( cid ) => setChoice_( key ,onequestion.questionId, cid )}/> */}
-    {/*
-                  </div>
-                )
-              }
-              <strong align = "center"><div style = {{"color":"red"}}>点击确认提交，查看正确答案</div></strong>
-              <Button className = {style.submitButton} text = {"确认提交"} onClick = {this.submitQuestions}/>
-              </div> */}
-
-            {/* </SlideRL> */}
-            {/* </Loading> */}
           </div>
           :
           <Info info = "您还没完成入口测试，请先完成入口测试!"/>
@@ -236,38 +211,6 @@ class SimulationTest extends React.PureComponent {
 };
 
 export default applyHOCs([
-  asyncProcessControl({
-    submitQuestionState: {
-      onResolved: function(){
-        //this.nextStep()
-      },
-      onRejected: function(){
-        this.props.alert( "失败" )
-      }
-    },
-
-  }),
-  // protect({
-  //   logined: {
-  //     satisfy: l => l === true,
-  //     block(){
-  //       const { openWindow , history, closeMask , openMask } = this.props;
-  //       openWindow( UserManagerWindow,
-  //         {
-  //           width: '380px',
-  //           height: '300px',
-  //           position: {
-  //             top: 'calc( 50% - 190px)',
-  //             left: 'calc( 50% - 150px)'
-  //           },
-  //           onCancel: () => history.goBack() || closeMask(),
-  //           onSuccess: closeMask,
-  //         }
-  //       );
-  //       openMask();
-  //     }
-  //   }
-  // }),
   makePage,
   connect(
     state => ({

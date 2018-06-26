@@ -1,5 +1,0 @@
-export const __ASYNC_LOAD_USER_INFO = {
-  pending: "USERINFO/__LOAD_USER_INFOI_PENDING",
-  resolved: "USERINFO/__LOAD_USER_INFOI_RESOLVED",
-  rejected: "USERINFO/__LOAD_USER_INFOI_REJECTED"
-};

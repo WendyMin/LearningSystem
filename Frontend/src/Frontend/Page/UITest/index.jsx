@@ -53,6 +53,48 @@ class UITest extends React.PureComponent {
     })
   }
 
+  text = () => {
+    document.getElementById("popup").innerHTML = "<img src=\"/static/images/gallery/5.jpg\"/>";
+    var imgs = document.getElementById("dedecmsok").getElementsByTagName("img");
+    var lens = imgs.length;
+    // console.log(lens);
+    var popup = document.getElementById("popup");
+    // var target = document.elementFromPoint(window.clientX, window.clientY);
+    //         showBig(target.src);
+    // popup.getElementsByTagName("img")[0].src = target.src;
+    popup.style.display = "block";
+
+    // for(var i = 0; i < lens; i++){
+    //     imgs[i].onclick = function (event){
+    //         event = event||window.event;
+    //         var target = document.elementFromPoint(event.clientX, event.clientY);
+    //         showBig(target.src);
+    //     }
+    // }
+    popup.onclick = function (){
+        popup.style.display = "none";
+    }
+    // var imgs = document.getElementById("dedecmsok").getElementsByTagName("img");
+    // var lens = imgs.length;
+    // // console.log(lens);
+    // var popup = document.getElementById("popup");
+    //
+    // for(var i = 0; i < lens; i++){
+    //     imgs[i].onclick = function (event){
+    //         event = event||window.event;
+    //         var target = document.elementFromPoint(event.clientX, event.clientY);
+    //         showBig(target.src);
+    //     }
+    // }
+    // popup.onclick = function (){
+    //     popup.style.display = "none";
+    // }
+    // function showBig(src){
+    //     popup.getElementsByTagName("img")[0].src = src;
+    //     popup.style.display = "block";
+    // }
+  }
+
   render(){
 
     const {
@@ -64,6 +106,8 @@ class UITest extends React.PureComponent {
     return(
       <React.Fragment>
         <p>{"Hello\n\n\nHello\r\n"}</p>
+        <img onClick={()=>this.text()} src="/static/images/gallery/3.jpg"/>
+        {/* <div onClick={()=>this.text()}>点击向页面写入文字</div> */}
 
       </React.Fragment>
     )

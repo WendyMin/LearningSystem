@@ -1,17 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { Prompt } from 'react-router';
 import style from 'style';
 
 import Button from 'UI/Button';
 import Info from 'UI/Info';
-// import ButtonControlPane from 'UI/ButtonControlPane';
 import LogicTestChart from 'UI/LogicTestChart';
 
 import SlideRL from 'Animation/SlideRL';
-// import SlideDU from 'Animation/SlideDU';
-// import SlideUD from 'Animation/SlideUD';
 
 import UserManagerWindow from "Windows/UserManager";
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
@@ -185,11 +181,6 @@ class LogicTest extends React.PureComponent {
     //console.log(testend)
     return (
       <React.Fragment>
-        {/* <Prompt
-          when = {(this.state.enterTest && !whetherDidTest || this.state.testAgain && !testend) !== true}
-          message = "you need to do it again, are you sure to quit?"
-        /> */}
-
         <div className={style.wrapper}>
          {
            this.state.enterTest && whetherDidTest || this.state.enterTest && testend || this.state.testAgain && testend ?
@@ -204,16 +195,12 @@ class LogicTest extends React.PureComponent {
             :
            this.state.enterTest && !whetherDidTest || this.state.testAgain && !testend ?
            <div>
-           {/* <div className="card-box"> */}
-           {/* <div className={style.question}> */}
-
                 <SlideRL play = {ined}>
                   <SingleSubjectTest
                       //submiter = { this.submitQuestions }
                       loader = {this.loadQuestions}
                   />
                 </SlideRL>
-            {/* </div> */}
             <div align="center">
               <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success btn-lg m-b-5"
                       onClick = {forceNext}
