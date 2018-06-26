@@ -171,7 +171,7 @@ const loadContentRejected = ( reason , detail ) => ({
     id: loadContentCounter
 });
 
-export const loadContent = () => ( dispatch , getState ) => {
+export const loadContent = ({body}) => ( dispatch , getState ) => {
   const oldState = getState();
   const reqId = ++loadContentCounter;
   const dispatchLastest = action => {
@@ -180,17 +180,20 @@ export const loadContent = () => ( dispatch , getState ) => {
     }
   }
   dispatch( loadContentStart() );
+  if( typeof body === "object" ){
+    body = JSON.stringify( body );
+  }
   fetch( '/api/eng_getSentence' , {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      // body: `username=${oldState.UserManager.name}&lock=0&articleId=0`
-      body: JSON.stringify({
-         username: oldState.UserManager.name,
-         lock:0,
-         articleId:0
-      })
+      // body: JSON.stringify({
+      //    username: oldState.UserManager.name,
+      //    lock:0,
+      //    articleId:0
+      // })
+      body: body
   })
   .then( response => {
     if( !response.ok ){

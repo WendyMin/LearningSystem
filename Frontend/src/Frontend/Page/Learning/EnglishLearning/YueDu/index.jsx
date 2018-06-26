@@ -73,6 +73,16 @@ class YueDu extends React.PureComponent {
 
   }
 
+  getArticle = () => {
+    this.props.loadContent({
+      body: {
+        username: this.props.username,
+        lock: 0,
+        articleId: 0
+      }
+    })
+  }
+
 
   loadQuestions = () => {
     // console.log(typeof(this.props.articleId))
@@ -193,7 +203,7 @@ quit = () => {
   }
 
   componentDidMount(){
-    this.props.loadContent();
+    this.getArticle();
     this.loadQuestions();
     this.function();
   }
