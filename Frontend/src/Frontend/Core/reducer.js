@@ -3,6 +3,7 @@ import { reducer as SingleOptionQuestions} from 'Connected/SingleOptionQuestions
 //import { reducer as MultOptionsQuestions } from 'Connected/MultOptionsQuestions';
 import { reducer as UserManager } from 'Connected/UserManager';
 import { reducer as EnglishArticle } from 'Connected/EnglishArticle';
+import { reducer as EnglishReviewPort } from 'Connected/EnglishReviewPort';
 import { reducer as SingleSubjectTest } from 'Connected/SingleSubjectTest';
 import { reducer as ButtonExpand } from 'Connected/ButtonExpand';
 import { reducer as WriteContent } from 'Connected/WriteContent';
@@ -26,6 +27,7 @@ export default {
   //MultOptionsQuestions: MultOptionsQuestions,
   UserManager: UserManager,
   EnglishArticle: EnglishArticle,
+  EnglishReviewPort: EnglishReviewPort,
   SingleSubjectTest: SingleSubjectTest,
   ButtonExpand: ButtonExpand,
   WriteContent: WriteContent,

@@ -28,6 +28,10 @@ import {
   view as PortTest,
   actions as PortTestActions
 } from 'Connected/PortTest';
+import {
+  view as EnglishReviewPort,
+  actions as EnglishReviewPortActions
+} from 'Connected/EnglishReviewPort';
 
 class EngReview extends React.PureComponent {
   constructor( props ){
@@ -46,7 +50,7 @@ class EngReview extends React.PureComponent {
   }
 
   loadReviewList = () => {
-    this.props.loadPortContent({
+    this.props.loadReviewList({
       url: "/api/eng_getReviewList",
       body: {
         username:  this.props.username,
@@ -60,7 +64,7 @@ class EngReview extends React.PureComponent {
   }
 
   getHardWord = (articleid) => {
-    this.props.loadPortContent2({
+    this.props.loadHardWord({
       url: "/api/eng_getCoreWord",
       body: {
         articleId:  articleid,
@@ -68,8 +72,17 @@ class EngReview extends React.PureComponent {
     })
   }
 
+  // getHardSentence = (articleid) => {
+  //   this.props.loadPortContent3({
+  //     url: "/api/eng_engToCh",
+  //     body: {
+  //       articleId:  articleid,
+  //     }
+  //   })
+  // }
+
   getHardSentence = (articleid) => {
-    this.props.loadPortContent3({
+    this.props.loadHardSentence({
       url: "/api/eng_engToCh",
       body: {
         articleId:  articleid,
@@ -289,14 +302,17 @@ export default applyHOCs([
       logined: state.UserManager.logined,
       username: state.UserManager.name,
       articleId: state.EnglishArticle.articleId,
-      reviewlist: state.PortTest.content,
-      hardword: state.PortTest.content2,
-      hardsentence: state.PortTest.content3,
+      // hardsentence: state.PortTest.content3,
       article: state.PortTest.content4,
+      reviewlist: state.EnglishReviewPort.reviewlist,
+      hardword: state.EnglishReviewPort.hardword,
+      hardsentence: state.EnglishReviewPort.hardsentence,
+      // article: state.EnglishReviewPort.content4,
     }),
     dispatch => ({
       ...bindActionCreators( EnglishArticleActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch),
+      ...bindActionCreators( EnglishReviewPortActions , dispatch),
     })
   )],
   EngReview
