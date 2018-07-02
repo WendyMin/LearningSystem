@@ -55,9 +55,12 @@ class UnitTest extends React.PureComponent {
 
       parser: response => {
         var all = [];
-        for( var i = 0 ; i < response.timu.length ; i++ ){
-          response.timu[i].map ( one => all.push(one) )
-        }
+        // for( var i = 0 ; i < response.timu.length ; i++ ){
+        //   response.timu[i].map ( one => all.push(one) )
+        // }
+        response.timu.map ( one =>
+          one.per_timu.map( oneques => all.push(oneques))
+        )
         //console.log(all)
         return all.map(one => ({
            questionId: one.id,
@@ -181,7 +184,7 @@ class UnitTest extends React.PureComponent {
       content,
       setChoice,
     } = this.props;
-    console.log(questions)
+    // console.log(questions)
 
     return (
       <React.Fragment>

@@ -56,7 +56,7 @@ class EnglishWordTest extends React.PureComponent {
 };
 
 export default connect(
-  ({ SingleSubject: ownState }) => ({
+  ({ EnglishWordTest: ownState }) => ({
     questions: ownState.content,
     level: ownState.nowAt.level,
     num: ownState.nowAt.num,
