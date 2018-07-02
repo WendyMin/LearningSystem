@@ -33,6 +33,7 @@ function EngWordTestDecideNextWord( questions , level , num, rightnum ){
       if( rightnum == 8) return [ level, 0, true, 9 ]
       else if( num < 14) return [ level, num++, false, rightnum++ ]
       else return [ level, num, true, rightnum ]
+    }
   }
   else {
     if( num < 14 ) return [ level, num++, false, rightnum ]

@@ -28,7 +28,7 @@ class EnglishWordTest extends React.PureComponent {
     var question = {
       choosed : questions[level][num].choosed,
       question: questions[level][num].word,
-      options: [ questions[level][num].options[0], questions[level][num].options[1] , questions[level][num].options[2], questions[level][num].options[3] ],
+      options: questions[level][num].options,
       rightKey: questions[level][num].key,
       lock: questions[level][num].lock,
     }
@@ -56,7 +56,7 @@ class EnglishWordTest extends React.PureComponent {
 };
 
 export default connect(
-  ({ SingleSubject: ownState }) => ({
+  ({ EnglishWordTest: ownState }) => ({
     questions: ownState.content,
     level: ownState.nowAt.level,
     num: ownState.nowAt.num,

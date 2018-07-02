@@ -9,7 +9,7 @@ import {
   __FORCE_END
 } from 'actionTypes';
 
-import nextQuestion from "Algorithm/decideNextQuestion";
+import nextQuestion from "Algorithm/EngWordTestDecideNextWord";
 
 export default ( state = {
     content: {},
