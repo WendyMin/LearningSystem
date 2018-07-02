@@ -214,7 +214,7 @@ export default (
         allTranslates.push( oneParagraphTranslate );
         return oneParagraphWords;
       });
-      console.log(paragraphedWords)
+      // console.log(paragraphedWords)
 
       return {
         ...state,

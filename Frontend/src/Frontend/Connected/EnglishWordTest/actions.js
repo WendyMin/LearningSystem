@@ -16,14 +16,14 @@ export const forceEnd = () => ({
     }
 });
 export const forceNext = () => ( dispatch , getState ) => {
-  const { SingleSubjectTest: { clear } } = getState();
+  const { EnglishWordTest: { clear } } = getState();
   clearTimeout( clear );
   dispatch( next() );
 }
 export const autoNext = ( cid , time = 1000 ) => ( dispatch , getState ) => {
-  const { SingleSubjectTest:{ nowAt: { qtype , level } , content } } = getState();
-  dispatch(setChoice_( qtype , level , cid ));
-  dispatch(lockAndShow( qtype , level ));
+  const { EnglishWordTest:{ nowAt: { level , num, rightnum } , content } } = getState();
+  dispatch(setChoice_( level , num , cid ));
+  dispatch(lockAndShow( level , num ));
 
   let clear = setTimeout(
     () => {
@@ -44,32 +44,31 @@ export const next = () => ({
 });
 
 let lockAndShowCounter = 0;
-export const lockAndShow = ( qtype , level ) => ({
+export const lockAndShow = ( level , num ) => ({
     type: __LOCK_AND_SHOW,
     payload: {
-      qtype,
-      level
-       //level , index
+      level,
+      num
     },
     id: lockAndShowCounter++
 });
 
 let unlockAndHideCounter = 0;
-export const unlockAndHide = ( qtype , level ) => ({
+export const unlockAndHide = ( level , num ) => ({
     type: __UNLOCK_AND_HIDE,
     payload: {
-      qtype , level
-       //level , index
+      level,
+      num
     },
     id: unlockAndHideCounter++
 });
 
 let setChoiceCounter = 0;
-export const setChoice_ = ( qtype , level , choice ) => ({
+export const setChoice_ = ( level , num , choice ) => ({
     type: __SET_CHOICE,
     payload: {
-      qtype,
       level,
+      num,
       //question,
       choice
     },

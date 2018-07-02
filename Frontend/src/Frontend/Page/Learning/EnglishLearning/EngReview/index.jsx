@@ -315,7 +315,7 @@ class EngReview extends React.PureComponent {
                       <div className="kanban-detail">
                         <span className="label label-primary pull-right">Sentence</span>
                         <p className={style.title18}>
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
                           {sentence.english}</p>
                         <ul className="list-inline m-b-0">
                           <li>

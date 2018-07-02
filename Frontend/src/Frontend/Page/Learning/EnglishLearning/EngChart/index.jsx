@@ -4,29 +4,15 @@ import { bindActionCreators } from 'redux';
 import { Prompt } from 'react-router';
 import style from 'style';
 
-import Button from 'UI/Button';
-
-import Loading from 'Animation/Loading';
-import SlideLR from 'Animation/SlideLR';
-import SlideRL from 'Animation/SlideRL';
-import SlideDU from 'Animation/SlideDU';
-import SlideUD from 'Animation/SlideUD';
-
 import UserManagerWindow from "Windows/UserManager";
 
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
-import WriteGraph from 'UI/WriteGraph';
-import {
-  view as EnglishArticle,
-  actions as EnglishArticleActions
-} from 'Connected/EnglishArticle';
-import {
-  view as PortTest,
-  actions as PortTestActions
-} from 'Connected/PortTest';
+
+// import WriteGraph from 'UI/WriteGraph';
+import { actions as PortTestActions } from 'Connected/PortTest';
 
 class EngChart extends React.PureComponent {
   constructor( props ){
@@ -57,7 +43,6 @@ class EngChart extends React.PureComponent {
 
     return(
       <React.Fragment>
-        {
           <div>
             <p className={style.title}>累计生词类型分析</p>
             {/* <WriteGraph/> */}
@@ -98,10 +83,6 @@ class EngChart extends React.PureComponent {
           </div>
 
 
-
-        }
-
-
       </React.Fragment>
     )
   }
@@ -111,8 +92,6 @@ class EngChart extends React.PureComponent {
 
 }
 
-
-// export default EngChart
 export default applyHOCs([
   asyncProcessControl({
   }),
@@ -121,11 +100,9 @@ export default applyHOCs([
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
-      articleId: state.EnglishArticle.articleId,
       content: state.PortTest.content,
     }),
     dispatch => ({
-      ...bindActionCreators( EnglishArticleActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch),
     })
   )],
