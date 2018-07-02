@@ -23,6 +23,9 @@ import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
+var sha1 = require('sha1');
+
+sha1("message");
 
 import {
   view as PortTest,
@@ -55,8 +58,8 @@ class UITest extends React.PureComponent {
 
   text = () => {
     document.getElementById("popup").innerHTML = "<img src=\"/static/images/gallery/5.jpg\"/>";
-    var imgs = document.getElementById("dedecmsok").getElementsByTagName("img");
-    var lens = imgs.length;
+    // var imgs = document.getElementById("dedecmsok").getElementsByTagName("img");
+    // var lens = imgs.length;
     // console.log(lens);
     var popup = document.getElementById("popup");
     // var target = document.elementFromPoint(window.clientX, window.clientY);
@@ -101,14 +104,19 @@ class UITest extends React.PureComponent {
       content
     } = this.props;
 
-    console.log(content);
+    // console.log(content);
 
     return(
       <React.Fragment>
         <p>{"Hello\n\n\nHello\r\n"}</p>
         <img onClick={()=>this.text()} src="/static/images/gallery/3.jpg"/>
         {/* <div onClick={()=>this.text()}>点击向页面写入文字</div> */}
-
+        <br/><br/>
+        <a href={"https://passport.doxue.com/login?redirect_url=59.110.23.212&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>登录测试</a>
+         {/* sha1 一种密码加密算法 */}
+         {/* <a href={"https://passport.doxue.com/login?redirect_url=localhost:8080&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>登录测试</a> */}
+         {/* http://localhost:8080 */}
+        {/* <a href={DATA.serverUrl+'service/apartment'+url+'?apartmentId='+urlID}>测试</a> */}
       </React.Fragment>
     )
   }

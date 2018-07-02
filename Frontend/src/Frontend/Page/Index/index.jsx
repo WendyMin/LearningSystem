@@ -9,11 +9,12 @@ import applyHOCs from 'direct-core/applyHOCs';
 
 import { actions as UserManagerActions } from 'Connected/UserManager';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
+var sha1 = require('sha1');
 
 class IndexPage extends React.Component {
-  constructor( props ){
-    super( props );
-  }
+  // constructor( props ){
+  //   super( props );
+  // }
 
   render(){
 
@@ -48,7 +49,7 @@ class IndexPage extends React.Component {
                         choice==0 ? <div>主页  > 课程信息</div> :
                         choice==1 ? <div>主页  > 用户信息</div> :
                         choice==2 ? <div>主页  > 查看帮助</div> :
-                                                 <div>主页  > 问题反馈</div>
+                                    <div>主页  > 问题反馈</div>
                      }
                     </h4>
                   </li>
@@ -79,7 +80,10 @@ class IndexPage extends React.Component {
                    </li>
 
                    <li>
-                     <a href="#" className="text-custom">
+                     <a className="text-custom"
+                        onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=59.110.23.212&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
+                        href="javascript:void(0);"
+                        >
                        <i className="zmdi zmdi-power"></i>
                      </a>
                    </li>
