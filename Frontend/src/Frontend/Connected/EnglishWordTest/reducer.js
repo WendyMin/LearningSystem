@@ -32,7 +32,8 @@ export default ( state = {
     testendState: false,
     nowAt:{
       level: "basic",
-      num: 0
+      num: 0,
+      rightnum: 0
     }
 } , { type , payload , id } ) => {
   const { content } = state;
@@ -163,7 +164,6 @@ export default ( state = {
         testendState: end
       }
       //console.log(list)
-      //console.log(state.nowAt.qtype);
 
     }
 

@@ -31,12 +31,6 @@ class EngTest extends React.PureComponent {
     this.loadTest();
   }
 
-  // loadTest = () => {
-  //   this.props.loadPortContent({
-  //     url: "/api/eng_wordTest",
-  //   })
-  // }
-
   loadTest = () => {
     this.props.loadTestQuestions({
       url: "/api/eng_wordTest",

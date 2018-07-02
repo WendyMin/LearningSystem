@@ -19,6 +19,7 @@ class EnglishWordTest extends React.PureComponent {
       autoNext,
       level,
       num,
+      // rightnum,
       //level
       //lockAndShow
     } = this.props;
@@ -58,7 +59,8 @@ export default connect(
   ({ SingleSubject: ownState }) => ({
     questions: ownState.content,
     level: ownState.nowAt.level,
-    num: ownState.nowAt.level,
+    num: ownState.nowAt.num,
+    // rightnum: ownState.nowAt.rightnum,
   }),
   dispatch => bindActionCreators( actionCreators , dispatch )
 )( EnglishWordTest );
