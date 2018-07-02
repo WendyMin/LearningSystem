@@ -33,7 +33,7 @@ class SingleSubjectTest extends React.PureComponent {
     //console.log(questions)
 
     var question = {
-      type: questions[qtype][level].type,
+      qtype: questions[qtype][level].type,
       level: questions[qtype][level].nanyi,
       choosed : questions[qtype][level].choosed,
       questionId: questions[qtype][level].id,
