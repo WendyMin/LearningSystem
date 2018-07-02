@@ -23,7 +23,8 @@ class EnglishWordTest extends React.PureComponent {
       //level
       //lockAndShow
     } = this.props;
-    //console.log(questions)
+
+    console.log(questions)
 
     var question = {
       choosed : questions[level][num].choosed,

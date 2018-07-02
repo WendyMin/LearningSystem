@@ -44,16 +44,16 @@ class EngTest extends React.PureComponent {
       questions,
     } = this.props;
 
-    // console.log(questions);
+    // console.log(questions["basic"]);
 
     return(
       <React.Fragment>
           <div>
             <p className={style.title}>水平测试</p>
-            <EnglishWordTest
+            {/* <EnglishWordTest
                 //submiter = { this.submitQuestions }
                 loader = {this.loadTest}
-            />
+            /> */}
           </div>
       </React.Fragment>
     )
