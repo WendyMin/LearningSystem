@@ -27,8 +27,6 @@ var sha1 = require('sha1');
 class EnglishLearning extends React.PureComponent {
   constructor( props ){
     super( props );
-
-    // this.type = ["词汇测试" , "进入学习" , "开始复习" , "统计图表", "查看帮助"];
   }
 
   render(){
@@ -73,7 +71,7 @@ class EnglishLearning extends React.PureComponent {
                   </li>
                   <li>
                     <h4 className="page-title">
-                      {choice==0 ? <div>英语  > 词汇测试</div> :
+                      {choice==0 ? <div>英语  > 水平测试</div> :
                        choice==1 ?
                         <div>
                          <span>英语  > </span>
@@ -184,7 +182,7 @@ class EnglishLearning extends React.PureComponent {
                 <div className="row">
 
                   {
-                    choice==0 ? <div className="card-box"><EngTest/></div> :
+                    choice==0 ? <EngTest/> :
                     choice==1 ? <EngLearningTypeSelect/> :
                     choice==2 ? <EngReview/> :
                     choice==3 ? <div className="card-box"><EngChart/></div> :

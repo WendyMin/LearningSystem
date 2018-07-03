@@ -12,16 +12,14 @@ import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
-// import WriteGraph from 'UI/WriteGraph';
 // import { actions as PortTestActions } from 'Connected/PortTest';
 import {
   view as EnglishWordTest,
   actions as EnglishWordTestActions
- } from 'Connected/EnglishWordTest';
- // import {
- //   view as SingleSubjectTest,
- //   actions as SingleSubjectTestActions
- // } from 'Connected/SingleSubjectTest';
+} from 'Connected/EnglishWordTest';
+
+ import levelConvert from "Algorithm/EngLevelToCh";
+
 
 class EngTest extends React.PureComponent {
   constructor( props ){
@@ -32,36 +30,71 @@ class EngTest extends React.PureComponent {
     this.loadTest();
   }
 
+  componentWillReceiveProps( NextProps ){
+    if(this.props.testend == false && NextProps.testend == true){
+      this.recordWordTestLevel();
+    }
+  }
+
   loadTest = () => {
     this.props.loadTestQuestions({
       url: "/api/eng_wordTest",
     })
   }
 
+  recordWordTestLevel = () => {
+    this.props.recordWordTest({
+      url:"/api/eng_recordWordTest",
+      body:{
+        username: "gyc",
+        // username: this.props.username,
+        level: this.props.level
+      }
+    })
+  }
+
   render(){
 
     const {
-      // test,
       questions,
       ined,
       forceNext,
+      testend,
+      level,
     } = this.props;
-    // console.log(questions["basic"]);
+
+    console.log(level);
 
     return(
       <React.Fragment>
-          <div>
-            <p className={style.title}>水平测试</p>
-            <SlideRL play = {ined}>
-              <EnglishWordTest
-                  //submiter = { this.submitQuestions }
-                  loader = {this.loadTest}
-              />
-          </SlideRL>
-          <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success btn-lg m-b-5"
-                  onClick = {forceNext}
-          >下一题</button>
-          </div>
+
+        <div>
+          {/* <p className={style.title}>水平测试</p> */}
+          {
+            !testend ?
+            <div>
+
+              <SlideRL play = {ined}>
+                <EnglishWordTest
+                    //submiter = { this.submitQuestions }
+                    loader = {this.loadTest}
+                />
+              </SlideRL>
+
+              <div className={style.buttonright}>
+                <button class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                  onClick = {forceNext}>
+                  下一题</button>
+              </div>
+
+            </div>
+            :
+            <div className="card-box">
+              <p>您已完成词汇测试！您的英语水平为：{levelConvert(level)}水平</p>
+            </div>
+          }
+        </div>
+
       </React.Fragment>
     )
   }
@@ -80,6 +113,8 @@ export default applyHOCs([
       // test: state.PortTest.content,
       // questions: state.SingleSubjectTest.content,
       questions: state.EnglishWordTest.content,
+      testend: state.EnglishWordTest.testendState,
+      level: state.EnglishWordTest.nowAt.level,
     }),
     dispatch => ({
       // ...bindActionCreators( PortTestActions , dispatch),

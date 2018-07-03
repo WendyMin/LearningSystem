@@ -6,7 +6,8 @@ import {
   __NEXT,
   __AUTO_NEXT,
   __CLEAR_AUTO_NEXT,
-  __FORCE_END
+  __FORCE_END,
+  __RECORD_WORD_TEST,
 } from 'actionTypes';
 
 //import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
@@ -194,5 +195,68 @@ export const loadTestQuestions = ({ url , body , parser , headers  , initState }
   })
   .catch( err => {
       dispatchLastest( loadTestQuestionsRejected( "network" , err ) );
+  });
+};
+
+
+
+let recordWordTestCounter = 0;
+const recordWordTestStart = () => ({
+    type: __RECORD_WORD_TEST.pending,
+    payload: {
+
+    },
+    id: recordWordTestCounter
+});
+const recordWordTestResolved = ( response , initState ) => ({
+    type: __RECORD_WORD_TEST.resolved,
+    payload: {
+      response,
+      initState
+    },
+    id: recordWordTestCounter
+});
+const recordWordTestRejected = ( reason , detail ) => ({
+    type: __RECORD_WORD_TEST.rejected,
+    payload: {
+      reason,
+      detail
+    },
+    id: recordWordTestCounter
+});
+
+export const recordWordTest = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+  const reqId = ++recordWordTestCounter;
+  const dispatchLastest = action => {
+    if( reqId === recordWordTestCounter ){
+      dispatch( action );
+    }
+  }
+  dispatch( recordWordTestStart() );
+  if( typeof body === "object" ){
+    body = JSON.stringify( body );
+  }
+  fetch( url , {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...headers
+      },
+      body: body
+  })
+  .then( response => {
+    if( !response.ok ){
+      dispatchLastest( recordWordTestRejected( "server" , response.status ) );
+      return;
+    }
+    response.json()
+    //.then( json => dispatchLastest( loadTestQuestionsResolved( parser( json ) , initState ) ) )
+    .then( json => dispatchLastest( recordWordTestResolved( json  , initState ) ) )
+    .catch( err => {
+      dispatchLastest( recordWordTestRejected( "json" , err ) )
+    });
+  })
+  .catch( err => {
+      dispatchLastest( recordWordTestRejected( "network" , err ) );
   });
 };

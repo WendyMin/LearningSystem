@@ -45,6 +45,7 @@ class UITest extends React.PureComponent {
 
   componentDidMount(){
     this.loadExtraArticle();
+    this.recordWordTest();
   }
 
   loadExtraArticle = () => {
@@ -101,10 +102,10 @@ class UITest extends React.PureComponent {
   render(){
 
     const {
-      content
+      content,
     } = this.props;
 
-    // console.log(content);
+    // console.log(flag);
 
     return(
       <React.Fragment>
