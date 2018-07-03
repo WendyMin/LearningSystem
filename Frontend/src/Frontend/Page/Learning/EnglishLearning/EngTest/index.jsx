@@ -69,7 +69,6 @@ class EngTest extends React.PureComponent {
       <React.Fragment>
 
         <div>
-          {/* <p className={style.title}>水平测试</p> */}
           {
             !testend ?
             <div>
@@ -90,7 +89,7 @@ class EngTest extends React.PureComponent {
             </div>
             :
             <div className="card-box">
-              <p>您已完成词汇测试！您的英语水平为：{levelConvert(level)}水平</p>
+              <div className={style.text}>您已完成词汇测试！您的英语水平为：<span style = {{"color":"#188ae2"}}>{levelConvert(level)}水平</span></div>
             </div>
           }
         </div>
