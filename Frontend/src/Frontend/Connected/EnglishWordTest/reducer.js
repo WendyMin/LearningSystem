@@ -167,6 +167,7 @@ export default ( state = {
 
     }
 
+//再测一次，无用
     case __FORCE_END: {
       return {
         ...state,

@@ -24,7 +24,7 @@ class EnglishWordTest extends React.PureComponent {
       //lockAndShow
     } = this.props;
 
-    console.log(questions)
+    // console.log(questions)
 
     var question = {
       choosed : questions[level][num].choosed,
@@ -32,8 +32,8 @@ class EnglishWordTest extends React.PureComponent {
       options: questions[level][num].options,
       rightKey: questions[level][num].key,
       lock: questions[level][num].lock,
+      show: questions[level][num].show,
     }
-    //console.log(question )
 
     return (
       <div className="container" //style={questionSize} style={"text_align": "center"}
@@ -43,12 +43,12 @@ class EnglishWordTest extends React.PureComponent {
         <Question
           {...question}
           layoutFormat = "upDown"
-          // subject = "logic_test"
+          questionLength = "single"
+          paraLength = "none"
           onSetChoice={ cid => {
               autoNext( cid , 10000 );
             }
           }
-
         />
       </div>
     );

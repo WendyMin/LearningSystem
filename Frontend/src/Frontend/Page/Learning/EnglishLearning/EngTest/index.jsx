@@ -5,6 +5,7 @@ import { Prompt } from 'react-router';
 import style from 'style';
 
 import UserManagerWindow from "Windows/UserManager";
+import SlideRL from 'Animation/SlideRL';
 
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
@@ -42,18 +43,24 @@ class EngTest extends React.PureComponent {
     const {
       // test,
       questions,
+      ined,
+      forceNext,
     } = this.props;
-
     // console.log(questions["basic"]);
 
     return(
       <React.Fragment>
           <div>
             <p className={style.title}>水平测试</p>
-            {/* <EnglishWordTest
-                //submiter = { this.submitQuestions }
-                loader = {this.loadTest}
-            /> */}
+            <SlideRL play = {ined}>
+              <EnglishWordTest
+                  //submiter = { this.submitQuestions }
+                  loader = {this.loadTest}
+              />
+          </SlideRL>
+          <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success btn-lg m-b-5"
+                  onClick = {forceNext}
+          >下一题</button>
           </div>
       </React.Fragment>
     )
