@@ -17,6 +17,7 @@ import LogicHelp from 'UI/Help/LogicHelp';
 
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
+var sha1 = require('sha1');
 
 
 class LogicLearning extends React.PureComponent {
@@ -113,9 +114,15 @@ class LogicLearning extends React.PureComponent {
                  </li>
 
                  <li>
-                   <a href="#" className="text-custom">
+                   <a className="text-custom"
+                      onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=59.110.23.212&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
+                      href="javascript:void(0);"
+                      >
                      <i className="zmdi zmdi-power"></i>
                    </a>
+                   {/* <a href="#" className="text-custom">
+                     <i className="zmdi zmdi-power"></i>
+                   </a> */}
                  </li>
                 </ul>
                 </div>

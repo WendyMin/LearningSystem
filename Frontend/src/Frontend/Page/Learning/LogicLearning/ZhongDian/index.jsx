@@ -49,13 +49,17 @@ class ZhongDian extends React.PureComponent {
 
       parser: response => {
         var all = [];
-        for( var i = 0 ; i < response.timu.length ; i++ ){
-          response.timu[i].map ( one => all.push(one) )
-        }
+        // for( var i = 0 ; i < response.timu.length ; i++ ){
+        //   response.timu[i].map ( one => all.push(one) )
+        // }
         //console.log(all)
+
+        response.timu.map ( one => all.push(one) )
+
         return all.map(one => ({
            questionId: one.id,
-           options: [one.op_one , one.op_two , one.op_three , one.op_four , one.op_five],
+           options: one.xuangxiang,
+           // options: [one.op_one , one.op_two , one.op_three , one.op_four , one.op_five],
            rightKey: changeAlpToNum( one.answer ),
            question: one.question,
            analysis: one.analysis,
@@ -140,7 +144,7 @@ class ZhongDian extends React.PureComponent {
       setChoice,
       setLearningType
     } = this.props;
-    //console.log(this.props)
+    console.log(this.props)
     //console.log(questions)
 
     return (

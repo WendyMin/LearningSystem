@@ -22,6 +22,7 @@ import Login from 'Page/Login';
 import  { view as SubjectSelect } from 'Connected/SubjectSelect';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
+var sha1 = require('sha1');
 
 class EnglishLearning extends React.PureComponent {
   constructor( props ){
@@ -117,9 +118,15 @@ class EnglishLearning extends React.PureComponent {
                    </li>
 
                    <li>
-                     <a href="#" className="text-custom">
+                     <a className="text-custom"
+                        onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=59.110.23.212&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
+                        href="javascript:void(0);"
+                        >
                        <i className="zmdi zmdi-power"></i>
                      </a>
+                     {/* <a href="#" className="text-custom">
+                       <i className="zmdi zmdi-power"></i>
+                     </a> */}
                    </li>
                   </ul>
                 </div>
