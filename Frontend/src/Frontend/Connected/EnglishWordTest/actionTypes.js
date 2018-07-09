@@ -20,6 +20,12 @@ export const __RECORD_WORD_TEST = {
   rejected: "ENGLISH_WORD_TEST/__RECORD_WORD_TEST_REJECTED",
 };
 
+export const __GET_LEVEL = {
+  pending: "ENGLISH_WORD_TEST/__GET_LEVEL_PENDING",
+  resolved: "ENGLISH_WORD_TEST/__GET_LEVEL_RESOVLED",
+  rejected: "ENGLISH_WORD_TEST/__GET_LEVEL_REJECTED",
+};
+
 export const __NEXT = "ENGLISH_WORD_TEST/__NEXT";
 export const __AUTO_NEXT = "ENGLISH_WORD_TEST/__AUTO_NEXT";
 export const __FORCE_END = "ENGLISH_WORD_TEST/__FORCE_END";

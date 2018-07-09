@@ -22,6 +22,7 @@ import Login from 'Page/Login';
 import  { view as SubjectSelect } from 'Connected/SubjectSelect';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
+
 var sha1 = require('sha1');
 
 class EnglishLearning extends React.PureComponent {

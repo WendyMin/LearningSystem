@@ -8,6 +8,7 @@ import {
   __CLEAR_AUTO_NEXT,
   __FORCE_END,
   __RECORD_WORD_TEST,
+  __GET_LEVEL,
 } from 'actionTypes';
 
 //import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
@@ -258,5 +259,70 @@ export const recordWordTest = ({ url , body , parser , headers  , initState }) =
   })
   .catch( err => {
       dispatchLastest( recordWordTestRejected( "network" , err ) );
+  });
+};
+
+
+
+
+
+let getLevelCounter = 0;
+const getLevelStart = () => ({
+    type: __GET_LEVEL.pending,
+    payload: {
+
+    },
+    id: getLevelCounter
+});
+const getLevelResolved = ( response , initState ) => ({
+    type: __GET_LEVEL.resolved,
+    payload: {
+      response,
+      initState
+    },
+    id: getLevelCounter
+});
+const getLevelRejected = ( reason , detail ) => ({
+    type: __GET_LEVEL.rejected,
+    payload: {
+      reason,
+      detail
+    },
+    id: getLevelCounter
+});
+
+export const getLevel = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+  const reqId = ++getLevelCounter;
+  const dispatchLastest = action => {
+    if( reqId === getLevelCounter ){
+      dispatch( action );
+    }
+  }
+  dispatch( getLevelStart() );
+  if( typeof body === "object" ){
+    body = JSON.stringify( body );
+  }
+  fetch( url , {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...headers
+      },
+      body: body
+  })
+  .then( response => {
+    if( !response.ok ){
+      dispatchLastest( getLevelRejected( "server" , response.status ) );
+      return;
+    }
+    response.json()
+    //.then( json => dispatchLastest( loadTestQuestionsResolved( parser( json ) , initState ) ) )
+    .then( json => dispatchLastest( getLevelResolved( json  , initState ) ) )
+    .catch( err => {
+      dispatchLastest( getLevelRejected( "json" , err ) )
+    });
+  })
+  .catch( err => {
+      dispatchLastest( getLevelRejected( "network" , err ) );
   });
 };

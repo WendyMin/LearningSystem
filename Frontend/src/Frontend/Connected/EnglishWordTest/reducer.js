@@ -6,13 +6,17 @@ import {
   __ASYNC_SUBMIT_QUESTIONS,
   __NEXT,
   __AUTO_NEXT,
-  __FORCE_END
+  __FORCE_END,
+  __RECORD_WORD_TEST,
+  __GET_LEVEL,
 } from 'actionTypes';
 
 import nextQuestion from "Algorithm/EngWordTestDecideNextWord";
 
 export default ( state = {
     content: {},
+    change: [],
+    recordFlagAndLevel: [],
     submitState: {
       pending: 0,
       resolved: 0,
@@ -40,7 +44,7 @@ export default ( state = {
   //console.log(content)
   switch( type ){
 
-/*  defineAsyncActionReducer __LOAD_QUESTIONS start  */
+    /*  defineAsyncActionReducer __LOAD_QUESTIONS start  */
     case __ASYNC_LOAD_QUESTIONS.pending: {
       let loadState = {...state.loadState };
       loadState.lastFailed = false;
@@ -79,6 +83,92 @@ export default ( state = {
         loadState
       };
     }
+
+
+
+    /*  defineAsyncActionReducer __RECORD_WORD_TEST start  */
+    case __RECORD_WORD_TEST.pending: {
+      let loadState = {...state.loadState };
+      loadState.lastFailed = false;
+      loadState.pending++;
+      return {
+        ...state,
+        loadState
+      };
+    }
+    case __RECORD_WORD_TEST.resolved: {
+      let { response , initState } = payload;
+      initState = initState || {
+        lock: false,
+        show: false,
+        choice: -1
+      };
+      let loadState = {...state.loadState };
+      loadState.resolved++;
+      loadState.pending--;
+      return {
+        ...state,
+        loadState,
+        change: response,
+      };
+    }
+    case __RECORD_WORD_TEST.rejected: {
+      let { reason , detail } = payload;
+      let loadState = {...state.loadState };
+      loadState.rejected++;
+      loadState.pending--;
+      loadState.lastFailed = true;
+      loadState.failedReason = reason;
+      loadState.failedDetail = detail;
+      return {
+        ...state,
+        loadState
+      };
+    }
+
+
+
+
+    /*  defineAsyncActionReducer __GET_LEVEL start  */
+    case __GET_LEVEL.pending: {
+      let loadState = {...state.loadState };
+      loadState.lastFailed = false;
+      loadState.pending++;
+      return {
+        ...state,
+        loadState
+      };
+    }
+    case __GET_LEVEL.resolved: {
+      let { response , initState } = payload;
+      initState = initState || {
+        lock: false,
+        show: false,
+        choice: -1
+      };
+      let loadState = {...state.loadState };
+      loadState.resolved++;
+      loadState.pending--;
+      return {
+        ...state,
+        loadState,
+        recordFlagAndLevel: response,
+      };
+    }
+    case __GET_LEVEL.rejected: {
+      let { reason , detail } = payload;
+      let loadState = {...state.loadState };
+      loadState.rejected++;
+      loadState.pending--;
+      loadState.lastFailed = true;
+      loadState.failedReason = reason;
+      loadState.failedDetail = detail;
+      return {
+        ...state,
+        loadState
+      };
+    }
+
 
     case __LOCK_AND_SHOW:
     case __UNLOCK_AND_HIDE:
@@ -167,7 +257,7 @@ export default ( state = {
 
     }
 
-//再测一次，无用
+    //再测一次，无用
     case __FORCE_END: {
       return {
         ...state,

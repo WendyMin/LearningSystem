@@ -98,7 +98,7 @@ class LogicTest extends React.PureComponent {
     right_rate13 += right_rate[13];
     right_rate14 += right_rate[14];
 
-   console.log(right_rate0,right_rate1,right_rate2,right_rate3,right_rate4,right_rate5,right_rate6,right_rate7,right_rate8,right_rate9,right_rate10,right_rate11,right_rate12,right_rate13,right_rate14)
+   // console.log(right_rate0,right_rate1,right_rate2,right_rate3,right_rate4,right_rate5,right_rate6,right_rate7,right_rate8,right_rate9,right_rate10,right_rate11,right_rate12,right_rate13,right_rate14)
    this.props.submitQuestions({
       url: "/api/logicTestRightRate",
       body: {
