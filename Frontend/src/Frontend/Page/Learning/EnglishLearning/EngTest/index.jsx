@@ -87,37 +87,10 @@ class EngTest extends React.PureComponent {
       testAgain,
     } = this.state;
 
-    console.log(didLevel);
+    // console.log(didLevel);
 
     return(
       <React.Fragment>
-
-        {/* <div>
-          {
-            !testend ?
-            <div>
-
-              <SlideRL play = {ined}>
-                <EnglishWordTest
-                    //submiter = { this.submitQuestions }
-                    loader = {this.loadTest}
-                />
-              </SlideRL>
-
-              <div className={style.buttonright}>
-                <button class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                  onClick = {forceNext}>
-                  下一题</button>
-              </div>
-
-            </div>
-            :
-            <div className="card-box">
-              <div className={style.text}>您已完成词汇测试！您的英语水平为：<span style = {{"color":"#188ae2"}}>{levelConvert(level)}水平</span></div>
-            </div>
-          }
-        </div> */}
-
 
         <div>
           {
