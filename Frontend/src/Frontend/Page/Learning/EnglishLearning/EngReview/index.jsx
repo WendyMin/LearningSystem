@@ -158,7 +158,9 @@ class EngReview extends React.PureComponent {
       submiting,
       lockAndShow
     } = this.props;
+
     var submitTime = submitQuestionState.resolved;
+    
     if( submiting ){
       return;
     }

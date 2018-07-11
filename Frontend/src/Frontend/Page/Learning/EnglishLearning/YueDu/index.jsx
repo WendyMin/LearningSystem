@@ -30,7 +30,7 @@ import {
 import {
   view as TranslatedWords
 } from 'Connected/TranslatedWords';
-import {  actions as PortTestActions} from 'Connected/PortTest';
+// import {  actions as PortTestActions} from 'Connected/PortTest';
 import {
   view as LearningTypeSelect,
   actions as LearningTypeSelectActions
@@ -193,8 +193,8 @@ quit = () => {
     }
   }
 
-  function = () => {
-    this.props.loadPortContent({
+  getUnitAndCourse = () => {
+    this.props.getUnitAndCourse({
       url: "/api/eng_getUnit",
       body:{
         username: this.props.username,
@@ -205,7 +205,7 @@ quit = () => {
   componentDidMount(){
     this.getArticle();
     this.loadQuestions();
-    this.function();
+    this.getUnitAndCourse();
   }
 
   render(){
@@ -249,7 +249,7 @@ quit = () => {
     }
 
     // this.props.changeArticleId(this.props.getArticleId.artid);
-    console.log(this.props.articleId)
+    // console.log(this.props.UnitAndCourse)
 
     return (
       <React.Fragment>
@@ -436,13 +436,13 @@ export default applyHOCs([
       loadArticleState: state.EnglishArticle.loadState,
       translateWordsState: state.EnglishArticle.translateWordsState,
       articleId: state.EnglishArticle.articleId,
-      UnitAndCourse: state.PortTest.content,
+      UnitAndCourse: state.EnglishArticle.unitAndCourse,
       learningType: state.LearningTypeSelect.learningType,
     }),
     dispatch => ({
       ...bindActionCreators( SingleOptionQuestionsActions , dispatch ),
       ...bindActionCreators( EnglishArticleActions , dispatch ),
-      ...bindActionCreators( PortTestActions , dispatch),
+      // ...bindActionCreators( PortTestActions , dispatch),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
     })
   )],

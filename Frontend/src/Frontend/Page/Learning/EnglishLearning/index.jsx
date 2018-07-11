@@ -22,13 +22,12 @@ import Login from 'Page/Login';
 import  { view as SubjectSelect } from 'Connected/SubjectSelect';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
+
 var sha1 = require('sha1');
 
 class EnglishLearning extends React.PureComponent {
   constructor( props ){
     super( props );
-
-    // this.type = ["词汇测试" , "进入学习" , "开始复习" , "统计图表", "查看帮助"];
   }
 
   render(){
@@ -73,7 +72,7 @@ class EnglishLearning extends React.PureComponent {
                   </li>
                   <li>
                     <h4 className="page-title">
-                      {choice==0 ? <div>英语  > 词汇测试</div> :
+                      {choice==0 ? <div>英语  > 水平测试</div> :
                        choice==1 ?
                         <div>
                          <span>英语  > </span>
@@ -81,7 +80,7 @@ class EnglishLearning extends React.PureComponent {
                          {
                            learningType == "" || learningType == "英语主页面" ? null :
                            learningType == "英语生词难句" ? <span onClick={()=>{this.props.setLearningType(learningType)}}> > 生词难句</span> :
-                           learningType == "英语汉译英" ? <span onClick={()=>{this.props.setLearningType(learningType)}}> > 汉译英</span> :
+                           learningType == "英语汉译英" ? <span onClick={()=>{this.props.setLearningType(learningType)}}> > 写作句型练习</span> :
                            learningType == "英语课后阅读材料" ? <span onClick={()=>{this.props.setLearningType(learningType)}}> > 课后阅读材料</span> :
                             <span onClick={()=>{this.props.setLearningType(learningType)}}> >  {learningType} </span>
                          }
@@ -184,7 +183,7 @@ class EnglishLearning extends React.PureComponent {
                 <div className="row">
 
                   {
-                    choice==0 ? <div className="card-box"><EngTest/></div> :
+                    choice==0 ? <EngTest/> :
                     choice==1 ? <EngLearningTypeSelect/> :
                     choice==2 ? <EngReview/> :
                     choice==3 ? <div className="card-box"><EngChart/></div> :

@@ -25,7 +25,7 @@ class SingleQuestion extends React.PureComponent<Props> {
     const {
       layoutFormat,
       questionLength,  // 问题长度 single 代表 只有一段
-      paraLength,  // 解析长度 single 代表 只有一段
+      paraLength,  // 解析长度 single 代表 只有一段，none代表没有解析
       xuhao,  // 题目序号
       questionId,
       options,
@@ -108,11 +108,12 @@ class SingleQuestion extends React.PureComponent<Props> {
               show ?
               <div className="col-sm-4">
                 <div className="card-box">
-                  { paraLength === "single" ?
-                  <div>{analysis}</div>:
-                  <div>
-                  <TextAndImag list={analysis} showBigImg={() => this.setState({showBigImg: true})}/>
-                </div>
+                  { paraLength === "none"?null:
+                     paraLength=== "single" ?
+                    <div>{analysis}</div>:
+                    <div>
+                      <TextAndImag list={analysis} showBigImg={() => this.setState({showBigImg: true})}/>
+                    </div>
                 }
                 </div>
               </div>
@@ -154,7 +155,8 @@ class SingleQuestion extends React.PureComponent<Props> {
              }
              {show ?
               <div>
-                { paraLength === "single" ?
+                { paraLength === "none" ? null :
+                  paraLength === "single" ?
                   <div>{analysis}</div>:
                   <TextAndImag list={analysis}/>
                 }

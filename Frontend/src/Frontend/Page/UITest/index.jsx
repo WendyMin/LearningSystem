@@ -4,8 +4,6 @@ import { bindActionCreators } from 'redux';
 import { Prompt } from 'react-router';
 import style from 'style';
 
-import Button from 'UI/Button';
-
 import Loading from 'Animation/Loading';
 import SlideLR from 'Animation/SlideLR';
 import SlideRL from 'Animation/SlideRL';
@@ -13,9 +11,9 @@ import SlideDU from 'Animation/SlideDU';
 import SlideUD from 'Animation/SlideUD';
 
 import {
-  view as EnglishArticle,
-  actions as EnglishArticleActions
-} from 'Connected/EnglishArticle';
+  view as EnglishWordTest,
+  actions as EnglishWordTestActions
+} from 'Connected/EnglishWordTest';
 
 import UserManagerWindow from "Windows/UserManager";
 
@@ -44,17 +42,26 @@ class UITest extends React.PureComponent {
   }
 
   componentDidMount(){
-    this.loadExtraArticle();
+    this.getUserLevel();
   }
 
-  loadExtraArticle = () => {
-    this.props.loadPortContent({
-      url: "/api/eng_getExtraArticle",
-      body: {
-        articleId:  1,
+  getUserLevel = () => {
+    this.props.getLevel({
+      url:"/api/eng_getLevel",
+      body:{
+        username: this.props.username,
       }
     })
   }
+
+  // getUserLevel = () => {
+  //   this.props.loadPortContent({
+  //     url:"/api/eng_getLevel",
+  //     body:{
+  //       username: this.props.username,
+  //     }
+  //   })
+  // }
 
   text = () => {
     document.getElementById("popup").innerHTML = "<img src=\"/static/images/gallery/5.jpg\"/>";
@@ -101,10 +108,11 @@ class UITest extends React.PureComponent {
   render(){
 
     const {
-      content
+      content,
+      flagAndLevel,
     } = this.props;
 
-    // console.log(content);
+    console.log(flagAndLevel);
 
     return(
       <React.Fragment>
@@ -138,9 +146,10 @@ export default applyHOCs([
       username: state.UserManager.name,
       articleId: state.EnglishArticle.articleId,
       content: state.PortTest.content,
+      flagAndLevel: state.EnglishWordTest.recordFlagAndLevel,
     }),
     dispatch => ({
-      ...bindActionCreators( EnglishArticleActions , dispatch ),
+      ...bindActionCreators( EnglishWordTestActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch),
     })
   )],

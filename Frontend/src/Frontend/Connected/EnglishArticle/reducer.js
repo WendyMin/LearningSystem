@@ -7,6 +7,7 @@ import {
   __HIDE_TRANSLATE,
   __HIDE_ALL,
   __ASYNC_LOAD_CONTENT,
+  __GET_UNIT_AND_COURSE,
 } from 'actionTypes';
 
 import TrieTree from 'DataStructure/TrieTree';
@@ -37,7 +38,8 @@ export default (
       rejected: 0,
       lastFailed: false,
       failedReason: "network" // "json" , "server"
-    }
+    },
+    unitAndCourse: [],
   } , { type , payload , id } ) => {
   switch( type ){
 
@@ -214,6 +216,7 @@ export default (
         allTranslates.push( oneParagraphTranslate );
         return oneParagraphWords;
       });
+
       // console.log(paragraphedWords)
 
       return {
@@ -242,6 +245,51 @@ export default (
     /*
     defineAsyncActionReducer __LOAD_CONTENT end
     */
+
+
+
+
+    case __GET_UNIT_AND_COURSE.pending: {
+      let loadState = {...state.loadState };
+      loadState.lastFailed = false;
+      loadState.pending++;
+      return {
+        ...state,
+        loadState
+      };
+    }
+    case __GET_UNIT_AND_COURSE.resolved: {
+      let { response , initState } = payload;
+      initState = initState || {
+        lock: false,
+        show: false,
+        choice: -1
+      };
+      let loadState = {...state.loadState };
+      loadState.resolved++;
+      loadState.pending--;
+      return {
+        ...state,
+        loadState,
+        unitAndCourse: response,
+      };
+    }
+    case __GET_UNIT_AND_COURSE.rejected: {
+      let { reason , detail } = payload;
+      let loadState = {...state.loadState };
+      loadState.rejected++;
+      loadState.pending--;
+      loadState.lastFailed = true;
+      loadState.failedReason = reason;
+      loadState.failedDetail = detail;
+      return {
+        ...state,
+        loadState
+      };
+    }
+
+
+
     default:
       return state;
   }
