@@ -153,9 +153,9 @@ class EnterLearning extends React.PureComponent {
               </a>
 
               <a href="javascript:void(0);">
-              <div className={style.translucent}>
+              {this.props.whetherDidZhongDian ?
                 <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
-                   <div className="gal-detail thumb"  onClick = {() => alert("完成重点习题后才可解锁，请先完成重点习题!")}>
+                   <div className="gal-detail thumb"  onClick = {() => {setLearningType("强化练习") ; this.setState({typeSelectShow: false})}}>
                        <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
                        <h4  className = {TextStyle[2]}
                             onMouseOver = {() => this.setState({typeSelectShow: true , changeColor3: true})}
@@ -163,46 +163,37 @@ class EnterLearning extends React.PureComponent {
                        >强化练习
                        </h4>
                        <p className={style.text_muted1}>
-                           完成重点习题后解锁
+                           点击查看每一章节的强化练习，提交后可以查看正确答案和解析
                        </p>
+                       {/* <p className={style.text_muted1}>
+                           完成重点习题后解锁
+                       </p> */}
                    </div>
                 </div>
-              </div>
-               <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
-                  <div className="gal-detail thumb"  onClick = {() => {setLearningType("强化练习") ; this.setState({typeSelectShow: false})}}>
-                      <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
-                      <h4  className = {TextStyle[2]}
-                           onMouseOver = {() => this.setState({typeSelectShow: true , changeColor3: true})}
-                           onMouseLeave = {() => this.setState({changeColor3: false})}
-                      >强化练习
-                      </h4>
-                      <p className={style.text_muted1}>
-                          点击查看每一章节的强化练习，提交后可以查看正确答案和解析
-                      </p>
-                      {/* <p className={style.text_muted1}>
-                          完成重点习题后解锁
-                      </p> */}
+                :
+                <div className={style.translucent}>
+                  <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
+                     <div className="gal-detail thumb" onClick = {() => alert("完成重点习题后才可解锁，请先完成重点习题!")}>
+                         <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
+                         <h4  className = {TextStyle[2]}
+                              onMouseOver = {() => this.setState({typeSelectShow: true , changeColor3: true})}
+                              onMouseLeave = {() => this.setState({changeColor3: false})}
+                         >强化练习
+                         </h4>
+                         <p className={style.text_muted1}>
+                            <div align="center">
+                              <i className="zmdi zmdi-lock-outline" style={{"fontSize":"60px"}}></i><br/>
+                              完成重点习题后解锁
+                            </div>
+                         </p>
+                     </div>
                   </div>
-               </div>
-
+                </div>
+              }
               </a>
 
               <a href="javascript:void(0);">
-                <div className={style.translucent}>
-                <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
-                  <div className="gal-detail thumb" onClick = {() => alert("完成强化练习后才可解锁，请先完成强化练习!")}>
-                    <img src="/static/images/gallery/3.jpg" className="thumb-img" alt="work-thumbnail"/>
-                    <h4 className = {TextStyle[3]}
-                        onMouseOver = {() => this.setState({typeSelectShow: true , changeColor4: true})}
-                        onMouseLeave = {() => this.setState({changeColor4: false})}
-                    >单元测试
-                    </h4>
-                    <p className={style.text_muted1}>
-                      完成强化练习后解锁
-                    </p>
-                  </div>
-                </div>
-              </div>
+              {this.props.whetherDidQiangHua ?
                 <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
                   <div className="gal-detail thumb" onClick = {() => {setLearningType("单元测试") ; this.setState({typeSelectShow: false})}}>
                     <img src="/static/images/gallery/3.jpg" className="thumb-img" alt="work-thumbnail"/>
@@ -216,6 +207,26 @@ class EnterLearning extends React.PureComponent {
                     </p>
                   </div>
                 </div>
+                :
+                <div className={style.translucent}>
+                <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
+                  <div className="gal-detail thumb" onClick = {() => alert("完成强化练习后才可解锁，请先完成强化练习!")}>
+                    <img src="/static/images/gallery/3.jpg" className="thumb-img" alt="work-thumbnail"/>
+                    <h4 className = {TextStyle[3]}
+                        onMouseOver = {() => this.setState({typeSelectShow: true , changeColor4: true})}
+                        onMouseLeave = {() => this.setState({changeColor4: false})}
+                    >单元测试
+                    </h4>
+                    <p className={style.text_muted1}>
+                       <div align="center">
+                         <i className="zmdi zmdi-lock-outline" style={{"fontSize":"60px"}}></i><br/>
+                         完成强化练习后解锁
+                       </div>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              }
               </a>
 
             </div>
@@ -255,7 +266,9 @@ export default applyHOCs([
       // xingshiOrLunzheng: state.LearningTypeSelect.xingshiOrLunzheng,
       learningType: state.LearningTypeSelect.learningType,
       finished_level_test: state.LearningTypeSelect.finished_level_test,
-      chapter_name: state.LearningTypeSelect.chapter_name
+      chapter_name: state.LearningTypeSelect.chapter_name,
+      whetherDidZhongDian: state.LearningTypeSelect.whetherDidZhongDian,
+      whetherDidQiangHua: state.LearningTypeSelect.whetherDidQiangHua
     }),
     dispatch => ({
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),

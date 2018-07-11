@@ -9,6 +9,8 @@ export default( state = {
   xingshiOrLunzheng: "",
   learningType: "",
   chapter_name: "",
+  whetherDidZhongDian: false,
+  whetherDidQiangHua: false,
   finished_level_test: "", // 0 表示未完成水平测试 ， 1 完成了水平测试
   enterNextChapter: false,
   loadState: {
