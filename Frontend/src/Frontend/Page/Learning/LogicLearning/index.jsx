@@ -32,17 +32,15 @@ class LogicLearning extends React.PureComponent {
       logined,
       choice,
     } = this.props;
-    // console.log(choice);
-    console.log(this.props.whetherEnlargeImag)
 
-    var user = sessionStorage.getItem("user");
-    if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" ){
-      <Login/>
-    }
-    else{
-      this.props.setUser(user,true);
-      sessionStorage.setItem("user",user);
-    }
+    // var user = sessionStorage.getItem("user");
+    // if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" ){
+    //   <Login/>
+    // }
+    // else{
+    //   this.props.setUser(user,true);
+    //   sessionStorage.setItem("user",user);
+    // }
     return (
       <React.Fragment>
         <div id="wrapper">
@@ -106,11 +104,11 @@ class LogicLearning extends React.PureComponent {
                 <h5>{this.props.username}</h5>
 
                 <ul className="list-inline">
-                 <li>
+                 {/* <li>
                    <a href="#" >
                      <i className="zmdi zmdi-settings"></i>
                    </a>
-                 </li>
+                 </li> */}
 
                  <li>
                    <a className="text-custom"
@@ -131,27 +129,27 @@ class LogicLearning extends React.PureComponent {
                   <ul>
                     <li className="text-muted menu-title">逻辑</li>
                     <li onClick={()=>this.props.setSubjectFunctionSelect(0)}>
-                      <a className="waves-effect"><i className="zmdi zmdi-layers"></i> <span> 入口测试 </span></a>
+                      <a className="waves-effect" style={choice==0?{"color":"#71b6f9"}:null}><i className="zmdi zmdi-layers"></i> <span> 入口测试 </span></a>
                     </li>
 
                     <li onClick={()=>{this.props.setSubjectFunctionSelect(1);this.props.setLearningType("");this.props.setButtonChoice("")}}>
-                      <a className="waves-effect"><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
+                      <a className="waves-effect" style={choice==1?{"color":"#71b6f9"}:null}><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
                     </li>
 
                     <li onClick={()=>{this.props.setSubjectFunctionSelect(2);this.props.setLearningType("");this.props.setButtonChoice("")}}>
-                      <a className="waves-effect"><i className="zmdi zmdi-book"></i> <span> 开始复习 </span> </a>
+                      <a className="waves-effect" style={choice==2?{"color":"#71b6f9"}:null}><i className="zmdi zmdi-book"></i> <span> 开始复习 </span> </a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(3)}>
-                      <a className="waves-effect"><i className="zmdi zmdi-graduation-cap"></i> <span> 模拟测试 </span> </a>
+                      <a className="waves-effect" style={choice==3?{"color":"#71b6f9"}:null}><i className="zmdi zmdi-graduation-cap"></i> <span> 模拟测试 </span> </a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(4)}>
-                      <a className="waves-effect"><i className="zmdi zmdi-chart"></i> <span> 数据统计 </span> </a>
+                      <a className="waves-effect" style={choice==4?{"color":"#71b6f9"}:null}><i className="zmdi zmdi-chart"></i> <span> 数据统计 </span> </a>
                      </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(5)}>
-                      <a className="waves-effect"><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
+                      <a className="waves-effect" style={choice==5?{"color":"#71b6f9"}:null}><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
                     </li>
                   </ul>
                  <div className="clearfix"></div>

@@ -62,7 +62,10 @@ class LogicTestTongji extends React.PureComponent {
               {this_rightRate.map((oneError , key) =>
                 <td key = {key}>
                   {oneError}
-                  <span style={{"color":"#797979","paddingLeft":"15px"}}><i className="fa fa-long-arrow-up"></i></span>
+                  <span style={{"color":"#797979","paddingLeft":"15px"}}>
+                    <i className="fa fa-long-arrow-up"></i>
+                    <i className="fa fa-long-arrow-down"></i>
+                  </span>
                 </td>)
               }
             </tr>
