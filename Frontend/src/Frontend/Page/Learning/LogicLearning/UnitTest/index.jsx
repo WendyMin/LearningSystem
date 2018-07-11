@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import style from 'style';
 
 import Button from 'UI/Button';
-import Info from 'UI/Info';
-import TextAndImag from 'UI/TextAndImag';
-import SingleQuestion from 'UI/SingleQuestion';
+// import Info from 'UI/Info';
+// import TextAndImag from 'UI/TextAndImag';
+// import SingleQuestion from 'UI/SingleQuestion';
 import LogicChapterError from 'UI/LogicChapterError';
 import changeAlpToNum from 'Algorithm/changeAlpToNum';
 // import UserManagerWindow from "Windows/UserManager";
@@ -20,7 +20,7 @@ import { actions as PortTestActions } from 'Connected/PortTest';
 import { actions as ZhentiPerYearTongjiActions } from 'Connected/ZhentiPerYearTongji';
 import { actions as ZhentiAllYearTongjiActions } from 'Connected/ZhentiAllYearTongji';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
-import { actions as LogicStateActions } from 'Connected/LogicState';
+// import { actions as LogicStateActions } from 'Connected/LogicState';
 
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
@@ -30,7 +30,7 @@ class UnitTest extends React.PureComponent {
   constructor( props ){
     super( props );
 
-    this.questions = [];
+    // this.questions = [];
     this.state = {
       end: false,
       unitTongjiShow: false,
@@ -65,7 +65,6 @@ class UnitTest extends React.PureComponent {
         return all.map(one => ({
            questionId: one.id,
            options: one.xuanxiang,
-           //options: [one.op_one , one.op_two , one.op_three , one.op_four , one.op_five],
            rightKey: changeAlpToNum( one.answer ),
            question: one.question,
            analysis: one.analysis,
@@ -75,9 +74,8 @@ class UnitTest extends React.PureComponent {
     })
   }
 
-
-
   submitQuestions = () => {
+    this.setState({submit: true});
     const {
       username,
       content,
@@ -119,14 +117,11 @@ class UnitTest extends React.PureComponent {
         dalei: content.chapter_name,
         question_id: question_id,
         RightOrWrong: RightOrWrong
-        //time: submitTime + 1
       }
     });
-    //if( ( ( submitTime + 1 ) & 1 ) === 0 ){
-      for( var i = 0; i < questions.length ; i++ ){
-        lockAndShow( questions[i].questionId );
-      }
-    //}
+    for( var i = 0; i < questions.length ; i++ ){
+      lockAndShow( questions[i].questionId );
+    }
   }
 
   loadChapterError = () => {
@@ -175,12 +170,12 @@ class UnitTest extends React.PureComponent {
   render(){
     const { end } = this.state;
     const {
-      submitQuestionState,
-      loadQuestionState,
-      loadContent,
-      loadContentState,
-      ined,
-      questions,
+      // submitQuestionState,
+      // loadQuestionState,
+      // loadContent,
+      // loadContentState,
+      // ined,
+      // questions,
       content,
       setChoice,
     } = this.props;
@@ -188,11 +183,23 @@ class UnitTest extends React.PureComponent {
 
     return (
       <React.Fragment>
-        {/* <Prompt
-          when={end==false}
-          message="you need to do it again, are you sure to quit?"
-        /> */}
         { this.state.unitTongjiShow ?
+          <LogicChapterError chapter_name = {this.props.chapter_name} ceshiData = {this.props.ceshiData} chapterData = {this.props.chapterData}
+                             stayThisChapter = {() => this.finishedChapter(0)} enterNextChapter = {() => this.finishedChapter(1)} // 1 进入下一章 ， 0 不进入
+          />
+          :
+          this.state.thisOrNext ? <EnterLearning/> :
+           <div className="card-box">
+             <h4 className = {style.dalei}> {content.chapter_name} </h4>
+             <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight"/>
+             <div align = "center">
+               {this.state.submit ? <Button text = {"查看本章数据统计"} onClick = {() => this.loadChapterError()}/>:
+               <Button text = {"确认提交"} onClick = {() => this.submitQuestions()}/>}
+             </div>
+           </div>
+        }
+
+         {/* { this.state.unitTongjiShow ?
           <LogicChapterError chapter_name = {this.props.chapter_name} ceshiData = {this.props.ceshiData} chapterData = {this.props.chapterData}
                              stayThisChapter = {() => this.finishedChapter(0)} enterNextChapter = {() => this.finishedChapter(1)} // 1 进入下一章 ， 0 不进入
           />
@@ -200,7 +207,7 @@ class UnitTest extends React.PureComponent {
           this.state.thisOrNext ? <EnterLearning/> :
           content.flag == 1 ?
            <div className="card-box">
-              {/* <div className = {style.pageTitle}> 单元测试 </div> */}
+              <div className = {style.pageTitle}> 单元测试 </div>
               <div className = {style.logic_knowledge}>
                  <h4 className = {style.dalei}> {content.chapter_name} </h4>
                  <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight"/>
@@ -216,7 +223,7 @@ class UnitTest extends React.PureComponent {
            content.flag == 3 ? <Info info = "您还没有完成重点习题，请先完成重点习题！"/> :
            <Info info = "您还没有完成强化练习，请先完成强化练习！"/>
 
-        }
+        }  */}
 
       </React.Fragment>
     );
@@ -244,7 +251,7 @@ export default applyHOCs([
       ...bindActionCreators( ZhentiPerYearTongjiActions , dispatch ),
       ...bindActionCreators( ZhentiAllYearTongjiActions , dispatch ),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
-      ...bindActionCreators( LogicStateActions , dispatch )
+      // ...bindActionCreators( LogicStateActions , dispatch )
     })
   )],
   UnitTest

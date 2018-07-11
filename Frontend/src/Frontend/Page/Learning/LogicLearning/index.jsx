@@ -63,28 +63,27 @@ class LogicLearning extends React.PureComponent {
                   </li>
                   <li>
                     <h4 className="page-title">
-                      {choice==0 ? <div>逻辑 <i className="ti-angle-double-right"></i> 入口测试</div> :
+                      <span onClick={()=>{this.props.setSubjectFunctionSelect(0);this.props.setLearningType("");this.props.setButtonChoice("")}}>逻辑</span>
+                      {choice==0 ? <span> > 入口测试</span> :
                        choice==1 ?
-                       <div>
-                         <span>逻辑 </span>
-                         <span onClick={()=>{this.props.setLearningType("");this.props.setButtonChoice("")}}><i className="ti-angle-double-right"></i> 进入学习 </span>
+                       <span>
+                         <span onClick={()=>{this.props.setLearningType("");this.props.setButtonChoice("")}}> > 进入学习 </span>
                          {
                            this.props.learningType === "" ? null :
-                           <span onClick={()=>{this.props.setLearningType(this.props.learningType);this.props.setButtonChoice("")}}><i className="ti-angle-double-right"></i>  {this.props.learningType} </span>
+                           <span onClick={()=>{this.props.setLearningType(this.props.learningType);this.props.setButtonChoice("")}}> >  {this.props.learningType} </span>
                          }
-                       </div> :
+                       </span> :
                        choice==2 ?
-                       <div>
-                         <span>逻辑 </span>
-                         <span onClick={()=>{this.props.setLearningType("");this.props.setButtonChoice("")}}><i className="ti-angle-double-right"></i> 开始复习 </span>
+                       <span>
+                         <span onClick={()=>{this.props.setLearningType("");this.props.setButtonChoice("")}}> > 开始复习 </span>
                          {
                            this.props.learningType === "" ? null :
-                           <span onClick={()=>{this.props.setLearningType(this.props.learningType);this.props.setButtonChoice("")}}><i className="ti-angle-double-right"></i>  {this.props.learningType} </span>
+                           <span onClick={()=>{this.props.setLearningType(this.props.learningType);this.props.setButtonChoice("")}}> >  {this.props.learningType} </span>
                          }
-                      </div> :
-                       choice==3 ? <div>逻辑 <i className="ti-angle-double-right"></i> 模拟测试</div> :
-                       choice==4 ? <div>逻辑 <i className="ti-angle-double-right"></i> 数据统计</div> :
-                       <div>逻辑 <i className="ti-angle-double-right"></i> 科目帮助</div>}
+                      </span> :
+                       choice==3 ? <span> > 模拟测试</span> :
+                       choice==4 ? <span> > 数据统计</span> :
+                       <span> > 科目帮助</span>}
                     </h4>
                   </li>
                 </ul>

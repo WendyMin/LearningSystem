@@ -26,7 +26,6 @@ import changeAlpToNum from 'Algorithm/changeAlpToNum';
 import decideNextQuestion from 'Algorithm/decideNextQuestion';
 import logicTestRightRate from 'Algorithm/logicTestRightRate';
 
-import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
@@ -71,17 +70,16 @@ class LogicTest extends React.PureComponent {
     } = this.props;
     //console.log(questions)
 
-    var submitTime = submitQuestionState.resolved;
-    if( submiting ){
-      return;
-    }
+    // var submitTime = submitQuestionState.resolved;
+    // if( submiting ){
+    //   return;
+    // }
 
     var right_rate0 = "";  var right_rate1 = ""; var right_rate2 = "";var right_rate3 = "";var right_rate4 = "";
     var right_rate5 = "";var right_rate6 = "";var right_rate7 = "";var right_rate8 = "";var right_rate9 = "";
     var right_rate10 = "";var right_rate11 = "";var right_rate12 = "";var right_rate13 = "";var right_rate14 = "";
     var right_rate = logicTestRightRate( questions );
     //console.log(right_rate)
-
     right_rate0 += right_rate[0];
     right_rate1 += right_rate[1];
     right_rate2 += right_rate[2];
@@ -136,17 +134,17 @@ class LogicTest extends React.PureComponent {
 
   }
 
-  endThisTest = () => {
-	  var r=confirm("您确定要结束本次测试吗?");
-	  if (r==true){
-      this.setState({enterTest: true , enterLearning: false , testAgain: false})
-		  // x="你按下了\"确定\"按钮!";
-	  }
-	  else{
-		  // x="你按下了\"取消\"按钮!";
-	  }
-	  // document.getElementById("demo").innerHTML=x;
-  }
+  // endThisTest = () => {
+	//   var r=confirm("您确定要结束本次测试吗?");
+	//   if (r==true){
+  //     this.setState({enterTest: true , enterLearning: false , testAgain: false})
+	// 	  // x="你按下了\"确定\"按钮!";
+	//   }
+	//   else{
+	// 	  // x="你按下了\"取消\"按钮!";
+	//   }
+	//   // document.getElementById("demo").innerHTML=x;
+  // }
 
   componentDidMount(){
     this.loadQuestions();
@@ -172,7 +170,7 @@ class LogicTest extends React.PureComponent {
       username,
       whetherDidTest
     } = this.props;
-    //console.log(this.props)
+    console.log(this.props)
     //this.setState({enterTest: !whetherDidTest});
     //console.log(this.state.enterTest);
     //console.log(this.state.enterLearning)
@@ -186,40 +184,26 @@ class LogicTest extends React.PureComponent {
            this.state.enterTest && whetherDidTest || this.state.enterTest && testend || this.state.testAgain && testend ?
            <div className="card-box">
              <div className = {style.tongji}>
-               <LogicTestTongji loadTestResult = {() => this.loadTestResult()}/>
-               <br/><br/><span>&nbsp;&nbsp;&nbsp;&nbsp;请选择再次测试还是开始章节内容的学习：&nbsp;&nbsp;</span>
-               <span><Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , enterLearning: false , testAgain: true});this.props.forceEnd();this.loadQuestions()}}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <LogicTestTongji loadTestResult = {() => this.loadTestResult()}/><br/>
+               {/* <br/><br/><span>&nbsp;&nbsp;&nbsp;&nbsp;请选择再次测试还是开始章节内容的学习：&nbsp;&nbsp;</span> */}
+               <div align="center"><span><Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , enterLearning: false , testAgain: true});this.props.forceEnd();this.loadQuestions()}}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                <Button text = "开始学习" onClick = {() => {this.props.setLearningType("");this.setState({enterTest: false , enterLearning: true , testAgain: false });this.props.setSubjectFunctionSelect(1)}}/></span>
+             </div>
              </div>
            </div>
             :
            this.state.enterTest && !whetherDidTest || this.state.testAgain && !testend ?
            <div>
-                <SlideRL play = {ined}>
-                  <SingleSubjectTest
-                      //submiter = { this.submitQuestions }
-                      loader = {this.loadQuestions}
-                  />
-                </SlideRL>
-            <div align="center">
-              <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success btn-lg m-b-5"
-                      onClick = {forceNext}
-              >下一题</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md btn-sm m-b-5"
+             {JSON.stringify(questions) == '{}' ? null : <SingleSubjectTest/>}
+             <div align="center">
+               <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success btn-lg m-b-5"
+                       onClick = {forceNext}
+               >下一题</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               {/* <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md btn-sm m-b-5"
                       onClick = {() => this.endThisTest()}
-              >结束测试</button>
-            </div>
-
-              {/* <Button className = {style.nextQuestion}
-                      text = {"下一题"}
-                      onClick = {forceNext}
-              />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <Button className = {style.nextQuestion}
-                      text = {"结束测试"}
-                      onClick = {() => this.endThisTest()}
-              /> */}
-
-          </div>
+               >结束测试</button> */}
+             </div>
+           </div>
            : null
          }
 
@@ -232,7 +216,6 @@ class LogicTest extends React.PureComponent {
 };
 
 export default applyHOCs([
-
   makePage,
   connect(
     state => ({

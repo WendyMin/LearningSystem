@@ -7,13 +7,6 @@ import style from 'style';
 import Button from 'UI/Button';
 import Info from 'UI/Info';
 import ButtonControlPane from 'UI/ButtonControlPane';
-//import SingleQuestion from 'UI/SingleQuestion';
-
-// import Loading from 'Animation/Loading';
-// import SlideLR from 'Animation/SlideLR';
-// import SlideRL from 'Animation/SlideRL';
-// import SlideDU from 'Animation/SlideDU';
-// import SlideUD from 'Animation/SlideUD';
 
 import UserManagerWindow from "Windows/UserManager";
 
@@ -25,9 +18,6 @@ import {
   view as PortTest,
   actions as PortTestActions
 } from 'Connected/PortTest';
-// import {
-//   actions as SingleSubjectTestActions
-// } from 'Connected/SingleSubjectTest';
 
 import TextAndImag from 'UI/TextAndImag';
 import SingleQuestion from 'UI/SingleQuestion';
@@ -148,11 +138,9 @@ class SimulationTest extends React.PureComponent {
         //time: submitTime + 1
       }
     });
-    //if( ( ( submitTime + 1 ) & 1 ) === 0 ){
-      for( var i = 0; i < questions.length ; i++ ){
-        lockAndShow( questions[i].questionId );
-      }
-    //}
+    for( var i = 0; i < questions.length ; i++ ){
+      lockAndShow( questions[i].questionId );
+    }
   }
 
  componentDidMount(){

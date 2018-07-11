@@ -64,10 +64,12 @@ class LogicChapterError extends React.PureComponent{
         { // flag == 1  建议进入下一章 ；flag == 2 不建议进入下一章 ； flag == 3 没有数据
           ceshiData.flag == 1 ? <strong align = "center"><div style = {{"color":"#ff5b5b"}}>根据您的做题情况，系统建议您进入下一章的学习</div></strong> :
           ceshiData.flag == 2 ? <strong align = "center"><div style = {{"color":"#ff5b5b"}}>根据您的做题情况，系统建议您留在本章的学习</div></strong> : null
-        }
-        <br/><span>请选择留在本章学习还是进入下一章节的学习：</span>
-        <span><Button text = "留在本章" onClick = {stayThisChapter}></Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <Button text = "进入下一章" onClick = {enterNextChapter}></Button></span>
+        }<br/>
+        <div align="center">
+          {/* <span>请选择留在本章学习还是进入下一章节的学习：</span> */}
+          <span><Button text = "留在本章" onClick = {stayThisChapter}></Button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button text = "进入下一章" onClick = {enterNextChapter}></Button></span>
+        </div>
 
       </div>
     </div>
