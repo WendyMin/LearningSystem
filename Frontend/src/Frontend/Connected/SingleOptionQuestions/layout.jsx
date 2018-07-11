@@ -1,8 +1,3 @@
-// @flow
-/*
-**   Antinux Innovation
-**   Author: Eric Deng
-*/
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';

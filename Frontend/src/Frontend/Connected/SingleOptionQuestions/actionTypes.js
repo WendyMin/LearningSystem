@@ -1,7 +1,3 @@
-/*
-**   Antinux Innovation
-**   Author: Eric Deng
-*/
 export const __SET_CHOICE = "SINGLE_OPTION_QUESTIONS/__SET_CHOICE";
 export const __LOCK_QUESTION = "SINGLE_OPTION_QUESTIONS/__LOCK_QUESTION";
 export const __SHOW_QUESTION = "SINGLE_OPTION_QUESTIONS/__SHOW_QUESTION";

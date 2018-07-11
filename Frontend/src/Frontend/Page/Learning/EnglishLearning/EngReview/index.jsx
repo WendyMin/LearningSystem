@@ -37,6 +37,8 @@ import {
   view as SingleOptionQuestions,
   actions as SingleOptionQuestionsActions
 } from 'Connected/SingleOptionQuestions';
+import EngLearningTypeSelect from 'Page/Learning/EnglishLearning/EngLearningTypeSelect';
+import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 
 class EngReview extends React.PureComponent {
   constructor( props ){
@@ -64,6 +66,10 @@ class EngReview extends React.PureComponent {
       courseSelect: -1,
       processStep: 0,
     };
+    const {
+      setLearningType,
+      learningType,
+    } = this.props;
   }
 
   componentDidMount(){
@@ -160,7 +166,7 @@ class EngReview extends React.PureComponent {
     } = this.props;
 
     var submitTime = submitQuestionState.resolved;
-    
+
     if( submiting ){
       return;
     }
@@ -195,6 +201,8 @@ class EngReview extends React.PureComponent {
       reviewlist,
       hardword,
       hardsentence,
+      setLearningType,
+      learningType,
       // article,
     } = this.props;
 
@@ -240,42 +248,66 @@ class EngReview extends React.PureComponent {
             showReviewList == true ?
             <div>
 
-              <div className={style.title}>复习</div>
+              {/* <div className={style.title}>复习</div> */}
               <br/>
 
               {
-                // reviewlist == undefined ? null :
-                reviewlist.length == 0 ? null :
-                reviewlist.map((list, key)=>
-
-                <div key = {key} className="col-md-4" >
-                  <div className="card-box kanban-box">
-                    <div className="kanban-detail">
-                        <span className="label label-primary pull-right">Finished</span>
-                        <div className={style.title18}>
-                          Unit{list.unit} Course{list.course}
-                        </div>
-                        <ul className="list-inline m-b-0">
-                            <li>
-                                <br/>
-                                <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
-                                        onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
-                                      this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }}
-                                    >查看核心词汇、重点句</button>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                                     onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true, processStep: 0});
-                                     this.getArticle(list.articleid); this.loadQuestions();this.props.hideAllTranslate();
-                                   }}
-                                   >查看阅读文章</button>
-                            </li>
-                        </ul>
+                learningType == "英语进入学习" ?
+                <EngLearningTypeSelect/>
+                :
+                <div>
+                  {
+                  // reviewlist == undefined ? null :
+                  reviewlist.length == 0 ?
+                  <div class="panel panel-custom panel-border">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Sorry</h3>
+                    </div>
+                    <div class="panel-body">
+                      <div className={style.text}>您尚未学习，没有需要复习的内容，请立即学习</div>
+                      <br/>
+                      <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                         onClick = {() => {setLearningType("英语进入学习");}}>
+                         进入学习</button>
                     </div>
                   </div>
+
+                  :
+                  reviewlist.map((list, key)=>
+
+                  <div key = {key} className="col-md-4" >
+                    <div className="card-box kanban-box">
+                      <div className="kanban-detail">
+                          <span className="label label-primary pull-right">Finished</span>
+                          <div className={style.title18}>
+                            Unit{list.unit} Course{list.course}
+                          </div>
+                          <ul className="list-inline m-b-0">
+                              <li>
+                                  <br/>
+                                  <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
+                                          onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
+                                        this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }}
+                                      >查看核心词汇、重点句</button>
+                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                  <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                                       onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true, processStep: 0});
+                                       this.getArticle(list.articleid); this.loadQuestions();this.props.hideAllTranslate();
+                                     }}
+                                     >查看阅读文章</button>
+                              </li>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  )
+                }
                 </div>
 
-                )
+
               }
+
 
             </div>
 
@@ -463,12 +495,15 @@ export default applyHOCs([
       showSentencesTranslates: state.EnglishArticle.showSentencesTranslates,
       loadArticleState: state.EnglishArticle.loadState,
       translateWordsState: state.EnglishArticle.translateWordsState,
+      choice: state.SubjectFunctionSelect.choice,
+      learningType: state.LearningTypeSelect.learningType,
     }),
     dispatch => ({
       ...bindActionCreators( EnglishArticleActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch),
       ...bindActionCreators( EnglishReviewPortActions , dispatch),
       ...bindActionCreators( SingleOptionQuestionsActions , dispatch ),
+      ...bindActionCreators( LearningTypeSelectActions , dispatch ),
     })
   )],
   EngReview

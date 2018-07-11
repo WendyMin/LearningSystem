@@ -8,6 +8,7 @@ import { reducer as EnglishWordTest } from 'Connected/EnglishWordTest';
 import { reducer as EnglishShengciNanjuPort } from 'Connected/EnglishShengciNanjuPort';
 import { reducer as EnglishChtoEngPort } from 'Connected/EnglishChtoEngPort';
 import { reducer as EnglishExtraArticlePort } from 'Connected/EnglishExtraArticlePort';
+import { reducer as EnglishChartPort } from 'Connected/EnglishChartPort';
 import { reducer as SingleSubjectTest } from 'Connected/SingleSubjectTest';
 import { reducer as ButtonExpand } from 'Connected/ButtonExpand';
 import { reducer as WriteContent } from 'Connected/WriteContent';
@@ -36,6 +37,7 @@ export default {
   EnglishShengciNanjuPort: EnglishShengciNanjuPort,
   EnglishChtoEngPort: EnglishChtoEngPort,
   EnglishExtraArticlePort: EnglishExtraArticlePort,
+  EnglishChartPort: EnglishChartPort,
   SingleSubjectTest: SingleSubjectTest,
   ButtonExpand: ButtonExpand,
   WriteContent: WriteContent,

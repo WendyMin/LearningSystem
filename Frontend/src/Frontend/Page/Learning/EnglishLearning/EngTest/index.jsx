@@ -126,9 +126,9 @@ class EngTest extends React.PureComponent {
                 />
               </SlideRL>
               <div className={style.buttonright}>
-                <button class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                {/* <button class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
                   onClick = {forceNext}>
-                  下一题</button>
+                  下一题</button> */}
               </div>
             </div>
             :

@@ -46,7 +46,7 @@ class EnglishWordTest extends React.PureComponent {
           questionLength = "single"
           paraLength = "none"
           onSetChoice={ cid => {
-              autoNext( cid , 10000 );
+              autoNext( cid , 600 );
             }
           }
         />

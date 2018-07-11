@@ -1,7 +1,3 @@
-/*
-**   Antinux Innovation
-**   Author: Eric Deng
-*/
 import {
   __SET_CHOICE,
   __LOCK_QUESTION,

@@ -1,7 +1,7 @@
 import React from 'react';
 import style from 'style';
 import TextAndImag from "UI/TextAndImag";
-import UITest from 'Page/UITest';
+// import UITest from 'Page/UITest';
 
 type Props = {
   questionId: number,

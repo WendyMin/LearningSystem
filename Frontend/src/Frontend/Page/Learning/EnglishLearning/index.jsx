@@ -186,7 +186,7 @@ class EnglishLearning extends React.PureComponent {
                     choice==0 ? <EngTest/> :
                     choice==1 ? <EngLearningTypeSelect/> :
                     choice==2 ? <EngReview/> :
-                    choice==3 ? <div className="card-box"><EngChart/></div> :
+                    choice==3 ? <EngChart/> :
                     <div className="card-box"><EnglishHelp/></div>
                   }
 
