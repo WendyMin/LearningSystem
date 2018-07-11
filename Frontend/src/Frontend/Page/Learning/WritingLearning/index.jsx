@@ -56,9 +56,23 @@ class WritingPage extends React.PureComponent {
                   </li>
                   <li>
                     <h4 className="page-title" id="expand-function">
+                      <span onClick={()=>{this.props.setSubjectFunctionSelect(0);this.props.setLearningType("");this.props.setButtonChoice("")}}>写作 </span>
                       {choice==0 ?
+                        <span>
+                          <span onClick={()=>{this.props.setLearningType("");this.props.setButtonChoice("")}}> > 进入学习 </span>
+                          {
+                            this.props.learningType === "" ? null :
+                            <span onClick={()=>{this.props.setLearningType(this.props.learningType);this.props.setButtonChoice("")}}> >  {this.props.learningType} </span>
+                          }
+                          {
+                            this.props.type === "" ? null :
+                            <span> > {this.props.type} </span>
+                          }
+                        </span> :
+                       <span> > 科目帮助</span>}
+                      {/* {choice==0 ?
                         <div>
-                          {/* 写作 > 进入学习 */}
+                          写作 > 进入学习
                           <span>写作 </span>
                           <span onClick={()=>{this.props.setLearningType("");this.props.setButtonChoice("")}}><i className="ti-angle-double-right"></i> 进入学习 </span>
                           {
@@ -70,7 +84,7 @@ class WritingPage extends React.PureComponent {
                             <span><i className="ti-angle-double-right"></i>  {this.props.type} </span>
                           }
                         </div> :
-                       <div>写作 <i className="ti-angle-double-right"></i> 科目帮助</div>}
+                       <div>写作 <i className="ti-angle-double-right"></i> 科目帮助</div>} */}
                     </h4>
                   </li>
                 </ul>
@@ -93,11 +107,11 @@ class WritingPage extends React.PureComponent {
                  <h5><a href="#">{this.props.username}</a> </h5>
 
                  <ul className="list-inline">
-                    <li>
+                    {/* <li>
                       <a href="#" >
                         <i className="zmdi zmdi-settings"></i>
                       </a>
-                    </li>
+                    </li> */}
 
                     <li>
                       <a className="text-custom"
