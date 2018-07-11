@@ -4,12 +4,8 @@ import { bindActionCreators } from 'redux';
 import style from 'style';
 
 import Button from 'UI/Button';
-// import Info from 'UI/Info';
-// import TextAndImag from 'UI/TextAndImag';
-// import SingleQuestion from 'UI/SingleQuestion';
 import LogicChapterError from 'UI/LogicChapterError';
 import changeAlpToNum from 'Algorithm/changeAlpToNum';
-// import UserManagerWindow from "Windows/UserManager";
 import EnterLearning from 'Page/Learning/LogicLearning/EnterLearning';
 
 import {
@@ -20,7 +16,6 @@ import { actions as PortTestActions } from 'Connected/PortTest';
 import { actions as ZhentiPerYearTongjiActions } from 'Connected/ZhentiPerYearTongji';
 import { actions as ZhentiAllYearTongjiActions } from 'Connected/ZhentiAllYearTongji';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
-// import { actions as LogicStateActions } from 'Connected/LogicState';
 
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
@@ -30,7 +25,6 @@ class UnitTest extends React.PureComponent {
   constructor( props ){
     super( props );
 
-    // this.questions = [];
     this.state = {
       end: false,
       unitTongjiShow: false,
@@ -170,12 +164,6 @@ class UnitTest extends React.PureComponent {
   render(){
     const { end } = this.state;
     const {
-      // submitQuestionState,
-      // loadQuestionState,
-      // loadContent,
-      // loadContentState,
-      // ined,
-      // questions,
       content,
       setChoice,
     } = this.props;
@@ -188,7 +176,7 @@ class UnitTest extends React.PureComponent {
                              stayThisChapter = {() => this.finishedChapter(0)} enterNextChapter = {() => this.finishedChapter(1)} // 1 进入下一章 ， 0 不进入
           />
           :
-          this.state.thisOrNext ? <EnterLearning/> :
+          this.state.thisOrNext ? <EnterLearning xingshi={this.props.xingshiOrLunzheng}/> :
            <div className="card-box">
              <h4 className = {style.dalei}> {content.chapter_name} </h4>
              <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight"/>
@@ -251,7 +239,6 @@ export default applyHOCs([
       ...bindActionCreators( ZhentiPerYearTongjiActions , dispatch ),
       ...bindActionCreators( ZhentiAllYearTongjiActions , dispatch ),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
-      // ...bindActionCreators( LogicStateActions , dispatch )
     })
   )],
   UnitTest

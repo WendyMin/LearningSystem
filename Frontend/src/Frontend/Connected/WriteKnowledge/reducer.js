@@ -3,6 +3,7 @@ import {
 } from 'actionTypes';
 
 export default ( state = {
+    all_content: [], // 直接返回response
     content: [],  // 知识点的所有内容
     name2: [],  // 二级标题
     name3: [],  // 三级标题
@@ -37,6 +38,7 @@ export default ( state = {
       return {
         ...state,
         loadState,
+        all_content: response,
         content: response.all_content,
         name2: response.section_name2,
         name3: response.section_name3

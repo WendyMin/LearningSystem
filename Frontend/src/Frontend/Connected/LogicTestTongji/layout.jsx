@@ -13,14 +13,16 @@ class LogicTestTongji extends React.PureComponent {
 
   render(){
     const {
+      flag,
       count,
       this_rightRate,
+      upOrDown,
       mean_rightRate,
       xingshi,
       lunzheng,
       loadTestResult
     } = this.props;
-    //console.log(this.props);
+    // console.log(this.props);
     var all_type = ["逻辑语言" , "命题逻辑" , "词项逻辑" , "逻辑应用" , "演绎推理" , "归纳逻辑" ,
                     "假设" , "支持" , "削弱" , "评价" , "解释" , "推论" , "比较" , "描述" , "综合"];
 
@@ -62,10 +64,10 @@ class LogicTestTongji extends React.PureComponent {
               {this_rightRate.map((oneError , key) =>
                 <td key = {key}>
                   {oneError}
-                  <span style={{"color":"#797979","paddingLeft":"15px"}}>
-                    <i className="fa fa-long-arrow-up"></i>
-                    <i className="fa fa-long-arrow-down"></i>
-                  </span>
+                  {/* <span style={{"color":"#797979","paddingLeft":"15px"}}>
+                    {upOrDown[key] == 1 ? <i className="fa fa-long-arrow-up"></i> :
+                    <i className="fa fa-long-arrow-down"></i>}
+                  </span> */}
                 </td>)
               }
             </tr>
@@ -85,8 +87,10 @@ class LogicTestTongji extends React.PureComponent {
 
 export default connect(
   ({ LogicTestTongji: ownState }) => ({
+    flag: ownState.flag, //是否做过了水平测试
     count: ownState.count, //开始学习之前做过测试的总次数
     this_rightRate: ownState.this_rightRate, // 本次/最新一次的正确率统计
+    upOrDown: ownState.upOrDown, // 本次测试跟上一次比是升还是降
     mean_rightRate: ownState.mean_rightRate, // 开始学习之前的平均正确率统计
     xingshi: ownState.xingshi,  // 规划路径中的形式逻辑的具体路径
     lunzheng: ownState.lunzheng  // 规划路径中的论证逻辑的具体路径

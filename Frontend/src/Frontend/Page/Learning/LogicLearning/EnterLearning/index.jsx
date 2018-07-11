@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import style from 'style';
-
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 import Info from 'UI/Info';
 
@@ -18,32 +17,39 @@ class EnterLearning extends React.PureComponent {
   constructor( props ){
     super( props );
     this.type = "";
-    // this.style = {
-    //   position: "",
-    //   width: "",
-    //   top: "",
-    // }
+
     this.state = {
       type1Selected: false,
       type2Selected: false,
       typeSelectShow: true,
+      chapterNameShow: false,
       changeColor1: false,
       changeColor2: false,
       changeColor3: false,
       changeColor4: false,
-      show: false
+      // show: false
     }
   }
 
   getLogicChapterName = ( num ) => {
     this.type = num;
-    // console.log(this.props.username,num)
+    console.log(this.props.username,num)
+    console.log(this.props.username,this.props.xingshi)
     if(num !== undefined){
       this.props.getChapterName({
         url: "/api/logicGetChapterName",
         body: {
           username: this.props.username,
           xingshi: num
+        },
+      })
+    }
+    else{
+      this.props.getChapterName({
+        url: "/api/logicGetChapterName",
+        body: {
+          username: this.props.username,
+          xingshi: this.props.xingshi
         },
       })
     }
@@ -78,11 +84,13 @@ class EnterLearning extends React.PureComponent {
 
   render(){
     const {
+      xingshi,
       setLearningType,
       learningType,
       finished_level_test,
-      showBigImg
     } = this.props;
+    console.log(xingshi)
+    // console.log(xingshi===0)
     //console.log(learningType)
 
     var TextStyle = [];
@@ -98,12 +106,16 @@ class EnterLearning extends React.PureComponent {
         <div>
           <Info info = "请先点击选择您要学习的类型："/><br/>
           <div align="center">
-            <button className={this.state.type1Selected ? "btn btn-success btn-trans waves-effect waves-success w-md m-b-5 btn-lg":"btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-sm"}
+            <button className={this.state.type1Selected || xingshi===1 ? "btn btn-success btn-trans waves-effect waves-success w-md m-b-5 btn-lg":"btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-sm"}
                     onClick = {() => {this.setState({type1Selected: true,type2Selected: false});this.getLogicChapterName(1)}}
             >形式逻辑</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button className={this.state.type2Selected ? "btn btn-success btn-trans waves-effect waves-success w-md m-b-5 btn-lg":"btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-sm"}
+            <button className={this.state.type2Selected || xingshi===0? "btn btn-success btn-trans waves-effect waves-success w-md m-b-5 btn-lg":"btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-sm"}
                     onClick = {() => {this.setState({type2Selected: true,type1Selected: false});this.getLogicChapterName(0)}}
             >论证逻辑</button>
+            {this.props.chapter_name == "none" ? null :
+            <div style={{"font-size":"20px"}}>您将要学习的章节是&nbsp;&nbsp;<span style={{"color":"red"}}>{this.props.chapter_name}</span></div>}
+            {/* {chapterNameShow} */}
+
           </div><br/>
 
           <div className="row port m-b-20">
@@ -134,7 +146,7 @@ class EnterLearning extends React.PureComponent {
                     >重点习题
                     </h4>
                     <p className={style.text_muted1}>
-                        点击查看每一章节的重点习题，新用户需要完成入口测试才可以查看
+                        点击查看每一章节的重点习题，提交后可以查看正确答案和解析
                     </p>
                   </div>
                 </div>
@@ -142,6 +154,20 @@ class EnterLearning extends React.PureComponent {
 
               <a href="javascript:void(0);">
               <div className={style.translucent}>
+                <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
+                   <div className="gal-detail thumb"  onClick = {() => alert("完成重点习题后才可解锁，请先完成重点习题!")}>
+                       <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
+                       <h4  className = {TextStyle[2]}
+                            onMouseOver = {() => this.setState({typeSelectShow: true , changeColor3: true})}
+                            onMouseLeave = {() => this.setState({changeColor3: false})}
+                       >强化练习
+                       </h4>
+                       <p className={style.text_muted1}>
+                           完成重点习题后解锁
+                       </p>
+                   </div>
+                </div>
+              </div>
                <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
                   <div className="gal-detail thumb"  onClick = {() => {setLearningType("强化练习") ; this.setState({typeSelectShow: false})}}>
                       <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
@@ -151,14 +177,32 @@ class EnterLearning extends React.PureComponent {
                       >强化练习
                       </h4>
                       <p className={style.text_muted1}>
-                          点击查看每一章节的强化练习，首次学习某一章节时，需要完成重点习题才可以进行强化练习
+                          点击查看每一章节的强化练习，提交后可以查看正确答案和解析
                       </p>
+                      {/* <p className={style.text_muted1}>
+                          完成重点习题后解锁
+                      </p> */}
                   </div>
                </div>
-              </div>
+
               </a>
 
               <a href="javascript:void(0);">
+                <div className={style.translucent}>
+                <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
+                  <div className="gal-detail thumb" onClick = {() => alert("完成强化练习后才可解锁，请先完成强化练习!")}>
+                    <img src="/static/images/gallery/3.jpg" className="thumb-img" alt="work-thumbnail"/>
+                    <h4 className = {TextStyle[3]}
+                        onMouseOver = {() => this.setState({typeSelectShow: true , changeColor4: true})}
+                        onMouseLeave = {() => this.setState({changeColor4: false})}
+                    >单元测试
+                    </h4>
+                    <p className={style.text_muted1}>
+                      完成强化练习后解锁
+                    </p>
+                  </div>
+                </div>
+              </div>
                 <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
                   <div className="gal-detail thumb" onClick = {() => {setLearningType("单元测试") ; this.setState({typeSelectShow: false})}}>
                     <img src="/static/images/gallery/3.jpg" className="thumb-img" alt="work-thumbnail"/>
@@ -168,7 +212,7 @@ class EnterLearning extends React.PureComponent {
                     >单元测试
                     </h4>
                     <p className={style.text_muted1}>
-                      点击查看每一章节的单元测试题，首次学习某一章节时，需要完成重点习题和强化练习，才可以进行单元测试，测试完成后，可以查看本章节的数据统计
+                      点击查看每一章节的单元测试题，测试完成后，点击提交可以查看正确答案和解析，可以查看本章节的数据统计
                     </p>
                   </div>
                 </div>
@@ -208,9 +252,10 @@ export default applyHOCs([
     state => ({
       //logined: state.UserManager.logined,
       username: state.UserManager.name,
-      xingshiOrLunzheng: state.LearningTypeSelect.xingshiOrLunzheng,
+      // xingshiOrLunzheng: state.LearningTypeSelect.xingshiOrLunzheng,
       learningType: state.LearningTypeSelect.learningType,
-      finished_level_test: state.LearningTypeSelect.finished_level_test
+      finished_level_test: state.LearningTypeSelect.finished_level_test,
+      chapter_name: state.LearningTypeSelect.chapter_name
     }),
     dispatch => ({
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),

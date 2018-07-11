@@ -7,6 +7,7 @@ export default ( state = {
   flag: "",  // 是否做过 , 0 未做过 1 做过
   count: "", // 做过几次
   this_rightRate: [],  // 本次正确率
+  upOrDown: [], // 本次跟上次比是升还是降
   mean_rightRate: [],  // 平均正确率
   xingshi: [],  // 形式路线
   lunzheng: [],  // 论证路线
@@ -47,6 +48,7 @@ export default ( state = {
         loadState,
         flag: response.flag,
         this_rightRate: response.rate,
+        upOrDown: response.upOrDown
       };
     }
     case __ASYNC_LOAD_LOGIC_TEST_RESULT.rejected: {
