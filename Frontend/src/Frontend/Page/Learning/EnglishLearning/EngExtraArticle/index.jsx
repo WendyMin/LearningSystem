@@ -3,14 +3,6 @@ import style from 'style';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Button from 'UI/Button';
-
-import Loading from 'Animation/Loading';
-import SlideLR from 'Animation/SlideLR';
-import SlideRL from 'Animation/SlideRL';
-import SlideDU from 'Animation/SlideDU';
-import SlideUD from 'Animation/SlideUD';
-
 import {
   view as LearningTypeSelect,
   actions as LearningTypeSelectActions
@@ -20,9 +12,10 @@ import {
   actions as EnglishArticleActions
 } from 'Connected/EnglishArticle';
 import {
-  view as PortTest,
-  actions as PortTestActions
-} from 'Connected/PortTest';
+  view as EnglishExtraArticlePort,
+  actions as EnglishExtraArticlePortActions
+} from 'Connected/EnglishExtraArticlePort';
+import { actions as PortTestActions } from 'Connected/PortTest';
 
 
 import protect from 'direct-core/protect';
@@ -40,18 +33,18 @@ class EngExtraArticle extends React.PureComponent {
   }
 
   componentWillMount(){
-    this.loadArticleId();
+    this.loadArticleid();
   }
 
   componentWillReceiveProps(nextProps){
     if(nextProps.articleId != undefined && this.haveArticleId===false){
-      this.loadExtraArticle(nextProps.articleId);
+      this.loadExArticle(nextProps.articleId);
       this.haveArticleId=true;
     }
   }
 
-  loadExtraArticle = ( articleId ) => {
-    this.props.loadPortContent({
+  loadExArticle = ( articleId ) => {
+    this.props.loadExtraArticle({
       url: "/api/eng_getExtraArticle",
       body: {
         articleId:  articleId,
@@ -59,8 +52,8 @@ class EngExtraArticle extends React.PureComponent {
     })
   }
 
-  loadArticleId = () => {
-    this.props.loadPortContent2({
+  loadArticleid = () => {
+    this.props.loadArticleId({
       url: "/api/eng_getArticleId",
       body: {
         username:  this.props.username,
@@ -144,13 +137,15 @@ export default applyHOCs([
       learningType: state.LearningTypeSelect.learningType,
       username: state.UserManager.name,
       // articleId: state.EnglishArticle.articleId,
-      articleId: state.PortTest.content2.pre_artid,
-      extraArticle: state.PortTest.content,
+      articleId: state.EnglishExtraArticlePort.articleIds.pre_artid,
+      extraArticle: state.EnglishExtraArticlePort.extraArticle,
+      // extraArticle: state.PortTest.content,
     }),
     dispatch => ({
       ...bindActionCreators( EnglishArticleActions , dispatch ),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch),
+      ...bindActionCreators( EnglishExtraArticlePortActions , dispatch ),
     })
   )],
   EngExtraArticle

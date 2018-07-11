@@ -24,10 +24,7 @@ import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
-import {
-  view as PortTest,
-  actions as PortTestActions
-} from 'Connected/PortTest';
+// import { actions as PortTestActions } from 'Connected/PortTest';
 
 class ChtoEng extends React.PureComponent {
 
@@ -42,16 +39,6 @@ class ChtoEng extends React.PureComponent {
     this.loadChtoEnglish();
   }
 
-// loadChtoEng = () => {
-//   this.props.loadPortContent({
-//     url: "/api/eng_getWriteTest",
-//     body: {
-//       username:  this.props.username,
-//       articleId: this.props.articleId
-//     }
-//   })
-// }
-
 loadChtoEnglish = () => {
   this.props.loadChtoEng({
     url: "/api/eng_getWriteTest",
@@ -61,7 +48,6 @@ loadChtoEnglish = () => {
     }
   })
 }
-
 
   render(){
 
@@ -154,13 +140,12 @@ export default applyHOCs([
       logined: state.UserManager.logined,
       username: state.UserManager.name,
       articleId: state.EnglishArticle.articleId,
-      // content: state.PortTest.content,
       content: state.EnglishChtoEngPort.chtoeng,
       learningType: state.LearningTypeSelect.learningType,
     }),
     dispatch => ({
       ...bindActionCreators( EnglishArticleActions , dispatch ),
-      ...bindActionCreators( PortTestActions , dispatch),
+      // ...bindActionCreators( PortTestActions , dispatch),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
       ...bindActionCreators( EnglishChtoEngPortActions , dispatch ),
     })
