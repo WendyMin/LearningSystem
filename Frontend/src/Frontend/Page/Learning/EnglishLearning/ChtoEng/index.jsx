@@ -39,7 +39,7 @@ class ChtoEng extends React.PureComponent {
   }
 
   componentDidMount(){
-    this.loadChtoEngish();
+    this.loadChtoEnglish();
   }
 
 // loadChtoEng = () => {
@@ -162,7 +162,7 @@ export default applyHOCs([
       ...bindActionCreators( EnglishArticleActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
-      ...bindActionCreators( EnglishChtoEngPort , dispatch ),
+      ...bindActionCreators( EnglishChtoEngPortActions , dispatch ),
     })
   )],
   ChtoEng
