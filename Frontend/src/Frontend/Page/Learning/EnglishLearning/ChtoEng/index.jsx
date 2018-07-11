@@ -4,15 +4,6 @@ import { bindActionCreators } from 'redux';
 import { Prompt } from 'react-router';
 import style from 'style';
 
-import Button from 'UI/Button';
-import WriteGraph from 'UI/WriteGraph';
-
-import Loading from 'Animation/Loading';
-import SlideLR from 'Animation/SlideLR';
-import SlideRL from 'Animation/SlideRL';
-import SlideDU from 'Animation/SlideDU';
-import SlideUD from 'Animation/SlideUD';
-
 import {
   view as LearningTypeSelect,
   actions as LearningTypeSelectActions
@@ -21,6 +12,10 @@ import {
   view as EnglishArticle,
   actions as EnglishArticleActions
 } from 'Connected/EnglishArticle';
+import {
+  view as EnglishChtoEngPort,
+  actions as EnglishChtoEngPortActions
+} from 'Connected/EnglishChtoEngPort';
 
 import UserManagerWindow from "Windows/UserManager";
 
@@ -44,11 +39,21 @@ class ChtoEng extends React.PureComponent {
   }
 
   componentDidMount(){
-    this.loadChtoEng();
+    this.loadChtoEngish();
   }
 
-loadChtoEng = () => {
-  this.props.loadPortContent({
+// loadChtoEng = () => {
+//   this.props.loadPortContent({
+//     url: "/api/eng_getWriteTest",
+//     body: {
+//       username:  this.props.username,
+//       articleId: this.props.articleId
+//     }
+//   })
+// }
+
+loadChtoEnglish = () => {
+  this.props.loadChtoEng({
     url: "/api/eng_getWriteTest",
     body: {
       username:  this.props.username,
@@ -75,19 +80,19 @@ loadChtoEng = () => {
             <div>
 
               <div className="row">
-                <div className={style.title}>汉译英 </div>
+                <div className={style.title}>写作句型练习 </div>
                 <br/>
                 {
                   content.length==0?null:
                   content.map((chtoeng, key)=>
-                  <div key={key} className="col-md-4" >
+                  <div key={key} className="col-md-12" >
                     <div className="card-box kanban-box">
                       <div className="kanban-detail">
                         {/* <span className="label label-primary pull-right">Translate</span> */}
                         <p className={style.title18}>
                           {chtoeng.chinese}</p>
                         <ul className="list-inline m-b-0">
-                          <textarea rows="5" class="form-control" placeholder="Write your answer"></textarea>
+                          <textarea rows="2" class="form-control" placeholder="Write your answer"></textarea>
                           <li>
                             <br/>
                             {
@@ -149,13 +154,15 @@ export default applyHOCs([
       logined: state.UserManager.logined,
       username: state.UserManager.name,
       articleId: state.EnglishArticle.articleId,
-      content: state.PortTest.content,
+      // content: state.PortTest.content,
+      content: state.EnglishChtoEngPort.chtoeng,
       learningType: state.LearningTypeSelect.learningType,
     }),
     dispatch => ({
       ...bindActionCreators( EnglishArticleActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
+      ...bindActionCreators( EnglishChtoEngPort , dispatch ),
     })
   )],
   ChtoEng

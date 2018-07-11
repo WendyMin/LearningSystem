@@ -80,7 +80,7 @@ class EnglishLearning extends React.PureComponent {
                          {
                            learningType == "" || learningType == "英语主页面" ? null :
                            learningType == "英语生词难句" ? <span onClick={()=>{this.props.setLearningType(learningType)}}> > 生词难句</span> :
-                           learningType == "英语汉译英" ? <span onClick={()=>{this.props.setLearningType(learningType)}}> > 汉译英</span> :
+                           learningType == "英语汉译英" ? <span onClick={()=>{this.props.setLearningType(learningType)}}> > 写作句型练习</span> :
                            learningType == "英语课后阅读材料" ? <span onClick={()=>{this.props.setLearningType(learningType)}}> > 课后阅读材料</span> :
                             <span onClick={()=>{this.props.setLearningType(learningType)}}> >  {learningType} </span>
                          }

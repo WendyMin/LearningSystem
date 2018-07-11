@@ -107,7 +107,7 @@ class EngLearningTypeSelect extends React.PureComponent {
                         <h4 className = {TextStyle[2]}
                           onMouseOver = {() => this.setState({changeColor3: true})} onMouseLeave = {() => this.setState({changeColor3: false})}
                           >
-                            汉译英</h4>
+                            写作句型练习</h4>
                         <p className={style.text_muted1}>
                             给中文，写英文，so easy~<br/>
                             每课将给出3句中文，可查看答案，巩固你的写作技能

@@ -5,6 +5,8 @@ import { reducer as UserManager } from 'Connected/UserManager';
 import { reducer as EnglishArticle } from 'Connected/EnglishArticle';
 import { reducer as EnglishReviewPort } from 'Connected/EnglishReviewPort';
 import { reducer as EnglishWordTest } from 'Connected/EnglishWordTest';
+import { reducer as EnglishShengciNanjuPort } from 'Connected/EnglishShengciNanjuPort';
+import { reducer as EnglishChtoEngPort } from 'Connected/EnglishChtoEngPort';
 import { reducer as SingleSubjectTest } from 'Connected/SingleSubjectTest';
 import { reducer as ButtonExpand } from 'Connected/ButtonExpand';
 import { reducer as WriteContent } from 'Connected/WriteContent';
@@ -30,6 +32,8 @@ export default {
   EnglishArticle: EnglishArticle,
   EnglishReviewPort: EnglishReviewPort,
   EnglishWordTest: EnglishWordTest,
+  EnglishShengciNanjuPort: EnglishShengciNanjuPort,
+  EnglishChtoEngPort: EnglishChtoEngPort,
   SingleSubjectTest: SingleSubjectTest,
   ButtonExpand: ButtonExpand,
   WriteContent: WriteContent,

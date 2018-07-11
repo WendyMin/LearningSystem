@@ -7,6 +7,7 @@ import {
   __ASYNC_TRANSLATE_WORDS,
   __HIDE_ALL,
   __ASYNC_LOAD_CONTENT,
+  __GET_UNIT_AND_COURSE,
 } from 'actionTypes';
 
 /*
@@ -210,3 +211,68 @@ export const loadContent = ({body}) => ( dispatch , getState ) => {
       dispatchLastest( loadContentRejected( "network" , err ) );
   });
 }
+
+
+
+let getUnitAndCourseCounter = 0;
+const getUnitAndCourseStart = () => ({
+    type: __GET_UNIT_AND_COURSE.pending,
+    payload: {
+
+    },
+    id: getUnitAndCourseCounter
+});
+const getUnitAndCourseResolved = ( response , initState ) => ({
+    type: __GET_UNIT_AND_COURSE.resolved,
+    payload: {
+      response,
+      initState
+    },
+    id: getUnitAndCourseCounter
+});
+const getUnitAndCourseRejected = ( reason , detail ) => ({
+    type: __GET_UNIT_AND_COURSE.rejected,
+    payload: {
+      reason,
+      detail
+    },
+    id: getUnitAndCourseCounter
+});
+
+
+export const getUnitAndCourse= ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+//export const loadButtonContents = ({ url , body ,headers  , initState }) => ( dispatch , getState ) => {
+    const reqId = ++getUnitAndCourseCounter;
+    const dispatchLastest = action => {
+      if( reqId === getUnitAndCourseCounter ){
+        dispatch( action );
+      }
+    }
+    dispatch( getUnitAndCourseStart() );
+    if( typeof body === "object" ){
+      body = JSON.stringify( body );
+    }
+    fetch( url , {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers
+        },
+        body: body
+    })
+  .then( response => {
+    if( !response.ok ){
+      dispatchLastest( getUnitAndCourseRejected( "server" , response.status ) );
+      return;
+    }
+   response.json()
+    .then( json => dispatchLastest( getUnitAndCourseResolved(  json  , initState ) ) )
+    .catch( err => {
+      dispatchLastest( getUnitAndCourseRejected( "json" , err ) )
+    //console.log(response)
+  });
+  })
+  .catch( err => {
+      dispatchLastest( getUnitAndCourseRejected( "network" , err ) );
+ });
+};

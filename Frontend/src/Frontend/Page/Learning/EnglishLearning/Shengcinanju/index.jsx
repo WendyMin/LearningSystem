@@ -19,10 +19,11 @@ import {
   view as EnglishArticle,
   actions as EnglishArticleActions
 } from 'Connected/EnglishArticle';
+// import {  actions as PortTestActions } from 'Connected/PortTest';
 import {
-  view as PortTest,
-  actions as PortTestActions
-} from 'Connected/PortTest';
+  view as EnglishShengciNanjuPort,
+  actions as EnglishShengciNanjuPortActions
+} from 'Connected/EnglishShengciNanjuPort';
 
 
 import protect from 'direct-core/protect';
@@ -40,7 +41,7 @@ class Shengcinanju extends React.PureComponent {
   }
 
   componentWillMount(){
-    this.loadArticleId();
+    this.loadArticleid();
   }
 
   componentWillReceiveProps(nextProps){
@@ -52,7 +53,7 @@ class Shengcinanju extends React.PureComponent {
   }
 
   loadShengCi = ( articleId ) => {
-    this.props.loadPortContent({
+    this.props.loadShengci({
       url: "/api/eng_getUserWord",
       body: {
         username:  this.props.username,
@@ -63,7 +64,7 @@ class Shengcinanju extends React.PureComponent {
   }
 
   loadNanJu = ( articleId ) => {
-    this.props.loadPortContent3({
+    this.props.loadNanju({
       url: "/api/eng_getUserSentence",
       body: {
         username:  this.props.username,
@@ -73,8 +74,8 @@ class Shengcinanju extends React.PureComponent {
     });
   }
 
-  loadArticleId = () => {
-    this.props.loadPortContent2({
+  loadArticleid = () => {
+    this.props.loadArticleId({
       url: "/api/eng_getArticleId",
       body: {
         username:  this.props.username,
@@ -97,7 +98,7 @@ class Shengcinanju extends React.PureComponent {
       <React.Fragment>
         <div>
           <div className="row">
-            <div className={style.title}>本课生词</div>
+            <div className={style.title}>本篇生词</div>
             <br/>
             {
               shengci[0] == undefined?null:
@@ -122,7 +123,7 @@ class Shengcinanju extends React.PureComponent {
           <br/>
 
           <div className="row">
-            <div className={style.title}>本课难句</div>
+            <div className={style.title}>本篇难句</div>
             <br/>
             {
               nanju == undefined?null:
@@ -178,14 +179,17 @@ export default applyHOCs([
       learningType: state.LearningTypeSelect.learningType,
       username: state.UserManager.name,
       // articleId: state.EnglishArticle.articleId,
-      articleId: state.PortTest.content2.pre_artid,
-      shengci: state.PortTest.content,
-      nanju: state.PortTest.content3,
+      articleId: state.EnglishShengciNanjuPort.articleIds.pre_artid,
+      // shengci: state.PortTest.content,
+      // nanju: state.PortTest.content3,
+      shengci: state.EnglishShengciNanjuPort.shengci,
+      nanju: state.EnglishShengciNanjuPort.nanju,
     }),
     dispatch => ({
       ...bindActionCreators( EnglishArticleActions , dispatch ),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
-      ...bindActionCreators( PortTestActions , dispatch),
+      // ...bindActionCreators( PortTestActions , dispatch),
+      ...bindActionCreators( EnglishShengciNanjuPortActions , dispatch),
     })
   )],
   Shengcinanju
