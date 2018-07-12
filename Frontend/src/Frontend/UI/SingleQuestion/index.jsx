@@ -73,6 +73,7 @@ class SingleQuestion extends React.PureComponent<Props> {
         {
           layoutFormat === "leftRight" ?
           <div className={style.wholeQuestion}>
+            {/* <div > */}
             <div className="col-sm-8">
               <div className="card-box">
                 {questionLength === "single" ?  <div className={questionStyle}>{question}</div> :
@@ -93,7 +94,7 @@ class SingleQuestion extends React.PureComponent<Props> {
                              checked={checked[key]}
                              readOnly={ lock ? 'readonly' : ''}
                       />
-                      <label htmlFor={`question${questionId}option${key}`}>
+                      <label htmlFor={`question${questionId}option${key}`} style={{"lineHeight":"20px"}}>
                           {option}
                       </label>
                    </div>
@@ -145,7 +146,7 @@ class SingleQuestion extends React.PureComponent<Props> {
                            checked={checked[key]}
                            readOnly={ lock ? 'readonly' : ''}
                     />
-                    <label htmlFor={`question${questionId}option${key}`}>
+                    <label htmlFor={`question${questionId}option${key}`} style={{"lineHeight":"20px"}}>
                         {option}
                     </label>
                  </div>

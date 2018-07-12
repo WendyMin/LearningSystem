@@ -4,18 +4,10 @@ import { connect } from 'react-redux';
 import * as actionCreators from 'actions';
 
 import Question from 'UI/SingleQuestion';
-//import AppearUD from 'Animation/AppearUD';
 import changeAlpToNum from 'Algorithm/changeAlpToNum';
 import style from 'style';
 
 class SingleSubjectTest extends React.PureComponent {
-  /*static defaultProps = {
-    questionSize: {
-      width: '60%',
-      left: '20%',
-      top: '15%'
-    }
-  }*/
 
   render(){
     const {
@@ -27,10 +19,8 @@ class SingleSubjectTest extends React.PureComponent {
       autoNext,
       qtype,
       level,
-      //qtype,
-      //lockAndShow
     } = this.props;
-    //console.log(questions)
+    console.log(questions)
 
     var question = {
       qtype: questions[qtype][level].type,
@@ -46,21 +36,17 @@ class SingleSubjectTest extends React.PureComponent {
     }
     //console.log(question )
 
-
     return (
-      <div className="container" //style={questionSize} style={"text_align": "center"}
-        >
+      <div className="container">
         {/* <strong> &nbsp;&nbsp;&nbsp;&nbsp; <label>{question.type}</label>
         &nbsp;&nbsp;&nbsp;&nbsp; <label>{question.level}</label></strong> */}
         <Question
           {...question}
           layoutFormat = "leftRight"
-          // subject = "logic_test"
           onSetChoice={ cid => {
               autoNext( cid , 10000 );
             }
           }
-
         />
       </div>
     );
@@ -71,7 +57,6 @@ class SingleSubjectTest extends React.PureComponent {
 export default connect(
   ({ SingleSubjectTest: ownState }) => ({
     questions: ownState.content,
-    //loadingData: ownState.loadingData,
     qtype: ownState.nowAt.qtype,
     level: ownState.nowAt.level,
   }),

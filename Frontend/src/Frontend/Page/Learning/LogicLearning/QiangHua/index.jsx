@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import style from 'style';
 
 import Button from 'UI/Button';
-import Info from 'UI/Info';
-import TextAndImag from 'UI/TextAndImag';
-import SingleQuestion from 'UI/SingleQuestion';
+// import Info from 'UI/Info';
+// import TextAndImag from 'UI/TextAndImag';
+// import SingleQuestion from 'UI/SingleQuestion';
 import changeAlpToNum from 'Algorithm/changeAlpToNum';
 // import UserManagerWindow from "Windows/UserManager";
 import {
@@ -15,7 +15,7 @@ import {
 } from 'Connected/SingleOptionQuestions';
 import { actions as PortTestActions } from 'Connected/PortTest';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
-import { actions as LogicStateActions } from 'Connected/LogicState';
+// import { actions as LogicStateActions } from 'Connected/LogicState';
 
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
@@ -25,9 +25,10 @@ class QiangHua extends React.PureComponent {
   constructor( props ){
     super( props );
 
-    this.questions = [];
+    // this.questions = [];
     this.state = {
-      end: false,
+      submit: false
+      // end: false,
     //  learning: false
     };
   }
@@ -60,7 +61,6 @@ class QiangHua extends React.PureComponent {
         return all.map(one => ({
            questionId: one.id,
            options: one.xuanxiang,
-           // options: [one.op_one , one.op_two , one.op_three , one.op_four , one.op_five],
            rightKey: changeAlpToNum( one.answer ),
            question: one.question,
            analysis: one.analysis,
@@ -73,6 +73,7 @@ class QiangHua extends React.PureComponent {
 
 
   submitQuestions = () => {
+    this.setState({submit: true});
     const {
       username,
       content,
@@ -82,10 +83,10 @@ class QiangHua extends React.PureComponent {
       lockAndShow
     } = this.props;
     // console.log(questions)
-    var submitTime = submitQuestionState.resolved;
-    if( submiting ){
-      return;
-    }
+    // var submitTime = submitQuestionState.resolved;
+    // if( submiting ){
+    //   return;
+    // }
 
     var question_id = "";
     var RightOrWrong = "";
@@ -107,22 +108,19 @@ class QiangHua extends React.PureComponent {
         dalei: content.chapter_name,
         question_id: question_id,
         RightOrWrong: RightOrWrong
-        //time: submitTime + 1
       }
     });
-    //if( ( ( submitTime + 1 ) & 1 ) === 0 ){
-      for( var i = 0; i < questions.length ; i++ ){
-        lockAndShow( questions[i].questionId );
-      }
-    //}
+    for( var i = 0; i < questions.length ; i++ ){
+      lockAndShow( questions[i].questionId );
+    }
   }
 
-  FinishTestNote_qianghua = () =>{
-    alert("您还没有完成入口测试，请先完成入口测试!");
-  }
-  FinishZhongDianNote_qianghua = () =>{
-    alert("您还没有完成重点习题，请先完成重点习题!");
-  }
+  // FinishTestNote_qianghua = () =>{
+  //   alert("您还没有完成入口测试，请先完成入口测试!");
+  // }
+  // FinishZhongDianNote_qianghua = () =>{
+  //   alert("您还没有完成重点习题，请先完成重点习题!");
+  // }
 
  componentDidMount(){
    this.loadQuestions();
@@ -132,14 +130,14 @@ class QiangHua extends React.PureComponent {
   render(){
     const { end } = this.state;
     const {
-      submitQuestionState,
-      loadQuestionState,
-      loadContent,
-      loadContentState,
-      ined,
-      questions,
+      // submitQuestionState,
+      // loadQuestionState,
+      // loadContent,
+      // loadContentState,
+      // ined,
+      // questions,
       content,
-      setChoice,
+      // setChoice,
       setLearningType
     } = this.props;
     //console.log(questions,content)
@@ -147,9 +145,17 @@ class QiangHua extends React.PureComponent {
 
     return (
       <React.Fragment>
-        {content.flag === 1 ?
         <div className="card-box">
-          {/* <div className = {style.pageTitle}> 强化练习 </div> */}
+          <h4 className = {style.dalei}> {content.chapter_name} </h4>
+          <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight"/>
+          <div align = "center">
+            {this.state.submit ? <Button text = {"进入单元测试"} onClick = {() => setLearningType("单元测试")}/>:
+            <Button text = {"提交"} onClick={() => this.submitQuestions()}/>}
+          </div>
+        </div>
+
+        {/* {content.flag === 1 ?
+        <div className="card-box">
           <div className = {style.logic_knowledge}>
              <h4 className = {style.dalei}> {content.chapter_name} </h4>
              <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight"/>
@@ -163,21 +169,16 @@ class QiangHua extends React.PureComponent {
         :
         content.flag === 2 ?
         <div>
-          {/* {this.FinishTestNote_qianghua()} */}
           <Info info = "您还没有完成入口测试，请先完成入口测试！"/>
         </div>
         :
         content.flag === 3 ?
         <div>
-          {/* {this.FinishZhongDianNote_qianghua()} */}
           <Info info = "您还没有完成重点习题，请先完成重点习题！"/>
-          {/* <EnterLearning/> */}
-          {/* <ZhongDian/> */}
-          {/* <button onClick = {() => this.setLearningType}>返回学习页面</button> */}
         </div>
         :
         null
-        }
+        } */}
       </React.Fragment>
     );
   }
@@ -200,7 +201,7 @@ export default applyHOCs([
       ...bindActionCreators( SingleOptionQuestionsActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch ),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
-      ...bindActionCreators( LogicStateActions , dispatch )
+      // ...bindActionCreators( LogicStateActions , dispatch )
     })
   )],
   QiangHua

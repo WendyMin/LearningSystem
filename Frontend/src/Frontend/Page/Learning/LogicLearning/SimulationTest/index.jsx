@@ -6,14 +6,7 @@ import style from 'style';
 
 import Button from 'UI/Button';
 import Info from 'UI/Info';
-import ButtonControlPane from 'UI/ButtonControlPane';
-//import SingleQuestion from 'UI/SingleQuestion';
-
-// import Loading from 'Animation/Loading';
-// import SlideLR from 'Animation/SlideLR';
-// import SlideRL from 'Animation/SlideRL';
-// import SlideDU from 'Animation/SlideDU';
-// import SlideUD from 'Animation/SlideUD';
+// import ButtonControlPane from 'UI/ButtonControlPane';
 
 import UserManagerWindow from "Windows/UserManager";
 
@@ -25,16 +18,13 @@ import {
   view as PortTest,
   actions as PortTestActions
 } from 'Connected/PortTest';
-// import {
-//   actions as SingleSubjectTestActions
-// } from 'Connected/SingleSubjectTest';
 
 import TextAndImag from 'UI/TextAndImag';
 import SingleQuestion from 'UI/SingleQuestion';
 import LogicChapterError from 'UI/LogicChapterError';
 import changeAlpToNum from 'Algorithm/changeAlpToNum';
 
-import protect from 'direct-core/protect';
+// import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
@@ -44,9 +34,10 @@ class SimulationTest extends React.PureComponent {
   constructor( props ){
     super( props );
 
-    this.questions = [];
+    this.numberOfRight = "";
     this.state = {
-      end: false,
+      submit: false,
+      tongjiShow: false
     };
   }
 
@@ -100,6 +91,7 @@ class SimulationTest extends React.PureComponent {
 
 
   submitQuestions = () => {
+    this.setState({submit: true});
     const {
       username,
       content,
@@ -116,6 +108,7 @@ class SimulationTest extends React.PureComponent {
 
     var question_id = "";
     var RightOrWrong = "";
+    var num = 0;
     //var queId = [];
     //var typeNum = questions.length / 3;   // 每一类三道，求共几类
     // for(var k = 0 , j = 0 ; k < typeNum ; k++ , j += 10000){
@@ -131,14 +124,18 @@ class SimulationTest extends React.PureComponent {
       question_id += `${questions[i].questionId}*`;
       if( questions[i].choosed !== undefined && questions[i].choosed.toString() === questions[i].rightKey ){
         RightOrWrong += `${0}*`;
+        num += 1;
       }
       else {
         RightOrWrong += `${1}*`;
       }
 
     }
+    this.numberOfRight = num
+    // console.log(num , this.numberOfRight)
 
-    console.log(username,question_id,RightOrWrong)
+
+    // console.log(username,question_id,RightOrWrong)
     this.props.submitQuestions({
       url: "/api/logicSimulationTongJi",
       body: {
@@ -148,11 +145,12 @@ class SimulationTest extends React.PureComponent {
         //time: submitTime + 1
       }
     });
-    //if( ( ( submitTime + 1 ) & 1 ) === 0 ){
-      for( var i = 0; i < questions.length ; i++ ){
-        lockAndShow( questions[i].questionId );
-      }
-    //}
+    for( var i = 0; i < questions.length ; i++ ){
+      lockAndShow( questions[i].questionId );
+    }
+  }
+  loadSimulationTestTongji = () => {
+    this.setState({tongjiShow: true});
   }
 
  componentDidMount(){
@@ -175,27 +173,32 @@ class SimulationTest extends React.PureComponent {
   //  console.log(questions)
     var chapter_name = ["逻辑语言" , "命题逻辑" , "词项逻辑" , "逻辑应用" , "演绎推理" , "归纳逻辑" ,
                         "假设" , "支持" , "削弱" , "评价" , "解释" , "推论" , "比较" , "描述" , "综合"];
-    //for (var i = 0 ; i < )
 
     return (
       <React.Fragment>
-        <Prompt
-          when={end==false}
-          message="you need to do it again, are you sure to quit?"
-        />
         {
           content.flag === 1 ?
           <div>
-            {/* <div className = {style.moniceshi}> 模拟测试 </div> */}
+            {this.state.tongjiShow ?
+            <div>
+              <div style={{"fontSize":"16px"}}>本次模拟测试一共包含{Object.keys(questions).length}道题,您一共答对了{this.numberOfRight}道</div>
+              <div align="center">
+                <Button text = {"再测一次"} onClick = {() => {this.loadQuestions();this.setState({tongjiShow: false,submit:false})}}/>
+              </div>
+            </div>
+            :
+            <div>
               <div><br/>
-                {/* <h4 className = {style.dalei}> {content.chapter_name} </h4> */}
 
                <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight"/>
                <div align = "center">
-                 <strong><div style = {{"color":"red"}}>点击确认提交，查看正确答案</div></strong>
-                 <Button className = {style.submitButton} text = {"确认提交"} onClick = {this.submitQuestions}/>
+                 {this.state.submit ? <Button text = {"查看测试统计"} onClick = {() => this.loadSimulationTestTongji()}/>:
+                 <Button className = {style.submitButton} text = {"提交"} onClick = {() => this.submitQuestions()}/>}
+
                </div>
           </div>
+        </div>}
+
 
           </div>
           :
@@ -221,17 +224,10 @@ export default applyHOCs([
       submitQuestionState: state.SingleOptionQuestions.submitState,
       content: state.PortTest.content,
       loadContentState: state.PortTest.loadState,
-      //chapter_name: state.LearningTypeSelect.chapter_name,
-      //ceshiData: state.ZhentiPerYearTongji.tongji,
-      //chapterData: state.ZhentiAllYearTongji.tongji
     }),
     dispatch => ({
       ...bindActionCreators( SingleOptionQuestionsActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch ),
-      //...bindActionCreators( SingleSubjectTestActions ,  dispatch )
-      //...bindActionCreators( ZhentiPerYearTongjiActions , dispatch ),
-      //...bindActionCreators( ZhentiAllYearTongjiActions , dispatch ),
-      //...bindActionCreators( LearningTypeSelectActions , dispatch )
     })
   )],
   SimulationTest

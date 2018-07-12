@@ -9,7 +9,6 @@ import {
   __FORCE_END
 } from 'actionTypes';
 
-//import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
 export const forceEnd = () => ({
     type: __FORCE_END,
     payload: {
@@ -49,7 +48,6 @@ export const lockAndShow = ( qtype , level ) => ({
     payload: {
       qtype,
       level
-       //level , index
     },
     id: lockAndShowCounter++
 });
@@ -58,8 +56,8 @@ let unlockAndHideCounter = 0;
 export const unlockAndHide = ( qtype , level ) => ({
     type: __UNLOCK_AND_HIDE,
     payload: {
-      qtype , level
-       //level , index
+      qtype,
+      level
     },
     id: unlockAndHideCounter++
 });
@@ -70,7 +68,6 @@ export const setChoice_ = ( qtype , level , choice ) => ({
     payload: {
       qtype,
       level,
-      //question,
       choice
     },
     id: setChoiceCounter++
@@ -187,7 +184,6 @@ export const loadTestQuestions = ({ url , body , parser , headers  , initState }
       return;
     }
     response.json()
-    //.then( json => dispatchLastest( loadTestQuestionsResolved( parser( json ) , initState ) ) )
     .then( json => dispatchLastest( loadTestQuestionsResolved( json  , initState ) ) )
     .catch( err => {
       dispatchLastest( loadTestQuestionsRejected( "json" , err ) )
