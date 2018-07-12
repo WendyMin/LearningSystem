@@ -73,11 +73,11 @@ class IndexPage extends React.Component {
                   <h5>{this.props.username}</h5>
 
                   <ul className="list-inline">
-                   <li>
-                     <a href="#" >
-                       <i className="zmdi zmdi-settings"></i>
-                     </a>
-                   </li>
+                     {/* <li>
+                       <a href="#" >
+                         <i className="zmdi zmdi-settings"></i>
+                       </a>
+                     </li> */}
 
                    <li>
                      <a className="text-custom"
@@ -94,23 +94,31 @@ class IndexPage extends React.Component {
                 <div id="sidebar-menu">
                   <ul>
                     <li onClick={()=>this.props.setSubjectFunctionSelect(0)}>
-                      <a //href="/login"
-                        className="waves-effect"><i className="zmdi zmdi-layers"></i> <span> 课程信息 </span></a>
+                      <a className="waves-effect" style={choice==0?{"color":"#71b6f9"}:null}>
+                        <i className="zmdi zmdi-layers"></i>
+                         <span> 课程信息 </span>
+                      </a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(1)}>
-                      <a //href="javascript:void(0);"
-                         className="waves-effect"><i className="zmdi zmdi-library"></i> <span> 用户信息 </span> </a>
+                      <a href="javascript:void(0);" className="waves-effect" style={choice==1?{"color":"#71b6f9"}:null}>
+                        <i className="zmdi zmdi-library"></i>
+                        <span> 用户信息 </span>
+                      </a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(2)}>
-                      <a //href="javascript:void(0);"
-                        className="waves-effect"><i className="zmdi zmdi-book"></i> <span> 查看帮助 </span> </a>
+                      <a className="waves-effect" style={choice==2?{"color":"#71b6f9"}:null}>
+                        <i className="zmdi zmdi-book"></i>
+                        <span> 查看帮助 </span>
+                      </a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(3)}>
-                      <a //href="javascript:void(0);"
-                      className="waves-effect"><i className="zmdi zmdi-chart"></i> <span> 问题反馈 </span> </a>
+                      <a className="waves-effect" style={choice==3?{"color":"#71b6f9"}:null}>
+                        <i className="zmdi zmdi-chart"></i>
+                        <span> 问题反馈 </span>
+                      </a>
                      </li>
 
                   </ul>

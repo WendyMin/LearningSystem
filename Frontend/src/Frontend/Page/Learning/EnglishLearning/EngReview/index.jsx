@@ -249,7 +249,7 @@ class EngReview extends React.PureComponent {
             <div>
 
               {/* <div className={style.title}>复习</div> */}
-              <br/>
+              {/* <br/> */}
 
               {
                 learningType == "英语进入学习" ?
@@ -264,7 +264,7 @@ class EngReview extends React.PureComponent {
                         <h3 class="panel-title">Sorry</h3>
                     </div>
                     <div class="panel-body">
-                      <div className={style.text}>您尚未学习，没有需要复习的内容，请立即学习</div>
+                      <div>您尚未学习，没有需要复习的内容，请立即学习</div>
                       <br/>
                       <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
                          onClick = {() => {setLearningType("英语进入学习");}}>

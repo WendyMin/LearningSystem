@@ -28,7 +28,8 @@ class EngTest extends React.PureComponent {
     this.state = {
       enterTest: true,
       enterLearning: false,
-      testAgain: false
+      testAgain: false,
+      newEnterTest: false,
     }
   }
 
@@ -85,6 +86,7 @@ class EngTest extends React.PureComponent {
       enterLearning,
       enterTest,
       testAgain,
+      newEnterTest,
     } = this.state;
 
     // console.log(didLevel);
@@ -117,7 +119,7 @@ class EngTest extends React.PureComponent {
             </div>
             :
 
-            enterTest && !didTest || testAgain && !testend ?
+            newEnterTest || testAgain && !testend ?
             <div>
               <SlideRL play = {ined}>
                 <EnglishWordTest
@@ -125,10 +127,23 @@ class EngTest extends React.PureComponent {
                     loader = {this.loadTest}
                 />
               </SlideRL>
-              <div className={style.buttonright}>
-                {/* <button class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+              {/* <div className={style.buttonright}>
+                <button class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
                   onClick = {forceNext}>
-                  下一题</button> */}
+                  下一题</button>
+              </div> */}
+            </div>
+            :
+            enterTest && !didTest ?
+            <div class="panel panel-custom panel-border">
+              <div class="panel-heading">
+                  <h3 class="panel-title">Sorry</h3>
+              </div>
+              <div class="panel-body">
+                <div className={style.text}>新用户，请点击开始水平测试</div>
+                <br/>
+                <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                    onClick={() => this.setState({newEnterTest: true})} >开始测试</button>
               </div>
             </div>
             :

@@ -34,23 +34,13 @@ class EngChart extends React.PureComponent {
   }
 
   function = () => {
-    this.props.loadPortContent({
+    this.props.loadWordRateAll({
       url: "/api/eng_getWordRateAll",
       body: {
         username:  this.props.username,
-        // articleId: 18,
       }
     })
   }
-
-  // function = () => {
-  //   this.props.loadWordRateAll({
-  //     url: "/api/eng_getWordRateAll",
-  //     body: {
-  //       username:  this.props.username,
-  //     }
-  //   })
-  // }
 
   render(){
 
@@ -106,14 +96,21 @@ class EngChart extends React.PureComponent {
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <th>{content.zhongkao_rate}</th>
-                              <th>{content.gaokao}</th>
-                              <th>{content.siji}</th>
-                              <th>{content.liuji}</th>
-                              <th>{content.kaoyan}</th>
-                              <th>{content.chaogang}</th>
-                            </tr>
+                            {
+                              (parseFloat(content.zhongkao_rate)*100).toFixed(1) == "NaN" ?
+                              <tr>
+                                <th>..</th><th>..</th><th>..</th><th>..</th><th>..</th><th>..</th>
+                              </tr>
+                              :
+                              <tr>
+                                <th>{(parseFloat(content.zhongkao_rate)*100).toFixed(1)}</th>
+                                <th>{(parseFloat(content.gaokao)*100).toFixed(1)}</th>
+                                <th>{(parseFloat(content.siji)*100).toFixed(1)}</th>
+                                <th>{(parseFloat(content.liuji)*100).toFixed(1)}</th>
+                                <th>{(parseFloat(content.kaoyan)*100).toFixed(1)}</th>
+                                <th>{(parseFloat(content.chaogang)*100).toFixed(1)}</th>
+                              </tr>
+                            }
                           </tbody>
                         </table>
                         <br/>
@@ -149,8 +146,8 @@ export default applyHOCs([
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
-      content: state.PortTest.content,
-      // content: state.EnglishChartPort.wordrateAll,
+      // content: state.PortTest.content,
+      content: state.EnglishChartPort.wordrateAll,
       choice: state.SubjectFunctionSelect.choice,
       learningType: state.LearningTypeSelect.learningType,
     }),

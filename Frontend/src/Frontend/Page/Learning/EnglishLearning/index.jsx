@@ -110,11 +110,11 @@ class EnglishLearning extends React.PureComponent {
                   <h5>{this.props.username}</h5>
 
                   <ul className="list-inline">
-                   <li>
+                   {/* <li>
                      <a href="#" >
                        <i className="zmdi zmdi-settings"></i>
                      </a>
-                   </li>
+                   </li> */}
 
                    <li>
                      <a className="text-custom"
@@ -135,28 +135,38 @@ class EnglishLearning extends React.PureComponent {
                   <ul>
                     <li className="text-muted menu-title">英语</li>
                     <li onClick={()=>this.props.setSubjectFunctionSelect(0)}>
-                      <a //href="/login"
-                        className="waves-effect"><i className="zmdi zmdi-layers"></i> <span> 水平测试 </span></a>
+                      <a className="waves-effect" style={choice==0?{"color":"#71b6f9"}:null}>
+                        <i className="zmdi zmdi-layers"></i>
+                        <span> 水平测试 </span>
+                      </a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(1)}>
-                      <a //href="javascript:void(0);"
-                         className="waves-effect"><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
+                      <a className="waves-effect" style={choice==1?{"color":"#71b6f9"}:null}>
+                        <i className="zmdi zmdi-library"></i>
+                        <span> 进入学习 </span>
+                      </a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(2)}>
-                      <a //href="javascript:void(0);"
-                        className="waves-effect"><i className="zmdi zmdi-book"></i> <span> 开始复习 </span> </a>
+                      <a className="waves-effect" style={choice==2?{"color":"#71b6f9"}:null}>
+                        <i className="zmdi zmdi-book"></i>
+                        <span> 开始复习 </span>
+                      </a>
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(3)}>
-                      <a //href="javascript:void(0);"
-                      className="waves-effect"><i className="zmdi zmdi-chart"></i> <span> 统计图表 </span> </a>
+                      <a className="waves-effect" style={choice==3?{"color":"#71b6f9"}:null}>
+                        <i className="zmdi zmdi-chart"></i>
+                        <span> 统计图表 </span>
+                      </a>
                      </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(4)}>
-                      <a //href="javascript:void(0);"
-                      className="waves-effect"><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
+                      <a className="waves-effect" style={choice==4?{"color":"#71b6f9"}:null}>
+                        <i className="zmdi  zmdi-pin-help"></i>
+                        <span> 查看帮助 </span>
+                      </a>
                     </li>
 
                     {/* <li>

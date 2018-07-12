@@ -12,7 +12,7 @@ class EnglishChartPort extends React.PureComponent {
       content,
       loader,
     } = this.props;
-    console.log(this.props);
+    // console.log(this.props);
 
     return (
       <div className="container">

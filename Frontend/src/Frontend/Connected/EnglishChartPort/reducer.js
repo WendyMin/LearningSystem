@@ -1,9 +1,9 @@
 import {
-  __ASYNC_LOAD_CH_TO_ENG,
+  __ASYNC_LOAD_WORD_RATE_ALL,
 } from 'actionTypes';
 
 export default ( state = {
-    chtoeng: [],
+    wordrateAll: [],
     name2: [],
     name3: [],
     loadState: {
@@ -18,7 +18,7 @@ export default ( state = {
   const { content } = state;
   //console.log(content)
   switch( type ){
-    case __ASYNC_LOAD_CH_TO_ENG.pending: {
+    case __ASYNC_LOAD_WORD_RATE_ALL.pending: {
       let loadState = {...state.loadState };
       loadState.lastFailed = false;
       loadState.pending++;
@@ -27,7 +27,7 @@ export default ( state = {
         loadState
       };
     }
-    case __ASYNC_LOAD_CH_TO_ENG.resolved: {
+    case __ASYNC_LOAD_WORD_RATE_ALL.resolved: {
       let { response , initState } = payload;
       initState = initState || {
         lock: false,
@@ -40,12 +40,12 @@ export default ( state = {
       return {
         ...state,
         loadState,
-        chtoeng: response,
+        wordrateAll: response,
         name2: response.section_name2,
         name3: response.section_name3,
       };
     }
-    case __ASYNC_LOAD_CH_TO_ENG.rejected: {
+    case __ASYNC_LOAD_WORD_RATE_ALL.rejected: {
       let { reason , detail } = payload;
       let loadState = {...state.loadState };
       loadState.rejected++;
