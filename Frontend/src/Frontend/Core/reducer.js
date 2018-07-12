@@ -3,11 +3,12 @@ import { reducer as SingleOptionQuestions} from 'Connected/SingleOptionQuestions
 //import { reducer as MultOptionsQuestions } from 'Connected/MultOptionsQuestions';
 import { reducer as UserManager } from 'Connected/UserManager';
 import { reducer as EnglishArticle } from 'Connected/EnglishArticle';
-import { reducer as EnglishReviewPort } from 'Connected/EnglishReviewPort';
 import { reducer as EnglishWordTest } from 'Connected/EnglishWordTest';
+import { reducer as EnglishLearningTypePort } from 'Connected/EnglishLearningTypePort';
 import { reducer as EnglishShengciNanjuPort } from 'Connected/EnglishShengciNanjuPort';
 import { reducer as EnglishChtoEngPort } from 'Connected/EnglishChtoEngPort';
 import { reducer as EnglishExtraArticlePort } from 'Connected/EnglishExtraArticlePort';
+import { reducer as EnglishReviewPort } from 'Connected/EnglishReviewPort';
 import { reducer as EnglishChartPort } from 'Connected/EnglishChartPort';
 import { reducer as SingleSubjectTest } from 'Connected/SingleSubjectTest';
 import { reducer as ButtonExpand } from 'Connected/ButtonExpand';
@@ -32,11 +33,12 @@ export default {
   //MultOptionsQuestions: MultOptionsQuestions,
   UserManager: UserManager,
   EnglishArticle: EnglishArticle,
-  EnglishReviewPort: EnglishReviewPort,
   EnglishWordTest: EnglishWordTest,
+  EnglishLearningTypePort: EnglishLearningTypePort,
   EnglishShengciNanjuPort: EnglishShengciNanjuPort,
   EnglishChtoEngPort: EnglishChtoEngPort,
   EnglishExtraArticlePort: EnglishExtraArticlePort,
+  EnglishReviewPort: EnglishReviewPort,
   EnglishChartPort: EnglishChartPort,
   SingleSubjectTest: SingleSubjectTest,
   ButtonExpand: ButtonExpand,

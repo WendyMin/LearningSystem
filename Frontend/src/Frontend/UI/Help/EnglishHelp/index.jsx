@@ -16,13 +16,6 @@ class EnglishHelp extends React.PureComponent<Props> {
 						<li>若不是首次登录，也可以进行词汇量测试。</li>
 					</ol>
 
-					<span className = {style.part}> 个人中心 </span><br/>
-					<ol>
-						<li>个人中心分为学习数据以及个人资料两个部分。</li>
-						<li>个人资料：可查看注册的用户名、密码等个人信息，并可针对需要进行相应修改。</li>
-						<li>学习数据：显示学过的课程列表，每一课可查看“本课生词”、“本课难句”、“本课错题”、“本课写作”。</li>
-					</ol>
-
 					<span className = {style.part}> 进入学习 </span><br/>
 					<ol>
 						<li>阅读文章，可标记不会的生词，并在右侧点击认为相对正确的题目答案</li>
@@ -30,15 +23,22 @@ class EnglishHelp extends React.PureComponent<Props> {
 						<li>选择自己不理解的句子，点击，提交系统，等待翻译</li>
 						<li>再次完成试题，如果觉得第一次做的完全正确，则重新再选一次以确认，如果觉得有误，则可以修改答案</li>
 						<li>点击确认后查看正确答案和解析</li>
-						<li>完成英译汉部分</li>
-						<li>完成汉译英（写作）部分，点击确认后查看正确答案，必须做对才能进行下一步</li>
-						<li>查看自己的学习情况，并决定是否复习，或者<strong>提前</strong>进行下一个单元的学习</li>
+						<li>查看自己点击过的不认识的单词和句子</li>
+						<li>完成写作句型部分</li>
+						<li>阅读一篇课后阅读材料</li>
+						<li>做完阅读后，可选择性地跳过后面的三个模块，<strong>提前</strong>进行下一个单元的学习</li>
 					</ol>
 
-					<span className = {style.part}> 复习 </span><br/>
+					<span className = {style.part}> 开始复习 </span><br/>
 					<ol>
-						<li>显示学过的课程列表。每一课可查看“重点词汇”、“长难句解析”、“全文翻译”、“习题解析”。</li>
+						<li>显示学过的课程列表。每一课可查看“重点词汇”、“长难句解析”、“全文翻译”、“习题解析”，并可重新做题。</li>
 					</ol>
+
+					<span className = {style.part}> 统计列表 </span><br/>
+					<ol>
+						<li>显示用户完成情况的统计。目前为用户不认识的词情况统计。</li>
+					</ol>
+
       </div>
     );
   }

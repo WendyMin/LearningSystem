@@ -15,7 +15,7 @@ import {
   view as EnglishExtraArticlePort,
   actions as EnglishExtraArticlePortActions
 } from 'Connected/EnglishExtraArticlePort';
-import { actions as PortTestActions } from 'Connected/PortTest';
+// import { actions as PortTestActions } from 'Connected/PortTest';
 
 
 import protect from 'direct-core/protect';
@@ -139,12 +139,11 @@ export default applyHOCs([
       // articleId: state.EnglishArticle.articleId,
       articleId: state.EnglishExtraArticlePort.articleIds.pre_artid,
       extraArticle: state.EnglishExtraArticlePort.extraArticle,
-      // extraArticle: state.PortTest.content,
     }),
     dispatch => ({
       ...bindActionCreators( EnglishArticleActions , dispatch ),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
-      ...bindActionCreators( PortTestActions , dispatch),
+      // ...bindActionCreators( PortTestActions , dispatch),
       ...bindActionCreators( EnglishExtraArticlePortActions , dispatch ),
     })
   )],
