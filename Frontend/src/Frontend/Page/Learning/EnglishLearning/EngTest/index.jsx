@@ -132,6 +132,7 @@ class EngTest extends React.PureComponent {
                   onClick = {forceNext}>
                   下一题</button>
               </div> */}
+              <div className={style.textgrey}>测试时间约为2分钟</div>
             </div>
             :
             enterTest && !didTest ?
@@ -140,7 +141,9 @@ class EngTest extends React.PureComponent {
                   <h3 class="panel-title">Sorry</h3>
               </div>
               <div class="panel-body">
-                <div className={style.text}>新用户，请点击开始水平测试</div>
+                <div className={style.text}>您为新用户，系统还没有您的数据，请点击开始水平测试，完成基础测评</div>
+                <br/>
+                <div className={style.text}>测试时间约为<span>2</span>分钟</div>
                 <br/>
                 <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
                     onClick={() => this.setState({newEnterTest: true})} >开始测试</button>

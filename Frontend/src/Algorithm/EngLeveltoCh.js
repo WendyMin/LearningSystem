@@ -5,7 +5,7 @@ function EngLevelToCh( level ){
   for( var i = 0 ; i < levelCh.length ; i++){
     if( level == levelEng[i]) return levelCh[i];
   }
-  return "高中";
+  return "初中";
 
 }
 

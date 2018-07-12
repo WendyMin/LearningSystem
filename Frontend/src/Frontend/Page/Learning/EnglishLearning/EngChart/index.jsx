@@ -61,7 +61,7 @@ class EngChart extends React.PureComponent {
               :
               <div>
                 {
-                  content == undefined ?
+                  content.length == 0 ?
                   <div class="panel panel-custom panel-border">
                     <div class="panel-heading">
                         <h3 class="panel-title">Sorry</h3>
@@ -96,21 +96,14 @@ class EngChart extends React.PureComponent {
                             </tr>
                           </thead>
                           <tbody>
-                            {
-                              (parseFloat(content.zhongkao_rate)*100).toFixed(1) == "NaN" ?
-                              <tr>
-                                <th>..</th><th>..</th><th>..</th><th>..</th><th>..</th><th>..</th>
-                              </tr>
-                              :
-                              <tr>
-                                <th>{(parseFloat(content.zhongkao_rate)*100).toFixed(1)}</th>
-                                <th>{(parseFloat(content.gaokao)*100).toFixed(1)}</th>
-                                <th>{(parseFloat(content.siji)*100).toFixed(1)}</th>
-                                <th>{(parseFloat(content.liuji)*100).toFixed(1)}</th>
-                                <th>{(parseFloat(content.kaoyan)*100).toFixed(1)}</th>
-                                <th>{(parseFloat(content.chaogang)*100).toFixed(1)}</th>
-                              </tr>
-                            }
+                            <tr>
+                              <th>{(parseFloat(content.zhongkao_rate)*100).toFixed(1)}%</th>
+                              <th>{(parseFloat(content.gaokao)*100).toFixed(1)}%</th>
+                              <th>{(parseFloat(content.siji)*100).toFixed(1)}%</th>
+                              <th>{(parseFloat(content.liuji)*100).toFixed(1)}%</th>
+                              <th>{(parseFloat(content.kaoyan)*100).toFixed(1)}%</th>
+                              <th>{(parseFloat(content.chaogang)*100).toFixed(1)}%</th>
+                            </tr>
                           </tbody>
                         </table>
                         <br/>
