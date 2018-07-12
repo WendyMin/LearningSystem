@@ -47,14 +47,14 @@ class LogicTestTongji extends React.PureComponent {
             </tr>
           </tbody>
         </table><br/>
-
+        {/* 注 : 垂直居中要写到 td 里边才管用 */}
         <div align = "center">您最新一次测试的各类题型正确率统计如下：</div><br/>
         <table className="table table-bordered m-0" align = "center">
           <thead>
             <tr>
               <th>类别名称</th>
               {all_type.map((oneType , key) =>
-                <th key = {key}> {oneType} </th>)
+                <td key = {key} style={{"vertical-align":"middle"}}><strong> {oneType} </strong></td>)
               }
             </tr>
           </thead>
@@ -62,12 +62,16 @@ class LogicTestTongji extends React.PureComponent {
             <tr>
               <th scope="row">正确率</th>
               {this_rightRate.map((oneError , key) =>
-                <td key = {key}>
+                <td key = {key} style={{"vertical-align":"middle"}}>
                   {oneError}
-                  {/* <span style={{"color":"#797979","paddingLeft":"15px"}}>
-                    {upOrDown[key] == 1 ? <i className="fa fa-long-arrow-up"></i> :
-                    <i className="fa fa-long-arrow-down"></i>}
-                  </span> */}
+                  {flag == 1 ?
+                    <span style={{"color":"#797979","paddingLeft":"15px"}}>
+                      {upOrDown[key] == 1 ? <i className="fa fa-long-arrow-up"></i> :
+                      upOrDown[key] == -1 ? <i className="fa fa-long-arrow-down"></i>:null
+                      // <i className="fa fa-long-arrow-right"></i>
+                    }
+                    </span>:null
+                  }
                 </td>)
               }
             </tr>
@@ -87,10 +91,10 @@ class LogicTestTongji extends React.PureComponent {
 
 export default connect(
   ({ LogicTestTongji: ownState }) => ({
-    flag: ownState.flag, //是否做过了水平测试
+    flag: ownState.flag, //是否做过了水平测试,1 表示做过了水平测试
     count: ownState.count, //开始学习之前做过测试的总次数
     this_rightRate: ownState.this_rightRate, // 本次/最新一次的正确率统计
-    upOrDown: ownState.upOrDown, // 本次测试跟上一次比是升还是降
+    upOrDown: ownState.upOrDown, // 本次测试跟上一次比是升还是降,1：进步，0：相同，-1退步
     mean_rightRate: ownState.mean_rightRate, // 开始学习之前的平均正确率统计
     xingshi: ownState.xingshi,  // 规划路径中的形式逻辑的具体路径
     lunzheng: ownState.lunzheng  // 规划路径中的论证逻辑的具体路径

@@ -147,13 +147,13 @@ class UnitTest extends React.PureComponent {
         whetherEnterNextChapter: num
       },
     });
-    // this.props.getChapterName({
-    //   url: "/api/logicGetChapterName",
-    //   body: {
-    //     username: this.props.username,
-    //     xingshi: this.props.xingshiOrLunzheng
-    //   },
-    // })
+    this.props.getChapterName({
+      url: "/api/logicGetChapterName",
+      body: {
+        username: this.props.username,
+        xingshi: this.props.xingshiOrLunzheng
+      },
+    })
   }
 
  componentDidMount(){
