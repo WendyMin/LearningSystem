@@ -120,6 +120,7 @@ class EnterLearning extends React.PureComponent {
       finished_level_test,
     } = this.props;
     console.log(xingshi)
+    console.log(this.props.xingshiOrLunzheng)
 
     var TextStyle = [];
     this.state.changeColor1 ? TextStyle[0] = style.choosed_type : TextStyle[0] = style.normal_type ;
