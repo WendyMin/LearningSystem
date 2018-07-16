@@ -171,8 +171,8 @@ class LogicLearning extends React.PureComponent {
                 {choice==0 ? <LogicTest/> :
                  choice==1 ? <EnterLearning/> :
                  choice==2 ? <LogicReview/> :
-                 choice==3 ? <div className="card-box"><SimulationTest/></div> :
-                 choice==4 ? <div className="card-box"><LogicStatistics/></div> :
+                 choice==3 ? <SimulationTest/> :
+                 choice==4 ? <LogicStatistics/> :
                   <div className="card-box"><LogicHelp/></div>
                 }
                 </div>

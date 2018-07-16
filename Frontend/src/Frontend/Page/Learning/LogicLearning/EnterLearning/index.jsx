@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import style from 'style';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
-import Info from 'UI/Info';
 
 import Knowledge from 'Page/Learning/LogicLearning/Knowledge';
 import ZhongDian from 'Page/Learning/LogicLearning/ZhongDian';
@@ -27,17 +26,13 @@ class EnterLearning extends React.PureComponent {
       changeColor2: false,
       changeColor3: false,
       changeColor4: false,
-      // show: false
     }
   }
 
   getLogicChapterName = ( num ) => {
-    console.log(this.props.xingshiOrLunzheng)
     this.type = num; // 1 代表形式逻辑
-    // console.log(this.props.username,num)
-    // console.log(this.props.username,this.props.xingshi)
     if(num !== undefined){
-      console.log(num,this.props.username)
+      // console.log(this.props.username,num)
       this.props.getChapterName({
         url: "/api/logicGetChapterName",
         body: {
@@ -46,23 +41,12 @@ class EnterLearning extends React.PureComponent {
         },
       })
     }
-    // if(this.props.xingshiOrLunzheng !== ""){
-    //   console.log(this.props.username,this.type)
-    //   this.props.getChapterName({
-    //     url: "/api/logicGetChapterName",
-    //     body: {
-    //       username: this.props.username,
-    //       xingshi: this.props.xingshiOrLunzheng
-    //     },
-    //   })
-    // }
     else{
-      console.log(this.props.username,this.props.xignshi)
+      // console.log(this.props.username,this.props.xignshi)
       this.props.getChapterName({
         url: "/api/logicGetChapterName",
         body: {
           username: this.props.username,
-          // xingshi: this.props.xingshiOrLunzheng
           xingshi: this.props.xingshi
         },
       })
@@ -99,7 +83,6 @@ class EnterLearning extends React.PureComponent {
   componentWillReceiveProps( NextProps ){
     console.log(this.props.learningType,NextProps.learningType,this.props.xingshiOrLunzheng)
     if(this.props.learningType !== "" && NextProps.learningType == ""){
-      // alert("lllll")
       this.props.getChapterName({
          url: "/api/logicGetChapterName",
          body: {
@@ -107,7 +90,6 @@ class EnterLearning extends React.PureComponent {
            xingshi: this.props.xingshiOrLunzheng
          },
        })
-      // this.getLogicChapterName();
     }
   }
 
@@ -119,8 +101,8 @@ class EnterLearning extends React.PureComponent {
       learningType,
       finished_level_test,
     } = this.props;
-    console.log(xingshi)
-    console.log(this.props.xingshiOrLunzheng)
+    // console.log(xingshi)
+    // console.log(this.props.xingshiOrLunzheng)
 
     var TextStyle = [];
     this.state.changeColor1 ? TextStyle[0] = style.choosed_type : TextStyle[0] = style.normal_type ;
@@ -133,8 +115,8 @@ class EnterLearning extends React.PureComponent {
       {
         this.state.typeSelectShow || learningType == "" ?
         <div>
-          <Info info = "请先点击选择您要学习的类型："/><br/>
           <div align="center">
+            <div style={{"fontSize": "22px","color": "#188ae2"}}>请先点击选择您要学习的类型：</div><br/>
             <button className={this.state.type1Selected || this.props.xingshiOrLunzheng===1 ? "btn btn-success btn-trans waves-effect waves-success w-md m-b-5 btn-lg":"btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-sm"}
                     onClick = {() => {this.setState({type1Selected: true,type2Selected: false});this.props.recordXingshiOrLunzheng(1);this.getLogicChapterName(1)}}
             >形式逻辑</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -143,8 +125,6 @@ class EnterLearning extends React.PureComponent {
             >论证逻辑</button>
             {this.props.chapter_name == "none" ? null :
             <div style={{"fontSize":"20px"}}>您将要学习的章节是&nbsp;&nbsp;<span style={{"color":"red"}}>{this.props.chapter_name}</span></div>}
-            {/* {chapterNameShow} */}
-
           </div><br/>
 
           <div className="row port m-b-20">
@@ -194,9 +174,6 @@ class EnterLearning extends React.PureComponent {
                        <p className={style.text_muted1}>
                            点击查看每一章节的强化练习，提交后可以查看正确答案和解析
                        </p>
-                       {/* <p className={style.text_muted1}>
-                           完成重点习题后解锁
-                       </p> */}
                    </div>
                 </div>
                 :
@@ -222,19 +199,6 @@ class EnterLearning extends React.PureComponent {
               </a>
 
               <a href="javascript:void(0);">
-                {/* <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
-                  <div className="gal-detail thumb" onClick = {() => {setLearningType("单元测试") ; this.setState({typeSelectShow: false})}}>
-                    <img src="/static/images/gallery/3.jpg" className="thumb-img" alt="work-thumbnail"/>
-                    <h4 className = {TextStyle[3]}
-                        onMouseOver = {() => this.setState({typeSelectShow: true , changeColor4: true})}
-                        onMouseLeave = {() => this.setState({changeColor4: false})}
-                    >单元测试
-                    </h4>
-                    <p className={style.text_muted1}>
-                      点击查看每一章节的单元测试题，测试完成后，点击提交可以查看正确答案和解析，可以查看本章节的数据统计
-                    </p>
-                  </div>
-                </div> */}
               {this.props.whetherDidQiangHua ?
                 <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
                   <div className="gal-detail thumb" onClick = {() => {setLearningType("单元测试") ; this.setState({typeSelectShow: false})}}>
