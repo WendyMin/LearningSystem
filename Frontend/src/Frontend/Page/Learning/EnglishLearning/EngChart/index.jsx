@@ -5,6 +5,7 @@ import { Prompt } from 'react-router';
 import style from 'style';
 
 import UserManagerWindow from "Windows/UserManager";
+import Note from 'UI/Note';
 
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
@@ -19,6 +20,7 @@ import {
 } from 'Connected/EnglishChartPort';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 import EngLearningTypeSelect from 'Page/Learning/EnglishLearning/EngLearningTypeSelect';
+import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 
 class EngChart extends React.PureComponent {
   constructor( props ){
@@ -62,18 +64,20 @@ class EngChart extends React.PureComponent {
               <div>
                 {
                   content.length == 0 ?
-                  <div class="panel panel-custom panel-border">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Sorry</h3>
-                    </div>
-                    <div class="panel-body">
-                      <div className={style.text}>您尚未学习，没有统计数据，请点击左侧的进入学习，开始英语学习吧</div>
-                      <br/>
-                      {/* <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                         onClick = {() => {setLearningType("英语进入学习");}}>
-                         进入学习</button> */}
-                    </div>
-                  </div>
+                  // <div class="panel panel-custom panel-border">
+                  //   <div class="panel-heading">
+                  //       <h3 class="panel-title">Sorry</h3>
+                  //   </div>
+                  //   <div class="panel-body">
+                  //     <div className={style.text}>您尚未学习，没有统计数据，请点击左侧的进入学习，开始英语学习吧</div>
+                  //     <br/>
+                  //     {/* <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                  //        onClick = {() => {setLearningType("英语进入学习");}}>
+                  //        进入学习</button> */}
+                  //   </div>
+                  // </div>
+
+                  <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/>
 
                   :
 
@@ -148,6 +152,7 @@ export default applyHOCs([
       ...bindActionCreators( PortTestActions , dispatch),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
       ...bindActionCreators( EnglishChartPortActions , dispatch ),
+      ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
     })
   )],
   EngChart

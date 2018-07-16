@@ -19,8 +19,10 @@ class Note extends React.PureComponent<Props> {
               <div className={style.icondot}></div>
             </div>
             <div align="center">
-              <h2>Sorry!</h2>
-              <p className="lead text-muted">{info}</p>
+              <h3>Sorry!</h3>
+              {/* <p className="lead text-muted">{info}</p> */}
+              <p className={style.text}>{info}</p>
+              <br/>
               <p><button className="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-lg" onClick={onClick}>OK</button></p>
             </div>
           </div>

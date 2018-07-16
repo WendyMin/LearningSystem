@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Prompt } from 'react-router';
 import style from 'style';
 
+import Note from 'UI/Note';
 import UserManagerWindow from "Windows/UserManager";
 import SlideRL from 'Animation/SlideRL';
 
@@ -18,9 +19,10 @@ import {
   actions as EnglishWordTestActions
 } from 'Connected/EnglishWordTest';
 import EngLearningTypeSelect from 'Page/Learning/EnglishLearning/EngLearningTypeSelect';
+import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 
  import levelConvert from "Algorithm/EngLevelToCh";
-
+ import TestStart from "UI/TestStart";
 
 class EngTest extends React.PureComponent {
   constructor( props ){
@@ -30,6 +32,7 @@ class EngTest extends React.PureComponent {
       enterLearning: false,
       testAgain: false,
       newEnterTest: false,
+      enterTestSure: false,
     }
   }
 
@@ -87,6 +90,7 @@ class EngTest extends React.PureComponent {
       enterTest,
       testAgain,
       newEnterTest,
+      enterTestSure,
     } = this.state;
 
     // console.log();
@@ -114,12 +118,12 @@ class EngTest extends React.PureComponent {
                  <br/>
                  <div className={style.text}>如需要重新测试，请点击：
                    <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                    onClick = {() => {this.setState({enterTest: false , enterLearning: false , testAgain: true});this.props.forceEnd();this.loadTest()}}>
+                    onClick = {() => {this.setState({enterTest: false , enterLearning: false , testAgain: true, enterTestSure: false});this.props.forceEnd();this.loadTest()}}>
                     再测一次</button>
-                    {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                    onClick = {() => {this.setState({enterTest: false , enterLearning: true , testAgain: false});this.props.forceEnd()}}>
-                    进入学习</button> */}
+                    onClick = {() => {this.setState({enterTest: false , enterLearning: true , testAgain: false, enterTestSure: false});this.props.setSubjectFunctionSelect(1);this.props.forceEnd()}}>
+                    进入学习</button>
                   </div>
               </div>
             </div>
@@ -127,19 +131,30 @@ class EngTest extends React.PureComponent {
 
             newEnterTest || testAgain && !testend ?
             <div>
-              <SlideRL play = {ined}>
-                <EnglishWordTest
-                    //submiter = { this.submitQuestions }
-                    loader = {this.loadTest}
-                />
-              </SlideRL>
-              {/* <div className={style.buttonright}>
-                <button class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                  onClick = {forceNext}>
-                  下一题</button>
-              </div> */}
-              <div className={style.textgrey}>测试时间约为2分钟</div>
+            {
+              enterTestSure ?
+              <div>
+                <SlideRL play = {ined}>
+                  <EnglishWordTest
+                      //submiter = { this.submitQuestions }
+                      loader = {this.loadTest}
+                  />
+                </SlideRL>
+                {/* <div className={style.buttonright}>
+                  <button class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                    onClick = {forceNext}>
+                    下一题</button>
+                </div> */}
+                <div className={style.textgrey}>测试时间约为2分钟</div>
+              </div>
+
+              :
+              <TestStart testnum="约30道" testtime="2  分钟" onClick={() => this.setState({enterTestSure: true})}/>
+
+            }
+
             </div>
+
             :
 
             (enterTest && !didTest) ?
@@ -153,9 +168,10 @@ class EngTest extends React.PureComponent {
                 <div className={style.text}>测试时间约为<span>2</span>分钟</div>
                 <br/>
                 <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                    onClick={() => this.setState({newEnterTest: true})} >开始测试</button>
+                    onClick={() => this.setState({newEnterTest: true, enterTestSure: false})} >开始测试</button>
               </div>
             </div>
+
             :
 
             null
@@ -188,6 +204,7 @@ export default applyHOCs([
     dispatch => ({
       // ...bindActionCreators( PortTestActions , dispatch),
       ...bindActionCreators( EnglishWordTestActions , dispatch ),
+      ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
     })
   )],
   EngTest

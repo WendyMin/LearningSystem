@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Prompt } from 'react-router';
 import style from 'style';
 
-import Button from 'UI/Button';
+import Note from 'UI/Note';
 import ButtonControlPane from 'UI/ButtonControlPane';
 import mergeArraysIntoOne from 'direct-core/Algorithm/mergeArraysIntoOne';
 
@@ -39,6 +39,7 @@ import {
 } from 'Connected/SingleOptionQuestions';
 import EngLearningTypeSelect from 'Page/Learning/EnglishLearning/EngLearningTypeSelect';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
+import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 
 class EngReview extends React.PureComponent {
   constructor( props ){
@@ -259,18 +260,20 @@ class EngReview extends React.PureComponent {
                   {
                   // reviewlist == undefined ? null :
                   reviewlist.length == 0 ?
-                  <div class="panel panel-custom panel-border">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Sorry</h3>
-                    </div>
-                    <div class="panel-body">
-                      <div>您尚未学习，没有需要复习的内容，请点击左侧的进入学习，开始英语学习吧</div>
-                      <br/>
-                      {/* <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                         onClick = {() => {setLearningType("英语进入学习");}}>
-                         进入学习</button> */}
-                    </div>
-                  </div>
+                  // <div class="panel panel-custom panel-border">
+                  //   <div class="panel-heading">
+                  //       <h3 class="panel-title">Sorry</h3>
+                  //   </div>
+                  //   <div class="panel-body">
+                  //     <div>您尚未学习，没有需要复习的内容，请点击左侧的进入学习，开始英语学习吧</div>
+                  //     <br/>
+                  //     {/* <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                  //        onClick = {() => {setLearningType("英语进入学习");}}>
+                  //        进入学习</button> */}
+                  //   </div>
+                  // </div>
+
+                  <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/>
 
                   :
                   reviewlist.map((list, key)=>
@@ -504,6 +507,7 @@ export default applyHOCs([
       ...bindActionCreators( EnglishReviewPortActions , dispatch),
       ...bindActionCreators( SingleOptionQuestionsActions , dispatch ),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
+      ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
     })
   )],
   EngReview

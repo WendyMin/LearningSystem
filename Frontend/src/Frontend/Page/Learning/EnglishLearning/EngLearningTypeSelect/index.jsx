@@ -18,12 +18,15 @@ import {
   view as EnglishLearningTypePort,
   actions as EnglishLearningTypePortActions
 } from 'Connected/EnglishLearningTypePort';
+import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 
 import UserManagerWindow from "Windows/UserManager";
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
+
+import Note from 'UI/Note';
 
 
 class EngLearningTypeSelect extends React.PureComponent {
@@ -61,7 +64,7 @@ class EngLearningTypeSelect extends React.PureComponent {
       didtest,
     } = this.props;
 
-    console.log(didtest);
+    // console.log(didtest);
 
     var TextStyle = [];
     this.state.changeColor1 ? TextStyle[0] = style.choosed_type : TextStyle[0] = style.normal_type ;
@@ -173,15 +176,17 @@ class EngLearningTypeSelect extends React.PureComponent {
           :
 
 
-          <div class="panel panel-custom panel-border">
-            <div class="panel-heading">
-                <h3 class="panel-title">Sorry</h3>
-            </div>
-            <div class="panel-body">
-              <div className={style.text}>您为新用户，系统还没有您的数据，请从左边栏前往水平测试，完成基础测评</div>
-              <br/>
-            </div>
-          </div>
+          // <div class="panel panel-custom panel-border">
+          //   <div class="panel-heading">
+          //       <h3 class="panel-title">Sorry</h3>
+          //   </div>
+          //   <div class="panel-body">
+          //     <div className={style.text}>您为新用户，系统还没有您的数据，请从左边栏前往水平测试，完成基础测评</div>
+          //     <br/>
+          //   </div>
+          // </div>
+
+          <Note info = "您还没完成水平测试，请先完成水平测试 !" onClick={()=>this.props.setSubjectFunctionSelect(0)}/>
 
 
         }
@@ -210,6 +215,7 @@ export default applyHOCs([
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
       // ...bindActionCreators( PortTestActions , dispatch),
       ...bindActionCreators( EnglishLearningTypePortActions , dispatch),
+      ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
     })
   )],
   EngLearningTypeSelect
