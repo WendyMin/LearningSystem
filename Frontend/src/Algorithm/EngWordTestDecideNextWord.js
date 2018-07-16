@@ -7,8 +7,8 @@ function EngWordTestDecideNextWord( questions , level , num, rightnum){
     3 : "extreme"
   }
 
-  var rightword = []
-  var wrongword = []
+  var rightword = ""
+  var wrongword = ""
 
   const convert = ( level ) => {
     for ( var name in levelName){
@@ -19,7 +19,7 @@ function EngWordTestDecideNextWord( questions , level , num, rightnum){
   var convertLevel = Number( convert( level ) );
 
   if( questions[level][num].choosed == questions[level][num].key ) {
-    rightword=1
+    rightword=questions[level][num].word
     switch( convertLevel ){
       case 0:
       if( rightnum == 11) return [ levelName[convertLevel+1], 0, false, 0, rightword, wrongword ]
@@ -40,7 +40,7 @@ function EngWordTestDecideNextWord( questions , level , num, rightnum){
     }
   }
   else {
-    wrongword=0
+    wrongword=questions[level][num].word
     if( num < 14 ) return [ level, num+1, false, rightnum, rightword, wrongword ]
     else return [ level, num, true, rightnum, rightword, wrongword ]
   }

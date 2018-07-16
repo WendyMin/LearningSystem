@@ -44,7 +44,7 @@ export default ( state = {
       wrongword: [],
     }
 } , { type , payload , id } ) => {
-  const { content } = state;
+  const { content, rightwords, wrongwords } = state;
   //console.log(content)
   switch( type ){
 
@@ -248,18 +248,22 @@ export default ( state = {
     case __NEXT: {
       let questions = state.content;
       let [ level , num , end , rightnum, rightword, wrongword] = nextQuestion( questions , state.nowAt.level , state.nowAt.num, state.nowAt.rightnum );
+      // console.log(rightword, wrongword)
+      if(rightword=="") { wrongwords.push(state.nowAt.level); wrongwords.push(wrongword) }
+      else { rightwords.push(state.nowAt.level); rightwords.push(rightword) }
       return {
         ...state,
+        rightwords,
+        wrongwords,
         nowAt: {
           level,
           num,
           rightnum,
-          rightword,
-          wrongword
+         rightword,
+         wrongword
         },
-        testendState: end
+        testendState: end,
       }
-      //console.log(list)
 
     }
 
