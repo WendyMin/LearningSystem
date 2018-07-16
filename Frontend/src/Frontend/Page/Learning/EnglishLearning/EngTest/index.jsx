@@ -89,14 +89,18 @@ class EngTest extends React.PureComponent {
       newEnterTest,
     } = this.state;
 
-    // console.log(didLevel);
+    // console.log();
 
     return(
       <React.Fragment>
 
         <div>
           {
-            enterTest && didTest || enterTest && testend || testAgain && testend ?
+            enterLearning ?
+            <EngLearningTypeSelect/>
+            :
+
+            ((enterTest && didTest) || (enterTest && testend) || (testAgain && testend)) ?
             <div class="panel panel-custom panel-border">
               <div class="panel-heading">
                   <h3 class="panel-title">Well Done !</h3>
@@ -106,15 +110,17 @@ class EngTest extends React.PureComponent {
                   <span style = {{"color":"#188ae2"}}>{levelConvert(didLevel)}水平</span>
                 </div>
                 <br/>
-                <div className={style.text}>请选择再次测试，还是开启个性化学习：
+                 <div className={style.text}>请点击左侧的进入学习，开始英语学习吧</div>
+                 <br/>
+                 <div className={style.text}>如需要重新测试，请点击：
+                   <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                    onClick = {() => {this.setState({enterTest: false , enterLearning: false , testAgain: true});this.props.forceEnd();this.loadTest()}}>
+                    再测一次</button>
+                    {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                   onClick = {() => {this.setState({enterTest: false , enterLearning: false , testAgain: true});this.props.forceEnd();this.loadTest()}}>
-                   再测一次</button>
-                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                 <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                   onClick = {() => {this.setState({enterTest: false , enterLearning: true , testAgain: false});this.props.forceEnd()}}>
-                   进入学习</button>
-                 </div>
+                    onClick = {() => {this.setState({enterTest: false , enterLearning: true , testAgain: false});this.props.forceEnd()}}>
+                    进入学习</button> */}
+                  </div>
               </div>
             </div>
             :
@@ -135,7 +141,8 @@ class EngTest extends React.PureComponent {
               <div className={style.textgrey}>测试时间约为2分钟</div>
             </div>
             :
-            enterTest && !didTest ?
+
+            (enterTest && !didTest) ?
             <div class="panel panel-custom panel-border">
               <div class="panel-heading">
                   <h3 class="panel-title">Sorry</h3>
@@ -150,12 +157,8 @@ class EngTest extends React.PureComponent {
               </div>
             </div>
             :
+
             null
-          }
-          {
-            enterLearning ?
-            <EngLearningTypeSelect/>
-            :null
           }
         </div>
 

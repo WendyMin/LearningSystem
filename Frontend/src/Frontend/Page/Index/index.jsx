@@ -9,6 +9,8 @@ import applyHOCs from 'direct-core/applyHOCs';
 
 import { actions as UserManagerActions } from 'Connected/UserManager';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
+import { actions as PortTestActions } from 'Connected/PortTest';
+
 var sha1 = require('sha1');
 
 class IndexPage extends React.Component {
@@ -16,12 +18,26 @@ class IndexPage extends React.Component {
   //   super( props );
   // }
 
+  componentDidMount(){
+    this.getProgress();
+  }
+
+  getProgress = () => {
+    this.props.loadPortContent({
+      url:"/api/all_getProgress",
+      body:{
+        username: this.props.username,
+      }
+    })
+  }
+
   render(){
 
     const{
       alert ,
       openModal,
       choice,
+      progress,
     } = this.props;
 
     return (
@@ -155,7 +171,7 @@ class IndexPage extends React.Component {
                                     {/* <a href="#" className="font-600 text-muted">view more</a> */}
                                 </p>
 
-                                <p className="font-600 m-b-5">Progress <span className="text-success pull-right">80%</span></p>
+                                <p className="font-600 m-b-5">Progress <span className="text-success pull-right">{progress.data*100}%</span></p>
                                 <div className="progress progress-bar-success-alt progress-sm m-b-5">
                                     <div className="progress-bar progress-bar-success progress-animated wow animated animated"
                                          role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
@@ -296,12 +312,14 @@ export default applyHOCs([
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
-      choice: state.SubjectFunctionSelect.choice
+      choice: state.SubjectFunctionSelect.choice,
+      progress: state.PortTest.content,
     }),
     dispatch => ({
       //...bindActionCreators( ButtonExpandActions , dispatch),
       ...bindActionCreators( UserManagerActions , dispatch ),
-      ...bindActionCreators( SubjectFunctionSelectActions , dispatch )
+      ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
+      ...bindActionCreators( PortTestActions , dispatch),
     })
   )],
   IndexPage

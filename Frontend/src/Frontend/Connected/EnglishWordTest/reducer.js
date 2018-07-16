@@ -17,6 +17,8 @@ export default ( state = {
     content: {},
     change: [],
     recordFlagAndLevel: [],
+    rightwords: [],
+    wrongwords: [],
     submitState: {
       pending: 0,
       resolved: 0,
@@ -37,7 +39,9 @@ export default ( state = {
     nowAt:{
       level: "basic",
       num: 0,
-      rightnum: 0
+      rightnum: 0,
+      rightword: [],
+      wrongword: [],
     }
 } , { type , payload , id } ) => {
   const { content } = state;
@@ -243,13 +247,15 @@ export default ( state = {
 
     case __NEXT: {
       let questions = state.content;
-      let [ level , num , end , rightnum] = nextQuestion( questions , state.nowAt.level , state.nowAt.num, state.nowAt.rightnum );
+      let [ level , num , end , rightnum, rightword, wrongword] = nextQuestion( questions , state.nowAt.level , state.nowAt.num, state.nowAt.rightnum );
       return {
         ...state,
         nowAt: {
           level,
           num,
-          rightnum
+          rightnum,
+          rightword,
+          wrongword
         },
         testendState: end
       }

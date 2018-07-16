@@ -67,11 +67,11 @@ class EngChart extends React.PureComponent {
                         <h3 class="panel-title">Sorry</h3>
                     </div>
                     <div class="panel-body">
-                      <div className={style.text}>您尚未学习，没有统计数据，请立即学习</div>
+                      <div className={style.text}>您尚未学习，没有统计数据，请点击左侧的进入学习，开始英语学习吧</div>
                       <br/>
-                      <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                      {/* <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
                          onClick = {() => {setLearningType("英语进入学习");}}>
-                         进入学习</button>
+                         进入学习</button> */}
                     </div>
                   </div>
 

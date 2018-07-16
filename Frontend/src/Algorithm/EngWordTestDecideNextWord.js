@@ -1,4 +1,4 @@
-function EngWordTestDecideNextWord( questions , level , num, rightnum ){
+function EngWordTestDecideNextWord( questions , level , num, rightnum){
 
   let levelName = {
     0 : "basic",
@@ -6,6 +6,9 @@ function EngWordTestDecideNextWord( questions , level , num, rightnum ){
     2 : "advance",
     3 : "extreme"
   }
+
+  var rightword = []
+  var wrongword = []
 
   const convert = ( level ) => {
     for ( var name in levelName){
@@ -16,28 +19,30 @@ function EngWordTestDecideNextWord( questions , level , num, rightnum ){
   var convertLevel = Number( convert( level ) );
 
   if( questions[level][num].choosed == questions[level][num].key ) {
+    rightword=1
     switch( convertLevel ){
       case 0:
-      if( rightnum == 11) return [ levelName[convertLevel+1], 0, false, 0 ]
-      else if( num < 14) return [ level, num+1, false, rightnum+1 ]
-      else return [ level, num, true, rightnum ]
+      if( rightnum == 11) return [ levelName[convertLevel+1], 0, false, 0, rightword, wrongword ]
+      else if( num < 14) return [ level, num+1, false, rightnum+1, rightword, wrongword ]
+      else return [ level, num, true, rightnum, rightword, wrongword ]
       case 1:
-      if( rightnum == 9) return [ levelName[convertLevel+1], 0, false, 0 ]
-      else if( num < 14) return [ level, num+1, false, rightnum+1 ]
-      else return [ level, num, true, rightnum ]
+      if( rightnum == 9) return [ levelName[convertLevel+1], 0, false, 0, rightword, wrongword ]
+      else if( num < 14) return [ level, num+1, false, rightnum+1, rightword, wrongword ]
+      else return [ level, num, true, rightnum, rightword, wrongword ]
       case 2:
-      if( rightnum == 8) return [ levelName[convertLevel+1], 0, false, 0 ]
-      else if( num < 14) return [ level, num+1, false, rightnum+1 ]
-      else return [ level, num, true, rightnum ]
+      if( rightnum == 8) return [ levelName[convertLevel+1], 0, false, 0, rightword, wrongword ]
+      else if( num < 14) return [ level, num+1, false, rightnum+1, rightword, wrongword ]
+      else return [ level, num, true, rightnum, rightword, wrongword ]
       case 3:
-      if( rightnum == 8) return [ level, 0, true, 9 ]
-      else if( num < 14) return [ level, num+1, false, rightnum+1 ]
-      else return [ level, num, true, rightnum ]
+      if( rightnum == 8) return [ level, 0, true, 9, rightword, wrongword ]
+      else if( num < 14) return [ level, num+1, false, rightnum+1, rightword, wrongword ]
+      else return [ level, num, true, rightnum, rightword, wrongword ]
     }
   }
   else {
-    if( num < 14 ) return [ level, num+1, false, rightnum ]
-    else return [ level, num, true, rightnum ]
+    wrongword=0
+    if( num < 14 ) return [ level, num+1, false, rightnum, rightword, wrongword ]
+    else return [ level, num, true, rightnum, rightword, wrongword ]
   }
 
 }
