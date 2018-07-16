@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import style from 'style';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
-import Info from 'UI/Info';
 
 import Knowledge from 'Page/Learning/LogicLearning/Knowledge';
 import ZhongDian from 'Page/Learning/LogicLearning/ZhongDian';
@@ -27,15 +26,13 @@ class EnterLearning extends React.PureComponent {
       changeColor2: false,
       changeColor3: false,
       changeColor4: false,
-      // show: false
     }
   }
 
   getLogicChapterName = ( num ) => {
-    this.type = num;
-    console.log(this.props.username,num)
-    console.log(this.props.username,this.props.xingshi)
+    this.type = num; // 1 代表形式逻辑
     if(num !== undefined){
+      // console.log(this.props.username,num)
       this.props.getChapterName({
         url: "/api/logicGetChapterName",
         body: {
@@ -45,6 +42,7 @@ class EnterLearning extends React.PureComponent {
       })
     }
     else{
+      // console.log(this.props.username,this.props.xignshi)
       this.props.getChapterName({
         url: "/api/logicGetChapterName",
         body: {
@@ -53,6 +51,7 @@ class EnterLearning extends React.PureComponent {
         },
       })
     }
+
   }
 
   TypeSelectNote = () =>{
@@ -65,20 +64,33 @@ class EnterLearning extends React.PureComponent {
     this.setState({typeSelectShow: true})
   }
   FinishXingshiNote = () =>{
-    alert("您已经完成所有形式逻辑的学习!");
+    alert("恭喜您已经完成所有形式逻辑的学习!");
     this.setState({typeSelectShow: true})
   }
   FinishLunzhengNote = () =>{
-    alert("您已经完成所有论证逻辑的学习!");
+    alert("恭喜您已经完成所有论证逻辑的学习!");
     this.setState({typeSelectShow: true})
   }
   FinishAllNote = () =>{
-    alert("您已经完成了所有形式逻辑和论证逻辑的学习!");
+    alert("恭喜您已经完成了所有形式逻辑和论证逻辑的学习!");
     this.setState({typeSelectShow: true})
   }
 
   componentDidMount(){
+    this.props.recordXingshiOrLunzheng("");
     this.getLogicChapterName();
+  }
+  componentWillReceiveProps( NextProps ){
+    console.log(this.props.learningType,NextProps.learningType,this.props.xingshiOrLunzheng)
+    if(this.props.learningType !== "" && NextProps.learningType == ""){
+      this.props.getChapterName({
+         url: "/api/logicGetChapterName",
+         body: {
+           username: this.props.username,
+           xingshi: this.props.xingshiOrLunzheng
+         },
+       })
+    }
   }
 
 
@@ -89,9 +101,8 @@ class EnterLearning extends React.PureComponent {
       learningType,
       finished_level_test,
     } = this.props;
-    console.log(xingshi)
-    // console.log(xingshi===0)
-    //console.log(learningType)
+    // console.log(xingshi)
+    // console.log(this.props.xingshiOrLunzheng)
 
     var TextStyle = [];
     this.state.changeColor1 ? TextStyle[0] = style.choosed_type : TextStyle[0] = style.normal_type ;
@@ -104,18 +115,16 @@ class EnterLearning extends React.PureComponent {
       {
         this.state.typeSelectShow || learningType == "" ?
         <div>
-          <Info info = "请先点击选择您要学习的类型："/><br/>
           <div align="center">
-            <button className={this.state.type1Selected || xingshi===1 ? "btn btn-success btn-trans waves-effect waves-success w-md m-b-5 btn-lg":"btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-sm"}
-                    onClick = {() => {this.setState({type1Selected: true,type2Selected: false});this.getLogicChapterName(1)}}
+            <div style={{"fontSize": "22px","color": "#188ae2"}}>请先点击选择您要学习的类型：</div><br/>
+            <button className={this.state.type1Selected || this.props.xingshiOrLunzheng===1 ? "btn btn-success btn-trans waves-effect waves-success w-md m-b-5 btn-lg":"btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-sm"}
+                    onClick = {() => {this.setState({type1Selected: true,type2Selected: false});this.props.recordXingshiOrLunzheng(1);this.getLogicChapterName(1)}}
             >形式逻辑</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button className={this.state.type2Selected || xingshi===0? "btn btn-success btn-trans waves-effect waves-success w-md m-b-5 btn-lg":"btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-sm"}
-                    onClick = {() => {this.setState({type2Selected: true,type1Selected: false});this.getLogicChapterName(0)}}
+            <button className={this.state.type2Selected || this.props.xingshiOrLunzheng===0? "btn btn-success btn-trans waves-effect waves-success w-md m-b-5 btn-lg":"btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-sm"}
+                    onClick = {() => {this.setState({type2Selected: true,type1Selected: false});this.props.recordXingshiOrLunzheng(0);this.getLogicChapterName(0)}}
             >论证逻辑</button>
             {this.props.chapter_name == "none" ? null :
-            <div style={{"font-size":"20px"}}>您将要学习的章节是&nbsp;&nbsp;<span style={{"color":"red"}}>{this.props.chapter_name}</span></div>}
-            {/* {chapterNameShow} */}
-
+            <div style={{"fontSize":"20px"}}>您将要学习的章节是&nbsp;&nbsp;<span style={{"color":"red"}}>{this.props.chapter_name}</span></div>}
           </div><br/>
 
           <div className="row port m-b-20">
@@ -165,9 +174,6 @@ class EnterLearning extends React.PureComponent {
                        <p className={style.text_muted1}>
                            点击查看每一章节的强化练习，提交后可以查看正确答案和解析
                        </p>
-                       {/* <p className={style.text_muted1}>
-                           完成重点习题后解锁
-                       </p> */}
                    </div>
                 </div>
                 :
@@ -235,7 +241,7 @@ class EnterLearning extends React.PureComponent {
           {/* <!-- End row --> */}
         </div>
         :
-        this.state.type1Selected == false && this.state.type2Selected == false && (learningType == "知识点精要" || learningType == "重点习题" || learningType == "强化练习" || learningType == "单元测试") ?
+        this.state.type1Selected == false && this.state.type2Selected == false && xingshi !== 0 && xingshi !==1 && (learningType == "知识点精要" || learningType == "重点习题" || learningType == "强化练习" || learningType == "单元测试") ?
         <div>{this.TypeSelectNote()}</div>
         :
         finished_level_test == 0 ? <div>{this.FinishTestNote()}</div>:
@@ -263,7 +269,8 @@ export default applyHOCs([
     state => ({
       //logined: state.UserManager.logined,
       username: state.UserManager.name,
-      // xingshiOrLunzheng: state.LearningTypeSelect.xingshiOrLunzheng,
+      choice: state.SubjectFunctionSelect.choice,
+      xingshiOrLunzheng: state.LearningTypeSelect.xingshiOrLunzheng,
       learningType: state.LearningTypeSelect.learningType,
       finished_level_test: state.LearningTypeSelect.finished_level_test,
       chapter_name: state.LearningTypeSelect.chapter_name,

@@ -8,6 +8,7 @@ import {
   __UNLOCK_QUESTION,
   __ASYNC_LOAD_QUESTIONS,
   __ASYNC_SUBMIT_QUESTIONS,
+  __FORCE_CLEAR_QUESTIONS
 } from 'actionTypes';
 
 export default ( state = {
@@ -151,6 +152,13 @@ export default ( state = {
         loadState
       };
     }
+
+    case __FORCE_CLEAR_QUESTIONS: {
+      return {
+        ...state,
+        content: []
+      };
+    };
     /*
     defineAsyncActionReducer __LOAD_QUESTIONS end
     */

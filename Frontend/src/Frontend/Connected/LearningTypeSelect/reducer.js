@@ -11,6 +11,7 @@ export default( state = {
   chapter_name: "",
   whetherDidZhongDian: false,
   whetherDidQiangHua: false,
+  whetherDidCeShi: false,
   finished_level_test: "", // 0 表示未完成水平测试 ， 1 完成了水平测试
   enterNextChapter: false,
   loadState: {
@@ -58,7 +59,10 @@ export default( state = {
           ...state,
           loadState,
           chapter_name: response.chapter_name_ch,
-          finished_level_test: response.flag
+          finished_level_test: response.flag,
+          whetherDidZhongDian: response.buzhou[0] == 0 ? false : true,
+          whetherDidQiangHua: response.buzhou[1] == 0 ? false : true,
+          whetherDidCeShi: response.buzhou[2] == 0 ? false : true,
         };
       }
       case __ASYNC_LOAD_CHAPTER_NAME.rejected: {

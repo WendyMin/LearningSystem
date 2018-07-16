@@ -48,7 +48,7 @@ export default ( state = {
         loadState,
         flag: response.flag,
         this_rightRate: response.rate,
-        upOrDown: response.upOrDown
+        upOrDown: response.updown
       };
     }
     case __ASYNC_LOAD_LOGIC_TEST_RESULT.rejected: {

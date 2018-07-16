@@ -6,7 +6,6 @@ import style from 'style';
 import { actions as PortTestActions } from 'Connected/PortTest';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 import TextAndImag from 'UI/TextAndImag';
-import Info from 'UI/Info';
 import Button from 'UI/Button';
 
 import makePage from 'direct-core/makePage';
@@ -39,8 +38,7 @@ class Knowledge extends React.PureComponent {
       total_content,
       setLearningType
     } = this.props;
-    console.log(total_content)
-    //onsole.log(total_content.content)
+    // console.log(total_content)
 
     return (
       <React.Fragment>
@@ -48,11 +46,7 @@ class Knowledge extends React.PureComponent {
         {total_content == undefined ? null :
           <div className = {style.logic_knowledge}>
             {total_content.chapter_name==undefined?null:<h4 className = {style.dalei}> {total_content.chapter_name} </h4>}
-
-            {total_content.content == undefined ? null :
-            <TextAndImag list = {total_content.content}/>
-            }
-
+            {total_content.content == undefined ? null :<TextAndImag list = {total_content.content}/> }
               {
                 total_content.shunxu == undefined ? null :
                 <div>{total_content.shunxu.map((onetype , key) =>
@@ -64,33 +58,9 @@ class Knowledge extends React.PureComponent {
               <div align="center">
                 <Button className = {style.enterNextButton} text = {"进入重点习题"} onClick = {() => setLearningType("重点习题")}/>
               </div>
-
           </div>
-          }
-
+        }
         </div>
-        {/* {total_content.flag == 1 ?
-        <div className="card-box">
-          <div className={style.pageTitle}> 知识点精要 </div>
-          <div className = {style.logic_knowledge}>
-            <h4 className = {style.dalei}> {total_content.chapter_name} </h4>
-            <TextAndImag list = {total_content.content}/>
-            {
-              total_content.shunxu == undefined ? null :
-              <div>{total_content.shunxu.map((onetype , key) =>
-              <div key = {key}>
-                <div className = {style.logic_knowledge_title}> {onetype} </div>
-                {total_content.xiaolei == undefined ? null:  <TextAndImag list = {total_content.xiaolei[key]} />}
-              </div>)}</div>
-             }
-            <div align="center">
-              <Button className = {style.enterNextButton} text = {"进入重点习题"} onClick = {() => setLearningType("重点习题")}/>
-            </div>
-          </div>
-        </div>
-        :
-        <Info info = "您还没有完成入口测试，请先完成入口测试！"/>
-        } */}
       </React.Fragment>
     );
   }

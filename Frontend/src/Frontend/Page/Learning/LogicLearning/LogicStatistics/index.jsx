@@ -1,27 +1,21 @@
+/** 显示用户在逻辑科目做过的所有章节的数据统计 **/
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import style from 'style';
-
-import {
-  actions as ZhentiPerYearTongjiActions
-} from 'Connected/ZhentiPerYearTongji';
-import {
-  actions as ZhentiAllYearTongjiActions
-} from 'Connected/ZhentiAllYearTongji';
-
-import Info from 'UI/Info';
-import Button from 'UI/Button';
-
+import Note from 'UI/Note';
+import { actions as ZhentiPerYearTongjiActions } from 'Connected/ZhentiPerYearTongji';
+import { actions as ZhentiAllYearTongjiActions } from 'Connected/ZhentiAllYearTongji';
+import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
+
 class LogicStatistics extends React.PureComponent{
   constructor( props ){
     super( props );
   }
-
+  /** 加载最新一次的统计数据 **/
   getLastTongji = () => {
-    this.setState({tongjiShow: true , typeSelect: false});
     this.props.loadAllZhentiTongji({
       url: "/api/logicAllTongji",
       body: {
@@ -29,9 +23,8 @@ class LogicStatistics extends React.PureComponent{
       },
     });
   }
-
+  /** 加载做过的所有数据的平均统计 **/
   getAllTongji = () => {
-    this.setState({tongjiShow: true , typeSelect: false});
     this.props.loadZhentiTongji({
       url: "/api/logicLastTongji",
       body: {
@@ -47,148 +40,72 @@ class LogicStatistics extends React.PureComponent{
 
   render(){
     const { data , lastData } = this.props;
-    //console.log(data.finish_chapter);
     console.log(data,lastData)
     return(
-      <div className = {style.allChapterTongji}>
-        <Info info = "您已经完成的所有章节统计情况如下："/>
+      <div>
         {
-          data.finish_chapter == undefined || lastData.finish_chapter == undefined ? null :
+          data == undefined || lastData == undefined ? null :
           <div>
-            {/*data.finish_chapter.map((oneChapter , key) =>
-              <div key = {key}>{oneChapter}&nbsp;&nbsp;&nbsp;&nbsp;</div>
-            )*/}
-            {data.finish_chapter.length == 0 || lastData.finish_chapter.length == 0 ? <Info info = "您还没有学习完成的章节！"/> :
+            {lastData.flag == 0 ? <Note info = "您还没完成入口测试，请先完成入口测试 !" onClick={()=>this.props.setSubjectFunctionSelect(0)}/>:
             <div>
-              {lastData.tongji.map((oneChapter , key) =>
-                <div key = {key} align = "center">
-                  <br/><h5 style = {{"color":"blue"}}>{lastData.finish_chapter[key]}</h5><span>最新一次总错误率<span>{oneChapter.total_mba}</span></span>
-                  <table className="table table-bordered m-0" align = "center" //style="table-layout:fixed;"
-                    >
-
-                      <thead>
+            {data.finish_chapter == undefined || lastData.finish_chapter == undefined ? null :
+              <div>
+                {data.finish_chapter.length == 0 || lastData.finish_chapter.length == 0 ?
+                <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/>
+                :
+                <div className="card-box">
+                <div className = {style.allChapterTongji}>
+                  <div className = {style.title}>您已经完成的所有章节统计信息如下：</div>
+                  {lastData.tongji.map((oneChapter , key) =>
+                    <div key = {key} align = "center">
+                      <br/><div style = {{"fontSize": "16px","lineHeight": "32px","color":"#71b6f9"}}>{lastData.finish_chapter[key]}</div><span>最新一次总错误率<span>{oneChapter.total_mba}</span></span>
+                      <table className="table table-bordered m-0" align = "center">
+                        <thead>
                           <tr>
-                              <th>小类名称</th>
-                              {oneChapter.mba_type.map((onetype , key) =>
-                                <th key = {key}>{onetype}</th>
-                              )}
-
+                            <th>小类名称</th>
+                            {oneChapter.mba_type.map((onetype , key) =>
+                            <th key = {key}>{onetype}</th>)}
                           </tr>
-                      </thead>
-                      <tbody>
+                        </thead>
+                        <tbody>
                           <tr>
                             <th>最新一次错误率</th>
                             {oneChapter.xiaolei_mba.map((oneerror , key) =>
-                              <td key = {key}>{oneerror}</td>
-                            )}
-
+                            <td key = {key} style={{"vertical-align":"middle"}}>{oneerror}</td>)}
                           </tr>
+                        </tbody>
+                      </table><br/>
 
-                      </tbody>
-                  </table><br/>
-                  {/* <table border="1" >
-                  <tr>
-                    <th>小类名称</th>
-                    {oneChapter.mba_type.map((onetype , key) =>
-                      <th key = {key}>{onetype}</th>
-                    )}
-                  </tr>
-
-                  <tr>
-                    <th>最新一次错误率</th>
-                    {oneChapter.xiaolei_mba.map((oneerror , key) =>
-                      <th key = {key}>{oneerror}</th>
-                    )}
-                  </tr>
-
-                </table> */}
-
-                <span>平均总错误率<span>{data.tongji[key].total_mba}</span></span>
-                <table className="table table-bordered m-0" align = "center" //style="table-layout:fixed;"
-                  >
-
-                    <thead>
+                    <span>平均总错误率<span>{data.tongji[key].total_mba}</span></span>
+                    <table className="table table-bordered m-0" align = "center">
+                      <thead>
                         <tr>
                           <th>小类名称</th>
                           {data.tongji[key].mba_type.map((onetype , key) =>
-                            <th key = {key}>{onetype}</th>
-                          )}
-
+                          <th key = {key}>{onetype}</th>)}
                         </tr>
-                    </thead>
-                    <tbody>
+                      </thead>
+                      <tbody>
                         <tr>
                           <th>平均错误率</th>
                           {data.tongji[key].xiaolei_mba.map((oneerror , key) =>
-                            <td key = {key}>{oneerror}</td>
-                          )}
-
-
+                          <td key = {key} style={{"vertical-align":"middle"}}>{oneerror}</td>)}
                         </tr>
-
-                    </tbody>
-                </table>
-                {/* <table border="1" >
-                <tr>
-                  <th>小类名称</th>
-                  {data.tongji[key].mba_type.map((onetype , key) =>
-                    <th key = {key}>{onetype}</th>
+                      </tbody>
+                    </table>
+                    </div>
                   )}
-                </tr>
-
-                <tr>
-                  <th>平均错误率</th>
-                  {data.tongji[key].xiaolei_mba.map((oneerror , key) =>
-                    <th key = {key}>{oneerror}</th>
-                  )}
-                </tr>
-              </table> */}
                 </div>
-              )}
-
-            {/* {data.tongji.map((oneChapter , key) =>
-              <div key = {key} align = "center">
-                <br/><h5>{data.finish_chapter[key]}</h5>
-                <span>平均总错误率<span>{oneChapter.total_mba}</span></span>
-                <table border="1" >
-                <tr>
-                  <th>小类名称</th>
-                  {oneChapter.mba_type.map((onetype , key) =>
-                    <th key = {key}>{onetype}</th>
-                  )}
-                </tr>
-
-                <tr>
-                  <th>平均错误率</th>
-                  {oneChapter.xiaolei_mba.map((oneerror , key) =>
-                    <th key = {key}>{oneerror}</th>
-                  )}
-                </tr>
-              </table>
+                </div>}
               </div>
-            )} */}
-          </div>}
-         </div>
+            }
+
+        </div>}
+
+          </div>
         }
-      {/*}<table border="1" align = "center">
-        <tr>
-          <th>章节名称</th>
-          {data.tongji.map((oneChapter , key) =>
-            <div key = {key}>
-              <div>{oneChapter.total_mba}</div>
-            </div>
-          )}
-          <th>逻辑语言</th>
-        </tr>
 
-
-        <tr>
-          <th>错误率</th>
-          <th>0.4</th>
-        </tr>
-
-      </table>*/}
-    </div>
+  </div>
 
     )
   }
@@ -204,7 +121,8 @@ export default applyHOCs([
     }),
     dispatch => ({
       ...bindActionCreators( ZhentiPerYearTongjiActions , dispatch ),
-      ...bindActionCreators( ZhentiAllYearTongjiActions , dispatch )
+      ...bindActionCreators( ZhentiAllYearTongjiActions , dispatch ),
+      ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
     })
   )],
   LogicStatistics

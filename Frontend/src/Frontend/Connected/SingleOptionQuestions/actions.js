@@ -8,6 +8,7 @@ import {
   __UNLOCK_QUESTION,
   __ASYNC_LOAD_QUESTIONS,
   __ASYNC_SUBMIT_QUESTIONS,
+  __FORCE_CLEAR_QUESTIONS
 } from 'actionTypes';
 
 //import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
@@ -228,6 +229,12 @@ export const loadQuestions = ({ url , body , parser , headers  , initState }) =>
       dispatchLastest( loadQuestionsRejected( "network" , err ) );
   });
 };
+
+export const forceClearQuestions = () => ({
+  type: __FORCE_CLEAR_QUESTIONS,
+  payload: {
+  }
+});
 
 /*
 defineAsyncActionCreator loadQuestions end
