@@ -154,7 +154,7 @@ class UnitTest extends React.PureComponent {
           this.state.thisOrNext ? <EnterLearning xingshi={this.props.xingshiOrLunzheng}/> :
            <div className="card-box">
              <h4 className = {style.dalei}> {this.props.chapter_name} </h4>
-             <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight"/>
+             <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight" whetherHaveXuhao = {true}/>
              <div align = "center">
                {this.state.submit ? <Button text = {"查看本章数据统计"} onClick = {() => this.loadChapterError()}/>:
                <Button text = {"确认提交"} onClick = {() => this.submitQuestions()}/>}

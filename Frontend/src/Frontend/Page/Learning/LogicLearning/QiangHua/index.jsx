@@ -103,7 +103,7 @@ class QiangHua extends React.PureComponent {
       <React.Fragment>
         <div className="card-box">
           <h4 className = {style.dalei}> {this.props.chapter_name} </h4>
-          <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight"/>
+          <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight" whetherHaveXuhao = {true}/>
           <div align = "center">
             {this.state.submit ? <Button text = {"进入单元测试"} onClick = {() => setLearningType("单元测试")}/>:
             <Button text = {"提交"} onClick={() => this.submitQuestions()}/>}

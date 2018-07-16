@@ -32,7 +32,8 @@ export default ( state = {
     testendState: false,
     nowAt:{
       qtype: "luojiyuyan",
-      level: 1
+      level: 1,
+      xuhao: 1
     }
 } , { type , payload , id } ) => {
   const { content } = state;
@@ -157,7 +158,8 @@ export default ( state = {
         ...state,
         nowAt: {
           qtype,
-          level
+          level,
+          xuhao: state.nowAt.xuhao + 1
         },
         testendState: end
       }
@@ -170,7 +172,8 @@ export default ( state = {
         testendState: false,
         nowAt:{
           qtype: "luojiyuyan",
-          level: 1
+          level: 1,
+          xuhao: 1
         },
       };
     };

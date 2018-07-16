@@ -15,7 +15,6 @@ import changeAlpToNum from 'Algorithm/changeAlpToNum';
 
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
-// import UserManagerWindow from "Windows/UserManager";
 
 class LogicReviewContent extends React.PureComponent {
 
@@ -137,7 +136,7 @@ class LogicReviewContent extends React.PureComponent {
                 {
                   questions.length == 0 ? <div align="center" style = {{"fontSize":"18px","color":"#ff5b5b"}}>您在本章没有错题！</div> :
                   <div>
-                    <SingleOptionQuestions loader = {this.requestChapterContent} layoutFormat="upDown"/>
+                    <SingleOptionQuestions loader = {this.requestChapterContent} layoutFormat="upDown" whetherHaveXuhao = {true}/>
                     <div align="center">
                       {this.state.submit ? null :
                       <Button text = {"提交"} onClick={this.submitQuestions}/>}

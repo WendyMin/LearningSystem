@@ -13,6 +13,7 @@ import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFuncti
 import Button from 'UI/Button';
 import Note from 'UI/Note';
 import FinishedNote from 'UI/FinishedNote';
+import TestStart from 'UI/TestStart';
 import changeAlpToNum from 'Algorithm/changeAlpToNum';
 
 import makePage from 'direct-core/makePage';
@@ -26,7 +27,8 @@ class SimulationTest extends React.PureComponent {
     this.numberOfRight = "";
     this.state = {
       submit: false,
-      tongjiShow: false
+      tongjiShow: false,
+      startTestNoteShow: true
     };
   }
 
@@ -147,26 +149,32 @@ class SimulationTest extends React.PureComponent {
                   <div className="col-lg-8">
                     <div className="card-box" align="center">
                       <img src="/static/plugins/bootstrap-sweetalert/thumbs-up.jpg" style={{"height":"80px","width":"80px","margin": "20px"}} alt="work-thumbnail"/>
-                      <br/><br/><h2>本次测试结果</h2>
-                        <p className="lead text-muted">
+                      <br/><br/><h3>本次测试结果</h3>
+                        <p className={style.text}>
                           题目总数:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style={{"color":"#ff5b5b"}}> {Object.keys(questions).length} </span>
                         </p>
-                        <p className="lead text-muted">
+                        <p className={style.text}>
                           正确数量:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style={{"color":"#ff5b5b"}}> {this.numberOfRight} </span>
                         </p>
-                      <p><button className="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-lg" onClick = {() => {this.loadQuestions();this.setState({tongjiShow: false,submit:false})}}>再测一次</button></p>
+                      <p><button className="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-lg" onClick = {() => {this.loadQuestions();this.setState({tongjiShow: false,submit:false,startTestNoteShow:true})}}>再测一次</button></p>
                     </div>
                   </div>
                 </div>
                 :
                 <div>
-                  <div className="card-box"><br/>
-                   <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight"/>
-                   <div align = "center">
-                     {this.state.submit ? <Button text = {"查看测试统计"} onClick = {() => this.setState({tongjiShow: true})}/>:
-                     <Button className = {style.submitButton} text = {"提交"} onClick = {() => this.submitQuestions()}/>}
-                   </div>
-                  </div>
+                  {
+                    this.state.startTestNoteShow ? <TestStart testnum="30道" testtime="30分钟" onClick={() => {this.setState({startTestNoteShow: false});this.loadQuestions()}}/> :
+                    <div className="card-box"><br/>
+                     <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight" whetherHaveXuhao = {true}/>
+                     <div align = "center">
+                       {this.state.submit ? <Button text = {"查看测试统计"} onClick = {() => this.setState({tongjiShow: true})}/>:
+                       <Button className = {style.submitButton} text = {"提交"} onClick = {() => this.submitQuestions()}/>}
+                     </div>
+                    </div>
+                  }
+
+
+
                </div>}
               </div>
               :

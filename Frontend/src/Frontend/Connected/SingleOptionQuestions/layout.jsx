@@ -27,6 +27,7 @@ class SingleOptionQuestions extends React.PureComponent {
       questionSize,
       submiter,
       loader,
+      whetherHaveXuhao
     } = this.props;
 
     return (
@@ -38,7 +39,8 @@ class SingleOptionQuestions extends React.PureComponent {
               layoutFormat={layoutFormat}
               questionLength={questionLength}
               paraLength = {paraLength}
-              xuhao={xuhao}
+              whetherHaveXuhao = {whetherHaveXuhao}
+              xuhao={xuhao + 1}
               {...question}
               onSetChoice={( cid ) => setChoice( question.questionId , cid )}
             />

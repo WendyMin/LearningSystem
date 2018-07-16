@@ -19,8 +19,9 @@ class SingleSubjectTest extends React.PureComponent {
       autoNext,
       qtype,
       level,
+      xuhao
     } = this.props;
-    console.log(questions)
+    // console.log(questions)
 
     var question = {
       qtype: questions[qtype][level].type,
@@ -35,6 +36,7 @@ class SingleSubjectTest extends React.PureComponent {
       show: questions[qtype][level].show
     }
     //console.log(question )
+    // console.log(xuhao)
 
     return (
       <div className="container">
@@ -43,6 +45,8 @@ class SingleSubjectTest extends React.PureComponent {
         <Question
           {...question}
           layoutFormat = "leftRight"
+          whetherHaveXuhao = {true}
+          xuhao = {xuhao}
           onSetChoice={ cid => {
               autoNext( cid , 10000 );
             }
@@ -59,6 +63,7 @@ export default connect(
     questions: ownState.content,
     qtype: ownState.nowAt.qtype,
     level: ownState.nowAt.level,
+    xuhao: ownState.nowAt.xuhao
   }),
   dispatch => bindActionCreators( actionCreators , dispatch )
 )( SingleSubjectTest );
