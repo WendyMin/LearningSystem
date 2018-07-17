@@ -86,33 +86,28 @@ class EngChart extends React.PureComponent {
                     {/* <WriteGraph/> */}
                     <br/>
                     <p className={style.title1}>不认识的单词在各单词库占比</p>
-                    <div>
-                      <div>
-                        <table className="table table-bordered m-0" align = "center">
-                          <thead>
-                            <tr>
-                              <th>中考</th>
-                              <th>高考</th>
-                              <th>四级</th>
-                              <th>六级</th>
-                              <th>考研</th>
-                              <th>超纲</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th>{(parseFloat(content.zhongkao_rate)*100).toFixed(1)}%</th>
-                              <th>{(parseFloat(content.gaokao)*100).toFixed(1)}%</th>
-                              <th>{(parseFloat(content.siji)*100).toFixed(1)}%</th>
-                              <th>{(parseFloat(content.liuji)*100).toFixed(1)}%</th>
-                              <th>{(parseFloat(content.kaoyan)*100).toFixed(1)}%</th>
-                              <th>{(parseFloat(content.chaogang)*100).toFixed(1)}%</th>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <br/>
-                      </div>
-                    </div>
+                    <table className="table table-bordered m-0" align = "center">
+                      <thead>
+                        <tr>
+                          <th>中考</th>
+                          <th>高考</th>
+                          <th>四级</th>
+                          <th>六级</th>
+                          <th>考研</th>
+                          <th>超纲</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th>{(parseFloat(content.zhongkao_rate)*100).toFixed(1)}%</th>
+                          <th>{(parseFloat(content.gaokao)*100).toFixed(1)}%</th>
+                          <th>{(parseFloat(content.siji)*100).toFixed(1)}%</th>
+                          <th>{(parseFloat(content.liuji)*100).toFixed(1)}%</th>
+                          <th>{(parseFloat(content.kaoyan)*100).toFixed(1)}%</th>
+                          <th>{(parseFloat(content.chaogang)*100).toFixed(1)}%</th>
+                        </tr>
+                      </tbody>
+                    </table>
                     <br/>
                     {/* <div className={style.pageTitle}>考研单词所占百分比折线图</div> */}
                   </div>

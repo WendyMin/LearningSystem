@@ -28,25 +28,36 @@ class UITest extends React.PureComponent {
     this.function();
   }
 
-  function = () => {
-    this.props.loadPortContent({
-      url:"/api/eng_recordWordTestWords",
-      body:{
-        username: this.props.username,
-        rightwords: "zhongkao&eat&zhongkao&meat&gaokao&fantastic",
-        wrongwords: "zhongkao&vegetable&zhongkao&sacrifice"
-      }
-    })
-  }
-
   // function = () => {
   //   this.props.loadPortContent({
-  //     url:"/api/all_getProgress",
+  //     url:"/api/eng_recordWordTestWords",
   //     body:{
-  //       username: this.props.username,
+  //       username: "testdzh",
+  //       rightwords: "zhongkao*eat*zhongkao*meat*gaokao*fantastic",
+  //       wrongwords: "zhongkao*vegetable*zhongkao*sacrifice"
   //     }
   //   })
   // }
+
+  // function = () => {
+  //   this.props.loadPortContent({
+  //     url:"/api/eng_recordWordTestWords",
+  //     body:{
+  //       username: this.props.username,
+  //       rightwords: WordsToString(this.props.rightwords),
+  //       wrongwords: WordsToString(this.props.wrongwords)
+  //     }
+  //   })
+  // }
+
+  function = () => {
+    this.props.loadPortContent({
+      url:"/api/all_getProgress",
+      body:{
+        username: this.props.username,
+      }
+    })
+  }
 
   render(){
 
@@ -54,7 +65,7 @@ class UITest extends React.PureComponent {
       content,
     } = this.props;
 
-    // console.log(content);
+    console.log(content);
 
     return(
       <React.Fragment>

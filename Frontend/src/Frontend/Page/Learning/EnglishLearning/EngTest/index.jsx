@@ -22,6 +22,7 @@ import EngLearningTypeSelect from 'Page/Learning/EnglishLearning/EngLearningType
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 
  import levelConvert from "Algorithm/EngLevelToCh";
+ import WordsToString from "Algorithm/WordsToString";
  import TestStart from "UI/TestStart";
 
 class EngTest extends React.PureComponent {
@@ -38,13 +39,16 @@ class EngTest extends React.PureComponent {
 
   componentDidMount(){
     this.getUserLevel();
+    this.getUserRate();
     this.loadTest();
   }
 
   componentWillReceiveProps( NextProps ){
     if(this.props.testend == false && NextProps.testend == true){
-      this.recordWordTestLevel();
+      this.recordTestLevel();
+      this.recordTestWords()
       this.getUserLevel();
+      this.getUserRate();
     }
   }
 
@@ -54,8 +58,8 @@ class EngTest extends React.PureComponent {
     })
   }
 
-  recordWordTestLevel = () => {
-    this.props.recordWordTest({
+  recordTestLevel = () => {
+    this.props.recordWordTestLevel({
       url:"/api/eng_recordWordTest",
       body:{
         username: this.props.username,
@@ -64,9 +68,30 @@ class EngTest extends React.PureComponent {
     })
   }
 
+  recordTestWords = () => {
+    console.log(WordsToString(this.props.rightwords))
+    this.props.recordWordTestWords({
+      url:"/api/eng_recordWordTestWords",
+      body:{
+        username: this.props.username,
+        rightwords: WordsToString(this.props.rightwords),
+        wrongwords: WordsToString(this.props.wrongwords)
+      }
+    })
+  }
+
   getUserLevel = () => {
     this.props.getLevel({
       url:"/api/eng_getLevel",
+      body:{
+        username: this.props.username,
+      }
+    })
+  }
+
+  getUserRate = () => {
+    this.props.getRate({
+      url:"/api/eng_getWordTestRate",
       body:{
         username: this.props.username,
       }
@@ -83,6 +108,9 @@ class EngTest extends React.PureComponent {
       level,
       didTest,
       didLevel,
+      rightwords,
+      wrongword,
+      rate,
     } = this.props;
 
     const {
@@ -93,7 +121,7 @@ class EngTest extends React.PureComponent {
       enterTestSure,
     } = this.state;
 
-    // console.log();
+    // console.log(rate);
 
     return(
       <React.Fragment>
@@ -113,6 +141,33 @@ class EngTest extends React.PureComponent {
                 <div className={style.text}>恭喜！您已完成词汇测试！您的英语水平为：
                   <span style = {{"color":"#188ae2"}}>{levelConvert(didLevel)}水平</span>
                 </div>
+                <div className={style.text}>平均各类型正确率统计如下：</div>
+                <br/>
+                {
+                  rate == undefined ? null :
+                  <table className="table table-bordered m-0" align = "center">
+                    <thead>
+                      <tr>
+                        <th>中考</th>
+                        <th>高考</th>
+                        <th>四级</th>
+                        <th>六级</th>
+                        {/* <th>考研</th>
+                        <th>超纲</th> */}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>{(parseFloat(rate.zhongkao)*100).toFixed(1)}%</th>
+                        <th>{(parseFloat(rate.gaokao)*100).toFixed(1)}%</th>
+                        <th>{(parseFloat(rate.siji)*100).toFixed(1)}%</th>
+                        <th>{(parseFloat(rate.liuji)*100).toFixed(1)}%</th>
+                        {/* <th>{(parseFloat(content.kaoyan)*100).toFixed(1)}%</th>
+                        <th>{(parseFloat(content.chaogang)*100).toFixed(1)}%</th> */}
+                      </tr>
+                    </tbody>
+                  </table>
+                }
                 <br/>
                  <div className={style.text}>请点击左侧的进入学习，开始英语学习吧</div>
                  <br/>
@@ -200,6 +255,9 @@ export default applyHOCs([
       didTest: state.EnglishWordTest.recordFlagAndLevel.didTest,
       didLevel: state.EnglishWordTest.recordFlagAndLevel.level,
       choice: state.SubjectFunctionSelect.choice,
+      rightwords: state.EnglishWordTest.nowAt.rightwords,
+      wrongwords: state.EnglishWordTest.nowAt.wrongwords,
+      rate: state.EnglishWordTest.rate,
     }),
     dispatch => ({
       // ...bindActionCreators( PortTestActions , dispatch),

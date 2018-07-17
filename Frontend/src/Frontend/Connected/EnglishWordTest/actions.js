@@ -7,8 +7,10 @@ import {
   __AUTO_NEXT,
   __CLEAR_AUTO_NEXT,
   __FORCE_END,
-  __RECORD_WORD_TEST,
+  __RECORD_WORD_TEST_LEVEL,
+  __RECORD_WORD_TEST_WORDS,
   __GET_LEVEL,
+  __GET_RATE,
 } from 'actionTypes';
 
 //import jsonToUrlencoded from 'direct-core/Algorithm/jsonToUrlencoded';
@@ -201,39 +203,39 @@ export const loadTestQuestions = ({ url , body , parser , headers  , initState }
 
 
 
-let recordWordTestCounter = 0;
-const recordWordTestStart = () => ({
-    type: __RECORD_WORD_TEST.pending,
+let recordWordTestLevelCounter = 0;
+const recordWordTestLevelStart = () => ({
+    type: __RECORD_WORD_TEST_LEVEL.pending,
     payload: {
 
     },
-    id: recordWordTestCounter
+    id: recordWordTestLevelCounter
 });
-const recordWordTestResolved = ( response , initState ) => ({
-    type: __RECORD_WORD_TEST.resolved,
+const recordWordTestLevelResolved = ( response , initState ) => ({
+    type: __RECORD_WORD_TEST_LEVEL.resolved,
     payload: {
       response,
       initState
     },
-    id: recordWordTestCounter
+    id: recordWordTestLevelCounter
 });
-const recordWordTestRejected = ( reason , detail ) => ({
-    type: __RECORD_WORD_TEST.rejected,
+const recordWordTestLevelRejected = ( reason , detail ) => ({
+    type: __RECORD_WORD_TEST_LEVEL.rejected,
     payload: {
       reason,
       detail
     },
-    id: recordWordTestCounter
+    id: recordWordTestLevelCounter
 });
 
-export const recordWordTest = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
-  const reqId = ++recordWordTestCounter;
+export const recordWordTestLevel = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+  const reqId = ++recordWordTestLevelCounter;
   const dispatchLastest = action => {
-    if( reqId === recordWordTestCounter ){
+    if( reqId === recordWordTestLevelCounter ){
       dispatch( action );
     }
   }
-  dispatch( recordWordTestStart() );
+  dispatch( recordWordTestLevelStart() );
   if( typeof body === "object" ){
     body = JSON.stringify( body );
   }
@@ -247,18 +249,83 @@ export const recordWordTest = ({ url , body , parser , headers  , initState }) =
   })
   .then( response => {
     if( !response.ok ){
-      dispatchLastest( recordWordTestRejected( "server" , response.status ) );
+      dispatchLastest( recordWordTestLevelRejected( "server" , response.status ) );
       return;
     }
     response.json()
     //.then( json => dispatchLastest( loadTestQuestionsResolved( parser( json ) , initState ) ) )
-    .then( json => dispatchLastest( recordWordTestResolved( json  , initState ) ) )
+    .then( json => dispatchLastest( recordWordTestLevelResolved( json  , initState ) ) )
     .catch( err => {
-      dispatchLastest( recordWordTestRejected( "json" , err ) )
+      dispatchLastest( recordWordTestLevelRejected( "json" , err ) )
     });
   })
   .catch( err => {
-      dispatchLastest( recordWordTestRejected( "network" , err ) );
+      dispatchLastest( recordWordTestLevelRejected( "network" , err ) );
+  });
+};
+
+
+
+
+
+let recordWordTestWordsCounter = 0;
+const recordWordTestWordsStart = () => ({
+    type: __RECORD_WORD_TEST_WORDS.pending,
+    payload: {
+
+    },
+    id: recordWordTestWordsCounter
+});
+const recordWordTestWordsResolved = ( response , initState ) => ({
+    type: __RECORD_WORD_TEST_WORDS.resolved,
+    payload: {
+      response,
+      initState
+    },
+    id: recordWordTestWordsCounter
+});
+const recordWordTestWordsRejected = ( reason , detail ) => ({
+    type: __RECORD_WORD_TEST_WORDS.rejected,
+    payload: {
+      reason,
+      detail
+    },
+    id: recordWordTestWordsCounter
+});
+
+export const recordWordTestWords = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+  const reqId = ++recordWordTestWordsCounter;
+  const dispatchLastest = action => {
+    if( reqId === recordWordTestWordsCounter ){
+      dispatch( action );
+    }
+  }
+  dispatch( recordWordTestWordsStart() );
+  if( typeof body === "object" ){
+    body = JSON.stringify( body );
+  }
+  fetch( url , {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...headers
+      },
+      body: body
+  })
+  .then( response => {
+    if( !response.ok ){
+      dispatchLastest( recordWordTestWordsRejected( "server" , response.status ) );
+      return;
+    }
+    response.json()
+    //.then( json => dispatchLastest( loadTestQuestionsResolved( parser( json ) , initState ) ) )
+    .then( json => dispatchLastest( recordWordTestWordsResolved( json  , initState ) ) )
+    .catch( err => {
+      dispatchLastest( recordWordTestWordsRejected( "json" , err ) )
+    });
+  })
+  .catch( err => {
+      dispatchLastest( recordWordTestWordsRejected( "network" , err ) );
   });
 };
 
@@ -324,5 +391,71 @@ export const getLevel = ({ url , body , parser , headers  , initState }) => ( di
   })
   .catch( err => {
       dispatchLastest( getLevelRejected( "network" , err ) );
+  });
+};
+
+
+
+
+
+
+let getRateCounter = 0;
+const getRateStart = () => ({
+    type: __GET_RATE.pending,
+    payload: {
+
+    },
+    id: getRateCounter
+});
+const getRateResolved = ( response , initState ) => ({
+    type: __GET_RATE.resolved,
+    payload: {
+      response,
+      initState
+    },
+    id: getRateCounter
+});
+const getRateRejected = ( reason , detail ) => ({
+    type: __GET_RATE.rejected,
+    payload: {
+      reason,
+      detail
+    },
+    id: getRateCounter
+});
+
+export const getRate = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+  const reqId = ++getRateCounter;
+  const dispatchLastest = action => {
+    if( reqId === getRateCounter ){
+      dispatch( action );
+    }
+  }
+  dispatch( getRateStart() );
+  if( typeof body === "object" ){
+    body = JSON.stringify( body );
+  }
+  fetch( url , {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...headers
+      },
+      body: body
+  })
+  .then( response => {
+    if( !response.ok ){
+      dispatchLastest( getRateRejected( "server" , response.status ) );
+      return;
+    }
+    response.json()
+    //.then( json => dispatchLastest( loadTestQuestionsResolved( parser( json ) , initState ) ) )
+    .then( json => dispatchLastest( getRateResolved( json  , initState ) ) )
+    .catch( err => {
+      dispatchLastest( getRateRejected( "json" , err ) )
+    });
+  })
+  .catch( err => {
+      dispatchLastest( getRateRejected( "network" , err ) );
   });
 };

@@ -7,8 +7,10 @@ import {
   __NEXT,
   __AUTO_NEXT,
   __FORCE_END,
-  __RECORD_WORD_TEST,
+  __RECORD_WORD_TEST_LEVEL,
+  __RECORD_WORD_TEST_WORDS,
   __GET_LEVEL,
+  __GET_RATE,
 } from 'actionTypes';
 
 import nextQuestion from "Algorithm/EngWordTestDecideNextWord";
@@ -16,9 +18,11 @@ import nextQuestion from "Algorithm/EngWordTestDecideNextWord";
 export default ( state = {
     content: {},
     change: [],
+    recordwords: [],
     recordFlagAndLevel: [],
     rightwords: [],
     wrongwords: [],
+    rate: [],
     submitState: {
       pending: 0,
       resolved: 0,
@@ -90,8 +94,8 @@ export default ( state = {
 
 
 
-    /*  defineAsyncActionReducer __RECORD_WORD_TEST start  */
-    case __RECORD_WORD_TEST.pending: {
+    /*  defineAsyncActionReducer __RECORD_WORD_TEST_LEVEL start  */
+    case __RECORD_WORD_TEST_LEVEL.pending: {
       let loadState = {...state.loadState };
       loadState.lastFailed = false;
       loadState.pending++;
@@ -100,7 +104,7 @@ export default ( state = {
         loadState
       };
     }
-    case __RECORD_WORD_TEST.resolved: {
+    case __RECORD_WORD_TEST_LEVEL.resolved: {
       let { response , initState } = payload;
       initState = initState || {
         lock: false,
@@ -116,7 +120,51 @@ export default ( state = {
         change: response,
       };
     }
-    case __RECORD_WORD_TEST.rejected: {
+    case __RECORD_WORD_TEST_LEVEL.rejected: {
+      let { reason , detail } = payload;
+      let loadState = {...state.loadState };
+      loadState.rejected++;
+      loadState.pending--;
+      loadState.lastFailed = true;
+      loadState.failedReason = reason;
+      loadState.failedDetail = detail;
+      return {
+        ...state,
+        loadState
+      };
+    }
+
+
+
+
+
+    /*  defineAsyncActionReducer __RECORD_WORD_TEST_WORDS start  */
+    case __RECORD_WORD_TEST_WORDS.pending: {
+      let loadState = {...state.loadState };
+      loadState.lastFailed = false;
+      loadState.pending++;
+      return {
+        ...state,
+        loadState
+      };
+    }
+    case __RECORD_WORD_TEST_WORDS.resolved: {
+      let { response , initState } = payload;
+      initState = initState || {
+        lock: false,
+        show: false,
+        choice: -1
+      };
+      let loadState = {...state.loadState };
+      loadState.resolved++;
+      loadState.pending--;
+      return {
+        ...state,
+        loadState,
+        recordwords: response,
+      };
+    }
+    case __RECORD_WORD_TEST_WORDS.rejected: {
       let { reason , detail } = payload;
       let loadState = {...state.loadState };
       loadState.rejected++;
@@ -172,6 +220,52 @@ export default ( state = {
         loadState
       };
     }
+
+
+
+
+
+        /*  defineAsyncActionReducer __GET_RATE start  */
+        case __GET_RATE.pending: {
+          let loadState = {...state.loadState };
+          loadState.lastFailed = false;
+          loadState.pending++;
+          return {
+            ...state,
+            loadState
+          };
+        }
+        case __GET_RATE.resolved: {
+          let { response , initState } = payload;
+          initState = initState || {
+            lock: false,
+            show: false,
+            choice: -1
+          };
+          let loadState = {...state.loadState };
+          loadState.resolved++;
+          loadState.pending--;
+          return {
+            ...state,
+            loadState,
+            rate: response,
+          };
+        }
+        case __GET_RATE.rejected: {
+          let { reason , detail } = payload;
+          let loadState = {...state.loadState };
+          loadState.rejected++;
+          loadState.pending--;
+          loadState.lastFailed = true;
+          loadState.failedReason = reason;
+          loadState.failedDetail = detail;
+          return {
+            ...state,
+            loadState
+          };
+        }
+
+
 
 
     case __LOCK_AND_SHOW:
