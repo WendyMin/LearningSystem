@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import style from 'style';
 
+import TestStart from 'UI/TestStart';
 import Button from 'UI/Button';
 import LogicTestChart from 'UI/LogicTestChart';
 
@@ -30,7 +31,8 @@ class LogicTest extends React.PureComponent {
     super( props );
     this.state = {
       enterTest: true,
-      testAgain: false
+      testAgain: false,
+      startTestNoteShow: true
     }
   }
 
@@ -139,31 +141,40 @@ class LogicTest extends React.PureComponent {
       whetherDidTest  // 之前是否已经做过水平测试
     } = this.props;
     // console.log(this.props)
+    console.log(this.state.enterTest && whetherDidTest,this.state.enterTest && !whetherDidTest)
+      console.log(typeof(this.state.enterTest && whetherDidTest),typeof(this.state.enterTest && !whetherDidTest))
     return (
       <React.Fragment>
+        {typeof(this.state.enterTest && whetherDidTest)=="string" ? null :
         <div className={style.wrapper}>
          {
            this.state.enterTest && whetherDidTest || this.state.enterTest && testend || this.state.testAgain && testend ?
            <div className="card-box">
              <LogicTestTongji loadTestResult = {() => this.loadTestResult()}/><br/>
              <div align="center">
-               <Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , testAgain: true});this.props.forceEnd();this.loadQuestions()}}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               <Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , testAgain: true , startTestNoteShow: true});this.props.forceEnd();this.loadQuestions()}}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                <Button text = "开始学习" onClick = {() => {this.props.setLearningType("");this.props.setSubjectFunctionSelect(1)}}/>
              </div>
            </div>
            :
            this.state.enterTest && !whetherDidTest || this.state.testAgain && !testend ?
            <div>
-             {JSON.stringify(questions) == '{}' ? null : <SingleSubjectTest/>}
-             <div align="center">
-               <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success btn-lg m-b-5"
-                       onClick = {forceNext}
-               >下一题</button>
-             </div>
+             {
+               this.state.startTestNoteShow ? <TestStart testnum="约40道" testtime="7分钟" onClick={() => {this.setState({startTestNoteShow: false});this.loadQuestions()}}/> :
+               <div>
+                 {JSON.stringify(questions) == '{}' ? null : <SingleSubjectTest/>}
+                 <div align="center">
+                   <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success btn-lg m-b-5"
+                           onClick = {forceNext}
+                   >下一题</button>
+                 </div>
+               </div>
+             }
            </div>
            : null
          }
-        </div>
+       </div>
+     }
       </React.Fragment>
     );
   }

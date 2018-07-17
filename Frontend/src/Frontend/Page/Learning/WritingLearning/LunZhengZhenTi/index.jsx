@@ -51,7 +51,7 @@ class LunZhengZhenTi extends React.PureComponent {
       }
     });
     /* 加载正确答案等 */
-    this.props.loadPortContent({
+    this.props.loadPortContent2({
       url: "/api/lunZhengZhenTiError",
       body: {
         requestQuestion: this.props.choice
@@ -204,7 +204,7 @@ export default applyHOCs([
       username: state.UserManager.name,
       choice: state.ButtonExpand.choice,
       title: state.WriteContent.title,
-      article_analysis: state.PortTest.content, // 文章的答案分析
+      article_analysis: state.PortTest.content2, // 文章的答案分析
       name: state.WriteContent.name, // 参考范文的题目
       example_article: state.WriteContent.example_article, // 参考范文的具体内容
       userInputText: state.EditText.userInputText, // 用户输入到文本框中的文字内容

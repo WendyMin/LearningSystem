@@ -1,7 +1,6 @@
 import React from 'react';
 import style from 'style';
 import TextAndImag from "UI/TextAndImag";
-// import UITest from 'Page/UITest';
 
 type Props = {
   questionId: number,
@@ -26,6 +25,7 @@ class SingleQuestion extends React.PureComponent<Props> {
       layoutFormat,
       questionLength,  // 问题长度 single 代表 只有一段
       paraLength,  // 解析长度 single 代表 只有一段，none代表没有解析
+      whetherHaveXuhao,
       xuhao,  // 题目序号
       questionId,
       options,
@@ -73,13 +73,24 @@ class SingleQuestion extends React.PureComponent<Props> {
         {
           layoutFormat === "leftRight" ?
           <div className={style.wholeQuestion}>
-            {/* <div > */}
             <div className="col-sm-8">
               <div className="card-box">
-                {questionLength === "single" ?  <div className={questionStyle}>{question}</div> :
+                {questionLength === "single" ?
+                <div className={questionStyle}>
+                  {whetherHaveXuhao ? <div><span>{xuhao}.&nbsp;&nbsp;</span>{question}</div>:
+                  <div>{question}</div>
+                  }
+                </div> :
                 <div>
-                {question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}
-              </div>}<br/>
+                  {whetherHaveXuhao ?
+                  <div>
+                    {question.map((one,key) => <div className={questionStyle} key={key}>{key==0?<span style = {{"color":"#71b6f9"}}>{xuhao}.&nbsp;&nbsp;</span>:null}{one}</div>)}
+                  </div>:
+                  <div>{question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}</div>
+                  }
+                </div>
+              }<br/>
+
               {
          	  	options.map( ( option , key ) =>
          	  		<div
@@ -88,8 +99,8 @@ class SingleQuestion extends React.PureComponent<Props> {
                    onClick={lock ? () => onTryChange( key ) : () => onSetChoice( key )}
                  >
                    <div className="radio radio-custom">
-                      <input type="radio" //name="radio"
-                             id={`question${questionId}option${key}`} //value="option3"
+                      <input type="radio"
+                             id={`question${questionId}option${key}`}
                              name={`answerToComponentQuestion${questionId}`}
                              checked={checked[key]}
                              readOnly={ lock ? 'readonly' : ''}
@@ -117,7 +128,6 @@ class SingleQuestion extends React.PureComponent<Props> {
                 }
                 </div>
               </div>
-
               :
               null
             }
@@ -128,10 +138,22 @@ class SingleQuestion extends React.PureComponent<Props> {
           <div className={style.wholeQuestion}>
           <div className="col-sm-12">
           <div className="card-box">
-            {questionLength === "single" ?  <div className={questionStyle}>{question}</div> :
+            {questionLength === "single" ?
+            <div className={questionStyle}>
+              {whetherHaveXuhao ? <div><span>{xuhao}.&nbsp;&nbsp;</span>{question}</div>:
+              <div>{question}</div>
+              }
+            </div> :
             <div>
-            {question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}
-          </div>}<br/>
+              {whetherHaveXuhao ?
+              <div>
+                {question.map((one,key) => <div className={questionStyle} key={key}>{key==0?<span style = {{"color":"#71b6f9"}}>{xuhao}.&nbsp;&nbsp;</span>:null}{one}</div>)}
+              </div>:
+              <div>{question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}</div>
+              }
+            </div>
+          }<br/>
+
             {
             options.map( ( option , key ) =>
               <div
@@ -140,8 +162,8 @@ class SingleQuestion extends React.PureComponent<Props> {
                  onClick={lock ? () => onTryChange( key ) : () => onSetChoice( key )}
                >
                  <div className="radio radio-custom">
-                    <input type="radio" //name="radio"
-                           id={`question${questionId}option${key}`} //value="option3"
+                    <input type="radio"
+                           id={`question${questionId}option${key}`}
                            name={`answerToComponentQuestion${questionId}`}
                            checked={checked[key]}
                            readOnly={ lock ? 'readonly' : ''}
