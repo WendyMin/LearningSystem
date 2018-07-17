@@ -13,6 +13,7 @@ import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
 import { actions as PortTestActions } from 'Connected/PortTest';
+import WordsToString from 'Algorithm/WordsToString';
 
 // var sha1 = require('sha1');
 // sha1("message");
@@ -25,7 +26,7 @@ class UITest extends React.PureComponent {
   }
 
   componentDidMount(){
-    this.function();
+    // this.function();
   }
 
   // function = () => {
@@ -41,31 +42,21 @@ class UITest extends React.PureComponent {
 
   // function = () => {
   //   this.props.loadPortContent({
-  //     url:"/api/eng_recordWordTestWords",
+  //     url:"/api/all_getProgress",
   //     body:{
   //       username: this.props.username,
-  //       rightwords: WordsToString(this.props.rightwords),
-  //       wrongwords: WordsToString(this.props.wrongwords)
   //     }
   //   })
   // }
 
-  function = () => {
-    this.props.loadPortContent({
-      url:"/api/all_getProgress",
-      body:{
-        username: this.props.username,
-      }
-    })
-  }
-
   render(){
 
     const {
-      content,
+      // content,
     } = this.props;
 
-    console.log(content);
+    // console.log(content);
+    console.log(WordsToString(["basic", "luck", "basic", "cancel", "basic", "luck"]))
 
     return(
       <React.Fragment>
@@ -92,7 +83,7 @@ export default applyHOCs([
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
-      content: state.PortTest.content,
+      // content: state.PortTest.content,
     }),
     dispatch => ({
       ...bindActionCreators( PortTestActions , dispatch),

@@ -240,7 +240,7 @@ class EngReview extends React.PureComponent {
       };
     }
 
-    console.log(reviewlist);
+    // console.log(reviewlist);
 
     return(
       <React.Fragment>
@@ -259,52 +259,60 @@ class EngReview extends React.PureComponent {
                 <div>
                   {
                   // reviewlist == undefined ? null :
-                  reviewlist.length == 0 ?
-                  // <div class="panel panel-custom panel-border">
-                  //   <div class="panel-heading">
-                  //       <h3 class="panel-title">Sorry</h3>
-                  //   </div>
-                  //   <div class="panel-body">
-                  //     <div>您尚未学习，没有需要复习的内容，请点击左侧的进入学习，开始英语学习吧</div>
-                  //     <br/>
-                  //     {/* <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                  //        onClick = {() => {setLearningType("英语进入学习");}}>
-                  //        进入学习</button> */}
-                  //   </div>
-                  // </div>
+                  typeof(reviewlist) == "string" ? null :
 
-                  <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/>
+                  <div>
+                    {
+                      reviewlist.length == 0 ?
+                      // <div class="panel panel-custom panel-border">
+                      //   <div class="panel-heading">
+                      //       <h3 class="panel-title">Sorry</h3>
+                      //   </div>
+                      //   <div class="panel-body">
+                      //     <div>您尚未学习，没有需要复习的内容，请点击左侧的进入学习，开始英语学习吧</div>
+                      //     <br/>
+                      //     {/* <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                      //        onClick = {() => {setLearningType("英语进入学习");}}>
+                      //        进入学习</button> */}
+                      //   </div>
+                      // </div>
 
-                  :
-                  reviewlist.map((list, key)=>
+                      <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/>
 
-                  <div key = {key} className="col-md-4" >
-                    <div className="card-box kanban-box">
-                      <div className="kanban-detail">
-                          <span className="label label-primary pull-right">Finished</span>
-                          <div className={style.title18}>
-                            Unit{list.unit} Course{list.course}
+                      :
+                      reviewlist.map((list, key)=>
+
+                      <div key = {key} className="col-md-4" >
+                        <div className="card-box kanban-box">
+                          <div className="kanban-detail">
+                              <span className="label label-primary pull-right">Finished</span>
+                              <div className={style.title18}>
+                                Unit{list.unit} Course{list.course}
+                              </div>
+                              <ul className="list-inline m-b-0">
+                                  <li>
+                                      <br/>
+                                      <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
+                                              onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
+                                            this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }}
+                                          >查看核心词汇、重点句</button>
+                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                      <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                                           onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true, processStep: 0});
+                                           this.getArticle(list.articleid); this.loadQuestions();this.props.hideAllTranslate();
+                                         }}
+                                         >查看阅读文章</button>
+                                  </li>
+                              </ul>
                           </div>
-                          <ul className="list-inline m-b-0">
-                              <li>
-                                  <br/>
-                                  <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
-                                          onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
-                                        this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }}
-                                      >查看核心词汇、重点句</button>
-                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                  <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                                       onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true, processStep: 0});
-                                       this.getArticle(list.articleid); this.loadQuestions();this.props.hideAllTranslate();
-                                     }}
-                                     >查看阅读文章</button>
-                              </li>
-                          </ul>
+                        </div>
                       </div>
-                    </div>
+
+                      )
+                    }
                   </div>
 
-                  )
+
                 }
                 </div>
 

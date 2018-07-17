@@ -7,7 +7,7 @@ import {
 } from 'actionTypes';
 
 export default ( state = {
-    reviewlist: [],
+    reviewlist: "",
     hardword: [],
     hardsentence: [],
     // content4: [],

@@ -69,7 +69,6 @@ class EngTest extends React.PureComponent {
   }
 
   recordTestWords = () => {
-    console.log(WordsToString(this.props.rightwords))
     this.props.recordWordTestWords({
       url:"/api/eng_recordWordTestWords",
       body:{
@@ -121,7 +120,7 @@ class EngTest extends React.PureComponent {
       enterTestSure,
     } = this.state;
 
-    // console.log(rate);
+    console.log(rightwords);
 
     return(
       <React.Fragment>
@@ -255,8 +254,8 @@ export default applyHOCs([
       didTest: state.EnglishWordTest.recordFlagAndLevel.didTest,
       didLevel: state.EnglishWordTest.recordFlagAndLevel.level,
       choice: state.SubjectFunctionSelect.choice,
-      rightwords: state.EnglishWordTest.nowAt.rightwords,
-      wrongwords: state.EnglishWordTest.nowAt.wrongwords,
+      rightwords: state.EnglishWordTest.rightwords,
+      wrongwords: state.EnglishWordTest.wrongwords,
       rate: state.EnglishWordTest.rate,
     }),
     dispatch => ({
