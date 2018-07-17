@@ -197,7 +197,7 @@ class IndexPage extends React.Component {
                                 {/* <div className="label label-primary">Uncompleted</div> */}
                                 <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse"> 逻辑</a></h4>
                                 <p className="text-primary text-uppercase m-b-20 font-13">Logic</p>
-                                <p className={style.text_muted1}>包含形式逻辑和论证逻辑。其中形式逻辑包括词项逻辑、演绎推理、逻辑应用、命题逻辑、逻辑语言，论证逻辑包括归纳逻辑、假设、削弱、推论、比较、综合、支持、评价、解释、描述，共15章。
+                                <p className={style.text_muted1}>包含形式逻辑和论证逻辑。其中形式逻辑包括词项逻辑、演绎推理、逻辑应用、命题逻辑、逻辑语言，论证逻辑包括归纳逻辑、假设、削弱、推论、比较、综合、支持、评价、解释、描述，共15章，1600道题。
                                      {/* <a href="#" className="font-600 text-muted">view more</a> */}
                                 </p>
 
