@@ -141,8 +141,11 @@ class LogicTest extends React.PureComponent {
       whetherDidTest  // 之前是否已经做过水平测试
     } = this.props;
     // console.log(this.props)
+    console.log(this.state.enterTest && whetherDidTest,this.state.enterTest && !whetherDidTest)
+      console.log(typeof(this.state.enterTest && whetherDidTest),typeof(this.state.enterTest && !whetherDidTest))
     return (
       <React.Fragment>
+        {typeof(this.state.enterTest && whetherDidTest)=="string" ? null :
         <div className={style.wrapper}>
          {
            this.state.enterTest && whetherDidTest || this.state.enterTest && testend || this.state.testAgain && testend ?
@@ -170,7 +173,8 @@ class LogicTest extends React.PureComponent {
            </div>
            : null
          }
-        </div>
+       </div>
+     }
       </React.Fragment>
     );
   }

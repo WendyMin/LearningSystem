@@ -130,7 +130,7 @@ class WritingPage extends React.PureComponent {
                 <ul>
                   <li className="text-muted menu-title">写作</li>
 
-                  <li onClick={()=>this.props.setSubjectFunctionSelect(0)}>
+                  <li onClick={()=>{this.props.setSubjectFunctionSelect(0);this.props.setLearningType("");this.props.setButtonChoice("")}}>
                     <a className="waves-effect" style={choice==0?{"color":"#71b6f9"}:null}><i className="zmdi zmdi-library"></i> <span> 进入学习 </span> </a>
                   </li>
 

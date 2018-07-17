@@ -67,18 +67,18 @@ class LogicReview extends React.PureComponent {
       setLearningType
     } = this.props;
     // console.log(this.props)
-    // console.log(typeof(whetherHaveFinishedChapter))
-    // console.log(whetherHaveFinishedChapter == 2 ,whetherHaveFinishedChapter==0)
+    console.log(typeof(whetherHaveFinishedChapter),typeof(whetherHaveFinishedChapter === 2),typeof(whetherHaveFinishedChapter===0))
+    console.log(whetherHaveFinishedChapter === 2 ,whetherHaveFinishedChapter===0)
 
     return(
       <React.Fragment>
         { this.props.learningType == "" ?
         <div>
           {
-            whetherHaveFinishedChapter == undefined ? null :
+            typeof(whetherHaveFinishedChapter) == "string" ? null :
             <div>
-              {whetherHaveFinishedChapter == 2 ? <Note info = "您还没完成入口测试，请先完成入口测试 !" onClick={()=>this.props.setSubjectFunctionSelect(0)}/> :
-              whetherHaveFinishedChapter == 0 ? <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/> :
+              {whetherHaveFinishedChapter === 2 ? <Note info = "您还没完成入口测试，请先完成入口测试 !" onClick={()=>this.props.setSubjectFunctionSelect(0)}/> :
+              whetherHaveFinishedChapter === 0 ? <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/> :
               <div className="row">
                   <div className="col-lg-6">
                     <div className="card-box">
