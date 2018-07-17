@@ -52,7 +52,7 @@ class EngChart extends React.PureComponent {
       learningType,
     } = this.props;
 
-    console.log(content);
+    // console.log(content);
 
     return(
       <React.Fragment>
@@ -63,31 +63,32 @@ class EngChart extends React.PureComponent {
               :
               <div>
                 {
-                  content.length == 0 ?
-                  // <div class="panel panel-custom panel-border">
-                  //   <div class="panel-heading">
-                  //       <h3 class="panel-title">Sorry</h3>
-                  //   </div>
-                  //   <div class="panel-body">
-                  //     <div className={style.text}>您尚未学习，没有统计数据，请点击左侧的进入学习，开始英语学习吧</div>
-                  //     <br/>
-                  //     {/* <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                  //        onClick = {() => {setLearningType("英语进入学习");}}>
-                  //        进入学习</button> */}
-                  //   </div>
-                  // </div>
+                  typeof(content) == "string" ? null :
+                  <div>
+                    {
+                      content.length == 0 ?
+                      // <div class="panel panel-custom panel-border">
+                      //   <div class="panel-heading">
+                      //       <h3 class="panel-title">Sorry</h3>
+                      //   </div>
+                      //   <div class="panel-body">
+                      //     <div className={style.text}>您尚未学习，没有统计数据，请点击左侧的进入学习，开始英语学习吧</div>
+                      //     <br/>
+                      //     {/* <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                      //        onClick = {() => {setLearningType("英语进入学习");}}>
+                      //        进入学习</button> */}
+                      //   </div>
+                      // </div>
 
-                  <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/>
+                      <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/>
 
-                  :
+                      :
 
-                  <div className="card-box">
-                    <p className={style.title}>累计生词类型分析</p>
-                    {/* <WriteGraph/> */}
-                    <br/>
-                    <p className={style.title1}>不认识的单词在各单词库占比</p>
-                    <div>
-                      <div>
+                      <div className="card-box">
+                        <p className={style.title}>累计生词类型分析</p>
+                        {/* <WriteGraph/> */}
+                        <br/>
+                        <p className={style.title1}>不认识的单词在各单词库占比</p>
                         <table className="table table-bordered m-0" align = "center">
                           <thead>
                             <tr>
@@ -111,11 +112,11 @@ class EngChart extends React.PureComponent {
                           </tbody>
                         </table>
                         <br/>
+                        {/* <div className={style.pageTitle}>考研单词所占百分比折线图</div> */}
                       </div>
-                    </div>
-                    <br/>
-                    {/* <div className={style.pageTitle}>考研单词所占百分比折线图</div> */}
+                    }
                   </div>
+
 
 
                 }

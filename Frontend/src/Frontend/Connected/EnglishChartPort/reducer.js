@@ -3,7 +3,7 @@ import {
 } from 'actionTypes';
 
 export default ( state = {
-    wordrateAll: [],
+    wordrateAll: "",
     name2: [],
     name3: [],
     loadState: {
