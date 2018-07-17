@@ -36,8 +36,8 @@ class TextAndImag extends React.PureComponent {
           if(onePara.indexOf(str) > -1) return(
             <div key = {key} align = "center">
               <a className="show-big-pic" href="javascript:void(0);">
-                <img id="dedecmsok" src = {onePara} className="thumb-img" alt="work-thumbnail" //onClick={()=>{this.props.setImagZoomState(true);this.props.setWhichImagToZoom(onePara)}}
-                  onClick={()=>this.enlargeImag(onePara)} style={{"width":"100%"}}/><br/>
+                <img id="dedecmsok" src = {onePara} className={style.tupian} alt="work-thumbnail" //onClick={()=>{this.props.setImagZoomState(true);this.props.setWhichImagToZoom(onePara)}}
+                  onClick={()=>this.enlargeImag(onePara)}/><br/>
               </a>
             </div>
           )

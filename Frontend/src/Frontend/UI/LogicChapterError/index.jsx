@@ -17,7 +17,7 @@ class LogicChapterError extends React.PureComponent{
       <div className="card-box">
       <div className = {style.wholeErrorTongji}>
         <div className = {style.note}>您在&nbsp;&nbsp;<span style = {{"color":"#ff5b5b"}}>{chapter_name}</span>&nbsp;&nbsp;章节的做题情况统计如下</div><br/>
-        <div>您在本章的所有题目，包括重点习题、强化习题以及单元测试的总错误概率为：&nbsp;&nbsp;<span style = {{"color":"#ff5b5b"}}>{chapterData.total}</span></div><br/>
+        <div>您在本章的所有题目，包括重点习题、强化习题以及单元测试的总错误概率为：&nbsp;&nbsp;<span style = {{"color":"#ff5b5b"}}>{chapterData.total_mba}</span></div><br/>
         <div>您在本章的所有题目中，按类型统计率统计如下：</div><br/>
         {chapterData.mba_type == undefined ? null :
         <table className="table table-bordered m-0" align = "center">
