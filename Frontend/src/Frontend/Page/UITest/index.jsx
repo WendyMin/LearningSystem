@@ -26,7 +26,7 @@ class UITest extends React.PureComponent {
   }
 
   componentDidMount(){
-    // this.function();
+    this.function();
   }
 
   // function = () => {
@@ -40,23 +40,25 @@ class UITest extends React.PureComponent {
   //   })
   // }
 
-  // function = () => {
-  //   this.props.loadPortContent({
-  //     url:"/api/all_getProgress",
-  //     body:{
-  //       username: this.props.username,
-  //     }
-  //   })
-  // }
+  function = () => {
+    this.props.loadPortContent({
+      url:"/api/test",
+      // body:{
+      //   username: "testdzh",
+      //   rightwords: "zhongkao*eat*zhongkao*meat*gaokao*fantastic",
+      //   wrongwords: "zhongkao*vegetable*zhongkao*sacrifice"
+      // }
+    })
+  }
 
   render(){
 
     const {
-      // content,
+      content,
     } = this.props;
 
-    // console.log(content);
-    console.log(WordsToString(["basic", "luck", "basic", "cancel", "basic", "luck"]))
+    console.log(content);
+    // console.log(WordsToString(["basic", "luck", "basic", "cancel", "basic", "luck"]))
 
     return(
       <React.Fragment>
@@ -83,7 +85,7 @@ export default applyHOCs([
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
-      // content: state.PortTest.content,
+      content: state.PortTest.content,
     }),
     dispatch => ({
       ...bindActionCreators( PortTestActions , dispatch),
