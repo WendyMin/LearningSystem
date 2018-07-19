@@ -77,7 +77,7 @@ class SingleQuestion extends React.PureComponent<Props> {
               <div className="card-box">
                 {questionLength === "single" ?
                 <div className={questionStyle}>
-                  {whetherHaveXuhao ? <div><span>{xuhao}.&nbsp;&nbsp;</span>{question}</div>:
+                  {whetherHaveXuhao ? <div><span style = {{"color":"#71b6f9"}}>{xuhao}.&nbsp;&nbsp;</span>{question}</div>:
                   <div>{question}</div>
                   }
                 </div> :
@@ -140,7 +140,7 @@ class SingleQuestion extends React.PureComponent<Props> {
           <div className="card-box">
             {questionLength === "single" ?
             <div className={questionStyle}>
-              {whetherHaveXuhao ? <div><span>{xuhao}.&nbsp;&nbsp;</span>{question}</div>:
+              {whetherHaveXuhao ? <div><span style = {{"color":"#71b6f9"}}>{xuhao}.&nbsp;&nbsp;</span>{question}</div>:
               <div>{question}</div>
               }
             </div> :

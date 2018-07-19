@@ -19,9 +19,7 @@ class EnglishWordTest extends React.PureComponent {
       autoNext,
       level,
       num,
-      // rightnum,
-      //level
-      //lockAndShow
+      xuhao
     } = this.props;
 
     // console.log(questions)
@@ -45,6 +43,8 @@ class EnglishWordTest extends React.PureComponent {
           layoutFormat = "upDown"
           questionLength = "single"
           paraLength = "none"
+          whetherHaveXuhao = {true}
+          xuhao = {xuhao}
           onSetChoice={ cid => {
               autoNext( cid , 600 );
             }
@@ -61,7 +61,7 @@ export default connect(
     questions: ownState.content,
     level: ownState.nowAt.level,
     num: ownState.nowAt.num,
-    // rightnum: ownState.nowAt.rightnum,
+    xuhao: ownState.nowAt.xuhao
   }),
   dispatch => bindActionCreators( actionCreators , dispatch )
 )( EnglishWordTest );

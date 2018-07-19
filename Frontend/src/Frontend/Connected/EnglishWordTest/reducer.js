@@ -43,6 +43,7 @@ export default ( state = {
     nowAt:{
       level: "basic",
       num: 0,
+      xuhao: 1,
       rightnum: 0,
       rightword: [],
       wrongword: [],
@@ -352,6 +353,7 @@ export default ( state = {
         nowAt: {
           level,
           num,
+          xuhao: state.nowAt.xuhao + 1,
           rightnum,
          rightword,
          wrongword
