@@ -29,6 +29,7 @@ class LogicTest extends React.PureComponent {
 
   constructor( props ){
     super( props );
+    this.submit = false,
     this.state = {
       enterTest: true,
       testAgain: false,
@@ -106,18 +107,10 @@ class LogicTest extends React.PureComponent {
       }
     });
 
-    this.props.loadTestTongjiContent({
-      url: "/api/logicTestTongji",
-      body: {
-        username: this.props.username
-      }
-    });
-    this.props.loadTestMeanTongjiContent({
-      url: "/api/logicTestMeanTongji",
-      body: {
-        username: this.props.username
-      }
-    });
+    this.submit = true;
+    if(this.submit) {
+      this.loadTestResult();
+    }
 
   }
 
@@ -160,7 +153,7 @@ class LogicTest extends React.PureComponent {
            this.state.enterTest && !whetherDidTest || this.state.testAgain && !testend ?
            <div>
              {
-               this.state.startTestNoteShow ? <TestStart testnum="约40道" testtime="7分钟" onClick={() => {this.setState({startTestNoteShow: false});this.loadQuestions()}}/> :
+               this.state.startTestNoteShow ? <TestStart testnum="约35道" testtime="7分钟" onClick={() => {this.setState({startTestNoteShow: false});this.loadQuestions()}}/> :
                <div>
                  {JSON.stringify(questions) == '{}' ? null : <SingleSubjectTest/>}
                  <div align="center">

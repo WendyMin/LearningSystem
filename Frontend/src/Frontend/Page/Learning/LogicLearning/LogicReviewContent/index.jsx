@@ -108,8 +108,8 @@ class LogicReviewContent extends React.PureComponent {
       chapter_name,
       questions
     } = this.props;
-    //console.log(total_content.content)
-
+    // console.log(total_content.content)
+    
     return (
       <React.Fragment>
         <div className="row">
