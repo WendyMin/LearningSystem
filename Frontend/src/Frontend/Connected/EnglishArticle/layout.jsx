@@ -41,7 +41,7 @@ class EnglishArticle extends React.PureComponent {
       displayByWords
     } = this.props;
 
-    var sentenceId = -1;
+    var sentenceId = 0;
 
     return (
       <div className={`container ${style.article}`}>
@@ -76,7 +76,7 @@ class EnglishArticle extends React.PureComponent {
                     ?
                     <div className={style.choosedSentenceTranslate}>
                       { this.function(sentenceId)}
-                      {sentencesTranslates[sentenceId]}
+                      {sentencesTranslates[sentenceId-1]}
                       {/* <Info info={sentencesTranslates[sentenceId]} /> */}
                     </div>
                     :null
