@@ -140,7 +140,7 @@ class EngTest extends React.PureComponent {
                 <div className={style.text}>恭喜！您已完成词汇测试！您的英语水平为：
                   <span style = {{"color":"#188ae2"}}>{levelConvert(didLevel)}水平</span>
                 </div>
-                <div className={style.text}>平均各类型错误率统计如下：</div>
+                <div className={style.text}>平均各类型正确率统计如下：</div>
                 <br/>
                 {
                   rate == undefined ? null :
