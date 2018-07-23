@@ -204,14 +204,8 @@ quit = () => {
 
   componentDidMount(){
     this.getArticle();
-    // this.loadQuestions();
+    this.loadQuestions();
     this.getUnitAndCourse();
-  }
-
-  componentWillReceiveProps( NextProps ){
-    if(this.props.articleId == [] && NextProps.articleId != this.props.articleId){
-      this.loadQuestions();
-    }
   }
 
   render(){
@@ -405,7 +399,7 @@ export default applyHOCs([
         this.nextStep()
       },
       onRejected: function(){
-        this.props.alert("失败")
+        this.props.alert("有无法识别的单词，请重新选择再提交")
       }
     }
   }),

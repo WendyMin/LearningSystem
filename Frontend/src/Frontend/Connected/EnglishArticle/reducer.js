@@ -191,7 +191,7 @@ export default (
       loadState.pending++;
       return {
         ...state,
-        loadState
+        loadState,
       };
     }
     case __ASYNC_LOAD_CONTENT.resolved: {
@@ -226,7 +226,13 @@ export default (
         sentences,
         paragraphedWords,
         sentencesTranslates,
-        allTranslates
+        allTranslates,
+        wordsTranslates: [],
+        choosedWords: new TrieTree(),
+        choosedSentences: [],
+        showAllTranslates: false,
+        showSentencesTranslates: false,
+        showWordsTranslates: false,
       };
     }
     case __ASYNC_LOAD_CONTENT.rejected: {
