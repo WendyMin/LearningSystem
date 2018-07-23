@@ -52,7 +52,8 @@ class EngChart extends React.PureComponent {
       learningType,
     } = this.props;
 
-    // console.log(content);
+    // console.log(content.length);
+    // console.log(typeof(content));
 
     return(
       <React.Fragment>
@@ -63,10 +64,15 @@ class EngChart extends React.PureComponent {
               :
               <div>
                 {
-                  typeof(content) == "string" ? null :
+                  typeof(content) == "string" ?
+
+                  <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/>
+
+                   :
+
                   <div>
                     {
-                      content.length == 0 ?
+                      content.length == 0?
                       // <div class="panel panel-custom panel-border">
                       //   <div class="panel-heading">
                       //       <h3 class="panel-title">Sorry</h3>

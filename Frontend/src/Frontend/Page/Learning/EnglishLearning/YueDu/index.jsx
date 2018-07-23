@@ -204,8 +204,14 @@ quit = () => {
 
   componentDidMount(){
     this.getArticle();
-    this.loadQuestions();
+    // this.loadQuestions();
     this.getUnitAndCourse();
+  }
+
+  componentWillReceiveProps( NextProps ){
+    if(this.props.articleId == [] && NextProps.articleId != this.props.articleId){
+      this.loadQuestions();
+    }
   }
 
   render(){
@@ -249,7 +255,7 @@ quit = () => {
     }
 
     // this.props.changeArticleId(this.props.getArticleId.artid);
-    // console.log(this.props.UnitAndCourse)
+    // console.log(this.props.articleId)
 
     return (
       <React.Fragment>

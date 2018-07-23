@@ -76,7 +76,17 @@ export default ( state = {
       return {
         ...state,
         loadState,
-        content: response
+        content: response,
+        rightwords: [],
+        wrongwords: [],
+        nowAt:{
+          level: "basic",
+          num: 0,
+          xuhao: 1,
+          rightnum: 0,
+          rightword: [],
+          wrongword: [],
+        }
       };
     }
     case __ASYNC_LOAD_QUESTIONS.rejected: {
