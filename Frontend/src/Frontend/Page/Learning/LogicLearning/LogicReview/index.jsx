@@ -10,6 +10,12 @@ import {
 import { actions as ZhentiPerYearTongjiActions } from 'Connected/ZhentiPerYearTongji';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
+import {
+  view as SingleOptionQuestions,
+  actions as SingleOptionQuestionsActions
+} from 'Connected/SingleOptionQuestions';
+// import { actions as ZhentiPerYearTongjiActions } from 'Connected/ZhentiPerYearTongji';
+import changeAlpToNum from 'Algorithm/changeAlpToNum';
 
 import Button from 'UI/Button';
 import Note from 'UI/Note';
@@ -49,6 +55,34 @@ class LogicReview extends React.PureComponent {
 
   requestChapterContent = (chapterName) => {
     this.setState({reviewContent: true , tongjiShow: false});
+      this.props.loadQuestions({
+        url: "/api/logicGetReviewCuoti",
+        body: {
+          username: this.props.username,
+          chapter_name: chapterName
+          // chapter_name: this.props.chapter_name
+        },
+
+        parser: response => {
+          var all = [];
+          response.content.map ( one => all.push(one) )
+          //console.log(response.content.length)
+          return all.map(one => ({
+             questionId: one.id,
+             options: one.options,
+             rightKey: changeAlpToNum( one.answer ),
+             question: one.question,
+             analysis: one.analysis,
+           }) )
+        }
+      }) // 加载错题
+      /** 加载做过的所有数据的平均统计 **/
+      this.props.loadZhentiTongji({
+        url: "/api/logicLastTongji",
+        body: {
+          username: this.props.username
+        },
+      });
   }
 
   componentDidMount(){
@@ -86,13 +120,30 @@ class LogicReview extends React.PureComponent {
                        {
                          importantChapterName.length == 0 ? <div align="center" style = {{"fontSize":"18px","color":"#ff5b5b"}}>您目前没有需要重点复习的章节</div> :
                          <div>
-                           <strong align = "center"><div style = {{"color":"#f9c851"}}>请点击选择要复习的章节</div></strong>
+                           {/* <strong align = "center"><div style = {{"color":"#f9c851"}}>请点击选择要复习的章节</div></strong> */}
                            {importantChapterName.map((oneChapter , key) =>
-                           <div key = {key}><br/><li style = {oneChapter == choice ? {"color":"#71b6f9"} : null}
-                             onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter);setLearningType(oneChapter)}}
-                             >{oneChapter}</li></div>)}
+                           <div key = {key}><br/>
+                             <li style = {oneChapter == choice ? {"color":"#71b6f9","cursor":"pointer"} : null}
+                                 onMouseOver = {() => {setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
+                                 onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter);setLearningType(oneChapter)}}
+                             >
+                               {oneChapter}
+                             </li>
+                           </div>)}
+                           {choice == "" ? null :
+                           <div className = {style.info}>
+                             <div>总错误率{data.tongji==undefined ? null : <span>&nbsp;&nbsp;
+                               0.5
+                               {/* {data.tongji[key].total_mba} */}
+                             </span>}</div>
+                             <div>错题总数&nbsp;&nbsp;{this.props.questions.length}</div>
+                           </div>
+                           }
+
+
                          </div>
                        }
+
                     </div>
                   </div>
                   {/* <!-- end col --> */}
@@ -103,9 +154,10 @@ class LogicReview extends React.PureComponent {
                       {
                         ordinaryChapterName.length == 0 ? <div align="center" style = {{"fontSize":"18px","color":"#ff5b5b"}}>您目前没有需要重点复习的章节</div> :
                         <div>
-                          <strong align = "center"><div style = {{"color":"#f9c851"}}>请点击选择要复习的章节</div></strong>
+                          {/* <strong align = "center"><div style = {{"color":"#f9c851"}}>请点击选择要复习的章节</div></strong> */}
                           {ordinaryChapterName.map((oneChapter , key) =>
-                          <div key = {key}><br/><li style = {oneChapter == choice ? {"color":"#71b6f9"} : null}
+                          <div key = {key}><br/><li style = {oneChapter == choice ? {"color":"#71b6f9","cursor":"pointer"} : null}
+                            onMouseOver = {() => {setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
                             onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter);setLearningType(oneChapter)}}
                             >{oneChapter}</li></div>)}
                         </div>
@@ -147,12 +199,16 @@ export default applyHOCs([
       choice: state.LogicReviewModel.choice,
       data: state.ZhentiPerYearTongji.tongji,
       learningType: state.LearningTypeSelect.learningType,
+      questions: state.SingleOptionQuestions.content,
+      data: state.ZhentiPerYearTongji.tongji,
     }),
     dispatch => ({
       ...bindActionCreators( LogicReviewModelActions , dispatch ),
       ...bindActionCreators( ZhentiPerYearTongjiActions , dispatch ),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
       ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
+      ...bindActionCreators( SingleOptionQuestionsActions , dispatch ),
+      ...bindActionCreators( ZhentiPerYearTongjiActions , dispatch ),
     })
   )],
   LogicReview

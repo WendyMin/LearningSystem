@@ -127,7 +127,171 @@ class EnterLearning extends React.PureComponent {
             <div style={{"fontSize":"20px"}}>您将要学习的章节是&nbsp;&nbsp;<span style={{"color":"red"}}>{this.props.chapter_name}</span></div>}
           </div><br/>
 
-          <div className="row port m-b-20">
+          {this.state.type1Selected || this.state.type2Selected || this.props.xingshiOrLunzheng===0 || this.props.xingshiOrLunzheng===1 ?
+            <div className="row port m-b-20">
+              <div className="portfolioContainer">
+                <a href="javascript:void(0);">
+                 <div className="col-sm-6 col-lg-3 col-md-4 natural personal">
+                     <div className="gal-detail thumb" onClick = {() => {setLearningType("知识点精要") ; this.setState({typeSelectShow: false})}}>
+                        <img src="/static/images/gallery/2.jpg" className="thumb-img" alt="work-thumbnail"/>
+                        <h4 className = {TextStyle[0]}
+                            onMouseOver = {() => this.setState({typeSelectShow: true , changeColor1: true})}
+                            onMouseLeave = {() => this.setState({changeColor1: false})}
+                        >知识点精要
+                        </h4>
+                        <p className={style.text_muted1}>
+                          点击可以查看每一章的知识点详细介绍
+                        </p>
+                     </div>
+                 </div>
+                </a>
+
+                <a href="javascript:void(0);">
+                  <div className="col-sm-6 col-lg-3 col-md-4 creative personal photography">
+                    <div className="gal-detail thumb" onClick = {() => {setLearningType("重点习题") ; this.setState({typeSelectShow: false})}}>
+                      <img src="/static/images/gallery/5.jpg" className="thumb-img" alt="work-thumbnail"/>
+                      <h4  className = {TextStyle[1]}
+                           onMouseOver = {() => this.setState({typeSelectShow: true , changeColor2: true})}
+                           onMouseLeave = {() => this.setState({changeColor2: false})}
+                      >重点习题
+                      </h4>
+                      <p className={style.text_muted1}>
+                          点击查看每一章节的重点习题，提交后可以查看正确答案和解析
+                      </p>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="javascript:void(0);">
+                {this.props.whetherDidZhongDian ?
+                  <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
+                     <div className="gal-detail thumb"  onClick = {() => {setLearningType("强化练习") ; this.setState({typeSelectShow: false})}}>
+                         <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
+                         <h4  className = {TextStyle[2]}
+                              onMouseOver = {() => this.setState({typeSelectShow: true , changeColor3: true})}
+                              onMouseLeave = {() => this.setState({changeColor3: false})}
+                         >强化练习
+                         </h4>
+                         <p className={style.text_muted1}>
+                             点击查看每一章节的强化练习，提交后可以查看正确答案和解析
+                         </p>
+                     </div>
+                  </div>
+                  :
+                  <div className={style.translucent}>
+                    <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
+                       <div className="gal-detail thumb" onClick = {() => alert("完成重点习题后才可解锁，请先完成重点习题!")}>
+                           <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
+                           <h4  className = {TextStyle[2]}
+                                onMouseOver = {() => this.setState({typeSelectShow: true , changeColor3: true})}
+                                onMouseLeave = {() => this.setState({changeColor3: false})}
+                           >强化练习
+                           </h4>
+                           <p className={style.text_muted1}>
+                              <div align="center">
+                                <i className="zmdi zmdi-lock-outline" style={{"fontSize":"60px"}}></i><br/>
+                                完成重点习题后解锁
+                              </div>
+                           </p>
+                       </div>
+                    </div>
+                  </div>
+                }
+                </a>
+
+                <a href="javascript:void(0);">
+                {this.props.whetherDidQiangHua ?
+                  <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
+                    <div className="gal-detail thumb" onClick = {() => {setLearningType("单元测试") ; this.setState({typeSelectShow: false})}}>
+                      <img src="/static/images/gallery/3.jpg" className="thumb-img" alt="work-thumbnail"/>
+                      <h4 className = {TextStyle[3]}
+                          onMouseOver = {() => this.setState({typeSelectShow: true , changeColor4: true})}
+                          onMouseLeave = {() => this.setState({changeColor4: false})}
+                      >单元测试
+                      </h4>
+                      <p className={style.text_muted1}>
+                        点击查看每一章节的单元测试题，测试完成后，点击提交可以查看正确答案和解析，可以查看本章节的数据统计
+                      </p>
+                    </div>
+                  </div>
+                  :
+                  <div className={style.translucent}>
+                  <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
+                    <div className="gal-detail thumb" onClick = {() => alert("完成强化练习后才可解锁，请先完成强化练习!")}>
+                      <img src="/static/images/gallery/3.jpg" className="thumb-img" alt="work-thumbnail"/>
+                      <h4 className = {TextStyle[3]}
+                          onMouseOver = {() => this.setState({typeSelectShow: true , changeColor4: true})}
+                          onMouseLeave = {() => this.setState({changeColor4: false})}
+                      >单元测试
+                      </h4>
+                      <p className={style.text_muted1}>
+                         <div align="center">
+                           <i className="zmdi zmdi-lock-outline" style={{"fontSize":"60px"}}></i><br/>
+                           完成强化练习后解锁
+                         </div>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                }
+                </a>
+
+              </div>
+             {/* <!-- end portfoliocontainer--> */}
+            </div>
+            :
+            <div className="row port m-b-20" className={style.translucent}>
+              <div className="portfolioContainer">
+                 <div className="col-sm-6 col-lg-3 col-md-4 natural personal">
+                     <div className="gal-detail thumb" //onClick = {() => {setLearningType("知识点精要") ; this.setState({typeSelectShow: false})}}
+                       >
+                        <img src="/static/images/gallery/2.jpg" className="thumb-img" alt="work-thumbnail"/>
+                        <h4 className={style.normal_type}> 知识点精要 </h4>
+                        <p className={style.text_muted1}>
+                          点击可以查看每一章的知识点详细介绍
+                        </p>
+                     </div>
+                 </div>
+
+                  <div className="col-sm-6 col-lg-3 col-md-4 creative personal photography">
+                    <div className="gal-detail thumb" //onClick = {() => {setLearningType("重点习题") ; this.setState({typeSelectShow: false})}}
+                    >
+                      <img src="/static/images/gallery/5.jpg" className="thumb-img" alt="work-thumbnail"/>
+                      <h4  className={style.normal_type}> 重点习题 </h4>
+                      <p className={style.text_muted1}>
+                          点击查看每一章节的重点习题，提交后可以查看正确答案和解析
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
+                     <div className="gal-detail thumb"  //onClick = {() => {setLearningType("强化练习") ; this.setState({typeSelectShow: false})}}
+                     >
+                         <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
+                         <h4  className={style.normal_type}> 强化练习 </h4>
+                         <p className={style.text_muted1}>
+                             点击查看每一章节的强化练习，提交后可以查看正确答案和解析
+                         </p>
+                     </div>
+                  </div>
+
+                  <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
+                    <div className="gal-detail thumb" //onClick = {() => {setLearningType("单元测试") ; this.setState({typeSelectShow: false})}}
+                    >
+                      <img src="/static/images/gallery/3.jpg" className="thumb-img" alt="work-thumbnail"/>
+                      <h4 className={style.normal_type}> 单元测试 </h4>
+                      <p className={style.text_muted1}>
+                        点击查看每一章节的单元测试题，测试完成后，点击提交可以查看正确答案和解析，可以查看本章节的数据统计
+                      </p>
+                    </div>
+                  </div>
+
+              </div>
+             {/* <!-- end portfoliocontainer--> */}
+            </div>
+          }
+
+          {/* <div className="row port m-b-20">
             <div className="portfolioContainer">
               <a href="javascript:void(0);">
                <div className="col-sm-6 col-lg-3 col-md-4 natural personal">
@@ -236,8 +400,8 @@ class EnterLearning extends React.PureComponent {
               </a>
 
             </div>
-           {/* <!-- end portfoliocontainer--> */}
-          </div>
+           <!-- end portfoliocontainer-->
+          </div> */}
           {/* <!-- End row --> */}
         </div>
         :
