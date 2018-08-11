@@ -48,18 +48,18 @@ class LogicStatistics extends React.PureComponent{
           <div>
             {lastData.flag == 0 ? <Note info = "您还没完成入口测试，请先完成入口测试 !" onClick={()=>this.props.setSubjectFunctionSelect(0)}/>:
             <div>
-            {data.finish_chapter == undefined || lastData.finish_chapter == undefined ? null :
+            {data.finish_xingshi == undefined || data.finish_lunzheng == undefined  || lastData.finish_xingshi == undefined || lastData.finish_lunzheng == undefined ? null :
               <div>
-                {data.finish_chapter.length == 0 || lastData.finish_chapter.length == 0 ?
+                {data.finish_xingshi.length == 0 || data.finish_lunzheng.length == 0 || lastData.finish_xingshi.length == 0 || lastData.finish_lunzheng.length == 0 ?
                 <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/>
                 :
                 <div className="card-box">
                   <div className = {style.allChapterTongji}>
                     <div className = {style.title}>您已经完成的所有章节统计信息如下：</div><br/>
                     <div style = {{"fontSize": "16px","lineHeight": "32px","color":"#71b6f9"}}> 形式逻辑 </div>
-                    {lastData.tongji.map((oneChapter , key) =>
+                    {lastData.xingshi.map((oneChapter , key) =>
                       <div key = {key}>
-                        <br/><li style = {{"fontSize": "16px","lineHeight": "32px"}}>{lastData.finish_chapter[key]}</li>
+                        <br/><li style = {{"fontSize": "16px","lineHeight": "32px"}}>{lastData.finish_xingshi[key]}</li>
                         {/* <span>最新一次总错误率<span>{oneChapter.total_mba}</span></span> */}
                         <table className="table table-bordered m-0" align = "center">
                           <thead>
@@ -79,9 +79,9 @@ class LogicStatistics extends React.PureComponent{
                             </tr>
                             <tr>
                               <th>平均错误率</th>
-                              {data.tongji[key].xiaolei_mba.map((oneerror , key) =>
+                              {data.xingshi[key].xiaolei_mba.map((oneerror , key) =>
                               <td key = {key} style={{"vertical-align":"middle"}}>{oneerror}</td>)}
-                              <td>{data.tongji[key].total_mba}</td>
+                              <td>{data.xingshi[key].total_mba}</td>
                             </tr>
                           </tbody>
                         </table><br/>
@@ -106,6 +106,35 @@ class LogicStatistics extends React.PureComponent{
                       </div>
                     )} <br/>
                     <div style = {{"fontSize": "16px","lineHeight": "32px","color":"#71b6f9"}}> 论证逻辑 </div>
+                    {lastData.lunzheng.map((oneChapter , key) =>
+                      <div key = {key}>
+                        <br/><li style = {{"fontSize": "16px","lineHeight": "32px"}}>{lastData.finish_lunzheng[key]}</li>
+                        <table className="table table-bordered m-0" align = "center">
+                          <thead>
+                            <tr>
+                              <th>小类名称</th>
+                              {oneChapter.mba_type.map((onetype , key) =>
+                              <th key = {key}>{onetype}</th>)}
+                              <th>总错误率</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th>最新一次错误率</th>
+                              {oneChapter.xiaolei_mba.map((oneerror , key) =>
+                              <td key = {key} style={{"vertical-align":"middle"}}>{oneerror}</td>)}
+                              <td>{oneChapter.total_mba}</td>
+                            </tr>
+                            <tr>
+                              <th>平均错误率</th>
+                              {data.lunzheng[key].xiaolei_mba.map((oneerror , key) =>
+                              <td key = {key} style={{"vertical-align":"middle"}}>{oneerror}</td>)}
+                              <td>{data.lunzheng[key].total_mba}</td>
+                            </tr>
+                          </tbody>
+                        </table><br/>
+                      </div>
+                    )} <br/>
                   </div>
                 {/* <div className = {style.allChapterTongji}>
                   <div className = {style.title}>您已经完成的所有章节统计信息如下：</div>

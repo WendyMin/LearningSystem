@@ -30,7 +30,9 @@ class LogicReview extends React.PureComponent {
     super( props );
     this.state = {
       reviewContent: false,
-      tongjiShow: false
+      tongjiShow: false,
+      leftErrorShow: false,
+      rightErrorShow: false
     }
   }
 
@@ -124,18 +126,22 @@ class LogicReview extends React.PureComponent {
                            {importantChapterName.map((oneChapter , key) =>
                            <div key = {key}><br/>
                              <li style = {oneChapter == choice ? {"color":"#71b6f9","cursor":"pointer"} : null}
-                                 onMouseOver = {() => {setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
+                                 onMouseOver = {() => {this.setState({leftErrorShow: true , rightErrorShow: false});setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
                                  onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter);setLearningType(oneChapter)}}
                              >
                                {oneChapter}
                              </li>
                            </div>)}
-                           {choice == "" ? null :
+                           {choice == "" || !this.state.leftErrorShow ? null :
                            <div className = {style.info}>
-                             <div>总错误率{data.tongji==undefined ? null : <span>&nbsp;&nbsp;
-                               0.5
-                               {/* {data.tongji[key].total_mba} */}
-                             </span>}</div>
+                             <div>总错误率&nbsp;&nbsp;
+                               {data.finish_lunzheng==undefined ? null :
+                                <span>
+                                  {data.finish_lunzheng.map((oneChapter,key) => oneChapter==choice?<span>{data.lunzheng[key].total_mba}</span>:null)}
+                                  {data.finish_xingshi.map((oneChapter,key) => oneChapter==choice?<span>{data.xingshi[key].total_mba}</span>:null)}
+                                </span>
+                               }
+                               </div>
                              <div>错题总数&nbsp;&nbsp;{this.props.questions.length}</div>
                            </div>
                            }
@@ -157,9 +163,22 @@ class LogicReview extends React.PureComponent {
                           {/* <strong align = "center"><div style = {{"color":"#f9c851"}}>请点击选择要复习的章节</div></strong> */}
                           {ordinaryChapterName.map((oneChapter , key) =>
                           <div key = {key}><br/><li style = {oneChapter == choice ? {"color":"#71b6f9","cursor":"pointer"} : null}
-                            onMouseOver = {() => {setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
+                            onMouseOver = {() => {this.setState({leftErrorShow: false , rightErrorShow: true});setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
                             onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter);setLearningType(oneChapter)}}
                             >{oneChapter}</li></div>)}
+                            {choice == "" || !this.state.rightErrorShow ? null :
+                            <div className = {style.info}>
+                              <div>总错误率&nbsp;&nbsp;
+                                {data.finish_lunzheng==undefined ? null :
+                                 <span>
+                                   {data.finish_lunzheng.map((oneChapter,key) => oneChapter==choice?<span>{data.lunzheng[key].total_mba}</span>:null)}
+                                   {data.finish_xingshi.map((oneChapter,key) => oneChapter==choice?<span>{data.xingshi[key].total_mba}</span>:null)}
+                                 </span>
+                                }
+                                </div>
+                              <div>错题总数&nbsp;&nbsp;{this.props.questions.length}</div>
+                            </div>
+                            }
                         </div>
                       }
                     </div>
