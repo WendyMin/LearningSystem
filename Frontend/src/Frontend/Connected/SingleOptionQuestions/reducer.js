@@ -156,7 +156,24 @@ export default ( state = {
     case __FORCE_CLEAR_QUESTIONS: {
       return {
         ...state,
-        content: []
+        content: [],
+        content: [],
+        submitState: {
+          pending: 0,
+          resolved: 0,
+          rejected: 0,
+          lastFailed: false,
+          failedReason: "network", // "json" , "server"
+          failedDetail: null
+        },
+        loadState: {
+          pending: 0,
+          resolved: 0,
+          rejected: 0,
+          lastFailed: false,
+          failedReason: "network", // "json" , "server"
+          failedDetail: null
+        },
       };
     };
     /*

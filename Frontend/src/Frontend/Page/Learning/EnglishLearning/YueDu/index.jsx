@@ -83,7 +83,6 @@ class YueDu extends React.PureComponent {
     })
   }
 
-
   loadQuestions = () => {
     // console.log(typeof(this.props.articleId))
     this.props.loadQuestions({
@@ -136,14 +135,14 @@ class YueDu extends React.PureComponent {
   //  });
 //  }
 
-quit = () => {
-  const { unlockAndHide  , questions , hideAllTranslate } = this.props;
-  for( var i = 0; i < questions.length ; i++ ){
-      unlockAndHide( questions[i].questionId );
-    }
-    hideAllTranslate();
-  this.props.setLearningType("英语主页面");
-}
+  quit = () => {
+    const { unlockAndHide  , questions , hideAllTranslate } = this.props;
+    for( var i = 0; i < questions.length ; i++ ){
+        unlockAndHide( questions[i].questionId );
+      }
+      hideAllTranslate();
+    this.props.setLearningType("英语主页面");
+  }
 
    doMore = () => {
       const { unlockAndHide  , questions , hideAllTranslate } = this.props;
@@ -203,6 +202,7 @@ quit = () => {
   }
 
   componentDidMount(){
+    // this.props.forceClearQuestions();
     this.getArticle();
     this.loadQuestions();
     this.getUnitAndCourse();
@@ -221,7 +221,8 @@ quit = () => {
       UnitAndCourse,
       setLearningType,
       learningType,
-      ined
+      ined,
+      // forceClearQuestions,
     } = this.props;
     var { displayByWords } = this.state;
     var text = "";

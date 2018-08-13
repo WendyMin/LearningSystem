@@ -1,9 +1,11 @@
 import {
   __LOAD_DID_TEST,
+  __LOAD_LEARN_ALL,
 } from 'actionTypes';
 
 export default ( state = {
     didtest: {},
+    learnall: "",
     loadState: {
       pending: 0,
       resolved: 0,
@@ -56,6 +58,53 @@ export default ( state = {
         loadState
       };
     }
+
+
+
+
+
+    /*  defineAsyncActionReducer __LOAD_LEARN_ALL start  */
+    case __LOAD_LEARN_ALL.pending: {
+      let loadState = {...state.loadState };
+      loadState.lastFailed = false;
+      loadState.pending++;
+      return {
+        ...state,
+        loadState
+      };
+    }
+    case __LOAD_LEARN_ALL.resolved: {
+      let { response , initState } = payload;
+      initState = initState || {
+        lock: false,
+        show: false,
+        choice: -1
+      };
+      let loadState = {...state.loadState };
+      loadState.resolved++;
+      loadState.pending--;
+      return {
+        ...state,
+        loadState,
+        learnall: response.data,
+      };
+    }
+    case __LOAD_LEARN_ALL.rejected: {
+      let { reason , detail } = payload;
+      let loadState = {...state.loadState };
+      loadState.rejected++;
+      loadState.pending--;
+      loadState.lastFailed = true;
+      loadState.failedReason = reason;
+      loadState.failedDetail = detail;
+      return {
+        ...state,
+        loadState
+      };
+    }
+
+
+
 
 
     default:
