@@ -136,17 +136,24 @@ class MathLearning extends React.PureComponent {
                       </a>
                     </li> */}
 
-                    <li onClick={()=>this.props.setSubjectFunctionSelect(1)}>
-                        <a href="javascript:void(0);" class="waves-effect">
+                    <li className="has_sub">
+                        <a href="javascript:void(0);"
+                           className={choice==1||choice==10||choice==11||choice==12||choice==13?"waves-effect subdrop":"waves-effect"}
+                           onClick={()=>{choice==1||choice==10||choice==11||choice==12||choice==13?this.props.setSubjectFunctionSelect(""):this.props.setSubjectFunctionSelect(1)}}
+                        >
                           <i className="zmdi zmdi-library"></i>
                           <span> 进入学习 </span>
-                          <span class="menu-arrow"></span>
+                          <span className="menu-arrow"></span>
                         </a>
-                        <ul class="list-unstyled">
-                            <li><a href="javascript:void(0);">算术</a></li>
-                            <li><a href="javascript:void(0);">代数</a></li>
-                            <li><a href="javascript:void(0);">几何</a></li>
-                            <li><a href="javascript:void(0);">数据分析</a></li>
+                        <ul className="list-unstyled" style={choice==1||choice==10||choice==11||choice==12||choice==13?{"display":"block"}:null}>
+                          {/* <li><a href="javascript:void(0);">算术</a></li>
+                          <li><a href="javascript:void(0);">代数</a></li>
+                          <li><a href="javascript:void(0);">几何</a></li>
+                          <li><a href="javascript:void(0);">数据分析</a></li> */}
+                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(10)}>算术</a></li>
+                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(11)}>代数</a></li>
+                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(12)}>几何</a></li>
+                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(13)}>数据分析</a></li>
                         </ul>
                     </li>
 
@@ -210,6 +217,10 @@ class MathLearning extends React.PureComponent {
 
                     choice==0 ? <p>入口测试</p> :
                     choice==1 ? <p>进入学习</p> :
+                    choice==10 ? <p>算术</p> :
+                    choice==11 ? <p>代数</p> :
+                    choice==12 ? <p>几何</p> :
+                    choice==13 ? <p>数据分析</p> :
                     choice==2 ? <p>开始复习</p> :
                     choice==3 ? <p>数据统计</p> :
                     choice==4 ? <div className="card-box"><MathHelp/></div> :
