@@ -17,6 +17,7 @@ const ZhongDian = asyncLoad( () => import( 'LogicLearning/ZhongDian' ) );
 const WritingLearning = asyncLoad( () => import('WritingLearning') );
 // const LunZheng = asyncLoad( () => import( 'WritingLearning/LunZheng' ) );
 // const LunShuo = asyncLoad( () => import( 'WritingLearning/LunShuo' ) );
+const MathLearning = asyncLoad( () => import('MathLearning') );
 const NotFound = asyncLoad( () => import( 'Page/NotFound' ) );
 
 class Learning extends React.PureComponent {
@@ -38,6 +39,7 @@ class Learning extends React.PureComponent {
             <Route exact path={`${match.url}/writing`} component={WritingLearning} />
             {/* <Route exact path={`${match.url}/writing/lunshuo`} component={LunShuo} /> */}
             {/* <Route exact path={`${match.url}/writing/lunzheng`} component={LunZheng} /> */}
+            <Route exact path={`${match.url}/math`} component={MathLearning} />
             <Route path="*" component={NotFound} />
           </Switch>
         </React.Fragment>
