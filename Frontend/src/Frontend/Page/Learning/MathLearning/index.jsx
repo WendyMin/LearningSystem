@@ -68,14 +68,16 @@ class MathLearning extends React.PureComponent {
                   <li>
                     <h4 className="page-title">
                       {choice==0 ? <div>数学  > 入口测试</div> :
-                       choice==1 ?
-                        <div>
-                         <span>数学  > 进入学习 </span>
-                       </div> :
+                        choice==1 ? <div>数学  > 进入学习 </div> :
+                       choice==10 ?<div>数学  > 进入学习 >算术 </div> :
+                       choice==11 ?<div>数学  > 进入学习 >代数 </div> :
+                       choice==12 ?<div>数学  > 进入学习 >几何 </div> :
+                       choice==13 ?<div>数学  > 进入学习 >数据分析 </div> :
                        choice==2 ? <div>数学  > 开始复习</div> :
                        choice==3 ? <div>数学  > 数据统计</div> :
                        choice==4 ? <div>数学  > 科目帮助</div> :
-                       <div>数学 > 问题反馈</div>
+                       choice==5? <div>数学 > 问题反馈</div>:
+                       <div>数学</div>
                      }
                     </h4>
                   </li>
