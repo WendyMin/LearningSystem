@@ -42,7 +42,7 @@ class WritingPage extends React.PureComponent {
           <div className="topbar">
 
             <div className="topbar-left">
-              <a href="/learning/logic" className="logo"><span>Learning<span>System</span></span><i className="zmdi zmdi-layers"></i></a>
+              <a href="/" className="logo"><span>Learning<span>System</span></span><i className="zmdi zmdi-layers"></i></a>
             </div>
 
             <div className="navbar navbar-default" role="navigation">

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Prompt } from 'react-router';
 import style from 'style';
 
+import Suanshu from 'Page/Learning/MathLearning/Suanshu';
 import MathHelp from 'UI/Help/MathHelp';
 import Info from 'UI/Info';
 
@@ -217,7 +218,7 @@ class MathLearning extends React.PureComponent {
 
                     choice==0 ? <p>入口测试</p> :
                     choice==1 ? <p>进入学习</p> :
-                    choice==10 ? <p>算术</p> :
+                    choice==10 ? <Suanshu/> :
                     choice==11 ? <p>代数</p> :
                     choice==12 ? <p>几何</p> :
                     choice==13 ? <p>数据分析</p> :
