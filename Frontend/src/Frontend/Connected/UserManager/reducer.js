@@ -1,5 +1,6 @@
 import {
   LOGIN,
+  GET_USER_INFO,
   __SET_USER
 } from 'actionTypes';
 
@@ -28,6 +29,48 @@ export default ( state = {
         logined: logined
       }
     }
+
+    case GET_USER_INFO.pending:
+      return {
+        ...state,
+        logining: true,
+        name: payload.username,
+        password: payload.password,
+        networkError: false,
+        serverError: false,
+        failed: false,
+        validName: false
+      };
+
+    case GET_USER_INFO.resolved:
+      let { username , userid } = payload;
+      // switch( payload.response.state ){
+      // switch( payload.response ){
+        // case "success":
+
+          return {
+            ...state,
+            name: username ,
+            logined: userid == 0 && username=="" ? false : true
+            // userid : userid
+          };
+          console.log(username)
+
+    case GET_USER_INFO.rejected:
+      if( payload.reason === "network" ){
+        return {
+          ...state,
+          networkError: true,
+          logining: false
+        };
+      }
+      else {
+        return {
+          ...state,
+          logining: false,
+          serverError: true
+        }
+      }
 
     case LOGIN.pending:
       return {

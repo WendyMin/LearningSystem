@@ -19,12 +19,14 @@ import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 var sha1 = require('sha1');
 
-
 class LogicLearning extends React.PureComponent {
-  // constructor( props ){
-  //   super( props );
-  //   this.type = ["入口测试" , "进入学习" , "开始复习" , "模拟测试" , "数据统计" , "查看帮助"];
-  // }
+  constructor( props ){
+    super( props );
+  }
+
+  componentDidMount(){
+    this.props.getUserInfo();
+  }
 
   render(){
     const{
@@ -32,15 +34,8 @@ class LogicLearning extends React.PureComponent {
       logined,
       choice,
     } = this.props;
+    console.log(username,logined)
 
-    // var user = sessionStorage.getItem("user");
-    // if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" ){
-    //   <Login/>
-    // }
-    // else{
-    //   this.props.setUser(user,true);
-    //   sessionStorage.setItem("user",user);
-    // }
     return (
       <React.Fragment>
         <div id="wrapper">
@@ -104,15 +99,10 @@ class LogicLearning extends React.PureComponent {
                 <h5>{this.props.username}</h5>
 
                 <ul className="list-inline">
-                 {/* <li>
-                   <a href="#" >
-                     <i className="zmdi zmdi-settings"></i>
-                   </a>
-                 </li> */}
 
                  <li>
                    <a className="text-custom"
-                      onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=59.110.23.212&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
+                      onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
                       href="javascript:void(0);"
                       >
                      <i className="zmdi zmdi-power"></i>

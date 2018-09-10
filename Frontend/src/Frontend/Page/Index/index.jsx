@@ -14,13 +14,59 @@ import { actions as PortTestActions } from 'Connected/PortTest';
 var sha1 = require('sha1');
 
 class IndexPage extends React.Component {
-  // constructor( props ){
-  //   super( props );
+  constructor( props ){
+    super( props );
+    // this.username = "";
+    // this.logined = "";
+    // // this.whetherGotUserInfo = false;
+    // this.state = {
+    // //   username: "",
+    // //   logined: ""
+    //   whetherGotUserInfo:false
+    // }
+  }
+
+  // getUserInfo = () => {
+  //   $.ajax({
+  //     type:"get",
+  //     url:'http://www.doxue.com/app/get_user',
+  //     dataType:"jsonp",
+  //     success:function(json){
+  //       // console.log(json),
+  //       // console.log(json.data.uid),
+  //       // console.log(json.data.uname);
+  //       // this.state.username = json.data.uname;
+  //       // this.state.logined = json.data.uid;
+  //       // console.log(this.state.username,this.state.logined,this.state.username == undefined && this.state.logined == 0 );
+  //       this.username = json.data.uname;
+  //       this.logined = json.data.uid;
+  //       console.log(this.username,this.logined,this.username == undefined && this.logined == 0 );
+  //     },
+  //     error:function(){
+  //       console.log('error');
+  //     }
+  //   })
+  //   // this.whetherGotUserInfo = true;
+  //   this.setState({whetherGotUserInfo: true})
+    // console.log(this.username)
+    // if(this.whetherGotUserInfo) this.props.setUser(this.username,this.logined)
+    // console.log(this.username,this.logined);
+    // if(this.username == undefined && this.logined == 0 ) {this.props.setUser(this.username,false)}
+    // else this.props.setUser(this.username,this.logined);
   // }
 
   componentDidMount(){
+    this.props.getUserInfo();
+    // this.getUserInfo();
     this.getProgress();
   }
+  // componentWillReceiveProps(NextProps){
+  //   console.log(NextProps)
+  //   if(this.props.username !== NextProps.username || this.props.logined !== NextProps.logined){
+  //     this.props.setUser(NextProps.username,NextProps.logined)
+  //   }
+  //
+  // }
 
   getProgress = () => {
     this.props.loadPortContent({
@@ -39,6 +85,17 @@ class IndexPage extends React.Component {
       choice,
       progress,
     } = this.props;
+    // console.log(this.username)
+    // if(this.state.whetherGotUserInfo ) {this.props.setUser(this.username,true)}
+
+    // else this.props.setUser(this.username,this.logined);
+    // this.getUserInfo();
+    // console.log(this.state.username,this.state.logined,this.state.username == undefined && this.state.logined == 0 );
+    // console.log(this.state.username != undefined)
+    // console.log(this.state.logined !=0)
+    // console.log(this.state.username != undefined && this.state.logined != 0)
+    // if(this.state.username !== undefined && this.state.logined !== 0 ) {this.props.setUser(this.username,true)}
+    // else this.props.setUser(this.username,this.logined);
 
     return (
 
@@ -89,15 +146,10 @@ class IndexPage extends React.Component {
                   <h5>{this.props.username}</h5>
 
                   <ul className="list-inline">
-                     {/* <li>
-                       <a href="#" >
-                         <i className="zmdi zmdi-settings"></i>
-                       </a>
-                     </li> */}
 
                    <li>
                      <a className="text-custom"
-                        onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=59.110.23.212&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
+                        onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
                         href="javascript:void(0);"
                         >
                        <i className="zmdi zmdi-power"></i>
@@ -161,7 +213,9 @@ class IndexPage extends React.Component {
                   <div>
                     <div className="row">
                         <div className="col-lg-4">
-                          <Link to="/learning/english">
+                          {/* <a href="https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp={Date.parse(new Date())}&secret_code={sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}"/> */}
+                          {/* <Link to="/learning/english">  */}
+                          <a href={this.props.logined?"/learning/english":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
                             <div className="card-box project-box">
                                 {/* <div className="label label-success">Uncompleted</div> */}
                                 <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse">英语</a></h4>
@@ -187,12 +241,13 @@ class IndexPage extends React.Component {
                                 {/* <!-- /.progress .no-rounded --> */}
 
                             </div>
-                          </Link>
+                          </a>
                         </div>
                         {/* <!-- end col--> */}
 
                         <div className="col-lg-4">
-                          <Link to="/learning/logic">
+                          <a href={this.props.logined?"/learning/logic":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
+                          {/* <Link to="/learning/logic"> */}
                             <div className="card-box project-box">
                                 {/* <div className="label label-primary">Uncompleted</div> */}
                                 <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse"> 逻辑</a></h4>
@@ -218,12 +273,13 @@ class IndexPage extends React.Component {
                                 {/* <!-- /.progress .no-rounded --> */}
 
                             </div>
-                          </Link>
+                          </a>
                         </div>
                         {/* <!-- end col--> */}
 
                         <div className="col-lg-4">
-                          <Link to="/learning/writing">
+                          {/* <Link to="/learning/writing"> */}
+                          <a href={this.props.logined?"/learning/writing":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
                             <div className="card-box project-box">
                                 {/* <div className="label label-pink">Uncompleted</div> */}
                                 <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse">写作</a></h4>
@@ -249,7 +305,8 @@ class IndexPage extends React.Component {
                                 {/* <!-- /.progress .no-rounded --> */}
 
                             </div>
-                          </Link>
+                          </a>
+                          {/* </Link> */}
                         </div>
                         {/* <!-- end col--> */}
 
@@ -262,7 +319,8 @@ class IndexPage extends React.Component {
                     <div className="row">
 
                         <div className="col-lg-4">
-                          <Link to="/learning/math">
+                          {/* <Link to="/learning/math"> */}
+                          <a href={this.props.logined?"/learning/math":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
                             <div className="card-box project-box">
                                 {/* <div className="label label-success">Uncompleted</div> */}
                                 <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse">数学</a></h4>
@@ -284,7 +342,8 @@ class IndexPage extends React.Component {
                                 {/* <!-- /.progress .no-rounded --> */}
 
                             </div>
-                          </Link>
+                          {/* </Link> */}
+                          </a>
                         </div>
                         {/* <!-- end col--> */}
 
