@@ -24,7 +24,10 @@ class LogicLearning extends React.PureComponent {
     super( props );
   }
 
+  // componentWillMount(){
+
   componentDidMount(){
+    // this.props.setUser();
     this.props.getUserInfo();
   }
 
@@ -158,13 +161,19 @@ class LogicLearning extends React.PureComponent {
             <div className="content">
               <div className="container">
                 <div className="row">
-                {choice==0 ? <LogicTest/> :
-                 choice==1 ? <EnterLearning/> :
-                 choice==2 ? <LogicReview/> :
-                 choice==3 ? <SimulationTest/> :
-                 choice==4 ? <LogicStatistics/> :
-                  <div className="card-box"><LogicHelp/></div>
-                }
+                  {username !== "" && logined ?
+                   <div>
+                    {choice==0 ? <LogicTest/> :
+                     choice==1 ? <EnterLearning/> :
+                     choice==2 ? <LogicReview/> :
+                     choice==3 ? <SimulationTest/> :
+                     choice==4 ? <LogicStatistics/> :
+                      <div className="card-box"><LogicHelp/></div>
+                    }
+                   </div>
+                   :
+                   null}
+
                 </div>
               </div>
 

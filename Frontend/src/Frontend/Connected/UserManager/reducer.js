@@ -54,7 +54,7 @@ export default ( state = {
             logined: userid == 0 && username=="" ? false : true
             // userid : userid
           };
-          console.log(username)
+          // console.log(username)
 
     case GET_USER_INFO.rejected:
       if( payload.reason === "network" ){

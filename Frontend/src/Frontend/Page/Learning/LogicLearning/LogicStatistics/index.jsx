@@ -48,15 +48,16 @@ class LogicStatistics extends React.PureComponent{
           <div>
             {lastData.flag == 0 ? <Note info = "您还没完成入口测试，请先完成入口测试 !" onClick={()=>this.props.setSubjectFunctionSelect(0)}/>:
             <div>
-            {data.finish_xingshi == undefined || data.finish_lunzheng == undefined  || lastData.finish_xingshi == undefined || lastData.finish_lunzheng == undefined ? null :
+            {/* {data.finish_xingshi == undefined && data.finish_lunzheng == undefined  && lastData.finish_xingshi == undefined && lastData.finish_lunzheng == undefined ? null : */}
+             {data.finish_xingshi == undefined || data.finish_lunzheng == undefined  || lastData.finish_xingshi == undefined || lastData.finish_lunzheng == undefined ? null :
               <div>
-                {data.finish_xingshi.length == 0 || data.finish_lunzheng.length == 0 || lastData.finish_xingshi.length == 0 || lastData.finish_lunzheng.length == 0 ?
+                {data.finish_xingshi.length == 0 && data.finish_lunzheng.length == 0 && lastData.finish_xingshi.length == 0 && lastData.finish_lunzheng.length == 0 ?
                 <Note info = "您目前还没有学习完成的章节，请先进行学习 !" onClick={()=>this.props.setSubjectFunctionSelect(1)}/>
                 :
                 <div className="card-box">
                   <div className = {style.allChapterTongji}>
                     <div className = {style.title}>您已经完成的所有章节统计信息如下：</div><br/>
-                    <div style = {{"fontSize": "16px","lineHeight": "32px","color":"#71b6f9"}}> 形式逻辑 </div>
+                    {data.finish_xingshi.length == 0 ? null : <div style = {{"fontSize": "16px","lineHeight": "32px","color":"#71b6f9"}}> 形式逻辑 </div>}
                     {lastData.xingshi.map((oneChapter , key) =>
                       <div key = {key}>
                         <br/><li style = {{"fontSize": "16px","lineHeight": "32px"}}>{lastData.finish_xingshi[key]}</li>
@@ -105,7 +106,7 @@ class LogicStatistics extends React.PureComponent{
                       </table> */}
                       </div>
                     )} <br/>
-                    <div style = {{"fontSize": "16px","lineHeight": "32px","color":"#71b6f9"}}> 论证逻辑 </div>
+                    {data.finish_lunzheng.length == 0 ? null : <div style = {{"fontSize": "16px","lineHeight": "32px","color":"#71b6f9"}}> 论证逻辑 </div>}
                     {lastData.lunzheng.map((oneChapter , key) =>
                       <div key = {key}>
                         <br/><li style = {{"fontSize": "16px","lineHeight": "32px"}}>{lastData.finish_lunzheng[key]}</li>

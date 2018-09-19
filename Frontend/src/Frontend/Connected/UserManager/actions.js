@@ -55,7 +55,7 @@ export const getUserInfo = () => ( dispatch ) => {
       // console.log(json.data.uid),
       // console.log(json.data.uname);
       dispatch( getUserInfoSucceed( json.data.uname , json.data.uid ) )
-      console.log(username,logined,username == undefined && logined == 0 );
+      // console.log(username,logined,username == undefined && logined == 0 );
     },
     error:function(){
       console.log('error');
@@ -63,7 +63,7 @@ export const getUserInfo = () => ( dispatch ) => {
   })
   console.log(username)
 
-  dispatch( getUserInfoSucceed( "2017" ) )
+  // dispatch( getUserInfoSucceed( "2017" ) )
 
 
 
