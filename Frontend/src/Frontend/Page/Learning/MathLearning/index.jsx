@@ -9,6 +9,7 @@ import Daishu from 'Page/Learning/MathLearning/Daishu';
 import Jihe from 'Page/Learning/MathLearning/Jihe';
 import Shujufenxi from 'Page/Learning/MathLearning/Shujufenxi';
 import MathReview from 'Page/Learning/MathLearning/MathReview';
+import MathChart from 'Page/Learning/MathLearning/MathChart';
 import MathHelp from 'UI/Help/MathHelp';
 import Info from 'UI/Info';
 
@@ -233,7 +234,7 @@ class MathLearning extends React.PureComponent {
                     choice==12 ? <Jihe/> :
                     choice==13 ? <Shujufenxi/> :
                     choice==2 ? <MathReview/> :
-                    choice==3 ? <p>数据统计</p> :
+                    choice==3 ? <MathChart/> :
                     choice==4 ? <div className="card-box"><MathHelp/></div> :
                     <p>问题反馈</p>
                   }
