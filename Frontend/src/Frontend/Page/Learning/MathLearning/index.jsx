@@ -5,6 +5,7 @@ import { Prompt } from 'react-router';
 import style from 'style';
 
 import Suanshu from 'Page/Learning/MathLearning/Suanshu';
+import MathReview from 'Page/Learning/MathLearning/MathReview';
 import MathHelp from 'UI/Help/MathHelp';
 import Info from 'UI/Info';
 
@@ -228,7 +229,7 @@ class MathLearning extends React.PureComponent {
                     choice==11 ? <p>代数</p> :
                     choice==12 ? <p>几何</p> :
                     choice==13 ? <p>数据分析</p> :
-                    choice==2 ? <p>开始复习</p> :
+                    choice==2 ? <MathReview/> :
                     choice==3 ? <p>数据统计</p> :
                     choice==4 ? <div className="card-box"><MathHelp/></div> :
                     <p>问题反馈</p>
