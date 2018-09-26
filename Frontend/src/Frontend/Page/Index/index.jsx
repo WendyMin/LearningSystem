@@ -58,7 +58,7 @@ class IndexPage extends React.Component {
   componentDidMount(){
     this.props.getUserInfo();
     // this.getUserInfo();
-    this.getProgress();
+    // this.getProgress();
   }
   // componentWillReceiveProps(NextProps){
   //   console.log(NextProps)
@@ -68,14 +68,21 @@ class IndexPage extends React.Component {
   //
   // }
 
-  getProgress = () => {
+  getProgress = (userName) => {
     this.props.loadPortContent({
       url:"/api/all_getProgress",
       body:{
-        username: this.props.username,
+        username: userName,
       }
     })
   }
+  componentWillReceiveProps(NextProps){
+    if(this.props.username !== NextProps.username){
+      this.getProgress(NextProps.username)
+    }
+  }
+
+
 
   render(){
 
@@ -96,6 +103,8 @@ class IndexPage extends React.Component {
     // console.log(this.state.username != undefined && this.state.logined != 0)
     // if(this.state.username !== undefined && this.state.logined !== 0 ) {this.props.setUser(this.username,true)}
     // else this.props.setUser(this.username,this.logined);
+    // console.log(this.props.username);
+    // console.log(progress);
 
     return (
 
@@ -227,7 +236,7 @@ class IndexPage extends React.Component {
 
                                 <p className="font-600 m-b-5">Progress <span className="text-success pull-right">
                                   {
-                                    progress.length==0 ? null : <div>{parseFloat(progress.data[0]*100).toFixed(1)}%</div>
+                                    progress.length==0 ? null : <div>{parseFloat(progress.data[0]*100).toFixed(0)}%</div>
                                   }
                                 </span></p>
                                 <div className="progress progress-bar-success-alt progress-sm m-b-5">
@@ -259,7 +268,7 @@ class IndexPage extends React.Component {
 
                                 <p className="font-600 m-b-5">Progress <span className="text-primary pull-right">
                                   {
-                                    progress.length==0 ? null : <div>{progress.data[1]*100}%</div>
+                                    progress.length==0 ? null : <div>{parseFloat(progress.data[1]*100).toFixed(0)}%</div>
                                   }
                                 </span></p>
                                 <div className="progress progress-bar-primary-alt progress-sm m-b-5">
@@ -291,7 +300,7 @@ class IndexPage extends React.Component {
 
                                 <p className="font-600 m-b-5">Progress <span className="text-pink pull-right">
                                   {
-                                    progress.length==0 ? null : <div>{progress.data[2]*100}%</div>
+                                    progress.length==0 ? null : <div>{parseFloat(progress.data[2]*100).toFixed(0)}%</div>
                                   }
                                 </span></p>
                                 <div className="progress progress-bar-pink-alt progress-sm m-b-5">
@@ -330,7 +339,11 @@ class IndexPage extends React.Component {
                                     {/* <a href="#" className="font-600 text-muted">view more</a> */}
                                 </p>
 
-                                <p className="font-600 m-b-5">Progress <span className="text-custom pull-right">0%</span></p>
+                                <p className="font-600 m-b-5">Progress <span className="text-custom pull-right">
+                                  {
+                                    progress.length==0 ? null : <div>{parseFloat(progress.data[2]*100).toFixed(0)}%</div>
+                                  }
+                                </span></p>
                                 <div className="progress progress-bar-custom-alt progress-sm m-b-5">
                                     <div className="progress-bar progress-bar-custom progress-animated wow animated animated"
                                          role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
