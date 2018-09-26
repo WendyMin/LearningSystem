@@ -229,17 +229,10 @@ class MathLearning extends React.PureComponent {
                     choice==0 ? <p>入口测试</p> :
                     choice==1 ? <p>进入学习</p> :
                     choice==10 ? <Suanshu/> :
-<<<<<<< HEAD
                     choice==11 ? <Daishu/> :
                     choice==12 ? <Jihe/> :
                     choice==13 ? <Shujufenxi/> :
-                    choice==2 ? <p>开始复习</p> :
-=======
-                    choice==11 ? <p>代数</p> :
-                    choice==12 ? <p>几何</p> :
-                    choice==13 ? <p>数据分析</p> :
                     choice==2 ? <MathReview/> :
->>>>>>> dc03d36b696184ff2d4a54e69d9e3c13f0c06d4e
                     choice==3 ? <p>数据统计</p> :
                     choice==4 ? <div className="card-box"><MathHelp/></div> :
                     <p>问题反馈</p>
