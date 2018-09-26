@@ -236,7 +236,8 @@ class MathLearning extends React.PureComponent {
                     choice==2 ? <MathReview/> :
                     choice==3 ? <MathChart/> :
                     choice==4 ? <div className="card-box"><MathHelp/></div> :
-                    <p>问题反馈</p>
+                    choice==5 ? <p>问题反馈</p> :
+                    null
                   }
 
                 </div>
