@@ -218,7 +218,7 @@ class IndexPage extends React.Component {
                           <a href={this.props.logined?"/learning/english":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
                             <div className="card-box project-box">
                                 {/* <div className="label label-success">Uncompleted</div> */}
-                                <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse">英语</a></h4>
+                                <h4 className="m-t-0 m-b-5">英语</h4>
 
                                 <p className="text-success text-uppercase m-b-20 font-13">English</p>
                                 <p className={style.text_muted1}>包含阅读、汉译英，以及中考、高考、四级、六级、考研词汇。阅读目前共有80篇。
@@ -227,7 +227,7 @@ class IndexPage extends React.Component {
 
                                 <p className="font-600 m-b-5">Progress <span className="text-success pull-right">
                                   {
-                                    progress.length==0 ? null : <div>{progress.data[0]*100}%</div>
+                                    progress.length==0 ? null : <div>{parseFloat(progress.data[0]*100).toFixed(1)}%</div>
                                   }
                                 </span></p>
                                 <div className="progress progress-bar-success-alt progress-sm m-b-5">
@@ -250,7 +250,7 @@ class IndexPage extends React.Component {
                           {/* <Link to="/learning/logic"> */}
                             <div className="card-box project-box">
                                 {/* <div className="label label-primary">Uncompleted</div> */}
-                                <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse"> 逻辑</a></h4>
+                                <h4 className="m-t-0 m-b-5">逻辑</h4>
                                 <p className="text-primary text-uppercase m-b-20 font-13">Logic</p>
                                 <p className={style.text_muted1}>包含形式逻辑和论证逻辑。其中形式逻辑包括词项逻辑、演绎推理、逻辑应用、命题逻辑、逻辑语言，论证逻辑包括归纳逻辑、假设、削弱、推论、比较、综合、支持、评价、解释、描述，共15章，1600道题。
                                      {/* <a href="#" className="font-600 text-muted">view more</a> */}
@@ -282,7 +282,7 @@ class IndexPage extends React.Component {
                           <a href={this.props.logined?"/learning/writing":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
                             <div className="card-box project-box">
                                 {/* <div className="label label-pink">Uncompleted</div> */}
-                                <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse">写作</a></h4>
+                                <h4 className="m-t-0 m-b-5">写作</h4>
                                 <p className="text-pink text-uppercase m-b-20 font-13">Writing</p>
                                 <p className={style.text_muted1}>写作包括论证有效性分析和论说文两部分，含有近十来年真题，其中论证巩固22篇，论证真题8篇，论说巩固19篇，论说真题8篇。
                                     {/* <a href="#" className="font-600 text-muted">view more</a> */}
@@ -323,7 +323,7 @@ class IndexPage extends React.Component {
                           <a href={this.props.logined?"/learning/math":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
                             <div className="card-box project-box">
                                 {/* <div className="label label-success">Uncompleted</div> */}
-                                <h4 className="m-t-0 m-b-5"><a href="" className="text-inverse">数学</a></h4>
+                                <h4 className="m-t-0 m-b-5">数学</h4>
 
                                 <p className="text-custom text-uppercase m-b-20 font-13">Math</p>
                                 <p className={style.text_muted1}>包含算术、代数、几何、数据分析。其中每一部分都划分为了若干章节，每一章节又细分成了各个知识点。
