@@ -154,13 +154,25 @@ class MathLearning extends React.PureComponent {
                     <li className="has_sub">
                         <a href="javascript:void(0);"
                            className={choice==1||choice==10||choice==11||choice==12||choice==13?"waves-effect subdrop":"waves-effect"}
-                           onClick={()=>{choice==1||choice==10||choice==11||choice==12||choice==13?this.props.setSubjectFunctionSelect(""):this.props.setSubjectFunctionSelect(1)}}
+                           onClick={()=>{this.setState({showLearningType: !this.state.showLearningType})}}
+                           // onClick={()=>{choice==1||choice==10||choice==11||choice==12||choice==13?this.props.setSubjectFunctionSelect(""):this.props.setSubjectFunctionSelect(1)}}
                         >
                           <i className="zmdi zmdi-library"></i>
                           <span> 进入学习 </span>
                           <span className="menu-arrow"></span>
                         </a>
-                        <ul className="list-unstyled" style={choice==1||choice==10||choice==11||choice==12||choice==13?{"display":"block"}:null}>
+                        {this.state.showLearningType ?
+                         <ul className="list-unstyled" style={{"display":"block"}}>
+                            {/* <li><a href="javascript:void(0);">算术</a></li>
+                            <li><a href="javascript:void(0);">代数</a></li>
+                            <li><a href="javascript:void(0);">几何</a></li>
+                            <li><a href="javascript:void(0);">数据分析</a></li> */}
+                              <li><a onClick={()=>this.props.setSubjectFunctionSelect(10)}>算术</a></li>
+                              <li><a onClick={()=>this.props.setSubjectFunctionSelect(11)}>代数</a></li>
+                              <li><a onClick={()=>this.props.setSubjectFunctionSelect(12)}>几何</a></li>
+                              <li><a onClick={()=>this.props.setSubjectFunctionSelect(13)}>数据分析</a></li>
+                        </ul>:
+                        <ul className="list-unstyled" style={null}>
                           {/* <li><a href="javascript:void(0);">算术</a></li>
                           <li><a href="javascript:void(0);">代数</a></li>
                           <li><a href="javascript:void(0);">几何</a></li>
@@ -170,6 +182,13 @@ class MathLearning extends React.PureComponent {
                             <li><a onClick={()=>this.props.setSubjectFunctionSelect(12)}>几何</a></li>
                             <li><a onClick={()=>this.props.setSubjectFunctionSelect(13)}>数据分析</a></li>
                         </ul>
+                        }
+                        {/* <ul className="list-unstyled" style={choice==1||choice==10||choice==11||choice==12||choice==13?{"display":"block"}:null}>
+                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(10)}>算术</a></li>
+                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(11)}>代数</a></li>
+                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(12)}>几何</a></li>
+                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(13)}>数据分析</a></li>
+                        </ul> */}
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(2)}>
