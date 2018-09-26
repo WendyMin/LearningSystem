@@ -5,13 +5,10 @@ import { Prompt } from 'react-router';
 import style from 'style';
 
 import Suanshu from 'Page/Learning/MathLearning/Suanshu';
-<<<<<<< HEAD
 import Daishu from 'Page/Learning/MathLearning/Daishu';
 import Jihe from 'Page/Learning/MathLearning/Jihe';
 import Shujufenxi from 'Page/Learning/MathLearning/Shujufenxi';
-=======
 import MathReview from 'Page/Learning/MathLearning/MathReview';
->>>>>>> dc03d36b696184ff2d4a54e69d9e3c13f0c06d4e
 import MathHelp from 'UI/Help/MathHelp';
 import Info from 'UI/Info';
 
