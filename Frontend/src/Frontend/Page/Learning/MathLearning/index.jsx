@@ -28,6 +28,9 @@ var sha1 = require('sha1');
 class MathLearning extends React.PureComponent {
   constructor( props ){
     super( props );
+    this.state = {
+      showLearningType: false
+    }
   }
 
   componentDidMount(){
@@ -228,7 +231,7 @@ class MathLearning extends React.PureComponent {
                     // <div className="card-box"><EnglishHelp/></div>
 
                     choice==0 ? <p>入口测试</p> :
-                    choice==1 ? <p>进入学习</p> :
+                    // choice==1 ? <p>进入学习</p> :
                     choice==10 ? <Suanshu/> :
                     choice==11 ? <Daishu/> :
                     choice==12 ? <Jihe/> :
