@@ -34,7 +34,8 @@ class EngTest extends React.PureComponent {
       testAgain: false,
       newEnterTest: false,
       enterTestSure: false,
-    }
+    },
+    this.submit =  false
   }
 
   componentDidMount(){
@@ -47,12 +48,11 @@ class EngTest extends React.PureComponent {
       this.getUserRate(NextProps.username);
     }
     if(this.props.testend == false && NextProps.testend == true){
-      this.getUserLevel(this.props.username);
-       this.getUserRate(this.props.username);
+      // this.getUserLevel(this.props.username);
+      //  this.getUserRate(this.props.username);
       this.recordTestLevel();
       this.recordTestWords()
     }
-
   }
 
   loadTest = () => {
@@ -79,7 +79,12 @@ class EngTest extends React.PureComponent {
         rightwords: WordsToString(this.props.rightwords),
         wrongwords: WordsToString(this.props.wrongwords)
       }
-    })
+    });
+    this.submit = true;
+    if(this.submit) {
+      this.getUserLevel(this.props.username);
+       this.getUserRate(this.props.username);
+    }
   }
 
   getUserLevel = ( username ) => {
@@ -123,7 +128,7 @@ class EngTest extends React.PureComponent {
       enterTestSure,
     } = this.state;
 
-    // console.log(this.props.username);
+    console.log(rate);
 
     return(
       <React.Fragment>
