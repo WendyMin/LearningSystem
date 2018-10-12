@@ -128,7 +128,7 @@ class EngTest extends React.PureComponent {
       enterTestSure,
     } = this.state;
 
-    console.log(rate);
+    // console.log(rate);
 
     return(
       <React.Fragment>
