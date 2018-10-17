@@ -34,21 +34,24 @@ class EngTest extends React.PureComponent {
       testAgain: false,
       newEnterTest: false,
       enterTestSure: false,
-    }
+    },
+    this.submit =  false
   }
 
   componentDidMount(){
-    this.getUserLevel();
-    this.getUserRate();
     this.loadTest();
   }
 
   componentWillReceiveProps( NextProps ){
+    if( this.props.username == undefined && NextProps.username != undefined ){
+      this.getUserLevel(NextProps.username);
+      this.getUserRate(NextProps.username);
+    }
     if(this.props.testend == false && NextProps.testend == true){
+      // this.getUserLevel(this.props.username);
+      //  this.getUserRate(this.props.username);
       this.recordTestLevel();
       this.recordTestWords()
-      this.getUserLevel();
-      this.getUserRate();
     }
   }
 
@@ -76,23 +79,28 @@ class EngTest extends React.PureComponent {
         rightwords: WordsToString(this.props.rightwords),
         wrongwords: WordsToString(this.props.wrongwords)
       }
-    })
+    });
+    this.submit = true;
+    if(this.submit) {
+      this.getUserLevel(this.props.username);
+       this.getUserRate(this.props.username);
+    }
   }
 
-  getUserLevel = () => {
+  getUserLevel = ( username ) => {
     this.props.getLevel({
       url:"/api/eng_getLevel",
       body:{
-        username: this.props.username,
+        username: username,
       }
     })
   }
 
-  getUserRate = () => {
+  getUserRate = ( username ) => {
     this.props.getRate({
       url:"/api/eng_getWordTestRate",
       body:{
-        username: this.props.username,
+        username: username,
       }
     })
   }
@@ -120,7 +128,7 @@ class EngTest extends React.PureComponent {
       enterTestSure,
     } = this.state;
 
-    // console.log(rightwords);
+    // console.log(rate);
 
     return(
       <React.Fragment>
