@@ -42,19 +42,7 @@ class EnglishLearning extends React.PureComponent {
       learningType,
     } = this.props;
 
-    // console.log(username);
-
-    // var user = sessionStorage.getItem("user");
-    // if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" ){
-    //   <Login/>
-    // }
-    // else{
-    //   this.props.setUser(user,true);
-    //   sessionStorage.setItem("user",user);
-    // }
-
     return (
-
       <React.Fragment>
         <div id="wrapper">
           <div className="topbar">
@@ -107,18 +95,12 @@ class EnglishLearning extends React.PureComponent {
 
                 <div className="user-box">
                   <div className="user-img">
-                   <img src="/static/images/users/avatar-1.jpg" alt="user-img" title={this.props.username} className="img-circle img-thumbnail img-responsive"/>
+                   <img src="/static/images/users/avatar-1.jpg" alt="user-img" title={this.props.userid} className="img-circle img-thumbnail img-responsive"/>
                    <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
                   </div>
-                  <h5>{this.props.username}</h5>
+                  <h5>{this.props.userid}</h5>
 
                   <ul className="list-inline">
-                   {/* <li>
-                     <a href="#" >
-                       <i className="zmdi zmdi-settings"></i>
-                     </a>
-                   </li> */}
-
                    <li>
                      <a className="text-custom"
                         onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
@@ -126,9 +108,6 @@ class EnglishLearning extends React.PureComponent {
                         >
                        <i className="zmdi zmdi-power"></i>
                      </a>
-                     {/* <a href="#" className="text-custom">
-                       <i className="zmdi zmdi-power"></i>
-                     </a> */}
                    </li>
                   </ul>
                 </div>
@@ -172,9 +151,6 @@ class EnglishLearning extends React.PureComponent {
                       </a>
                     </li>
 
-                    {/* <li>
-                      <a href="javascript:void(0);" className="waves-effect"><i className="zmdi zmdi-phone"></i><span onClick={()=>this.props.setSubjectFunctionSelect(6)}> 反馈信息 </span> </a>
-                    </li> */}
 
                   </ul>
                  <div className="clearfix"></div>
@@ -228,15 +204,14 @@ export default applyHOCs([
   makePage,
   connect(
     state => ({
-      logined: state.UserManager.logined,
       username: state.UserManager.name,
+      userid: state.UserManager.id,
+      logined: state.UserManager.logined,
       newTo: state.UserManager.newTo,
-      // choice: state.SubjectSelect.choice
       choice: state.SubjectFunctionSelect.choice,
       learningType: state.LearningTypeSelect.learningType,
     }),
     dispatch => ({
-      //...bindActionCreators( ButtonExpandActions , dispatch),
       ...bindActionCreators( UserManagerActions , dispatch ),
       ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),

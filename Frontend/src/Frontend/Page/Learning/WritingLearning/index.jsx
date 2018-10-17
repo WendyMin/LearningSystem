@@ -30,16 +30,6 @@ class WritingPage extends React.PureComponent {
       choice
     } = this.props;
 
-    // var user = sessionStorage.getItem("user");
-    // if(sessionStorage.getItem("user") == "undefined" || sessionStorage.getItem("user") == "" || sessionStorage.getItem("user") == null){
-    //   // <Login/>
-    // }
-    // else{
-    //   this.props.setUser(user , true);
-    //   sessionStorage.setItem("user",user);
-    //   //console.log(sessionStorage.getItem("user"))
-    // }
-
     return (
       <React.Fragment>
         <div id="wrapper">
@@ -108,15 +98,9 @@ class WritingPage extends React.PureComponent {
                     <img src="/static/images/users/avatar-1.jpg" alt="user-img" title="Mat Helme" className="img-circle img-thumbnail img-responsive"/>
                     <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
                  </div>
-                 <h5><a href="#">{this.props.username}</a> </h5>
+                 <h5><a href="#">{this.props.userid}</a> </h5>
 
                  <ul className="list-inline">
-                    {/* <li>
-                      <a href="#" >
-                        <i className="zmdi zmdi-settings"></i>
-                      </a>
-                    </li> */}
-
                     <li>
                       <a className="text-custom"
                          onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
@@ -185,8 +169,9 @@ export default applyHOCs([
   makePage,
   connect(
     state => ({
-      logined: state.UserManager.logined,
       username: state.UserManager.name,
+      userid: state.UserManager.id,
+      logined: state.UserManager.logined,
       choice: state.SubjectFunctionSelect.choice,  // 代表用户选择的左侧导航栏的按钮，是选择了进入学习还是查看帮助
       learningType: state.LearningTypeSelect.learningType, // 代表用户选择的是论证或论说的哪一项功能，是写作技巧精讲还是巩固还是真题等
       type: state.ButtonExpand.choice // 代表用户具体选择的是哪一个小知识点或者具体哪一年的真题

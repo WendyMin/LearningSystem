@@ -107,10 +107,10 @@ class MathLearning extends React.PureComponent {
 
                 <div className="user-box">
                   <div className="user-img">
-                   <img src="/static/images/users/avatar-1.jpg" alt="user-img" title={this.props.username} className="img-circle img-thumbnail img-responsive"/>
+                   <img src="/static/images/users/avatar-1.jpg" alt="user-img" title={this.props.userid} className="img-circle img-thumbnail img-responsive"/>
                    <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
                   </div>
-                  <h5>{this.props.username}</h5>
+                  <h5>{this.props.userid}</h5>
 
                   <ul className="list-inline">
                    {/* <li>
@@ -219,10 +219,6 @@ class MathLearning extends React.PureComponent {
                       </a>
                     </li>
 
-                    {/* <li>
-                      <a href="javascript:void(0);" className="waves-effect"><i className="zmdi zmdi-phone"></i><span onClick={()=>this.props.setSubjectFunctionSelect(6)}> 反馈信息 </span> </a>
-                    </li> */}
-
                   </ul>
                  <div className="clearfix"></div>
                 </div>
@@ -243,12 +239,6 @@ class MathLearning extends React.PureComponent {
                 <div className="row">
 
                   {
-                    // choice==0 ? <EngTest/> :
-                    // choice==1 ? <EngLearningTypeSelect/> :
-                    // choice==2 ? <EngReview/> :
-                    // choice==3 ? <EngChart/> :
-                    // <div className="card-box"><EnglishHelp/></div>
-
                     choice==0 ? <p>入口测试</p> :
                     // choice==1 ? <p>进入学习</p> :
                     choice==10 ? <Suanshu/> :
@@ -287,9 +277,12 @@ export default applyHOCs([
   makePage,
   connect(
     state => ({
-      logined: state.UserManager.logined,
       username: state.UserManager.name,
-      newTo: state.UserManager.newTo,
+      userid: state.UserManager.id,
+      logined: state.UserManager.logined,
+      // logined: state.UserManager.logined,
+      // username: state.UserManager.name,
+      // newTo: state.UserManager.newTo,
       choice: state.SubjectFunctionSelect.choice,
       learningType: state.LearningTypeSelect.learningType,
     }),

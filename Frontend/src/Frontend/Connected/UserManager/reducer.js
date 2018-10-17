@@ -9,6 +9,7 @@ export default ( state = {
     logining: false,
     rememberPassword: false,
     name: '',
+    id: '',
     token: '',
     uid: 0,
     password: '',
@@ -44,15 +45,18 @@ export default ( state = {
 
     case GET_USER_INFO.resolved:
       let { username , userid } = payload;
+      console.log(username,userid)
       // switch( payload.response.state ){
       // switch( payload.response ){
         // case "success":
 
           return {
             ...state,
-            name: username ,
+            name: userid ,
+            id : username ,
+            // name: username ,
+            // userid : userid ,
             logined: userid == 0 && username=="" ? false : true
-            // userid : userid
           };
           // console.log(username)
 

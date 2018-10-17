@@ -16,57 +16,11 @@ var sha1 = require('sha1');
 class IndexPage extends React.Component {
   constructor( props ){
     super( props );
-    // this.username = "";
-    // this.logined = "";
-    // // this.whetherGotUserInfo = false;
-    // this.state = {
-    // //   username: "",
-    // //   logined: ""
-    //   whetherGotUserInfo:false
-    // }
   }
-
-  // getUserInfo = () => {
-  //   $.ajax({
-  //     type:"get",
-  //     url:'http://www.doxue.com/app/get_user',
-  //     dataType:"jsonp",
-  //     success:function(json){
-  //       // console.log(json),
-  //       // console.log(json.data.uid),
-  //       // console.log(json.data.uname);
-  //       // this.state.username = json.data.uname;
-  //       // this.state.logined = json.data.uid;
-  //       // console.log(this.state.username,this.state.logined,this.state.username == undefined && this.state.logined == 0 );
-  //       this.username = json.data.uname;
-  //       this.logined = json.data.uid;
-  //       console.log(this.username,this.logined,this.username == undefined && this.logined == 0 );
-  //     },
-  //     error:function(){
-  //       console.log('error');
-  //     }
-  //   })
-  //   // this.whetherGotUserInfo = true;
-  //   this.setState({whetherGotUserInfo: true})
-    // console.log(this.username)
-    // if(this.whetherGotUserInfo) this.props.setUser(this.username,this.logined)
-    // console.log(this.username,this.logined);
-    // if(this.username == undefined && this.logined == 0 ) {this.props.setUser(this.username,false)}
-    // else this.props.setUser(this.username,this.logined);
-  // }
 
   componentDidMount(){
     this.props.getUserInfo();
-    // this.getUserInfo();
-    // this.getProgress();
   }
-  // componentWillReceiveProps(NextProps){
-  //   console.log(NextProps)
-  //   if(this.props.username !== NextProps.username || this.props.logined !== NextProps.logined){
-  //     this.props.setUser(NextProps.username,NextProps.logined)
-  //   }
-  //
-  // }
 
   getProgress = (userName) => {
     this.props.loadPortContent({
@@ -92,19 +46,7 @@ class IndexPage extends React.Component {
       choice,
       progress,
     } = this.props;
-    // console.log(this.username)
-    // if(this.state.whetherGotUserInfo ) {this.props.setUser(this.username,true)}
-
-    // else this.props.setUser(this.username,this.logined);
-    // this.getUserInfo();
-    // console.log(this.state.username,this.state.logined,this.state.username == undefined && this.state.logined == 0 );
-    // console.log(this.state.username != undefined)
-    // console.log(this.state.logined !=0)
-    // console.log(this.state.username != undefined && this.state.logined != 0)
-    // if(this.state.username !== undefined && this.state.logined !== 0 ) {this.props.setUser(this.username,true)}
-    // else this.props.setUser(this.username,this.logined);
-    // console.log(this.props.username);
-    // console.log(progress);
+    console.log(this.props.userid)
 
     return (
 
@@ -149,10 +91,10 @@ class IndexPage extends React.Component {
 
                 <div className="user-box">
                   <div className="user-img">
-                   <img src="/static/images/users/avatar-1.jpg" alt="user-img" title={this.props.username} className="img-circle img-thumbnail img-responsive"/>
+                   <img src="/static/images/users/avatar-1.jpg" alt="user-img" title={this.props.userid} className="img-circle img-thumbnail img-responsive"/>
                    <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
                   </div>
-                  <h5>{this.props.username}</h5>
+                  <h5>{this.props.logined ? <div>{this.props.userid}</div>:null}</h5>
 
                   <ul className="list-inline">
 
@@ -329,34 +271,37 @@ class IndexPage extends React.Component {
 
                         <div className="col-lg-4">
                           {/* <Link to="/learning/math"> */}
-                          <a href={this.props.logined?"/learning/math":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
+                          {/* <a href={this.props.logined?"/learning/math":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}> */}
                             <div className="card-box project-box">
                                 {/* <div className="label label-success">Uncompleted</div> */}
                                 <h4 className="m-t-0 m-b-5">数学</h4>
 
                                 <p className="text-custom text-uppercase m-b-20 font-13">Math</p>
-                                <p className={style.text_muted1}>包含算术、代数、几何、数据分析。其中每一部分都划分为了若干章节，每一章节又细分成了各个知识点。
+                                {/* <p className={style.text_muted1}>包含算术、代数、几何、数据分析。其中每一部分都划分为了若干章节，每一章节又细分成了各个知识点。
+                                    <a href="#" className="font-600 text-muted">view more</a>
+                                </p> */}
+                                <p className={style.text_muted1}>正在测试中，敬请期待...
                                     {/* <a href="#" className="font-600 text-muted">view more</a> */}
                                 </p>
 
                                 <p className="font-600 m-b-5">Progress <span className="text-custom pull-right">
-                                  {
+                                  {/* {
                                     progress.length==0 ? null : <div>{parseFloat(progress.data[2]*100).toFixed(0)}%</div>
-                                  }
+                                  } */}
+                                  <div>0%</div>
                                 </span></p>
                                 <div className="progress progress-bar-custom-alt progress-sm m-b-5">
                                     <div className="progress-bar progress-bar-custom progress-animated wow animated animated"
                                          role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
-                                         // style="width: 45%;"
                                          >
                                     </div>
-                                    {/* <!-- /.progress-bar .progress-bar-danger --> */}
+
                                 </div>
-                                {/* <!-- /.progress .no-rounded --> */}
+
 
                             </div>
                           {/* </Link> */}
-                          </a>
+                          {/* </a> */}
                         </div>
                         {/* <!-- end col--> */}
 
@@ -370,8 +315,6 @@ class IndexPage extends React.Component {
                   choice==2 ? <p>查看帮助</p> :
                   <p>问题反馈</p>
                 }
-
-                {/* </div> */}
 
               </div>
 
@@ -400,12 +343,14 @@ export default applyHOCs([
   connect(
     state => ({
       logined: state.UserManager.logined,
-      username: state.UserManager.name,
+      // username: state.UserManager.name,
+      // userid: state.UserManager.userid,
+      username: state.UserManager.name,  // username 实际代表用户的 id
+      userid: state.UserManager.id,  // userid 实际代表用户的 name
       choice: state.SubjectFunctionSelect.choice,
       progress: state.PortTest.content,
     }),
     dispatch => ({
-      //...bindActionCreators( ButtonExpandActions , dispatch),
       ...bindActionCreators( UserManagerActions , dispatch ),
       ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
       ...bindActionCreators( PortTestActions , dispatch),

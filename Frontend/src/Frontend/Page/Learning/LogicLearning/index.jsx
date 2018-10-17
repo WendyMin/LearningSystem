@@ -24,10 +24,7 @@ class LogicLearning extends React.PureComponent {
     super( props );
   }
 
-  // componentWillMount(){
-
   componentDidMount(){
-    // this.props.setUser();
     this.props.getUserInfo();
   }
 
@@ -96,10 +93,10 @@ class LogicLearning extends React.PureComponent {
 
                 <div className="user-box">
                 <div className="user-img">
-                 <img src="/static/images/users/avatar-1.jpg" alt="user-img" title={this.props.username} className="img-circle img-thumbnail img-responsive"/>
+                 <img src="/static/images/users/avatar-1.jpg" alt="user-img" title={this.props.userid} className="img-circle img-thumbnail img-responsive"/>
                  <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
                 </div>
-                <h5>{this.props.username}</h5>
+                <h5>{this.props.userid}</h5>
 
                 <ul className="list-inline">
 
@@ -110,9 +107,6 @@ class LogicLearning extends React.PureComponent {
                       >
                      <i className="zmdi zmdi-power"></i>
                    </a>
-                   {/* <a href="#" className="text-custom">
-                     <i className="zmdi zmdi-power"></i>
-                   </a> */}
                  </li>
                 </ul>
                 </div>
@@ -197,8 +191,9 @@ export default applyHOCs([
    makePage,
   connect(
     state => ({
-      logined: state.UserManager.logined,
       username: state.UserManager.name,
+      userid: state.UserManager.id,
+      logined: state.UserManager.logined,
       choice: state.SubjectFunctionSelect.choice,  // 代表用户选择的左侧导航栏的按钮，是选择了入口测试、进入学习还是等
       learningType: state.LearningTypeSelect.learningType, // 三级按钮，代表具体某一章的类型，如是知识点精要还是重点，强化等
       type: state.ButtonExpand.choice, // 代表用户具体选择的是哪一个小知识点或者具体哪一年的真题
