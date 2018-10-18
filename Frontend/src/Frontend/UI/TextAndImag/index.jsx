@@ -27,7 +27,8 @@ class TextAndImag extends React.PureComponent {
 
   render(){
     const { list , showBigImg } = this.props;
-    var str = "http://59.110.23.212/LearningSystem";
+    // var str = "http://59.110.23.212/LearningSystem";
+    var str = "http://39.106.175.128/LearningSystem";
 
     return(
       <div>

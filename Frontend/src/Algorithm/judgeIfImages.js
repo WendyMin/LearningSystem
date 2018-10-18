@@ -1,6 +1,7 @@
 function judgeIfImages(para , name2 , name3){
   //console.log(name2);
-  var str = "http://59.110.23.212/LearningSystem";
+  // var str = "http://59.110.23.212/LearningSystem";
+  var str = "http://39.106.175.128/LearningSystem";
   var max_length = name2.length;
   if( name3.length > max_length ) {
     max_length = name3.length;
