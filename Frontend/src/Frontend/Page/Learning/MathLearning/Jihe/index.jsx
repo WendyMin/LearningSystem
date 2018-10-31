@@ -19,6 +19,7 @@ import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFuncti
 class Jihe extends React.PureComponent {
   constructor( props ){
     super( props );
+    this.pingMian = ["示例1"];
     const {
       setLearningType,
       learningType,
@@ -34,8 +35,69 @@ class Jihe extends React.PureComponent {
 
     return(
       <React.Fragment>
+        <div className="col-md-4">
+          <div className="card-box taskboard-box">
 
-        <div className="col-md-4" >
+            <h4 className="header-title m-t-0 m-b-30 text-warning">平面几何</h4>
+            {this.pingMian.map(( oneName , key ) =>
+              <ul className="list-unstyled task-list" id="drag-upcoming" key = {key}>
+                <li>
+                    <div className="card-box kanban-box">
+                        <div className="kanban-detail" onClick = {() => {setButtonChoice(oneName);this.loadMobanContent( oneName );this.setState({typeSelect:false})}}>
+                            <span className="label label-danger pull-right">Begin</span>
+                            <h4><a //onClick = {() => {setButtonChoice(oneName);this.loadZhentiContent( oneName );this.setState({zhenTiSelect:false})}}
+                            >{oneName}</a> </h4>
+                        </div>
+                     </div>
+                </li>
+              </ul>
+            )}
+
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="card-box taskboard-box">
+
+            <h4 className="header-title m-t-0 m-b-30 text-warning">解析几何</h4>
+            {this.pingMian.map(( oneName , key ) =>
+              <ul className="list-unstyled task-list" id="drag-upcoming" key = {key}>
+                <li>
+                    <div className="card-box kanban-box">
+                        <div className="kanban-detail" onClick = {() => {setButtonChoice(oneName);this.loadMobanContent( oneName );this.setState({typeSelect:false})}}>
+                            <span className="label label-danger pull-right">Begin</span>
+                            <h4><a //onClick = {() => {setButtonChoice(oneName);this.loadZhentiContent( oneName );this.setState({zhenTiSelect:false})}}
+                            >{oneName}</a> </h4>
+                        </div>
+                     </div>
+                </li>
+              </ul>
+            )}
+
+          </div>
+        </div>
+
+        <div className="col-md-4">
+          <div className="card-box taskboard-box">
+
+            <h4 className="header-title m-t-0 m-b-30 text-warning">立体几何</h4>
+            {this.pingMian.map(( oneName , key ) =>
+              <ul className="list-unstyled task-list" id="drag-upcoming" key = {key}>
+                <li>
+                    <div className="card-box kanban-box">
+                        <div className="kanban-detail" onClick = {() => {setButtonChoice(oneName);this.loadMobanContent( oneName );this.setState({typeSelect:false})}}>
+                            <span className="label label-danger pull-right">Begin</span>
+                            <h4><a //onClick = {() => {setButtonChoice(oneName);this.loadZhentiContent( oneName );this.setState({zhenTiSelect:false})}}
+                            >{oneName}</a> </h4>
+                        </div>
+                     </div>
+                </li>
+              </ul>
+            )}
+
+          </div>
+        </div>
+
+        {/* <div className="col-md-4" >
           <div className="card-box kanban-box">
             <div className="kanban-detail">
                 <span className="label label-primary pull-right">Unfinish</span>
@@ -57,9 +119,9 @@ class Jihe extends React.PureComponent {
                 </ul>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="col-md-4" >
+        {/* <div className="col-md-4" >
           <div className="card-box kanban-box">
             <div className="kanban-detail">
                 <span className="label label-primary pull-right">Unfinish</span>
@@ -81,9 +143,9 @@ class Jihe extends React.PureComponent {
                 </ul>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="col-md-4" >
+        {/* <div className="col-md-4" >
           <div className="card-box kanban-box">
             <div className="kanban-detail">
                 <span className="label label-primary pull-right">Unfinish</span>
@@ -105,7 +167,7 @@ class Jihe extends React.PureComponent {
                 </ul>
             </div>
           </div>
-        </div>
+        </div> */}
 
 
       </React.Fragment>

@@ -25,6 +25,8 @@ import { reducer as LogicTestTongji } from 'Connected/LogicTestTongji';
 import { reducer as EditText } from 'Connected/EditText';
 import { reducer as ViewFinishedText } from 'Connected/ViewFinishedText';
 import { reducer as LogicState } from 'Connected/LogicState';
+import { reducer as MathGetKnowledge } from 'Connected/MathGetKnowledge';
+
 //import { reducer as ... } from 'Connected/...';
 
 export default {

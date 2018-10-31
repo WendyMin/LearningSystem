@@ -65,6 +65,8 @@ class UITest extends React.PureComponent {
         {/* <a href={"https://passport.doxue.com/login?redirect_url=59.110.23.212&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>登录测试</a> */}
 
         <div>ui</div>
+        <div>{"\"\\u7ec4\\u5408\\u4e0e\\u7ec4\\u5408\\u6570\""}</div>
+        <div>{"\u7ec4\u5408\u4e0e\u7ec4\u5408\u6570","\u7ec4\u5408\u516c\u5f0f","\u5e38\u89c1\u7c7b\u578b","\u6478\u7403\u95ee\u9898","\u4e8b\u4ef6\u7684\u6982\u7387\u8fd0\u7b97","\u6982\u7387\u7684\u6027\u8d28"}</div>
 
       </React.Fragment>
     )
