@@ -14,9 +14,10 @@ import applyHOCs from 'direct-core/applyHOCs';
 
 import { actions as PortTestActions } from 'Connected/PortTest';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
-import EngLearningTypeSelect from 'Page/Learning/EnglishLearning/EngLearningTypeSelect';
+import MathLearningTypeSelect from 'Page/Learning/MathLearning/MathLearningTypeSelect';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import { actions as ButtonExpandActions } from 'Connected/ButtonExpand';
+import { actions as MathGetKnowledgeActions } from 'Connected/MathGetKnowledge';
 
 class Suanshu extends React.PureComponent {
   constructor( props ){
@@ -31,6 +32,18 @@ class Suanshu extends React.PureComponent {
       setLearningType,
       learningType,
     } = this.props;
+  }
+
+  getMathKnowledge = () => {
+    this.props.loadMathKnowledge({
+      url: "/api/MathGetKnowledge",
+      body: {
+        type: "suanshu",
+        chapter_name: "zhengshu",
+        title: "zheng"
+      }
+    })
+
   }
 
   render(){
@@ -54,7 +67,7 @@ class Suanshu extends React.PureComponent {
                   <li>
                       <div className="card-box kanban-box">
                           <div className="kanban-detail"
-                            onClick = {() => this.setState({showChapter: false , showKnowledge: true})}
+                            onClick = {() => {this.getMathKnowledge() ; this.setState({showChapter: false , showKnowledge: true})}}
                             //onClick = {() => {setButtonChoice(oneName);this.loadZhaocuoContent( oneName );this.setState({typeSelect:false})}}
                             >
                               <span className="label label-danger pull-right">Begin</span>
@@ -183,7 +196,7 @@ class Suanshu extends React.PureComponent {
         </div>
         :
         this.state.showKnowledge ?
-        <MathKnowledge chapterNum = {this.chapterNum} knowledgeNum = {this.knowledgeNum}/>
+        <MathLearningTypeSelect chapterNum = {this.chapterNum} knowledgeNum = {this.knowledgeNum}/>
         :
         null
 
@@ -212,12 +225,14 @@ export default applyHOCs([
       // content: state.PortTest.content,
       choice: state.SubjectFunctionSelect.choice,
       learningType: state.LearningTypeSelect.learningType,
+      content: state.MathGetKnowledge.content
     }),
     dispatch => ({
       ...bindActionCreators( PortTestActions , dispatch),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
       ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
-      ...bindActionCreators( ButtonExpandActions , dispatch )
+      ...bindActionCreators( ButtonExpandActions , dispatch ),
+      ...bindActionCreators( MathGetKnowledgeActions , dispatch )
     })
   )],
   Suanshu

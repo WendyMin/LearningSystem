@@ -82,7 +82,7 @@ class Daishu extends React.PureComponent {
         <div className="col-md-4">
           <div className="card-box taskboard-box">
 
-            <h4 className="header-title m-t-0 m-b-30 text-warning">整式与分式</h4>
+            <h4 className="header-title m-t-0 m-b-30 text-success">整式与分式</h4>
             {this.zhengShiYuFenShi.map(( oneName , key ) =>
               <ul className="list-unstyled task-list" id="drag-upcoming" key = {key}>
                 <li>

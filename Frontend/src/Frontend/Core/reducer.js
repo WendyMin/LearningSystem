@@ -56,5 +56,6 @@ export default {
   EditText: EditText,
   ViewFinishedText: ViewFinishedText,
   LogicState: LogicState,
+  MathGetKnowledge: MathGetKnowledge
   //others
 };

@@ -1,42 +1,42 @@
 import {
-  __ASYNC_LOAD_WRITE_KNOWLEDGE
+  __ASYNC_LOAD_MATH_KNOWLEDGE
 } from 'actionTypes';
 
 
-let loadWriteKnowledgeCounter = 0;
-const loadWriteKnowledgeStart = () => ({
-    type: __ASYNC_LOAD_WRITE_KNOWLEDGE.pending,
+let loadMathKnowledgeCounter = 0;
+const loadMathKnowledgeStart = () => ({
+    type: __ASYNC_LOAD_MATH_KNOWLEDGE.pending,
     payload: {
 
     },
-    id: loadWriteKnowledgeCounter
+    id: loadMathKnowledgeCounter
 });
-const loadWriteKnowledgeResolved = ( response , initState ) => ({
-    type: __ASYNC_LOAD_WRITE_KNOWLEDGE.resolved,
+const loadMathKnowledgeResolved = ( response , initState ) => ({
+    type: __ASYNC_LOAD_MATH_KNOWLEDGE.resolved,
     payload: {
       response,
       initState
     },
-    id: loadWriteKnowledgeCounter
+    id: loadMathKnowledgeCounter
 });
-const loadWriteKnowledgeRejected = ( reason , detail ) => ({
-    type: __ASYNC_LOAD_WRITE_KNOWLEDGE.rejected,
+const loadMathKnowledgeRejected = ( reason , detail ) => ({
+    type: __ASYNC_LOAD_MATH_KNOWLEDGE.rejected,
     payload: {
       reason,
       detail
     },
-    id: loadWriteKnowledgeCounter
+    id: loadMathKnowledgeCounter
 });
 
 
-export const loadWriteKnowledge = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
-    const reqId = ++loadWriteKnowledgeCounter;
+export const loadMathKnowledge = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+    const reqId = ++loadMathKnowledgeCounter;
     const dispatchLastest = action => {
-      if( reqId === loadWriteKnowledgeCounter ){
+      if( reqId === loadMathKnowledgeCounter ){
         dispatch( action );
       }
     }
-    dispatch( loadWriteKnowledgeStart() );
+    dispatch( loadMathKnowledgeStart() );
     if( typeof body === "object" ){
       body = JSON.stringify( body );
     }
@@ -50,16 +50,16 @@ export const loadWriteKnowledge = ({ url , body , parser , headers  , initState 
     })
   .then( response => {
     if( !response.ok ){
-      dispatchLastest( loadWriteKnowledgeRejected( "server" , response.status ) );
+      dispatchLastest( loadMathKnowledgeRejected( "server" , response.status ) );
       return;
     }
    response.json()
-    .then( json => dispatchLastest( loadWriteKnowledgeResolved(  json  , initState ) ) )
+    .then( json => dispatchLastest( loadMathKnowledgeResolved(  json  , initState ) ) )
     .catch( err => {
-      dispatchLastest( loadWriteKnowledgeRejected( "json" , err ) )
+      dispatchLastest( loadMathKnowledgeRejected( "json" , err ) )
   });
   })
   .catch( err => {
-      dispatchLastest( loadWriteKnowledgeRejected( "network" , err ) );
+      dispatchLastest( loadMathKnowledgeRejected( "network" , err ) );
  });
 };

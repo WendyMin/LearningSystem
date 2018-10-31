@@ -4,41 +4,20 @@ import { bindActionCreators } from 'redux';
 import style from 'style';
 
 // import YueDu from 'Page/Learning/EnglishLearning/YueDu';
-// import Shengcinanju from 'Page/Learning/EnglishLearning/Shengcinanju';
-// import ChtoEng from 'Page/Learning/EnglishLearning/ChtoEng';
-// import EngExtraArticle from 'Page/Learning/EnglishLearning/EngExtraArticle';
-// import EngChart from 'Page/Learning/EnglishLearning/EngChart';
 
 import {
-  // view as LearningTypeSelect,
   actions as LearningTypeSelectActions
 } from 'Connected/LearningTypeSelect';
-// import { actions as PortTestActions } from 'Connected/PortTest';
-// import {
-//   view as EnglishLearningTypePort,
-//   actions as EnglishLearningTypePortActions
-// } from 'Connected/EnglishLearningTypePort';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
-// import { actions as EnglishArticleActions } from 'Connected/EnglishArticle';
 
-// import UserManagerWindow from "Windows/UserManager";
-// import protect from 'direct-core/protect';
-// import asyncProcessControl from 'direct-core/asyncProcessControl';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
-
-// import Note from 'UI/Note';
-// import FinishedNote from 'UI/FinishedNote';
-
 
 class MathKnowledge extends React.PureComponent {
   constructor( props ){
     super( props );
     this.state = {
       typeselect: true,
-      // yuedu: false,
-      // shengcinanju: false,
-      // chtoeng: false,
       changeColor1: false,
       changeColor2: false,
       changeColor3: false,
@@ -54,6 +33,7 @@ class MathKnowledge extends React.PureComponent {
       setLearningType,
       learningType,
       didtest,
+      content
     } = this.props;
     // console.log(learnall);
 
@@ -63,88 +43,15 @@ class MathKnowledge extends React.PureComponent {
     this.state.changeColor3 ? TextStyle[2] = style.choosed_type : TextStyle[2] = style.normal_type ;
 
     return(
-
       <React.Fragment>
-        <div className = {style.whole}>
-          {
-            learningType == "英语主页面" || this.state.typeselect == true ?
-              <div class="row port m-b-20">
-                <div className={style.title}>章节{chapterNum}1&nbsp;&nbsp;知识点{knowledgeNum}1</div><br/>
-
-                <div class="portfolioContainer">
-                  <div className="col-lg-1"></div>
-
-                  <a href="javascript:void(0);">
-                   <div class="col-sm-6 col-lg-3 col-md-4 natural personal">
-                       <div class="gal-detail thumb" //onClick = {() => {setLearningType("英语阅读"); this.setState({typeselect: false}); }}
-                       >
-                           <div class="image-popup" >
-                             <img src="/static/images/gallery/2.jpg" class="thumb-img" alt="work-thumbnail"/>
-                           </div>
-                           <h4 className = {TextStyle[0]}
-                             onMouseOver = {() => this.setState({changeColor1: true})} onMouseLeave = {() => this.setState({changeColor1: false})}
-                             >
-                             知识点精要</h4>
-                           <p className={style.text_muted1}>
-                               开始学习本章节知识点吧！<br/>
-                               根据目前英语水平进行推荐，请认真做题哟~可查看生词、难句、题目解析、全文翻译
-                           </p>
-                       </div>
-                   </div>
-                  </a>
-                  {/* <div className="col-lg-1"></div> */}
-
-                  <a href="javascript:void(0);">
-                    <div class="col-sm-6 col-lg-3 col-md-4 creative personal photography">
-                        <div class="gal-detail thumb" //onClick = {() => {setLearningType("英语生词难句"); this.setState({typeselect: false})}}
-                        >
-                            <div class="image-popup">
-                              <img src="/static/images/gallery/5.jpg" class="thumb-img" alt="work-thumbnail"/>
-                            </div>
-                            <h4 className = {TextStyle[1]}
-                              onMouseOver = {() => this.setState({changeColor2: true})} onMouseLeave = {() => this.setState({changeColor2: false})}
-                              >
-                                重点例题</h4>
-                            <p className={style.text_muted1}>
-                                本课阅读过程中遇到的生词和难句，我们都帮你记录好了<br/>
-                                快来点击查看吧！
-                            </p>
-                         </div>
-                    </div>
-                  </a>
-                  {/* <div className="col-lg-1"></div> */}
-
-                  <a href="javascript:void(0);">
-                   <div class="col-sm-6 col-lg-3 col-md-4 natural creative">
-                      <div class="gal-detail thumb"// onClick = {() => {setLearningType("英语汉译英"); this.setState({typeselect: false})}}
-                      >
-                          <div class="image-popup">
-                              <img src="/static/images/gallery/8.jpg" class="thumb-img" alt="work-thumbnail"/>
-                          </div>
-                          <h4 className = {TextStyle[2]}
-                            onMouseOver = {() => this.setState({changeColor3: true})} onMouseLeave = {() => this.setState({changeColor3: false})}
-                            >
-                              强化练习</h4>
-                          <p className={style.text_muted1}>
-                              给中文，写英文，so easy~<br/>
-                              每课将给出3句中文，可查看答案，巩固你的写作技能
-                          </p>
-                      </div>
-                   </div>
-                  </a>
-                 <div className="col-lg-1"></div>
-
-              </div>
-            </div>
-
-            :
-            learningType == "英语阅读" ? <YueDu/>:
-            learningType == "英语生词难句" ? <Shengcinanju/>:
-            learningType == "英语汉译英" ?  <ChtoEng/>:
-            learningType == "英语课后阅读材料" ? <EngExtraArticle/>
-            :null
-          }
-        </div>
+      <div className="col-lg-2"></div>
+      <div className="col-lg-8">
+      {
+        content.map((onePict , key) => <img src = {onePict}/>
+      )
+      }
+      </div>
+      <div className="col-lg-2"></div>
 
 
 
@@ -166,6 +73,7 @@ export default applyHOCs([
       learningType: state.LearningTypeSelect.learningType,
       didtest: state.EnglishLearningTypePort.didtest,
       learnall: state.EnglishLearningTypePort.learnall,
+      content: state.MathGetKnowledge.content
     }),
     dispatch => ({
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),

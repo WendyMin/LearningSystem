@@ -19,7 +19,9 @@ import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFuncti
 class Jihe extends React.PureComponent {
   constructor( props ){
     super( props );
-    this.pingMian = ["示例1"];
+    this.pingMian = ["三角形" , "四边形" , "圆与扇形"];
+    this.jieXi = ["平面直角坐标系" , "直线的方程" , "圆的方程"];
+    this.liTi = ["长方体" , "柱体、球体"];
     const {
       setLearningType,
       learningType,
@@ -38,7 +40,7 @@ class Jihe extends React.PureComponent {
         <div className="col-md-4">
           <div className="card-box taskboard-box">
 
-            <h4 className="header-title m-t-0 m-b-30 text-warning">平面几何</h4>
+            <h4 className="header-title m-t-0 m-b-30 text-primary">平面几何</h4>
             {this.pingMian.map(( oneName , key ) =>
               <ul className="list-unstyled task-list" id="drag-upcoming" key = {key}>
                 <li>
@@ -59,7 +61,7 @@ class Jihe extends React.PureComponent {
           <div className="card-box taskboard-box">
 
             <h4 className="header-title m-t-0 m-b-30 text-warning">解析几何</h4>
-            {this.pingMian.map(( oneName , key ) =>
+            {this.jieXi.map(( oneName , key ) =>
               <ul className="list-unstyled task-list" id="drag-upcoming" key = {key}>
                 <li>
                     <div className="card-box kanban-box">
@@ -79,8 +81,8 @@ class Jihe extends React.PureComponent {
         <div className="col-md-4">
           <div className="card-box taskboard-box">
 
-            <h4 className="header-title m-t-0 m-b-30 text-warning">立体几何</h4>
-            {this.pingMian.map(( oneName , key ) =>
+            <h4 className="header-title m-t-0 m-b-30 text-success">立体几何</h4>
+            {this.liTi.map(( oneName , key ) =>
               <ul className="list-unstyled task-list" id="drag-upcoming" key = {key}>
                 <li>
                     <div className="card-box kanban-box">

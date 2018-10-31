@@ -1,6 +1,6 @@
 const callPython = require("./callPython");
 
-const pythonFilename = "offer_logic_fuxi_cuoti.py";
+const pythonFilename = "math_test.py";
 
 module.exports = ( req, res ) => {
   const { type , chapter_name , title } = req.body;
