@@ -168,16 +168,7 @@ class MathLearning extends React.PureComponent {
                               <li><a onClick={()=>this.props.setSubjectFunctionSelect(12)} style={choice==12?{"color":"#71b6f9"}:null}>几何</a></li>
                               <li><a onClick={()=>this.props.setSubjectFunctionSelect(13)} style={choice==13?{"color":"#71b6f9"}:null}>数据分析</a></li>
                         </ul>:
-                        <ul className="list-unstyled" style={null}>
-                          {/* <li><a href="javascript:void(0);">算术</a></li>
-                          <li><a href="javascript:void(0);">代数</a></li>
-                          <li><a href="javascript:void(0);">几何</a></li>
-                          <li><a href="javascript:void(0);">数据分析</a></li> */}
-                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(10)} style={choice==10?{"color":"#71b6f9"}:null}>算术</a></li>
-                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(11)} style={choice==11?{"color":"#71b6f9"}:null}>代数</a></li>
-                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(12)} style={choice==12?{"color":"#71b6f9"}:null}>几何</a></li>
-                            <li><a onClick={()=>this.props.setSubjectFunctionSelect(13)} style={choice==13?{"color":"#71b6f9"}:null}>数据分析</a></li>
-                        </ul>
+                        null
                         }
                         {/* <ul className="list-unstyled" style={choice==1||choice==10||choice==11||choice==12||choice==13?{"display":"block"}:null}>
                             <li><a onClick={()=>this.props.setSubjectFunctionSelect(10)}>算术</a></li>
