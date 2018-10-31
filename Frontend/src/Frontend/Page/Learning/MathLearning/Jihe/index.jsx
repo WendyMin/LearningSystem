@@ -47,8 +47,7 @@ class Jihe extends React.PureComponent {
                     <div className="card-box kanban-box">
                         <div className="kanban-detail" onClick = {() => {setButtonChoice(oneName);this.loadMobanContent( oneName );this.setState({typeSelect:false})}}>
                             <span className="label label-primary pull-right">Begin</span>
-                            <h4><a //onClick = {() => {setButtonChoice(oneName);this.loadZhentiContent( oneName );this.setState({zhenTiSelect:false})}}
-                            >{oneName}</a> </h4>
+                            <h4><a>{oneName}</a> </h4>
                         </div>
                      </div>
                 </li>
@@ -67,8 +66,7 @@ class Jihe extends React.PureComponent {
                     <div className="card-box kanban-box">
                         <div className="kanban-detail" onClick = {() => {setButtonChoice(oneName);this.loadMobanContent( oneName );this.setState({typeSelect:false})}}>
                             <span className="label label-primary pull-right">Begin</span>
-                            <h4><a //onClick = {() => {setButtonChoice(oneName);this.loadZhentiContent( oneName );this.setState({zhenTiSelect:false})}}
-                            >{oneName}</a> </h4>
+                            <h4><a>{oneName}</a> </h4>
                         </div>
                      </div>
                 </li>
@@ -88,8 +86,7 @@ class Jihe extends React.PureComponent {
                     <div className="card-box kanban-box">
                         <div className="kanban-detail" onClick = {() => {setButtonChoice(oneName);this.loadMobanContent( oneName );this.setState({typeSelect:false})}}>
                             <span className="label label-primary pull-right">Begin</span>
-                            <h4><a //onClick = {() => {setButtonChoice(oneName);this.loadZhentiContent( oneName );this.setState({zhenTiSelect:false})}}
-                            >{oneName}</a> </h4>
+                            <h4><a>{oneName}</a> </h4>
                         </div>
                      </div>
                 </li>
