@@ -58,7 +58,7 @@ class Suanshu extends React.PureComponent {
       <React.Fragment>
         {this.state.showChapter ?
         <div>
-          <div className="col-md-6">
+          <div className="col-md-4">
             <div className="card-box taskboard-box">
 
               <h4 className="header-title m-t-0 m-b-30 text-primary">整数与分数</h4>
@@ -68,11 +68,9 @@ class Suanshu extends React.PureComponent {
                       <div className="card-box kanban-box">
                           <div className="kanban-detail"
                             onClick = {() => {this.getMathKnowledge() ; this.setState({showChapter: false , showKnowledge: true})}}
-                            //onClick = {() => {setButtonChoice(oneName);this.loadZhaocuoContent( oneName );this.setState({typeSelect:false})}}
                             >
-                              <span className="label label-danger pull-right">Begin</span>
-                              <h4><a //onClick = {() => {setButtonChoice(oneName);this.loadZhentiContent( oneName );this.setState({zhenTiSelect:false})}}
-                              >{oneName}</a> </h4>
+                              <span className="label label-primary pull-right">Begin</span>
+                              <h4><a>{oneName}</a> </h4>
                           </div>
                        </div>
                   </li>
@@ -82,7 +80,7 @@ class Suanshu extends React.PureComponent {
             </div>
           </div>
 
-          <div className="col-md-6">
+          <div className="col-md-4">
             <div className="card-box taskboard-box">
 
               <h4 className="header-title m-t-0 m-b-30 text-warning">应用题</h4>
@@ -94,7 +92,7 @@ class Suanshu extends React.PureComponent {
                                onClick = {() => this.setState({showChapter: false , showKnowledge: true})}
                           //  onClick = {() => {setButtonChoice(oneName);this.loadMobanContent( oneName );this.setState({typeSelect:false})}}
                           >
-                              <span className="label label-danger pull-right">Begin</span>
+                              <span className="label label-primary pull-right">Begin</span>
                               <h4><a //onClick = {() => {setButtonChoice(oneName);this.loadZhentiContent( oneName );this.setState({zhenTiSelect:false})}}
                               >{oneName}</a> </h4>
                           </div>
@@ -105,6 +103,7 @@ class Suanshu extends React.PureComponent {
 
             </div>
           </div>
+
           {/* <div className="col-md-4" >
             <div className="card-box kanban-box">
               <div className="kanban-detail">
@@ -137,62 +136,6 @@ class Suanshu extends React.PureComponent {
             </div>
           </div> */}
 
-          {/* <div className="col-md-4" >
-            <div className="card-box kanban-box">
-              <div className="kanban-detail">
-                  <span className="label label-primary pull-right">Unfinish</span>
-                  <div className={style.title18}>
-                    第二章 应用题
-                  </div>
-                  <ul className="list-inline m-b-0">
-                      <li>
-                          <br/>
-                          <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5" >
-                            知识点1 销售问题</button>
-                          <br/>
-                          <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5" >
-                            知识点2 行程问题</button>
-                          <br/>
-                          <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5" >
-                            知识点3 工程问题</button>
-                          <br/>
-                          <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5" >
-                            知识点4 浓度问题</button>
-                          <br/>
-                          <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5" >
-                            知识点5 分段计费</button>
-                          <br/>
-                          <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5" >
-                            知识点6 集合问题</button>
-                      </li>
-                  </ul>
-              </div>
-            </div>
-          </div> */}
-
-          {/* <div className="col-md-4" >
-            <div className="card-box kanban-box">
-              <div className="kanban-detail">
-                  <span className="label label-primary pull-right">Unfinish</span>
-                  <div className={style.title18}>
-                    第三章
-                  </div>
-                  <ul className="list-inline m-b-0">
-                      <li>
-                          <br/>
-                          <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5" >
-                            知识点1</button>
-                          <br/>
-                          <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5" >
-                            知识点2</button>
-                          <br/>
-                          <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5" >
-                            知识点3</button>
-                      </li>
-                  </ul>
-              </div>
-            </div>
-          </div> */}
         </div>
         :
         this.state.showKnowledge ?
@@ -222,7 +165,6 @@ export default applyHOCs([
     state => ({
       logined: state.UserManager.logined,
       username: state.UserManager.name,
-      // content: state.PortTest.content,
       choice: state.SubjectFunctionSelect.choice,
       learningType: state.LearningTypeSelect.learningType,
       content: state.MathGetKnowledge.content

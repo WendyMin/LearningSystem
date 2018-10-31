@@ -46,7 +46,7 @@ class Daishu extends React.PureComponent {
                 <li>
                     <div className="card-box kanban-box">
                         <div className="kanban-detail" onClick = {() => {setButtonChoice(oneName);this.loadZhaocuoContent( oneName );this.setState({typeSelect:false})}}>
-                            <span className="label label-danger pull-right">Begin</span>
+                            <span className="label label-primary pull-right">Begin</span>
                             <h4><a //onClick = {() => {setButtonChoice(oneName);this.loadZhentiContent( oneName );this.setState({zhenTiSelect:false})}}
                             >{oneName}</a> </h4>
                         </div>
@@ -67,7 +67,7 @@ class Daishu extends React.PureComponent {
                 <li>
                     <div className="card-box kanban-box">
                         <div className="kanban-detail" onClick = {() => {setButtonChoice(oneName);this.loadMobanContent( oneName );this.setState({typeSelect:false})}}>
-                            <span className="label label-danger pull-right">Begin</span>
+                            <span className="label label-primary pull-right">Begin</span>
                             <h4><a //onClick = {() => {setButtonChoice(oneName);this.loadZhentiContent( oneName );this.setState({zhenTiSelect:false})}}
                             >{oneName}</a> </h4>
                         </div>
@@ -88,7 +88,7 @@ class Daishu extends React.PureComponent {
                 <li>
                     <div className="card-box kanban-box">
                         <div className="kanban-detail" onClick = {() => {setButtonChoice(oneName);this.loadMobanContent( oneName );this.setState({typeSelect:false})}}>
-                            <span className="label label-danger pull-right">Begin</span>
+                            <span className="label label-primary pull-right">Begin</span>
                             <h4><a //onClick = {() => {setButtonChoice(oneName);this.loadZhentiContent( oneName );this.setState({zhenTiSelect:false})}}
                             >{oneName}</a> </h4>
                         </div>
@@ -99,78 +99,6 @@ class Daishu extends React.PureComponent {
 
           </div>
         </div>
-
-        {/* <div className="col-md-4" >
-          <div className="card-box kanban-box">
-            <div className="kanban-detail">
-                <span className="label label-primary pull-right">Unfinish</span>
-                <div className={style.title18}>
-                  第一章
-                </div>
-                <ul className="list-inline m-b-0">
-                    <li>
-                        <br/>
-                        <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5" >
-                          知识点1</button>
-                        <br/>
-                        <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5" >
-                          知识点2</button>
-                        <br/>
-                        <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5" >
-                          知识点3</button>
-                    </li>
-                </ul>
-            </div>
-          </div>
-        </div> */}
-
-        {/* <div className="col-md-4" >
-          <div className="card-box kanban-box">
-            <div className="kanban-detail">
-                <span className="label label-primary pull-right">Unfinish</span>
-                <div className={style.title18}>
-                  第二章
-                </div>
-                <ul className="list-inline m-b-0">
-                    <li>
-                        <br/>
-                        <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5" >
-                          知识点1</button>
-                        <br/>
-                        <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5" >
-                          知识点2</button>
-                        <br/>
-                        <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5" >
-                          知识点3</button>
-                    </li>
-                </ul>
-            </div>
-          </div>
-        </div> */}
-
-        {/* <div className="col-md-4" >
-          <div className="card-box kanban-box">
-            <div className="kanban-detail">
-                <span className="label label-primary pull-right">Unfinish</span>
-                <div className={style.title18}>
-                  第三章
-                </div>
-                <ul className="list-inline m-b-0">
-                    <li>
-                        <br/>
-                        <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5" >
-                          知识点1</button>
-                        <br/>
-                        <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5" >
-                          知识点2</button>
-                        <br/>
-                        <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5" >
-                          知识点3</button>
-                    </li>
-                </ul>
-            </div>
-          </div>
-        </div> */}
 
 
       </React.Fragment>
