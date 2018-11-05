@@ -20,7 +20,7 @@ class Daishu extends React.PureComponent {
   constructor( props ){
     super( props );
     this.hanShu = ["集合" , "函数" , "代数方程" , "不等式"];
-    this.shuLieJiYingYong = ["整数及其运算" , "有理数与实数" , "绝对值" , "平均值" , "比与比例"];
+    this.shuLieJiYingYong = ["普通数列" , "等比数列" , "等差数列" ];
     this.zhengShiYuFenShi = ["整式" , "分式"];
     const {
       setLearningType,
