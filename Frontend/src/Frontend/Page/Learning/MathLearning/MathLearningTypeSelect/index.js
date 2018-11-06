@@ -9,6 +9,8 @@ import {
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 
 import MathKnowledge from 'Page/Learning/MathLearning/MathKnowledge';
+import MathExample from 'Page/Learning/MathLearning/MathExample';
+import MathExercise from 'Page/Learning/MathLearning/MathExercise';
 
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
@@ -50,7 +52,7 @@ class MathLearningTypeSelect extends React.PureComponent {
       <React.Fragment>
         <div className = {style.whole}>
           {
-            learningType == "" || this.state.typeselect == true ?
+            learningType == "数学主页面" || this.state.typeselect == true ?
               <div className="row port m-b-20">
                 <div className={style.title}>{partCN}&nbsp;&nbsp;{chapterCN}&nbsp;&nbsp;{sectionCN}</div><br/>
 
@@ -77,7 +79,7 @@ class MathLearningTypeSelect extends React.PureComponent {
 
                   <a href="javascript:void(0);">
                     <div className="col-sm-6 col-lg-3 col-md-4 creative personal photography">
-                        <div className="gal-detail thumb" //onClick = {() => {setLearningType("数学例题"); this.setState({typeselect: false})}}
+                        <div className="gal-detail thumb" onClick = {() => {setLearningType("数学例题"); this.setState({typeselect: false})}}
                         >
                             <div className="image-popup">
                               <img src="/static/images/gallery/5.jpg" className="thumb-img" alt="work-thumbnail"/>
@@ -96,7 +98,7 @@ class MathLearningTypeSelect extends React.PureComponent {
 
                   <a href="javascript:void(0);">
                    <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
-                      <div className="gal-detail thumb" //onClick = {() => {setLearningType("数学习题"); this.setState({typeselect: false})}}
+                      <div className="gal-detail thumb" onClick = {() => {setLearningType("数学习题"); this.setState({typeselect: false})}}
                       >
                           <div className="image-popup">
                               <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
@@ -121,8 +123,8 @@ class MathLearningTypeSelect extends React.PureComponent {
                partCN = {this.props.partCN} chapterCN = {this.props.chapterCN} sectionCN = {this.props.sectionCN}
                partPY = {this.props.partPY} chapterPY = {this.props.chapterPY} sectionPY = {this.props.sectionPY}
              />
-            :learningType == "数学例题" ? null
-            :learningType == "数学习题" ? null
+            :learningType == "数学例题" ? <MathExample />
+            :learningType == "数学习题" ? <MathExercise />
             :null
           }
         </div>

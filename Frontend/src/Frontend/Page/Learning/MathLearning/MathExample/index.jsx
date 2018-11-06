@@ -9,29 +9,12 @@ import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFuncti
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
-import { actions as MathGetKnowledgeActions } from 'Connected/MathGetKnowledge';
-
-class MathKnowledge extends React.PureComponent {
+class MathExample extends React.PureComponent {
   constructor( props ){
     super( props );
     this.state = {
       typeselect: true,
     }
-  }
-
-  componentDidMount(){
-    this.getMathKnowledge();
-  }
-
-  getMathKnowledge = () => {
-    this.props.loadMathKnowledge({
-      url: "/api/math_getKnowlegde",
-      body: {
-        type1: this.props.partPY,
-        type2: this.props.chapterPY,
-        type3: this.props.sectionPY,
-      }
-    })
   }
 
 
@@ -40,28 +23,18 @@ class MathKnowledge extends React.PureComponent {
     const {
       setLearningType,
       learningType,
-      knowledge,
-      partCN,
-      chapterCN,
-      sectionCN,
-      partPY,
-      chapterPY,
-      sectionPY,
     } = this.props;
-
-    // console.log(learnall);
 
     return(
       <React.Fragment>
 
+
         <div className="col-lg-2"></div>
 
         <div className="col-lg-8">
-        {
-          knowledge.map((onePict , key) => <img src = {onePict}/>)
-        }
+          <p>重点例题</p>
         </div>
-        
+
         <div className="col-lg-2"></div>
 
         <div className="row">
@@ -71,8 +44,8 @@ class MathKnowledge extends React.PureComponent {
                 返回学习主页面</button>
           &nbsp;&nbsp;
           <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-              onClick={() => {setLearningType("数学例题")}} >
-              进入重点例题</button>
+              onClick={() => {setLearningType("数学习题")}} >
+              进入强化练习</button>
           </div>
         </div>
 
@@ -93,13 +66,11 @@ export default applyHOCs([
     state => ({
       username: state.UserManager.name,
       learningType: state.LearningTypeSelect.learningType,
-      knowledge: state.MathGetKnowledge.content
     }),
     dispatch => ({
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
       ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
-      ...bindActionCreators( MathGetKnowledgeActions , dispatch ),
     })
   )],
-  MathKnowledge
+  MathExample
 );
