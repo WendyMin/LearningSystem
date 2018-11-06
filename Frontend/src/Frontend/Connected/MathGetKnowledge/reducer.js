@@ -15,7 +15,9 @@ export default ( state = {
 } , { type , payload , id } ) => {
   const { content } = state;
   //console.log(content)
+
   switch( type ){
+
     case __ASYNC_LOAD_MATH_KNOWLEDGE.pending: {
       let loadState = {...state.loadState };
       loadState.lastFailed = false;
@@ -25,6 +27,7 @@ export default ( state = {
         loadState
       };
     }
+
     case __ASYNC_LOAD_MATH_KNOWLEDGE.resolved: {
       let { response , initState } = payload;
       initState = initState || {
@@ -39,10 +42,9 @@ export default ( state = {
         ...state,
         loadState,
         content: response,
-        // name2: response.section_name2,
-        // name3: response.section_name3,
       };
     }
+
     case __ASYNC_LOAD_MATH_KNOWLEDGE.rejected: {
       let { reason , detail } = payload;
       let loadState = {...state.loadState };

@@ -42,7 +42,7 @@ class LunZhengZhenTi extends React.PureComponent {
   }
 
   loadZhentiContent = ( choice ) => {
-    console.log(choice)
+    // console.log(choice)
     /*  加载左侧的题目部分 */
     this.props.loadWriteContents({
       url: "/api/lunZhengZhenTiContent",

@@ -22,15 +22,18 @@ class MathLearningTypeSelect extends React.PureComponent {
       changeColor1: false,
       changeColor2: false,
       changeColor3: false,
-      changeColor4: false,
     }
   }
 
 
   render(){
     const {
-      chapterNum,
-      knowledgeNum,
+      partPY,
+      chapterPY,
+      sectionPY,
+      partCN,
+      chapterCN,
+      sectionCN,
       setLearningType,
       learningType,
       didtest,
@@ -49,7 +52,7 @@ class MathLearningTypeSelect extends React.PureComponent {
           {
             learningType == "" || this.state.typeselect == true ?
               <div className="row port m-b-20">
-                <div className={style.title}>章节{chapterNum}1&nbsp;&nbsp;知识点{knowledgeNum}1</div><br/>
+                <div className={style.title}>{partCN}&nbsp;&nbsp;{chapterCN}&nbsp;&nbsp;{sectionCN}</div><br/>
 
                 <div className="portfolioContainer">
                   <div className="col-lg-1"></div>
@@ -66,17 +69,15 @@ class MathLearningTypeSelect extends React.PureComponent {
                              >
                              知识点精要</h4>
                            <p className={style.text_muted1}>
-                               开始学习本章节知识点吧！<br/>
-                               根据目前英语水平进行推荐，请认真做题哟~可查看生词、难句、题目解析、全文翻译
+                               开始学习本章节知识点吧！
                            </p>
                        </div>
                    </div>
                   </a>
-                  {/* <div className="col-lg-1"></div> */}
 
                   <a href="javascript:void(0);">
                     <div className="col-sm-6 col-lg-3 col-md-4 creative personal photography">
-                        <div className="gal-detail thumb" //onClick = {() => {setLearningType("英语生词难句"); this.setState({typeselect: false})}}
+                        <div className="gal-detail thumb" //onClick = {() => {setLearningType("数学例题"); this.setState({typeselect: false})}}
                         >
                             <div className="image-popup">
                               <img src="/static/images/gallery/5.jpg" className="thumb-img" alt="work-thumbnail"/>
@@ -86,17 +87,16 @@ class MathLearningTypeSelect extends React.PureComponent {
                               >
                                 重点例题</h4>
                             <p className={style.text_muted1}>
-                                本课阅读过程中遇到的生词和难句，我们都帮你记录好了<br/>
+                                本章的重点例题，我们都帮你整理好了<br/>
                                 快来点击查看吧！
                             </p>
                          </div>
                     </div>
                   </a>
-                  {/* <div className="col-lg-1"></div> */}
 
                   <a href="javascript:void(0);">
                    <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
-                      <div className="gal-detail thumb"// onClick = {() => {setLearningType("英语汉译英"); this.setState({typeselect: false})}}
+                      <div className="gal-detail thumb" //onClick = {() => {setLearningType("数学习题"); this.setState({typeselect: false})}}
                       >
                           <div className="image-popup">
                               <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
@@ -106,8 +106,7 @@ class MathLearningTypeSelect extends React.PureComponent {
                             >
                               强化练习</h4>
                           <p className={style.text_muted1}>
-                              给中文，写英文，so easy~<br/>
-                              每课将给出3句中文，可查看答案，巩固你的写作技能
+                            一起来巩固一下吧~
                           </p>
                       </div>
                    </div>
@@ -117,11 +116,13 @@ class MathLearningTypeSelect extends React.PureComponent {
               </div>
             </div>
 
-            :
-            learningType == "数学知识点" ? <MathKnowledge/>:
-            learningType == "英语生词难句" ? <Shengcinanju/>:
-            learningType == "英语汉译英" ?  <ChtoEng/>:
-            learningType == "英语课后阅读材料" ? <EngExtraArticle/>
+            :learningType == "数学知识点" ?
+             <MathKnowledge
+               partCN = {this.props.partCN} chapterCN = {this.props.chapterCN} sectionCN = {this.props.sectionCN}
+               partPY = {this.props.partPY} chapterPY = {this.props.chapterPY} sectionPY = {this.props.sectionPY}
+             />
+            :learningType == "数学例题" ? null
+            :learningType == "数学习题" ? null
             :null
           }
         </div>
