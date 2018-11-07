@@ -5,7 +5,6 @@ import { Prompt } from 'react-router';
 import style from 'style';
 
 import UserManagerWindow from "Windows/UserManager";
-import MathKnowledge from 'Page/Learning/MathLearning/MathKnowledge';
 
 import protect from 'direct-core/protect';
 import asyncProcessControl from 'direct-core/asyncProcessControl';
