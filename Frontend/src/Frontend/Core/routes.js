@@ -3,7 +3,6 @@ import asyncLoad from 'direct-core/asyncLoad';
 
 import Index from 'Page/Index';
 
-const LearningSystem = asyncLoad( () => import('Page/LearningSystem') );
 const Login = asyncLoad( () => import('Page/Login') );
 const SignUp = asyncLoad( () => import('Page/SignUp') );
 const Learning = asyncLoad( () => import('Page/Learning') );
@@ -17,10 +16,6 @@ export default {
   },
   "/learning": {
     page: Learning,
-    nested
-  },
-  "/learningsystem": {
-    page: LearningSystem,
     nested
   },
   "/login": {
