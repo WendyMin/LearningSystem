@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Prompt } from 'react-router';
 import style from 'style';
 
+import MathTest from 'Page/Learning/MathLearning/MathTest';
 import Suanshu from 'Page/Learning/MathLearning/Suanshu';
 import Daishu from 'Page/Learning/MathLearning/Daishu';
 import Jihe from 'Page/Learning/MathLearning/Jihe';
@@ -226,7 +227,7 @@ class MathLearning extends React.PureComponent {
                 <div className="row">
 
                   {
-                    choice==0 ? <p>入口测试</p> :
+                    choice==0 ? <MathTest/> :
                     // choice==1 ? <p>进入学习</p> :
                     choice==10 ? <Suanshu/> :
                     choice==11 ? <Daishu/> :

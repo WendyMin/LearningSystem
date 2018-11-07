@@ -27,6 +27,7 @@ class SingleQuestion extends React.PureComponent<Props> {
       paraLength,  // 解析长度 single 代表 只有一段，none代表没有解析
       whetherHaveXuhao,
       xuhao,  // 题目序号
+      decode, // 是否需要解码，针对数学中的一些特殊格式
       questionId,
       options,
       question,
@@ -121,7 +122,7 @@ class SingleQuestion extends React.PureComponent<Props> {
                 <div className="card-box">
                   { paraLength === "none"?null:
                      paraLength=== "single" ?
-                    <div>{analysis}</div>:
+                    <div>{{analysis}}</div>:
                     <div>
                       <TextAndImag list={analysis} showBigImg={() => this.setState({showBigImg: true})}/>
                     </div>
