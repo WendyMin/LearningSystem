@@ -30,9 +30,11 @@ class MathLevelTest extends React.PureComponent {
       choosed : questions[qtype][level].choosed,
       questionId: questions[qtype][level].id,
       question: questions[qtype][level].question,
-      options: [questions[qtype][level].op_one, questions[qtype][level].op_two , questions[qtype][level].op_three, questions[qtype][level].op_four , questions[qtype][level].op_five],
+      options: questions[qtype][level].option,
+      // options: [questions[qtype][level].op_one, questions[qtype][level].op_two , questions[qtype][level].op_three, questions[qtype][level].op_four , questions[qtype][level].op_five],
       analysis: questions[qtype][level].analysis,
-      rightKey: changeAlpToNum( questions[qtype][level].answer ),  //need to changge ABC to 123
+      rightKey: questions[qtype][level].answer,
+      // rightKey: changeAlpToNum( questions[qtype][level].answer ),  //need to changge ABC to 123
       lock: questions[qtype][level].lock,
       show: questions[qtype][level].show
     }

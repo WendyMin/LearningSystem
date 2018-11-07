@@ -13,14 +13,14 @@ import {
   actions as MathLevelTestActions
 } from 'Connected/MathLevelTest';
 import {
-  view as LogicTestTongji,
-  actions as LogicTestTongjiActions
-} from 'Connected/LogicTestTongji';
+  view as MathLevelTestTongji,
+  actions as MathLevelTestTongjiActions
+} from 'Connected/MathLevelTestTongji';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 
-import changeAlpToNum from 'Algorithm/changeAlpToNum';
-import decideNextQuestion from 'Algorithm/decideNextQuestion';
-import logicTestRightRate from 'Algorithm/logicTestRightRate';
+// import changeAlpToNum from 'Algorithm/changeAlpToNum';
+// import decideNextQuestion from 'Algorithm/decideNextQuestion';
+import mathLevelTestRightRate from 'Algorithm/mathLevelTestRightRate';
 
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
@@ -43,14 +43,14 @@ class MathTest extends React.PureComponent {
     })
   }
   loadTestResult = () => {
-    this.props.loadTestTongjiContent({
-      url: "/api/logicTestTongji",
+    this.props.loadMathLevelTestTongjiContent({
+      url: "/api/mathGetLevelTestLatestResult",
       body: {
         username: this.props.username
       }
     });
-    this.props.loadTestMeanTongjiContent({
-      url: "/api/logicTestMeanTongji",
+    this.props.loadMathLevelTestMeanTongjiContent({
+      url: "/api/mathGetLevelTestMeanResult",
       body: {
         username: this.props.username
       }
@@ -63,47 +63,19 @@ class MathTest extends React.PureComponent {
       questions,
     } = this.props;
 
-    var right_rate0 = "";  var right_rate1 = ""; var right_rate2 = "";var right_rate3 = "";var right_rate4 = "";
-    var right_rate5 = "";var right_rate6 = "";var right_rate7 = "";var right_rate8 = "";var right_rate9 = "";
-    var right_rate10 = "";var right_rate11 = "";var right_rate12 = "";var right_rate13 = "";var right_rate14 = "";
-    var right_rate = logicTestRightRate( questions );
-    //console.log(right_rate)
-    right_rate0 += right_rate[0];
-    right_rate1 += right_rate[1];
-    right_rate2 += right_rate[2];
-    right_rate3 += right_rate[3];
-    right_rate4 += right_rate[4];
-    right_rate5 += right_rate[5];
-    right_rate6 += right_rate[6];
-    right_rate7 += right_rate[7];
-    right_rate8 += right_rate[8];
-    right_rate9 += right_rate[9];
-    right_rate10 += right_rate[10];
-    right_rate11 += right_rate[11];
-    right_rate12 += right_rate[12];
-    right_rate13 += right_rate[13];
-    right_rate14 += right_rate[14];
+    var right_rate = mathLevelTestRightRate(questions);
+    var rightRate = "";
+    // console.log(rightRate)
+    for(var key in right_rate){
+      rightRate += `${right_rate[key]}*`
+    }
+    console.log(rightRate)
 
-   console.log(right_rate0,right_rate1,right_rate2,right_rate3,right_rate4,right_rate5,right_rate6,right_rate7,right_rate8,right_rate9,right_rate10,right_rate11,right_rate12,right_rate13,right_rate14)
    this.props.submitQuestions({
-      url: "/api/logicTestRightRate",
+      url: "/api/mathRecordLevelTestResult",
       body: {
         username: username,
-        right_rate0: right_rate0,
-        right_rate1: right_rate1,
-        right_rate2: right_rate2,
-        right_rate3: right_rate3,
-        right_rate4: right_rate4,
-        right_rate5: right_rate5,
-        right_rate6: right_rate6,
-        right_rate7: right_rate7,
-        right_rate8: right_rate8,
-        right_rate9: right_rate9,
-        right_rate10: right_rate10,
-        right_rate11: right_rate11,
-        right_rate12: right_rate12,
-        right_rate13: right_rate13,
-        right_rate14: right_rate14,
+        rightRate: rightRate
       }
     });
 
@@ -143,10 +115,9 @@ class MathTest extends React.PureComponent {
          {
            this.state.enterTest && whetherDidTest || this.state.enterTest && testend || this.state.testAgain && testend ?
            <div className="card-box">
-             <LogicTestTongji loadTestResult = {() => this.loadTestResult()}/><br/>
+             <MathLevelTestTongji loadTestResult = {() => this.loadTestResult()}/><br/>
              <div align="center">
-               <Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , testAgain: true , startTestNoteShow: true});this.props.forceEnd();this.loadQuestions()}}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <Button text = "开始学习" onClick = {() => {this.props.setLearningType("");this.props.setSubjectFunctionSelect(1)}}/>
+               <Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , testAgain: true , startTestNoteShow: true});this.props.forceEnd();this.loadQuestions()}}/>
              </div>
            </div>
            :
@@ -180,11 +151,11 @@ export default applyHOCs([
       username: state.UserManager.name,
       questions: state.MathLevelTest.content,
       testend: state.MathLevelTest.testendState,
-      whetherDidTest: state.LogicTestTongji.flag
+      whetherDidTest: state.MathLevelTestTongji.flag
     }),
     dispatch => ({
       ...bindActionCreators( MathLevelTestActions , dispatch ),
-      ...bindActionCreators( LogicTestTongjiActions , dispatch ),
+      ...bindActionCreators( MathLevelTestTongjiActions , dispatch ),
       ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
     })

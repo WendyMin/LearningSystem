@@ -1,0 +1,117 @@
+import {
+  __ASYNC_LOAD_MATH_LEVEL_TEST_RESULT,
+  __ASYNC_LOAD_MATH_LEVEL_TEST_MEAN_RESULT
+} from 'actionTypes';
+
+export default ( state = {
+  flag: "",  // 是否做过 , 0 未做过 1 做过
+  count: "", // 做过几次
+  this_rightRate: [],  // 本次正确率
+  upOrDown: [], // 本次跟上次比是升还是降
+  mean_rightRate: [],  // 平均正确率
+  zhongdian: [],  // 重点学习章节
+  yiban: [],  // 一般学习章节
+
+    loadState: {
+      pending: 0,
+      resolved: 0,
+      rejected: 0,
+      lastFailed: false,
+      failedReason: "network", // "json" , "server"
+      failedDetail: null
+    },
+} , { type , payload , id } ) => {
+  const { content } = state;
+  //console.log(content)
+  switch( type ){
+    case __ASYNC_LOAD_MATH_LEVEL_TEST_RESULT.pending: {
+      let loadState = {...state.loadState };
+      loadState.lastFailed = false;
+      loadState.pending++;
+      return {
+        ...state,
+        loadState
+      };
+    }
+    case __ASYNC_LOAD_MATH_LEVEL_TEST_RESULT.resolved: {
+      let { response , initState } = payload;
+      initState = initState || {
+        lock: false,
+        show: false,
+        choice: -1
+      };
+      let loadState = {...state.loadState };
+      loadState.resolved++;
+      loadState.pending--;
+      return {
+        ...state,
+        loadState,
+        // flag: 1,
+        flag: response.flag,
+        this_rightRate: response.rate,
+        upOrDown: response.updown
+      };
+    }
+    case __ASYNC_LOAD_MATH_LEVEL_TEST_RESULT.rejected: {
+      let { reason , detail } = payload;
+      let loadState = {...state.loadState };
+      loadState.rejected++;
+      loadState.pending--;
+      loadState.lastFailed = true;
+      loadState.failedReason = reason;
+      loadState.failedDetail = detail;
+      return {
+        ...state,
+        loadState
+      };
+    }
+
+    /* 平均正确率 */
+
+    case __ASYNC_LOAD_MATH_LEVEL_TEST_MEAN_RESULT.pending: {
+      let loadState = {...state.loadState };
+      loadState.lastFailed = false;
+      loadState.pending++;
+      return {
+        ...state,
+        loadState
+      };
+    }
+    case __ASYNC_LOAD_MATH_LEVEL_TEST_MEAN_RESULT.resolved: {
+      let { response , initState } = payload;
+      initState = initState || {
+        lock: false,
+        show: false,
+        choice: -1
+      };
+      let loadState = {...state.loadState };
+      loadState.resolved++;
+      loadState.pending--;
+      return {
+        ...state,
+        loadState,
+        count: response.count,
+        mean_rightRate: response.rate,
+        yiban: response.yiban,
+        zhongdian: response.zhongdian
+      };
+    }
+    case __ASYNC_LOAD_MATH_LEVEL_TEST_MEAN_RESULT.rejected: {
+      let { reason , detail } = payload;
+      let loadState = {...state.loadState };
+      loadState.rejected++;
+      loadState.pending--;
+      loadState.lastFailed = true;
+      loadState.failedReason = reason;
+      loadState.failedDetail = detail;
+      return {
+        ...state,
+        loadState
+      };
+    }
+
+
+    default:
+      return state;
+  }
+}

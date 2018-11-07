@@ -26,6 +26,7 @@ import { reducer as EditText } from 'Connected/EditText';
 import { reducer as ViewFinishedText } from 'Connected/ViewFinishedText';
 import { reducer as LogicState } from 'Connected/LogicState';
 import { reducer as MathLevelTest } from 'Connected/MathLevelTest';
+import { reducer as MathLevelTestTongji } from 'Connected/MathLevelTestTongji';
 import { reducer as MathGetKnowledge } from 'Connected/MathGetKnowledge';
 
 //import { reducer as ... } from 'Connected/...';
@@ -58,6 +59,7 @@ export default {
   ViewFinishedText: ViewFinishedText,
   LogicState: LogicState,
   MathLevelTest: MathLevelTest,
+  MathLevelTestTongji: MathLevelTestTongji,
   MathGetKnowledge: MathGetKnowledge
   //others
 };
