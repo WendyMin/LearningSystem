@@ -28,6 +28,18 @@ class UITest extends React.PureComponent {
   componentDidMount(){
     this.function();
   }
+  componentDidMount(){
+    var testEditor;
+    testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id
+        htmlDecode : "style,script,iframe",
+        emoji : true,
+        taskList : true,
+        tex : true, // 默认不解析
+        flowChart : true, // 默认不解析
+        sequenceDiagram : true, // 默认不解析
+        codeFold : true
+    });
+  }
 
   // function = () => {
   //   this.props.loadPortContent({
@@ -49,6 +61,20 @@ class UITest extends React.PureComponent {
       //   wrongwords: "zhongkao*vegetable*zhongkao*sacrifice"
       // }
     })
+    // var testEditor;
+    // testEditor = editormd.markdownToHTML("doc-content", {//注意：这里是上面DIV的id
+    //     htmlDecode : "style,script,iframe",
+    //     emoji : true,
+    //     taskList : true,
+    //     tex : true, // 默认不解析
+    //     flowChart : true, // 默认不解析
+    //     sequenceDiagram : true, // 默认不解析
+    //     codeFold : true
+    // });
+
+    // document.getElementById("doc-content").value = "$$2(x-4)+3(x+x-4)=100$$";
+    // console.log(document.getElementById("doc-content").value)
+    // document.getElementById("doc-content").innerHTML = "<textarea style=" + '"display: none;"' + ">" + $$|a-d|^2<|b-c|^2\Rightarrow(a+d)^2-4ad<(b+c)^2-4bc$$ + "</textarea>"
   }
 
   render(){
@@ -56,25 +82,19 @@ class UITest extends React.PureComponent {
     const {
       content,
     } = this.props;
-
     console.log(content);
     // console.log(WordsToString(["basic", "luck", "basic", "cancel", "basic", "luck"]))
 
     return(
       <React.Fragment>
-        {/* <a href={"https://passport.doxue.com/login?redirect_url=59.110.23.212&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>登录测试</a> */}
-
         <div>ui</div>
-        <div>{"\"\\u7ec4\\u5408\\u4e0e\\u7ec4\\u5408\\u6570\""}</div>
-        <div>{"\u7ec4\u5408\u4e0e\u7ec4\u5408\u6570","\u7ec4\u5408\u516c\u5f0f","\u5e38\u89c1\u7c7b\u578b","\u6478\u7403\u95ee\u9898","\u4e8b\u4ef6\u7684\u6982\u7387\u8fd0\u7b97","\u6982\u7387\u7684\u6027\u8d28"}</div>
-
+        <div id="doc-content">
+          <textarea style={{"display": "none;"}} value="公式$$a^2+1$$"/>
+        </div>
       </React.Fragment>
     )
   }
-
-
-
-
+  
 }
 
 
