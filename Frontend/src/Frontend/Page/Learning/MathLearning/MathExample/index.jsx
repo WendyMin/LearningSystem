@@ -9,6 +9,8 @@ import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFuncti
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
+import { actions as MathGetExampleActions } from 'Connected/MathGetExample';
+
 class MathExample extends React.PureComponent {
   constructor( props ){
     super( props );
@@ -17,12 +19,33 @@ class MathExample extends React.PureComponent {
     }
   }
 
+  componentDidMount(){
+    this.getMathExample();
+  }
+
+  getMathExample = () => {
+    this.props.loadMathExample({
+      url: "/api/math_getExample",
+      body: {
+        type1: this.props.partPY,
+        type2: this.props.chapterPY,
+        type3: this.props.sectionPY,
+      }
+    })
+  }
 
   render(){
 
     const {
       setLearningType,
       learningType,
+      example,
+      partCN,
+      chapterCN,
+      sectionCN,
+      partPY,
+      chapterPY,
+      sectionPY,
     } = this.props;
 
     return(
@@ -32,7 +55,9 @@ class MathExample extends React.PureComponent {
         <div className="col-lg-2"></div>
 
         <div className="col-lg-8">
-          <p>重点例题</p>
+        {
+          example.map((onePict , key) => <img src = {onePict}/>)
+        }
         </div>
 
         <div className="col-lg-2"></div>
@@ -66,10 +91,12 @@ export default applyHOCs([
     state => ({
       username: state.UserManager.name,
       learningType: state.LearningTypeSelect.learningType,
+      example: state.MathGetExample.content
     }),
     dispatch => ({
       ...bindActionCreators( LearningTypeSelectActions , dispatch ),
       ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
+      ...bindActionCreators( MathGetExampleActions , dispatch ),
     })
   )],
   MathExample

@@ -28,6 +28,7 @@ import { reducer as LogicState } from 'Connected/LogicState';
 import { reducer as MathLevelTest } from 'Connected/MathLevelTest';
 import { reducer as MathLevelTestTongji } from 'Connected/MathLevelTestTongji';
 import { reducer as MathGetKnowledge } from 'Connected/MathGetKnowledge';
+import { reducer as MathGetExample } from 'Connected/MathGetExample';
 
 //import { reducer as ... } from 'Connected/...';
 
@@ -60,6 +61,7 @@ export default {
   LogicState: LogicState,
   MathLevelTest: MathLevelTest,
   MathLevelTestTongji: MathLevelTestTongji,
-  MathGetKnowledge: MathGetKnowledge
+  MathGetKnowledge: MathGetKnowledge,
+  MathGetExample: MathGetExample,
   //others
 };

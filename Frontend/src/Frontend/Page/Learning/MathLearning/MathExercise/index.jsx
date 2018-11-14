@@ -17,6 +17,8 @@ class MathExercise extends React.PureComponent {
     }
   }
 
+
+
   render(){
 
     const {

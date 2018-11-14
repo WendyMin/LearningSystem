@@ -61,7 +61,7 @@ class MathKnowledge extends React.PureComponent {
           knowledge.map((onePict , key) => <img src = {onePict}/>)
         }
         </div>
-        
+
         <div className="col-lg-2"></div>
 
         <div className="row">
