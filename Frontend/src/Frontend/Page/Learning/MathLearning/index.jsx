@@ -23,6 +23,10 @@ import { actions as UserManagerActions } from 'Connected/UserManager';
 import  { view as SubjectSelect } from 'Connected/SubjectSelect';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
+import {
+  view as Feedback,
+  actions as FeedbackActions
+} from 'Connected/Feedback';
 
 var sha1 = require('sha1');
 
@@ -236,7 +240,7 @@ class MathLearning extends React.PureComponent {
                     choice==2 ? <MathReview/> :
                     choice==3 ? <MathChart/> :
                     choice==4 ? <div className="card-box"><MathHelp/></div> :
-                    choice==5 ? <p>问题反馈</p> :
+                    choice==5 ? <Feedback /> :
                     null
                   }
 

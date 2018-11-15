@@ -25,7 +25,7 @@ class Suanshu extends React.PureComponent {
     this.pingMianCN = ["三角形" , "四边形" , "圆与扇形"];
     this.pingMianPY = ["sanjiaoxing" , "sibianxing" , "yuanyushanxing"];
     this.jieXiCN = ["平面直角坐标系" , "直线的方程" , "圆的方程"];
-    this.jieXiPY = ["pingmianzhijiaozuobianxi" , "zhixiandefangcheng" , "yuandefangcheng"];
+    this.jieXiPY = ["pingmianzhijiaozuobiaoxi" , "zhixiandefangcheng" , "yuandefangcheng"];
     this.liTiCN = ["长方体" , "柱体、球体"];
     this.liTiPY = ["changfangti" , "zhutiqiuti"];
     this.state = {
