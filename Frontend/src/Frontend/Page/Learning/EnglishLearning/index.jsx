@@ -22,6 +22,10 @@ import Login from 'Page/Login';
 import  { view as SubjectSelect } from 'Connected/SubjectSelect';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
+import {
+  view as Feedback,
+  actions as FeedbackActions
+} from 'Connected/Feedback';
 
 var sha1 = require('sha1');
 
@@ -78,7 +82,10 @@ class EnglishLearning extends React.PureComponent {
                        </div> :
                        choice==2 ? <div>英语  > 开始复习</div> :
                        choice==3 ? <div>英语  > 统计图表</div> :
-                       <div>英语  > 科目帮助</div>}
+                       choice==4 ? <div>英语  > 科目帮助</div> :
+                       choice==5 ? <div>英语  > 问题反馈</div> :
+                       <div>英语  </div>
+                     }
                     </h4>
                   </li>
                 </ul>
@@ -151,6 +158,13 @@ class EnglishLearning extends React.PureComponent {
                       </a>
                     </li>
 
+                    <li onClick={()=>this.props.setSubjectFunctionSelect(5)}>
+                      <a className="waves-effect" style={choice==5?{"color":"#71b6f9"}:null}>
+                        <i className="zmdi  zmdi-pin-help"></i>
+                        <span> 问题反馈 </span>
+                      </a>
+                    </li>
+
 
                   </ul>
                  <div className="clearfix"></div>
@@ -176,7 +190,9 @@ class EnglishLearning extends React.PureComponent {
                     choice==1 ? <EngLearningTypeSelect/> :
                     choice==2 ? <EngReview/> :
                     choice==3 ? <EngChart/> :
-                    <div className="card-box"><EnglishHelp/></div>
+                    choice==4 ? <div className="card-box"><EnglishHelp/></div> :
+                    choice==5 ? <Feedback /> :
+                    null
                   }
 
                 </div>

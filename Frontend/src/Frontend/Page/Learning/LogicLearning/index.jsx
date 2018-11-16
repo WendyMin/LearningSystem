@@ -7,6 +7,10 @@ import { actions as UserManagerActions } from 'Connected/UserManager';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 import { actions as ButtonExpandActions } from 'Connected/ButtonExpand';
+import {
+  view as Feedback,
+  actions as FeedbackActions
+} from 'Connected/Feedback';
 
 import LogicTest from 'Page/Learning/LogicLearning/LogicTest';
 import EnterLearning from 'Page/Learning/LogicLearning/EnterLearning';
@@ -76,7 +80,10 @@ class LogicLearning extends React.PureComponent {
                       </span> :
                        choice==3 ? <span> > 模拟测试</span> :
                        choice==4 ? <span> > 数据统计</span> :
-                       <span> > 科目帮助</span>}
+                       choice==5 ? <span> > 科目帮助</span> :
+                       choice==6 ? <span> > 问题反馈</span> :
+                       null
+                     }
                     </h4>
                   </li>
                 </ul>
@@ -138,6 +145,14 @@ class LogicLearning extends React.PureComponent {
                     <li onClick={()=>this.props.setSubjectFunctionSelect(5)}>
                       <a className="waves-effect" style={choice==5?{"color":"#71b6f9"}:null}><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
                     </li>
+
+                    <li onClick={()=>this.props.setSubjectFunctionSelect(6)}>
+                      <a className="waves-effect" style={choice==6?{"color":"#71b6f9"}:null}>
+                        <i className="zmdi  zmdi-pin-help"></i>
+                        <span> 问题反馈 </span>
+                      </a>
+                    </li>
+
                   </ul>
                  <div className="clearfix"></div>
                 </div>
@@ -162,7 +177,9 @@ class LogicLearning extends React.PureComponent {
                      choice==2 ? <LogicReview/> :
                      choice==3 ? <SimulationTest/> :
                      choice==4 ? <LogicStatistics/> :
-                      <div className="card-box"><LogicHelp/></div>
+                     choice==5 ? <div className="card-box"><LogicHelp/></div> :
+                     choice==6 ? <Feedback /> :
+                     null
                     }
                    </div>
                    :
