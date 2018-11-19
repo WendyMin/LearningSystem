@@ -21,7 +21,7 @@ function mathLevelTestDecideNextQuestion( questions , type , level ){
 
   var convert_type = Number( convert( type ) );
   // var convert_type = convert( type );
-  console.log(convert_type == 0 && level < 2)
+  // console.log(convert_type == 0 && level < 2)
 
   if(  convert_type == 0 && level < 1 || convert_type == 1 && level < 4 || convert_type == 2 && level < 3
     || convert_type == 3 && level < 1 || convert_type == 4 && level < 1 || convert_type == 5 && level < 2

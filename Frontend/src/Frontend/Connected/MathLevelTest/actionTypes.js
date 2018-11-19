@@ -17,3 +17,4 @@ export const __ASYNC_LOAD_QUESTIONS = {
 export const __NEXT = "MathLevelTest/__NEXT";
 export const __AUTO_NEXT = "MathLevelTest/__AUTO_NEXT";
 export const __FORCE_END = "MathLevelTest/__FORCE_END";
+export const __FORCE_CLEAR_QUESTIONS = "MATH_LEVEL_TEST/__FORCE_CLEAR_QUESTIONS";
