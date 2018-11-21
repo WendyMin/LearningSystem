@@ -32,7 +32,16 @@ class DataFormatConversion extends React.PureComponent {
   //     this.dataParse();
   //   }
   // }
-  
+  componentDidUpdate(prevProps,prevState){
+    if(prevProps.data !== this.props.data) {
+      document.getElementById(this.props.id).innerHTML = "<textarea class=" + "disappear"//style={{"display": "none;"}}
+      //defaultValue={data} onChange={()=>this.dataParse(id)}
+      + ">" + this.props.data + "</textarea>";
+      this.dataParse();
+    }
+  }
+
+
 
   render(){
     const { id , data , num } = this.props;

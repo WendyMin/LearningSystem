@@ -68,7 +68,7 @@ class MathSingleQuestion extends React.PureComponent<Props> {
       onTryChange,
     } = this.props;
     // console.log(this.props)
-    console.log(question,options,analysis)
+    // console.log(question,options,analysis)
 
     var checked = [];
     var highlighted = [];
