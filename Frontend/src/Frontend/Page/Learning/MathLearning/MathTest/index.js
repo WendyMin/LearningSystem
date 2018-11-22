@@ -18,10 +18,7 @@ import {
 } from 'Connected/MathLevelTestTongji';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 
-// import changeAlpToNum from 'Algorithm/changeAlpToNum';
-// import decideNextQuestion from 'Algorithm/decideNextQuestion';
 import mathLevelTestRightRate from 'Algorithm/mathLevelTestRightRate';
-
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
@@ -38,6 +35,7 @@ class MathTest extends React.PureComponent {
   }
 
   loadQuestions = () => {
+    // this.props.forceClearQuestions();
     this.props.loadTestQuestions({
       url: "/api/mathLevelTest",
     })

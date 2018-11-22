@@ -6,7 +6,8 @@ import {
   __ASYNC_SUBMIT_QUESTIONS,
   __NEXT,
   __AUTO_NEXT,
-  __FORCE_END
+  __FORCE_END,
+  __FORCE_CLEAR_QUESTIONS
 } from 'actionTypes';
 
 import nextQuestion from "Algorithm/mathLevelTestDecideNextQuestion";
@@ -153,9 +154,9 @@ export default ( state = {
 
     case __NEXT: {
       let list = state.content;
-      console.log(list,state.nowAt.qtype , state.nowAt.level)
+      // console.log(list,state.nowAt.qtype , state.nowAt.level)
       let [ qtype , level , end , right_rate] = nextQuestion( list , state.nowAt.qtype , state.nowAt.level );
-      console.log(qtype , level , end)
+      // console.log(qtype , level , end)
       return {
         ...state,
         nowAt: {
@@ -176,6 +177,29 @@ export default ( state = {
           qtype: "整数与分数",
           level: 0,
           xuhao: 1
+        },
+      };
+    };
+
+    case __FORCE_CLEAR_QUESTIONS: {
+      return {
+        ...state,
+        content: {},
+        submitState: {
+          pending: 0,
+          resolved: 0,
+          rejected: 0,
+          lastFailed: false,
+          failedReason: "network", // "json" , "server"
+          failedDetail: null
+        },
+        loadState: {
+          pending: 0,
+          resolved: 0,
+          rejected: 0,
+          lastFailed: false,
+          failedReason: "network", // "json" , "server"
+          failedDetail: null
         },
       };
     };

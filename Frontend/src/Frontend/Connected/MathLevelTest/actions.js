@@ -6,7 +6,8 @@ import {
   __NEXT,
   __AUTO_NEXT,
   __CLEAR_AUTO_NEXT,
-  __FORCE_END
+  __FORCE_END,
+  __FORCE_CLEAR_QUESTIONS
 } from 'actionTypes';
 
 export const forceEnd = () => ({
@@ -193,3 +194,9 @@ export const loadTestQuestions = ({ url , body , parser , headers  , initState }
       dispatchLastest( loadTestQuestionsRejected( "network" , err ) );
   });
 };
+
+export const forceClearQuestions = () => ({
+  type: __FORCE_CLEAR_QUESTIONS,
+  payload: {
+  }
+});

@@ -3,8 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actionCreators from 'actions';
 
-import Question from 'UI/SingleQuestion';
-import changeAlpToNum from 'Algorithm/changeAlpToNum';
+// import Question from 'UI/SingleQuestion';
+import Question from 'UI/MathSingleQuestion';
+// import changeAlpToNum from 'Algorithm/changeAlpToNum';
 import style from 'style';
 
 class MathLevelTest extends React.PureComponent {
@@ -22,7 +23,7 @@ class MathLevelTest extends React.PureComponent {
       xuhao
     } = this.props;
     // console.log(questions)
-    console.log(qtype)
+    // console.log(qtype)
 
     var question = {
       qtype: questions[qtype][level].type,
@@ -31,15 +32,11 @@ class MathLevelTest extends React.PureComponent {
       questionId: questions[qtype][level].id,
       question: questions[qtype][level].question,
       options: questions[qtype][level].option,
-      // options: [questions[qtype][level].op_one, questions[qtype][level].op_two , questions[qtype][level].op_three, questions[qtype][level].op_four , questions[qtype][level].op_five],
       analysis: questions[qtype][level].analysis,
       rightKey: questions[qtype][level].answer,
-      // rightKey: changeAlpToNum( questions[qtype][level].answer ),  //need to changge ABC to 123
       lock: questions[qtype][level].lock,
       show: questions[qtype][level].show
     }
-    //console.log(question )
-    // console.log(xuhao)
 
     return (
       <div className="container">
@@ -48,9 +45,9 @@ class MathLevelTest extends React.PureComponent {
         <Question
           {...question}
           layoutFormat = "leftRight"
-          whetherHaveXuhao = {true}
+          // whetherHaveXuhao = {true}
           xuhao = {xuhao}
-          decode = {true}
+          // whetherNeedDecode = {true}
           onSetChoice={ cid => {
               autoNext( cid , 10000 );
             }
