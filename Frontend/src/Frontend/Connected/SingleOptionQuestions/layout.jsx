@@ -5,6 +5,7 @@ import * as actionCreators from 'actions';
 import Button from 'UI/Button';
 
 import Question from 'UI/SingleQuestion';
+import MathQuestion from 'UI/MathSingleQuestion';
 
 import AppearUD from 'Animation/AppearUD';
 
@@ -19,6 +20,7 @@ class SingleOptionQuestions extends React.PureComponent {
   }
   render(){
     const {
+      subject,
       layoutFormat,
       questionLength,
       paraLength,
@@ -35,6 +37,18 @@ class SingleOptionQuestions extends React.PureComponent {
       {
         questions.map( ( question , xuhao ) =>
           <div key={question.questionId} style={questionSize}>
+          {
+            subject == "math" ?
+            <MathQuestion
+              layoutFormat={layoutFormat}
+              // questionLength={questionLength}
+              // paraLength = {paraLength}
+              // whetherHaveXuhao = {whetherHaveXuhao}
+              xuhao={xuhao + 1}
+              {...question}
+              onSetChoice={( cid ) => setChoice( question.questionId , cid )}
+            />
+            :
             <Question
               layoutFormat={layoutFormat}
               questionLength={questionLength}
@@ -44,6 +58,8 @@ class SingleOptionQuestions extends React.PureComponent {
               {...question}
               onSetChoice={( cid ) => setChoice( question.questionId , cid )}
             />
+          }
+
           </div>
         )
       }
