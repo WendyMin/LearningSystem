@@ -30,6 +30,7 @@ import { reducer as MathLevelTestTongji } from 'Connected/MathLevelTestTongji';
 import { reducer as MathGetKnowledge } from 'Connected/MathGetKnowledge';
 import { reducer as DataParse } from 'Connected/DataParse';
 import { reducer as MathGetExample } from 'Connected/MathGetExample';
+import { reducer as MathReviewPort } from 'Connected/MathReviewPort';
 import { reducer as Feedback } from 'Connected/Feedback';
 
 //import { reducer as ... } from 'Connected/...';
@@ -66,6 +67,7 @@ export default {
   MathGetKnowledge: MathGetKnowledge,
   DataParse: DataParse,
   MathGetExample: MathGetExample,
+  MathReviewPort: MathReviewPort,
   Feedback: Feedback,
   //others
 };
