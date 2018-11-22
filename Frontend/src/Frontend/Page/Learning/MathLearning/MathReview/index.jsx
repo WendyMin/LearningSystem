@@ -36,8 +36,8 @@ class MathReview extends React.PureComponent {
     this.props.loadReviewList({
       url: "/api/math_getReviewList",
       body: {
-        username: this.props.username,
-        // username: "202513",
+        // username: this.props.username,
+        username: "202513",
       }
     })
   }
