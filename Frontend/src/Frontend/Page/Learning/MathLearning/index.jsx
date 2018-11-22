@@ -205,7 +205,7 @@ class MathLearning extends React.PureComponent {
                     </li>
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(5)}>
-                      <a className="waves-effect" style={choice==4?{"color":"#71b6f9"}:null}>
+                      <a className="waves-effect" style={choice==5?{"color":"#71b6f9"}:null}>
                         <i className="zmdi  zmdi-pin-help"></i>
                         <span> 问题反馈 </span>
                       </a>

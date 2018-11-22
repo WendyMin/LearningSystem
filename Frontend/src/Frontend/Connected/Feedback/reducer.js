@@ -41,7 +41,7 @@ export default ( state = {
       return {
         ...state,
         loadState,
-        success: response,
+        success: response.success,
       };
     }
 

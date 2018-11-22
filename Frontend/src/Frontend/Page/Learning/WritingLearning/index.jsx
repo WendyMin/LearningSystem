@@ -7,6 +7,11 @@ import { actions as UserManagerActions } from 'Connected/UserManager';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 import { actions as ButtonExpandActions } from 'Connected/ButtonExpand';
+import {
+  view as Feedback,
+  actions as FeedbackActions
+} from 'Connected/Feedback';
+
 import EnterLearning from 'Page/Learning/WritingLearning/EnterLearning';
 import WriteHelp from 'UI/Help/WriteHelp';
 
@@ -63,7 +68,10 @@ class WritingPage extends React.PureComponent {
                             <span> > {this.props.type} </span>
                           }
                         </span> :
-                       <span> > 科目帮助</span>}
+                        choice==1 ?  <span> > 科目帮助</span> :
+                        choice==2 ? <span> > 问题反馈</span> :
+                        null
+                      }
                       {/* {choice==0 ?
                         <div>
                           写作 > 进入学习
@@ -126,6 +134,13 @@ class WritingPage extends React.PureComponent {
                     <a className="waves-effect" style={choice==1?{"color":"#71b6f9"}:null}><i className="zmdi  zmdi-pin-help"></i> <span> 查看帮助 </span> </a>
                   </li>
 
+                  <li onClick={()=>this.props.setSubjectFunctionSelect(2)}>
+                    <a className="waves-effect" style={choice==2?{"color":"#71b6f9"}:null}>
+                      <i className="zmdi  zmdi-pin-help"></i>
+                      <span> 问题反馈 </span>
+                    </a>
+                  </li>
+
                 </ul>
                <div className="clearfix"></div>
               </div>
@@ -146,7 +161,9 @@ class WritingPage extends React.PureComponent {
                 <div className="row">
                   {choice===0 || choice === 100 ?
                   <EnterLearning/> :
-                  <div className="card-box"><WriteHelp/></div>
+                  choice==1 ? <div className="card-box"><WriteHelp/></div> :
+                  choice==2 ? <Feedback /> :
+                  null
                   }
                 </div>
 

@@ -7,9 +7,15 @@ import style from 'style';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
+import SystemHelp from 'UI/Help/SystemHelp';
+
 import { actions as UserManagerActions } from 'Connected/UserManager';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import { actions as PortTestActions } from 'Connected/PortTest';
+import {
+  view as Feedback,
+  actions as FeedbackActions
+} from 'Connected/Feedback';
 
 var sha1 = require('sha1');
 
@@ -71,7 +77,7 @@ class IndexPage extends React.Component {
                     <h4 className="page-title">
                       {
                         choice==0 ? <div>主页  > 课程信息</div> :
-                        choice==1 ? <div>主页  > 用户信息</div> :
+                        // choice==1 ? <div>主页  > 用户信息</div> :
                         choice==2 ? <div>主页  > 查看帮助</div> :
                                     <div>主页  > 问题反馈</div>
                      }
@@ -119,12 +125,12 @@ class IndexPage extends React.Component {
                       </a>
                     </li>
 
-                    <li onClick={()=>this.props.setSubjectFunctionSelect(1)}>
+                    {/*<li onClick={()=>this.props.setSubjectFunctionSelect(1)}>
                       <a href="javascript:void(0);" className="waves-effect" style={choice==1?{"color":"#71b6f9"}:null}>
                         <i className="zmdi zmdi-library"></i>
                         <span> 用户信息 </span>
                       </a>
-                    </li>
+                    </li>*/}
 
                     <li onClick={()=>this.props.setSubjectFunctionSelect(2)}>
                       <a className="waves-effect" style={choice==2?{"color":"#71b6f9"}:null}>
@@ -311,9 +317,10 @@ class IndexPage extends React.Component {
 
 
                   :
-                  choice==1 ? <p>用户信息</p> :
-                  choice==2 ? <p>查看帮助</p> :
-                  <p>问题反馈</p>
+                  // choice==1 ? <p>用户信息</p> :
+                  choice==2 ? <div className="card-box"><SystemHelp /></div> :
+                  choice==3 ? <Feedback /> :
+                  null
                 }
 
               </div>

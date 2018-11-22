@@ -3,40 +3,40 @@ import {
 } from 'actionTypes';
 
 
-let loadFeedbackCounter = 0;
-const loadFeedbackStart = () => ({
+let sendFeedbackCounter = 0;
+const sendFeedbackStart = () => ({
     type: __ASYNC_SEND_FEEDBACK.pending,
     payload: {
 
     },
-    id: loadFeedbackCounter
+    id: sendFeedbackCounter
 });
-const loadFeedbackResolved = ( response , initState ) => ({
+const sendFeedbackResolved = ( response , initState ) => ({
     type: __ASYNC_SEND_FEEDBACK.resolved,
     payload: {
       response,
       initState
     },
-    id: loadFeedbackCounter
+    id: sendFeedbackCounter
 });
-const loadFeedbackRejected = ( reason , detail ) => ({
+const sendFeedbackRejected = ( reason , detail ) => ({
     type: __ASYNC_SEND_FEEDBACK.rejected,
     payload: {
       reason,
       detail
     },
-    id: loadFeedbackCounter
+    id: sendFeedbackCounter
 });
 
 
-export const loadFeedback = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
-    const reqId = ++loadFeedbackCounter;
+export const sendFeedback = ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+    const reqId = ++sendFeedbackCounter;
     const dispatchLastest = action => {
-      if( reqId === loadFeedbackCounter ){
+      if( reqId === sendFeedbackCounter ){
         dispatch( action );
       }
     }
-    dispatch( loadFeedbackStart() );
+    dispatch( sendFeedbackStart() );
     if( typeof body === "object" ){
       body = JSON.stringify( body );
     }
@@ -50,16 +50,16 @@ export const loadFeedback = ({ url , body , parser , headers  , initState }) => 
     })
   .then( response => {
     if( !response.ok ){
-      dispatchLastest( loadFeedbackRejected( "server" , response.status ) );
+      dispatchLastest( sendFeedbackRejected( "server" , response.status ) );
       return;
     }
    response.json()
-    .then( json => dispatchLastest( loadFeedbackResolved(  json  , initState ) ) )
+    .then( json => dispatchLastest( sendFeedbackResolved(  json  , initState ) ) )
     .catch( err => {
-      dispatchLastest( loadFeedbackRejected( "json" , err ) )
+      dispatchLastest( sendFeedbackRejected( "json" , err ) )
   });
   })
   .catch( err => {
-      dispatchLastest( loadFeedbackRejected( "network" , err ) );
+      dispatchLastest( sendFeedbackRejected( "network" , err ) );
  });
 };
