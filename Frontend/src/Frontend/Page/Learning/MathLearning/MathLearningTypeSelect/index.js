@@ -128,7 +128,11 @@ class MathLearningTypeSelect extends React.PureComponent {
              partCN = {this.props.partCN} chapterCN = {this.props.chapterCN} sectionCN = {this.props.sectionCN}
              partPY = {this.props.partPY} chapterPY = {this.props.chapterPY} sectionPY = {this.props.sectionPY}
              />
-            :learningType == "数学习题" ? <MathExercise />
+            :learningType == "数学习题" ?
+            <MathExercise
+             partCN = {this.props.partCN} chapterCN = {this.props.chapterCN} sectionCN = {this.props.sectionCN}
+             partPY = {this.props.partPY} chapterPY = {this.props.chapterPY} sectionPY = {this.props.sectionPY}
+            />
             :null
           }
         </div>

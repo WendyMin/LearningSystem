@@ -107,7 +107,7 @@ class MathSingleQuestion extends React.PureComponent<Props> {
               <div className="card-box">
                 <div className={questionStyle}>
                   <span style = {{"color":"#71b6f9"}}>{xuhao}.&nbsp;&nbsp;</span>
-                  <span><DataFormatConversion id = "question" data={question}/></span>
+                  <span><DataFormatConversion id = {`question${xuhao}`} data={question}/></span>
                   {/*<span>{question}</span>*/}
                 </div>
               <br/>
@@ -127,7 +127,7 @@ class MathSingleQuestion extends React.PureComponent<Props> {
                              readOnly={ lock ? 'readonly' : ''}
                       />
                       <label htmlFor={`question${questionId}option${key}`} style={{"lineHeight":"20px"}}>
-                        <DataFormatConversion id={`option${key}`} data={option}/>
+                        <DataFormatConversion id={`question${xuhao}option${key}`} data={option}/>
                         {/*{option}*/}
                       </label>
                    </div>
@@ -141,7 +141,7 @@ class MathSingleQuestion extends React.PureComponent<Props> {
               show ?
               <div className="col-sm-4">
                 <div className="card-box">
-                  <DataFormatConversion id="analysis" data={analysis}/>
+                  <DataFormatConversion id={`question${xuhao}analysis`} data={analysis}/>
                 </div>
               </div>
               :

@@ -74,6 +74,18 @@ class UITest extends React.PureComponent {
         利用S<sub>阴影</sub>=S<sub>菱形</sub>-2S<sub>扇形</sub>=$$\frac{1}{2}\times2\sqrt{3}\times2-$$
         $$2\times\frac{1}{6}\pi\times(\sqrt{3})^2=2\sqrt{3}-\pi$$"/>
 
+        <DataFormatConversion id = "demo444" data="$$(a+1)^2>(b+1)^2 $$
+           $$\Longleftrightarrow(a+1)^2-(b+1)^2>0$$
+           $$\Longleftrightarrow a^2+2a+1-b^2-2b-1>0$$
+           $$\Longleftrightarrow a^2-b^2+2a-2b>0$$
+           $$\Longleftrightarrow (a-b)(a+b)+2(a-b)>0 $$
+           $$\Longleftrightarrow (a-b)(a+b+2)>0$$"
+        />
+
+
+<DataFormatConversion id = "demo1111" data='$$a<b\Longleftrightarrow a-b<0$$'/>
+
+
         <DataFormatConversion id = "demo11" data={this.state.varData}/>
 
 
