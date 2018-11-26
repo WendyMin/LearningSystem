@@ -3,26 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import style from 'style';
 
-import {
-  view as LogicReviewModel,
-  actions as LogicReviewModelActions
-} from 'Connected/LogicReviewModel';
-import { actions as ZhentiPerYearTongjiActions } from 'Connected/ZhentiPerYearTongji';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
-import {
-  view as SingleOptionQuestions,
-  actions as SingleOptionQuestionsActions
-} from 'Connected/SingleOptionQuestions';
-// import { actions as ZhentiPerYearTongjiActions } from 'Connected/ZhentiPerYearTongji';
-import changeAlpToNum from 'Algorithm/changeAlpToNum';
-
-import Button from 'UI/Button';
-import Note from 'UI/Note';
-import LogicReviewError from 'UI/LogicReviewError';
-import LogicReviewContent from 'Page/Learning/LogicLearning/LogicReviewContent';
 import { actions as MathReviewPortActions } from 'Connected/MathReviewPort';
 
+import Note from 'UI/Note';
 import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
@@ -133,7 +118,6 @@ export default applyHOCs([
   makePage,
   connect(
     state => ({
-      choice: state.LogicReviewModel.choice,
       learningType: state.LearningTypeSelect.learningType,
       reviewlistpass: state.MathReviewPort.reviewlist.Reach_standard,
       reviewlistunpass: state.MathReviewPort.reviewlist.Unreach_standard,
