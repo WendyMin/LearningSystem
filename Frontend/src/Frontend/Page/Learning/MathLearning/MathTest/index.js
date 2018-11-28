@@ -67,7 +67,7 @@ class MathTest extends React.PureComponent {
     for(var key in right_rate){
       rightRate += `${right_rate[key]}*`
     }
-    console.log(rightRate)
+    // console.log(rightRate)
 
    this.props.submitQuestions({
       url: "/api/mathRecordLevelTestResult",
