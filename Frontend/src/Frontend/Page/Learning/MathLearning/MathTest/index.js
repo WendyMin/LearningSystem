@@ -40,17 +40,18 @@ class MathTest extends React.PureComponent {
       url: "/api/mathLevelTest",
     })
   }
-  loadTestResult = () => {
+  loadTestResult = (username) => {
+    console.log(username)
     this.props.loadMathLevelTestTongjiContent({
       url: "/api/mathGetLevelTestLatestResult",
       body: {
-        username: this.props.username
+        username: username
       }
     });
     this.props.loadMathLevelTestMeanTongjiContent({
       url: "/api/mathGetLevelTestMeanResult",
       body: {
-        username: this.props.username
+        username: username
       }
     });
   }
@@ -79,16 +80,19 @@ class MathTest extends React.PureComponent {
 
     this.submit = true;
     if(this.submit) {
-      this.loadTestResult();
+      this.loadTestResult(username);
     }
 
   }
 
   componentDidMount(){
     this.loadQuestions();
-    this.loadTestResult();
+    // this.loadTestResult();
   }
   componentWillReceiveProps( NextProps ){
+    if( this.props.username == undefined && NextProps.username != undefined ){
+      this.loadTestResult(NextProps.username);
+    }
     if(this.props.testend == false && NextProps.testend == true){
       this.submitQuestions();
     }
@@ -113,7 +117,7 @@ class MathTest extends React.PureComponent {
          {
            this.state.enterTest && whetherDidTest || this.state.enterTest && testend || this.state.testAgain && testend ?
            <div className="card-box">
-             <MathLevelTestTongji loadTestResult = {() => this.loadTestResult()}/><br/>
+             <MathLevelTestTongji loadTestResult = {() => this.loadTestResult(this.props.username)}/><br/>
              <div align="center">
                <Button text = "再测一次" onClick = {() => {this.setState({enterTest: false , testAgain: true , startTestNoteShow: true});this.props.forceEnd();this.loadQuestions()}}/>
              </div>

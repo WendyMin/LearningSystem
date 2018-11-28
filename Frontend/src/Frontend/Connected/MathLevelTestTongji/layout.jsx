@@ -87,7 +87,7 @@ class MathLevelTestTongji extends React.PureComponent {
           </div>
           }
         <div style = {{"color":"#f9c851"}}>一般学习</div>
-          {yiban.length == 0 ? <div>您目前没有需要重点学习的模块</div> :
+          {yiban.length == 0 ? <div>您目前没有需要一般学习的模块</div> :
           <div>
             {yiban.map((oneChapter , key) => <li className = {style.onetype} key = {key}>{oneChapter}&nbsp;&nbsp;&nbsp;&nbsp;</li>)}
           </div>
