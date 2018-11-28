@@ -63,7 +63,7 @@ class MathLevelTestTongji extends React.PureComponent {
               <th scope="row">正确率</th>
               {this_rightRate.map((oneError , key) =>
                 <td key = {key} style={{"vertical-align":"middle"}}>
-                  {parseFloat(oneError).toFixed(2)}     
+                  {parseFloat(oneError).toFixed(2)}
                   {flag == 1 ?
                     <span style={{"color":"#797979","paddingLeft":"15px"}}>
                       {upOrDown[key] == 1 ? <i className="fa fa-long-arrow-up"></i> :
@@ -78,15 +78,16 @@ class MathLevelTestTongji extends React.PureComponent {
           </tbody>
         </table><br/>
 
-        <div style = {{"color":"#71b6f9"}} align = "center">根据您的测试情况，系统推荐您需要重点和一般学习的章节如下:</div><br/>
+        {/*<div style = {{"color":"#71b6f9"}} align = "center">根据您的测试情况，系统推荐您需要重点和一般学习的章节如下:</div><br/>*/}
+        <div style = {{"color":"#71b6f9"}} align = "center">针对您的本次测试情况，系统建议您需要重点和一般学习的模块如下:</div><br/>
         <div style = {{"color":"#f9c851"}}>重点学习</div>
-          {zhongdian.length == 0 ? <div>您目前没有需要重点学习的章节</div> :
+          {zhongdian.length == 0 ? <div>您目前没有需要重点学习的模块</div> :
           <div>
             {zhongdian.map((oneChapter , key) => <li className = {style.onetype} key = {key}>{oneChapter}&nbsp;&nbsp;&nbsp;&nbsp;</li>)}<br/><br/>
           </div>
           }
         <div style = {{"color":"#f9c851"}}>一般学习</div>
-          {yiban.length == 0 ? <div>您目前没有需要重点学习的章节</div> :
+          {yiban.length == 0 ? <div>您目前没有需要重点学习的模块</div> :
           <div>
             {yiban.map((oneChapter , key) => <li className = {style.onetype} key = {key}>{oneChapter}&nbsp;&nbsp;&nbsp;&nbsp;</li>)}
           </div>
