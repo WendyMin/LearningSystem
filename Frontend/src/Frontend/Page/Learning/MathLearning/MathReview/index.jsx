@@ -6,6 +6,8 @@ import style from 'style';
 import { actions as LearningTypeSelectActions } from 'Connected/LearningTypeSelect';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import { actions as MathReviewPortActions } from 'Connected/MathReviewPort';
+import ReviewWrongQuestions from 'Page/Learning/MathLearning/ReviewWrongQuestions';
+import ReviewNewQuestions from 'Page/Learning/MathLearning/ReviewNewQuestions';
 
 import Note from 'UI/Note';
 import makePage from 'direct-core/makePage';
@@ -59,8 +61,8 @@ class MathReview extends React.PureComponent {
       <React.Fragment>
 
         {
-          showCuoti ? <p>错题 {chapterCN} {sectionCN}</p> :
-          showXinti ? <p>新题 {chapterCN} {sectionCN}</p> :
+          showCuoti ? <ReviewWrongQuestions chapterCN={this.state.chapterCN} sectionCN={this.state.sectionCN} onClick={()=>this.setState({showCuoti:false,showXinti:false})}/> :
+          showXinti ? <ReviewNewQuestions chapterCN={this.state.chapterCN} sectionCN={this.state.sectionCN} onClick={()=>this.setState({showCuoti:false,showXinti:false})}/> :
           <div className="row">
 
               <div className="col-lg-6">

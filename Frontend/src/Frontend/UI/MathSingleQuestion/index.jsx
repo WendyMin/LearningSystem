@@ -152,23 +152,14 @@ class MathSingleQuestion extends React.PureComponent<Props> {
           :
           layoutFormat === "upDown" ?
           <div className={style.wholeQuestion}>
-          <div className="col-sm-12">
-          <div className="card-box">
-            {questionLength === "single" ?
-            <div className={questionStyle}>
-              {whetherHaveXuhao ? <div><span style = {{"color":"#71b6f9"}}>{xuhao}.&nbsp;&nbsp;</span>{question}</div>:
-              <div>{question}</div>
-              }
-            </div> :
-            <div>
-              {whetherHaveXuhao ?
-              <div>
-                {question.map((one,key) => <div className={questionStyle} key={key}>{key==0?<span style = {{"color":"#71b6f9"}}>{xuhao}.&nbsp;&nbsp;</span>:null}{one}</div>)}
-              </div>:
-              <div>{question.map((one,key) => <div className={questionStyle} key={key}>{one}</div>)}</div>
-              }
-            </div>
-          }<br/>
+           <div className="col-sm-12">
+            <div className="card-box">
+             <div className={questionStyle}>
+               <span style = {{"color":"#71b6f9"}}>{xuhao}.&nbsp;&nbsp;</span>
+               <span><DataFormatConversion id = {`question${xuhao}`} data={question}/></span>
+               {/*<span>{question}</span>*/}
+             </div>
+          <br/>
 
             {
             options.map( ( option , key ) =>
@@ -185,7 +176,8 @@ class MathSingleQuestion extends React.PureComponent<Props> {
                            readOnly={ lock ? 'readonly' : ''}
                     />
                     <label htmlFor={`question${questionId}option${key}`} style={{"lineHeight":"20px"}}>
-                        {option}
+                      <DataFormatConversion id={`question${xuhao}option${key}`} data={option}/>
+                        {/*{option}*/}
                     </label>
                  </div>
                </div>
@@ -193,11 +185,12 @@ class MathSingleQuestion extends React.PureComponent<Props> {
              }
              {show ?
               <div>
-                { paraLength === "none" ? null :
+                <DataFormatConversion id={`question${xuhao}analysis`} data={analysis}/>
+                {/* paraLength === "none" ? null :
                   paraLength === "single" ?
                   <div>{analysis}</div>:
                   <TextAndImag list={analysis}/>
-                }
+                */}
               </div>
               :null
              }
@@ -214,15 +207,17 @@ class MathSingleQuestion extends React.PureComponent<Props> {
   }
 };
 
+export default MathSingleQuestion;
 
-export default applyHOCs([
-  connect(
-    state => ({
-      // logined: state.UserManager.logined,
-    }),
-    dispatch => ({
-      ...bindActionCreators( DataParseActions , dispatch)
-    })
-  )],
-  MathSingleQuestion
-);
+
+// export default applyHOCs([
+//   connect(
+//     state => ({
+//       // logined: state.UserManager.logined,
+//     }),
+//     dispatch => ({
+//       ...bindActionCreators( DataParseActions , dispatch)
+//     })
+//   )],
+//   MathSingleQuestion
+// );
