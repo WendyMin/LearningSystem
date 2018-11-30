@@ -74,7 +74,7 @@ class MathReview extends React.PureComponent {
                         <li>
                           <div className="card-box kanban-box">
                             <div className="kanban-detail">
-                              <span className="label label-primary pull-right">Unpass</span>
+                              <span className="label label-primary pull-right">Pass</span>
                               <div className={style.title18}> {sectionname[0]}&nbsp;&nbsp;{sectionname[1]}</div>
                               <ul className="list-inline m-b-0">
                                 <li>
