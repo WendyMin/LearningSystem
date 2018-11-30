@@ -13,6 +13,16 @@ import applyHOCs from 'direct-core/applyHOCs';
 
 class MathReview extends React.PureComponent {
 
+  constructor( props ){
+    super( props );
+    this.state = {
+      showCuoti: false,
+      showXinti: false,
+      chapterCN: null,
+      sectionCN: null,
+    };
+  }
+
   componentDidMount(){
     this.getMathReviewList();
   }
@@ -36,73 +46,97 @@ class MathReview extends React.PureComponent {
       reviewlistunpass,
     } = this.props;
 
+    const {
+      showCuoti,
+      showXinti,
+      chapterCN,
+      sectionCN,
+    } = this.state;
+
     // console.log(reviewlistunpass)
 
     return(
       <React.Fragment>
 
+        {
+          showCuoti ? <p>错题 {chapterCN} {sectionCN}</p> :
+          showXinti ? <p>新题 {chapterCN} {sectionCN}</p> :
+          <div className="row">
 
-        <div className="row">
-
-            <div className="col-lg-6">
-              <div className="card-box">
-                <div align="center" style = {{"fontSize":"20px","color":"#188ae2"}}>已达标</div><br/>
-                {
-                  reviewlistpass == undefined?null:
-                  <div>
-                  {reviewlistpass.map(( sectionname , key ) =>
-                    <ul className="list-unstyled task-list" id="drag-upcoming" key = {key}>
-                      <li>
-                          <div className="card-box kanban-box">
-                              <div className="kanban-detail"
-                                  // onClick = {() => { this.setState({showChapter: false , showKnowledge: true,
-                                  //   chapterPY:"zhengshuyufenshu",
-                                  //   sectionPY:nameToPinyin(this.zhengShuYuFenShuCN, this.zhengShuYuFenShuPY, sectionname),
-                                  //   chapterCN:"整数与分数", sectionCN: sectionname }) } }
-                                >
-                                  <span className="label label-primary pull-right">Pass</span>
-                                  <h4><a>{sectionname[0]}&nbsp;&nbsp;{sectionname[1]}</a> </h4>
-                              </div>
-                           </div>
-                      </li>
-                    </ul>
-                  )}
-                  </div>
-                }
-                <br/>
-             </div>
-           </div>
-
-             <div className="col-lg-6">
-               <div className="card-box">
-                  <div align="center" style = {{"fontSize":"20px","color":"#188ae2"}}>未达标</div><br/>
+              <div className="col-lg-6">
+                <div className="card-box">
+                  <div align="center" style = {{"fontSize":"20px","color":"#188ae2"}}>已达标</div><br/>
                   {
-                    reviewlistunpass == undefined?null:
+                    reviewlistpass == undefined?null:
                     <div>
-                    {reviewlistunpass.map(( sectionname , key ) =>
+                    {reviewlistpass.map(( sectionname , key ) =>
                       <ul className="list-unstyled task-list" id="drag-upcoming" key = {key}>
                         <li>
-                            <div className="card-box kanban-box">
-                                <div className="kanban-detail"
-                                    // onClick = {() => { this.setState({showChapter: false , showKnowledge: true,
-                                    //   chapterPY:"zhengshuyufenshu",
-                                    //   sectionPY:nameToPinyin(this.zhengShuYuFenShuCN, this.zhengShuYuFenShuPY, sectionname),
-                                    //   chapterCN:"整数与分数", sectionCN: sectionname }) } }
-                                  >
-                                    <span className="label label-primary pull-right">Unpass</span>
-                                    <h4><a>{sectionname[0]}&nbsp;&nbsp;{sectionname[1]}</a> </h4>
-                                </div>
-                             </div>
+                          <div className="card-box kanban-box">
+                            <div className="kanban-detail">
+                              <span className="label label-primary pull-right">Unpass</span>
+                              <div className={style.title18}> {sectionname[0]}&nbsp;&nbsp;{sectionname[1]}</div>
+                              <ul className="list-inline m-b-0">
+                                <li>
+                                  <br/>
+                                   <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
+                                           onClick = {() => {this.setState({showCuoti: true , showXinti: false ,
+                                           chapterCN: sectionname[0], sectionCN: sectionname[1] }) }}
+                                           >错题集锦</button>
+                                </li>
+                              </ul>
+                            </div>
+                        </div>
                         </li>
                       </ul>
                     )}
                     </div>
                   }
                   <br/>
-              </div>
-            </div>
+               </div>
+             </div>
 
-           </div>
+               <div className="col-lg-6">
+                 <div className="card-box">
+                    <div align="center" style = {{"fontSize":"20px","color":"#188ae2"}}>未达标</div><br/>
+                    {
+                      reviewlistunpass == undefined?null:
+                      <div>
+                      {reviewlistunpass.map(( sectionname , key ) =>
+                        <ul className="list-unstyled task-list" id="drag-upcoming" key = {key}>
+                          <li>
+                           <div className="card-box kanban-box">
+                            <div className="kanban-detail">
+                              <span className="label label-primary pull-right">Unpass</span>
+                              <div className={style.title18}> {sectionname[0]}&nbsp;&nbsp;{sectionname[1]}</div>
+                              <ul className="list-inline m-b-0">
+                                <li>
+                                  <br/>
+                                   <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
+                                           onClick = {() => {this.setState({showCuoti: true , showXinti: false ,
+                                           chapterCN: sectionname[0], sectionCN: sectionname[1] }) }}
+                                           >错题集锦</button>
+                                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                   <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                                        onClick = {() => {this.setState({showCuoti: false , showXinti: true ,
+                                        chapterCN: sectionname[0], sectionCN: sectionname[1] }) }}
+                                        >新练习题</button>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                          </li>
+                        </ul>
+                      )}
+                      </div>
+                    }
+                    <br/>
+                </div>
+              </div>
+
+          </div>
+        }
+
 
 
       </React.Fragment>
