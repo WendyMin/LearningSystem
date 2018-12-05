@@ -34,7 +34,6 @@ class MathReview extends React.PureComponent {
       url: "/api/math_getReviewList",
       body: {
         username: this.props.username,
-        // username: "202513",
       }
     })
   }
