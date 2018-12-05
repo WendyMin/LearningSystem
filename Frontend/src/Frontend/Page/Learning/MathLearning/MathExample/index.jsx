@@ -51,6 +51,7 @@ class MathExample extends React.PureComponent {
     return(
       <React.Fragment>
 
+        <div className={style.title}>{partCN}&nbsp;&nbsp;{chapterCN}&nbsp;&nbsp;{sectionCN}</div><br/>
 
         <div className="col-lg-2"></div>
 
