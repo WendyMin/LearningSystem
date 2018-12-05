@@ -17,9 +17,6 @@ import applyHOCs from 'direct-core/applyHOCs';
 class MathExercise extends React.PureComponent {
   constructor( props ){
     super( props );
-    // this.state = {
-      // typeselect: true,
-    // }
   }
 
   componentDidMount(){
@@ -41,7 +38,6 @@ class MathExercise extends React.PureComponent {
         var all = [];
         response.timu.map ( one =>
           all.push(one)
-          //one.per_timu.map( oneques => all.push(oneques))
         )
         // console.log(all)
         return all.map(one => ({
@@ -98,14 +94,15 @@ class MathExercise extends React.PureComponent {
     const {
       setLearningType,
       learningType,
-      chapterPY,
-      sectionPY,
+      partCN,
+      chapterCN,
+      sectionCN,
     } = this.props;
 
     return(
       <React.Fragment>
         <div className="card-box">
-          <h4 className = {style.dalei}> {this.props.chapter_name} </h4>
+          <div className={style.title}>{partCN}&nbsp;&nbsp;{chapterCN}&nbsp;&nbsp;{sectionCN}</div><br/>
           <SingleOptionQuestions loader = {this.loadQiangHuaQuestions} subject = "math" layoutFormat="leftRight" whetherHaveXuhao = {true}/>
           <div align = "center">
             <Button text = {"提交"} onClick={() => this.submitQuestions()}/>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -117,8 +114,6 @@ class MathExercise extends React.PureComponent {
       </React.Fragment>
     )
   }
-
-
 
 
 }

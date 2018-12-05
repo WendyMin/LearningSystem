@@ -7,8 +7,8 @@ import {
   view as SingleOptionQuestions,
   actions as SingleOptionQuestionsActions
 } from 'Connected/SingleOptionQuestions';
-import {  actions as LearningTypeSelectActions} from 'Connected/LearningTypeSelect';
-import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
+import {  actions as MathReviewWrongQuestionsPortActions} from 'Connected/MathReviewWrongQuestionsPort';
+import FinishedNote from 'UI/FinishedNote';
 import Button from 'UI/Button';
 
 import makePage from 'direct-core/makePage';
@@ -17,9 +17,6 @@ import applyHOCs from 'direct-core/applyHOCs';
 class ReviewNewQuestions extends React.PureComponent {
   constructor( props ){
     super( props );
-    // this.state = {
-      // typeselect: true,
-    // }
   }
 
   componentDidMount(){
@@ -28,12 +25,10 @@ class ReviewNewQuestions extends React.PureComponent {
   }
 
   loadReviewNewQuestions = ( ) => {
-    // console.log(this.props.chapterCN , this.props.sectionCN)
     this.props.loadQuestions({
       url: "/api/mathGetReviewNewQuestions",
       body: {
-        username: "202513",
-        // username: this.props.username,
+        username: this.props.username,
         chapter_name: this.props.chapterCN,
         zhishidian: this.props.sectionCN
       },
@@ -42,9 +37,8 @@ class ReviewNewQuestions extends React.PureComponent {
         var all = [];
         response.map ( one =>
           all.push(one)
-          //one.per_timu.map( oneques => all.push(oneques))
         )
-        // console.log(all)
+
         return all.map(one => ({
            questionId: one.id,
            options: one.option,
@@ -97,25 +91,45 @@ class ReviewNewQuestions extends React.PureComponent {
   render(){
 
     const {
-      setLearningType,
-      learningType,
       chapterCN,
       sectionCN,
+      questions,
+      qs,
       onClick
     } = this.props;
 
     return(
       <React.Fragment>
-        <div className="card-box">
-          <h4 className = {style.dalei}> {chapterCN}&nbsp;&nbsp;&nbsp;&nbsp;{sectionCN} </h4>
-          <SingleOptionQuestions loader = {this.loadReviewNewQuestions} subject = "math" layoutFormat="leftRight" whetherHaveXuhao = {true}/>
-          <div align = "center">
-            <Button text = {"提交"} onClick={() => this.submitQuestions()}/>&nbsp;&nbsp;&nbsp;&nbsp;
+      {
+        typeof(qs)=="string"? null
+        :
+        qs.length === 0 ?
+        <div>
+          <div className = {style.title}> {chapterCN}&nbsp;&nbsp;&nbsp;&nbsp;{sectionCN} </div>
+          <FinishedNote info="恭喜您已经完成了本章节的所有题目 ！"/>
+          <div className="col-lg-12" align="center">
             <button  className="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
                      onClick={onClick} >
-                返回列表</button>
+            返回列表</button>
           </div>
         </div>
+        :
+        questions.length != 0?
+        <div className="card-box">
+          <div className = {style.title}> {chapterCN}&nbsp;&nbsp;&nbsp;&nbsp;{sectionCN} </div>
+          <SingleOptionQuestions loader = {this.loadReviewNewQuestions} subject = "math" layoutFormat="leftRight" whetherHaveXuhao = {true}/>
+          <div align = "center">
+            <div>
+             <Button text = {"提交"} onClick={() => this.submitQuestions()}/>&nbsp;&nbsp;&nbsp;&nbsp;
+             <button  className="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                      onClick={onClick} >
+                 返回列表</button>
+            </div>
+          </div>
+        </div>
+        :
+        null
+        }
       </React.Fragment>
     )
   }
@@ -130,13 +144,12 @@ export default applyHOCs([
   connect(
     state => ({
       username: state.UserManager.name,
-      learningType: state.LearningTypeSelect.learningType,
       questions: state.SingleOptionQuestions.content,
+      qs: state.MathReviewWrongQuestionsPort.content,
     }),
     dispatch => ({
-      ...bindActionCreators( LearningTypeSelectActions , dispatch ),
-      ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
-      ...bindActionCreators( SingleOptionQuestionsActions , dispatch)
+      ...bindActionCreators( SingleOptionQuestionsActions , dispatch),
+      ...bindActionCreators( MathReviewWrongQuestionsPortActions , dispatch)
     })
   )],
   ReviewNewQuestions

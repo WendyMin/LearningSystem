@@ -10,8 +10,6 @@ class DataFormatConversion extends React.PureComponent {
     var testEditor;
     var num = 0;
     testEditor = editormd.markdownToHTML(`${this.props.id}`, {//注意：这里是上面DIV的id
-      // tex : true, // 默认不解析
-      // htmlDecode : true,
       htmlDecode : "style,script,iframe",
       emoji : true,
       taskList : true,
@@ -26,12 +24,7 @@ class DataFormatConversion extends React.PureComponent {
   componentDidMount(){
     this.dataParse();
   } // 对答案解析部分有用
-  // componentWillReceiveProps( NextProps ){
-  //   if(this.props.id != NextProps.id || this.props.num != NextProps.num || this.props.data != NextProps.data){
-  //     // alert("true")
-  //     this.dataParse();
-  //   }
-  // }
+
   componentDidUpdate(prevProps,prevState){
     if(prevProps.data !== this.props.data) {
       document.getElementById(this.props.id).innerHTML = "<textarea class=" + "disappear"//style={{"display": "none;"}}
@@ -47,14 +40,12 @@ class DataFormatConversion extends React.PureComponent {
     const { id , data , num } = this.props;
     // console.log(this.props);
     return (
-      <div>
-      <div id = {id}//id="doc-content"
+      <span id = {id}//id="doc-content"
       >
         <textarea className="disappear"//style={{"display": "none;"}}
         //defaultValue={data} onChange={()=>this.dataParse(id)}
         >{data}</textarea>
-      </div>
-      </div>
+      </span>
     );
   }
 };

@@ -1,6 +1,5 @@
 import { reducer as SubjectFunctionSelect } from 'Connected/SubjectFunctionSelect';
 import { reducer as SingleOptionQuestions} from 'Connected/SingleOptionQuestions';
-//import { reducer as MultOptionsQuestions } from 'Connected/MultOptionsQuestions';
 import { reducer as UserManager } from 'Connected/UserManager';
 import { reducer as EnglishArticle } from 'Connected/EnglishArticle';
 import { reducer as EnglishWordTest } from 'Connected/EnglishWordTest';
@@ -28,9 +27,9 @@ import { reducer as LogicState } from 'Connected/LogicState';
 import { reducer as MathLevelTest } from 'Connected/MathLevelTest';
 import { reducer as MathLevelTestTongji } from 'Connected/MathLevelTestTongji';
 import { reducer as MathGetKnowledge } from 'Connected/MathGetKnowledge';
-import { reducer as DataParse } from 'Connected/DataParse';
 import { reducer as MathGetExample } from 'Connected/MathGetExample';
 import { reducer as MathReviewPort } from 'Connected/MathReviewPort';
+import { reducer as MathReviewWrongQuestionsPort } from 'Connected/MathReviewWrongQuestionsPort';
 import { reducer as MathChartPort } from 'Connected/MathChartPort';
 import { reducer as Feedback } from 'Connected/Feedback';
 
@@ -39,7 +38,6 @@ import { reducer as Feedback } from 'Connected/Feedback';
 export default {
   SubjectFunctionSelect: SubjectFunctionSelect,
   SingleOptionQuestions: SingleOptionQuestions,
-  //MultOptionsQuestions: MultOptionsQuestions,
   UserManager: UserManager,
   EnglishArticle: EnglishArticle,
   EnglishWordTest: EnglishWordTest,
@@ -66,10 +64,10 @@ export default {
   MathLevelTest: MathLevelTest,
   MathLevelTestTongji: MathLevelTestTongji,
   MathGetKnowledge: MathGetKnowledge,
-  DataParse: DataParse,
   MathGetExample: MathGetExample,
   MathReviewPort: MathReviewPort,
   MathChartPort: MathChartPort,
+  MathReviewWrongQuestionsPort: MathReviewWrongQuestionsPort,
   Feedback: Feedback,
   //others
 };
