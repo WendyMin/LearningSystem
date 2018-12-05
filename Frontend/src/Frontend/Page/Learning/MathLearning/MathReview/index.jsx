@@ -33,8 +33,8 @@ class MathReview extends React.PureComponent {
     this.props.loadReviewList({
       url: "/api/math_getReviewList",
       body: {
-        // username: this.props.username,
-        username: "202513",
+        username: this.props.username,
+        // username: "202513",
       }
     })
   }
@@ -154,6 +154,7 @@ export default applyHOCs([
   makePage,
   connect(
     state => ({
+      username: state.UserManager.name,
       learningType: state.LearningTypeSelect.learningType,
       reviewlistpass: state.MathReviewPort.reviewlist.Reach_standard,
       reviewlistunpass: state.MathReviewPort.reviewlist.Unreach_standard,
