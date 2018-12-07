@@ -83,7 +83,19 @@ class MathChart extends React.PureComponent{
                                 suanshu[chaptername].done[key] == "0" ?
                                 <span className="label label-default">未完成</span>
                                 :
-                                <div>{(parseFloat(rate)*100).toFixed(1)}%</div>
+                                <div>
+                                {(parseFloat(rate)*100).toFixed(1)}%
+                                &nbsp;&nbsp;
+                                {
+                                  rate > suanshu[chaptername].average_wrong_rate[key] ?
+                                  <i className="fa fa-long-arrow-up"></i>
+                                  :
+                                  rate < suanshu[chaptername].average_wrong_rate[key] ?
+                                  <i className="fa fa-long-arrow-down"></i>
+                                  :
+                                  null
+                                }
+                                </div>
                               }
                             </th>
                           )}
@@ -141,7 +153,19 @@ class MathChart extends React.PureComponent{
                               daishu[chaptername].done[key] == "0" ?
                               <span className="label label-default">未完成</span>
                               :
-                              <div>{(parseFloat(rate)*100).toFixed(1)}%</div>
+                              <div>
+                              {(parseFloat(rate)*100).toFixed(1)}%
+                              &nbsp;&nbsp;
+                              {
+                                rate > daishu[chaptername].average_wrong_rate[key] ?
+                                <i className="fa fa-long-arrow-up"></i>
+                                :
+                                rate < daishu[chaptername].average_wrong_rate[key] ?
+                                <i className="fa fa-long-arrow-down"></i>
+                                :
+                                null
+                              }
+                              </div>
                             }
                             </th>
                           )}
@@ -198,7 +222,19 @@ class MathChart extends React.PureComponent{
                               jihe[chaptername].done[key] == "0" ?
                               <span className="label label-default">未完成</span>
                               :
-                              <div>{(parseFloat(rate)*100).toFixed(1)}%</div>
+                              <div>
+                              {(parseFloat(rate)*100).toFixed(1)}%
+                              &nbsp;&nbsp;
+                              {
+                                rate > jihe[chaptername].average_wrong_rate[key] ?
+                                <i className="fa fa-long-arrow-up"></i>
+                                :
+                                rate < jihe[chaptername].average_wrong_rate[key] ?
+                                <i className="fa fa-long-arrow-down"></i>
+                                :
+                                null
+                              }
+                              </div>
                             }
                             </th>
                           )}
@@ -255,7 +291,19 @@ class MathChart extends React.PureComponent{
                               shujufenxi[chaptername].done[key] == "0" ?
                               <span className="label label-default">未完成</span>
                               :
-                              <div>{(parseFloat(rate)*100).toFixed(1)}%</div>
+                              <div>
+                              {(parseFloat(rate)*100).toFixed(1)}%
+                              &nbsp;&nbsp;
+                              {
+                                rate > shujufenxi[chaptername].average_wrong_rate[key] ?
+                                <i className="fa fa-long-arrow-up"></i>
+                                :
+                                rate < shujufenxi[chaptername].average_wrong_rate[key] ?
+                                <i className="fa fa-long-arrow-down"></i>
+                                :
+                                null
+                              }
+                              </div>
                             }
                             </th>
                           )}

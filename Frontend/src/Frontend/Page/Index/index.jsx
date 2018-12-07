@@ -277,24 +277,23 @@ class IndexPage extends React.Component {
 
                         <div className="col-lg-4">
                           {/* <Link to="/learning/math"> */}
-                          {/* <a href={this.props.logined?"/learning/math":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}> */}
+                           <a href={this.props.logined?"/learning/math":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
                             <div className="card-box project-box">
                                 {/* <div className="label label-success">Uncompleted</div> */}
                                 <h4 className="m-t-0 m-b-5">数学</h4>
 
                                 <p className="text-custom text-uppercase m-b-20 font-13">Math</p>
-                                {/* <p className={style.text_muted1}>包含算术、代数、几何、数据分析。其中每一部分都划分为了若干章节，每一章节又细分成了各个知识点。
-                                    <a href="#" className="font-600 text-muted">view more</a>
-                                </p> */}
-                                <p className={style.text_muted1}>正在测试中，敬请期待...
-                                    {/* <a href="#" className="font-600 text-muted">view more</a> */}
+                                 <p className={style.text_muted1}>包含算术、代数、几何、数据分析。其中每一部分都划分为了若干章节，每一章节又细分成了各个知识点。
+                                    {/*<a href="#" className="font-600 text-muted">view more</a>*/}
                                 </p>
+                                {/*<p className={style.text_muted1}>正在测试中，敬请期待...
+                                     <a href="#" className="font-600 text-muted">view more</a>
+                                </p>*/}
 
                                 <p className="font-600 m-b-5">Progress <span className="text-custom pull-right">
-                                  {/* {
-                                    progress.length==0 ? null : <div>{parseFloat(progress.data[2]*100).toFixed(0)}%</div>
-                                  } */}
-                                  <div>0%</div>
+                                   {
+                                    progress.length==0 ? null : <div>{parseFloat(progress.data[3]*100).toFixed(0)}%</div>
+                                  }
                                 </span></p>
                                 <div className="progress progress-bar-custom-alt progress-sm m-b-5">
                                     <div className="progress-bar progress-bar-custom progress-animated wow animated animated"
@@ -307,7 +306,7 @@ class IndexPage extends React.Component {
 
                             </div>
                           {/* </Link> */}
-                          {/* </a> */}
+                           </a>
                         </div>
                         {/* <!-- end col--> */}
 
