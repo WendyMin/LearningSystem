@@ -106,7 +106,7 @@ class IndexPage extends React.Component {
 
                    <li>
                      <a className="text-custom"
-                        onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
+                        onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=39.96.40.166&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
                         href="javascript:void(0);"
                         >
                        <i className="zmdi zmdi-power"></i>
@@ -170,9 +170,9 @@ class IndexPage extends React.Component {
                   <div>
                     <div className="row">
                         <div className="col-lg-4">
-                          {/* <a href="https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp={Date.parse(new Date())}&secret_code={sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}"/> */}
+                          {/* <a href="https://passport.doxue.com/login?redirect_url=39.96.40.166&stamp={Date.parse(new Date())}&secret_code={sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}"/> */}
                           {/* <Link to="/learning/english">  */}
-                          <a href={this.props.logined?"/learning/english":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
+                          <a href={this.props.logined?"/learning/english":"https://passport.doxue.com/login?redirect_url=39.96.40.166&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
                             <div className="card-box project-box">
                                 {/* <div className="label label-success">Uncompleted</div> */}
                                 <h4 className="m-t-0 m-b-5">英语</h4>
@@ -203,7 +203,7 @@ class IndexPage extends React.Component {
                         {/* <!-- end col--> */}
 
                         <div className="col-lg-4">
-                          <a href={this.props.logined?"/learning/logic":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
+                          <a href={this.props.logined?"/learning/logic":"https://passport.doxue.com/login?redirect_url=39.96.40.166&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
                           {/* <Link to="/learning/logic"> */}
                             <div className="card-box project-box">
                                 {/* <div className="label label-primary">Uncompleted</div> */}
@@ -236,7 +236,7 @@ class IndexPage extends React.Component {
 
                         <div className="col-lg-4">
                           {/* <Link to="/learning/writing"> */}
-                          <a href={this.props.logined?"/learning/writing":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
+                          <a href={this.props.logined?"/learning/writing":"https://passport.doxue.com/login?redirect_url=39.96.40.166&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
                             <div className="card-box project-box">
                                 {/* <div className="label label-pink">Uncompleted</div> */}
                                 <h4 className="m-t-0 m-b-5">写作</h4>
@@ -277,7 +277,7 @@ class IndexPage extends React.Component {
 
                         <div className="col-lg-4">
                           {/* <Link to="/learning/math"> */}
-                           <a href={this.props.logined?"/learning/math":"https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
+                           <a href={this.props.logined?"/learning/math":"https://passport.doxue.com/login?redirect_url=39.96.40.166&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
                             <div className="card-box project-box">
                                 {/* <div className="label label-success">Uncompleted</div> */}
                                 <h4 className="m-t-0 m-b-5">数学</h4>
