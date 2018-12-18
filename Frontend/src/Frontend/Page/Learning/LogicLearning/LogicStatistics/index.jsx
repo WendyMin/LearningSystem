@@ -75,14 +75,14 @@ class LogicStatistics extends React.PureComponent{
                             <tr>
                               <th>最新一次错误率</th>
                               {oneChapter.xiaolei_mba.map((oneerror , key) =>
-                              <td key = {key} style={{"vertical-align":"middle"}}>{oneerror}</td>)}
-                              <td>{oneChapter.total_mba}</td>
+                              <td key = {key} style={{"vertical-align":"middle"}}>{(parseFloat(oneerror)*100).toFixed(1)}%</td>)}
+                              <td>{(parseFloat(oneChapter.total_mba)*100).toFixed(1)}%</td>
                             </tr>
                             <tr>
                               <th>平均错误率</th>
                               {data.xingshi[key].xiaolei_mba.map((oneerror , key) =>
-                              <td key = {key} style={{"vertical-align":"middle"}}>{oneerror}</td>)}
-                              <td>{data.xingshi[key].total_mba}</td>
+                              <td key = {key} style={{"vertical-align":"middle"}}>{(parseFloat(oneerror)*100).toFixed(1)}%</td>)}
+                              <td>{(parseFloat(data.xingshi[key].total_mba)*100).toFixed(1)}%</td>
                             </tr>
                           </tbody>
                         </table><br/>
@@ -123,14 +123,14 @@ class LogicStatistics extends React.PureComponent{
                             <tr>
                               <th>最新一次错误率</th>
                               {oneChapter.xiaolei_mba.map((oneerror , key) =>
-                              <td key = {key} style={{"vertical-align":"middle"}}>{oneerror}</td>)}
-                              <td>{oneChapter.total_mba}</td>
+                              <td key = {key} style={{"vertical-align":"middle"}}>{(parseFloat(oneerror)*100).toFixed(1)}%</td>)}
+                              <td>{(parseFloat(oneChapter.total_mba)*100).toFixed(1)}%</td>
                             </tr>
                             <tr>
                               <th>平均错误率</th>
                               {data.lunzheng[key].xiaolei_mba.map((oneerror , key) =>
-                              <td key = {key} style={{"vertical-align":"middle"}}>{oneerror}</td>)}
-                              <td>{data.lunzheng[key].total_mba}</td>
+                              <td key = {key} style={{"vertical-align":"middle"}}>{(parseFloat(oneerror)*100).toFixed(1)}%</td>)}
+                              <td>{(parseFloat(data.lunzheng[key].total_mba)*100).toFixed(1)}%</td>
                             </tr>
                           </tbody>
                         </table><br/>

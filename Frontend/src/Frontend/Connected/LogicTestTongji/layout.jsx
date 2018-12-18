@@ -42,7 +42,7 @@ class LogicTestTongji extends React.PureComponent {
             <tr>
               <th scope="row">正确率</th>
               {mean_rightRate.map((oneError , key) =>
-                <td key = {key}> {oneError} </td>)
+                <td key = {key}> {(parseFloat(oneError)*100).toFixed(1)}% </td>)
               }
             </tr>
           </tbody>
@@ -63,7 +63,7 @@ class LogicTestTongji extends React.PureComponent {
               <th scope="row">正确率</th>
               {this_rightRate.map((oneError , key) =>
                 <td key = {key} style={{"vertical-align":"middle"}}>
-                  {oneError}
+                  {(parseFloat(oneError)*100).toFixed(1)}%
                   {flag == 1 ?
                     <span style={{"color":"#797979","paddingLeft":"15px"}}>
                       {upOrDown[key] == 1 ? <i className="fa fa-long-arrow-up"></i> :
@@ -80,9 +80,9 @@ class LogicTestTongji extends React.PureComponent {
 
         <div style = {{"color":"#71b6f9"}} align = "center">根据您的测试情况，系统规划的学习路径如下:</div><br/>
         <div style = {{"color":"#f9c851"}}>形式逻辑</div>
-          {xingshi.map((oneChapter , key) => <li className = {style.onetype} key = {key}>{oneChapter}&nbsp;&nbsp;&nbsp;&nbsp;</li>)}<br/><br/>
+          {xingshi.map((oneChapter , key) => <li className = {style.onetype} key = {key}>{oneChapter}&nbsp;&nbsp;</li>)}<br/><br/>
         <div style = {{"color":"#f9c851"}}>论证逻辑</div>
-          {lunzheng.map((oneChapter , key) => <li className = {style.onetype} key = {key}>{oneChapter}&nbsp;&nbsp;&nbsp;&nbsp;</li>)}
+          {lunzheng.map((oneChapter , key) => <li className = {style.onetype} key = {key}>{oneChapter}&nbsp;&nbsp;</li>)}
 
       </div>
     );

@@ -113,7 +113,7 @@ class ZhentiAllYearTongji extends React.PureComponent {
                       <tr>
                         <th>正确率</th>
                         {tongji.zhengquelv.map((oneRightRate , key) =>
-                          <th key = {key}> {oneRightRate} </th>)
+                          <th key = {key}> {(parseFloat(oneRightRate)*100).toFixed(1)}% </th>)
                         }
                       </tr>
 

@@ -42,7 +42,7 @@ class MathLevelTestTongji extends React.PureComponent {
             <tr>
               <th scope="row">正确率</th>
               {mean_rightRate.map((oneError , key) =>
-                <td key = {key}> {oneError} </td>)
+                <td key = {key}> {(parseFloat(oneError)*100).toFixed(1)}% </td>)
               }
             </tr>
           </tbody>
@@ -63,7 +63,7 @@ class MathLevelTestTongji extends React.PureComponent {
               <th scope="row">正确率</th>
               {this_rightRate.map((oneError , key) =>
                 <td key = {key} style={{"vertical-align":"middle"}}>
-                  {parseFloat(oneError).toFixed(2)}
+                  {(parseFloat(oneError)*100).toFixed(1)}%
                   {flag == 1 ?
                     <span style={{"color":"#797979","paddingLeft":"15px"}}>
                       {upOrDown[key] == 1 ? <i className="fa fa-long-arrow-up"></i> :
