@@ -72,14 +72,36 @@ class EngTest extends React.PureComponent {
   }
 
   recordTestWords = () => {
-    this.props.recordWordTestWords({
-      url:"/api/eng_recordWordTestWords",
-      body:{
-        username: this.props.username,
-        rightwords: WordsToString(this.props.rightwords),
-        wrongwords: WordsToString(this.props.wrongwords)
-      }
-    });
+    if(this.props.rightwords==""){
+      this.props.recordWordTestWords({
+        url:"/api/eng_recordWordTestWords",
+        body:{
+          username: this.props.username,
+          rightwords: "none",
+          wrongwords: WordsToString(this.props.wrongwords)
+        }
+      })
+    }
+    else if(this.props.wrongwords==""){
+      this.props.recordWordTestWords({
+        url:"/api/eng_recordWordTestWords",
+        body:{
+          username: this.props.username,
+          rightwords: WordsToString(this.props.rightwords),
+          wrongwords: "none"
+        }
+      })
+    }
+    else{
+      this.props.recordWordTestWords({
+        url:"/api/eng_recordWordTestWords",
+        body:{
+          username: this.props.username,
+          rightwords: WordsToString(this.props.rightwords),
+          wrongwords: WordsToString(this.props.wrongwords)
+        }
+      })
+    }
     this.submit = true;
     if(this.submit) {
       this.getUserLevel(this.props.username);
