@@ -11,10 +11,9 @@ import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
 import { actions as PortTestActions } from 'Connected/PortTest';
+import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import DataFormatConversion from 'UI/DataFormatConversion';
-// import { actions as DataParseActions , view as DataParse } from 'Connected/DataParse';
-// import WordsToString from 'Algorithm/WordsToString';
-// import FinishedNote from 'UI/FinishedNote';
+// var sha1 = require('sha1');
 
 class Manage extends React.PureComponent {
   constructor( props ){
@@ -56,11 +55,11 @@ class Manage extends React.PureComponent {
     const {
       content,
       varData,
-      choice
-    } = this.props;
+      choice,
+      progress
+    }
+      = this.props;
     console.log(`${this.state.varData}`)
-    // console.log(content);
-    // console.log(WordsToString(["basic", "luck", "basic", "cancel", "basic", "luck"]))
 
     return(
       <React.Fragment>
@@ -108,7 +107,8 @@ class Manage extends React.PureComponent {
                  <img src="/static/images/users/avatar-1.jpg" alt="user-img" title={this.props.userid} className="img-circle img-thumbnail img-responsive"/>
                  <div className="user-status offline"><i className="zmdi zmdi-dot-circle"></i></div>
                 </div>
-                <h5>{this.props.logined ? <div>{this.props.userid}</div>:null}</h5>
+                {/*<h5>{this.props.logined ? <div>{this.props.userid}</div>:null}</h5>*/}
+                <h5>Manage</h5>
 
                 <ul className="list-inline">
 
@@ -161,160 +161,9 @@ class Manage extends React.PureComponent {
               {/* <div className="row"> */}
 
               {
-                choice==0 ?
-                <div>
-                  <div className="row">
-                      <div className="col-lg-4">
-                        {/* <a href="https://passport.doxue.com/login?redirect_url=39.96.40.166&stamp={Date.parse(new Date())}&secret_code={sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}"/> */}
-                        {/* <Link to="/learning/english">  */}
-                        <a href={this.props.logined?"/learning/english":"https://passport.doxue.com/login?redirect_url=39.96.40.166&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
-                          <div className="card-box project-box">
-                              {/* <div className="label label-success">Uncompleted</div> */}
-                              <h4 className="m-t-0 m-b-5">英语</h4>
-
-                              <p className="text-success text-uppercase m-b-20 font-13">English</p>
-                              <p className={style.text_muted1}>包含阅读、汉译英，以及中考、高考、四级、六级、考研词汇。阅读目前共有80篇。
-                                  {/* <a href="#" className="font-600 text-muted">view more</a> */}
-                              </p>
-
-                              <p className="font-600 m-b-5">Progress <span className="text-success pull-right">
-                                {
-                                  progress.length==0 ? null : <div>{parseFloat(progress.data[0]*100).toFixed(0)}%</div>
-                                }
-                              </span></p>
-                              <div className="progress progress-bar-success-alt progress-sm m-b-5">
-                                  <div className="progress-bar progress-bar-success progress-animated wow animated animated"
-                                       role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                       // style="width: 80%; visibility: visible; animation-name: animationProgress;"
-                                       >
-                                  </div>
-                                  {/* <!-- /.progress-bar .progress-bar-danger --> */}
-                              </div>
-                              {/* <!-- /.progress .no-rounded --> */}
-
-                          </div>
-                        </a>
-                      </div>
-                      {/* <!-- end col--> */}
-
-                      <div className="col-lg-4">
-                        <a href={this.props.logined?"/learning/logic":"https://passport.doxue.com/login?redirect_url=39.96.40.166&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
-                        {/* <Link to="/learning/logic"> */}
-                          <div className="card-box project-box">
-                              {/* <div className="label label-primary">Uncompleted</div> */}
-                              <h4 className="m-t-0 m-b-5">逻辑</h4>
-                              <p className="text-primary text-uppercase m-b-20 font-13">Logic</p>
-                              <p className={style.text_muted1}>包含形式逻辑和论证逻辑。其中形式逻辑包括词项逻辑、演绎推理、逻辑应用、命题逻辑、逻辑语言，论证逻辑包括归纳逻辑、假设、削弱、推论、比较、综合、支持、评价、解释、描述，共15章，1600道题。
-                                   {/* <a href="#" className="font-600 text-muted">view more</a> */}
-                              </p>
-
-
-                              <p className="font-600 m-b-5">Progress <span className="text-primary pull-right">
-                                {
-                                  progress.length==0 ? null : <div>{parseFloat(progress.data[1]*100).toFixed(0)}%</div>
-                                }
-                              </span></p>
-                              <div className="progress progress-bar-primary-alt progress-sm m-b-5">
-                                  <div className="progress-bar progress-bar-primary progress-animated wow animated animated"
-                                       role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
-                                       // style="width: 45%;"
-                                       >
-                                  </div>
-                                  {/* <!-- /.progress-bar .progress-bar-danger --> */}
-                              </div>
-                              {/* <!-- /.progress .no-rounded --> */}
-
-                          </div>
-                        </a>
-                      </div>
-                      {/* <!-- end col--> */}
-
-                      <div className="col-lg-4">
-                        {/* <Link to="/learning/writing"> */}
-                        <a href={this.props.logined?"/learning/writing":"https://passport.doxue.com/login?redirect_url=39.96.40.166&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
-                          <div className="card-box project-box">
-                              {/* <div className="label label-pink">Uncompleted</div> */}
-                              <h4 className="m-t-0 m-b-5">写作</h4>
-                              <p className="text-pink text-uppercase m-b-20 font-13">Writing</p>
-                              <p className={style.text_muted1}>写作包括论证有效性分析和论说文两部分，含有近十来年真题，其中论证巩固22篇，论证真题8篇，论说巩固19篇，论说真题8篇。
-                                  {/* <a href="#" className="font-600 text-muted">view more</a> */}
-                              </p>
-
-
-                              <p className="font-600 m-b-5">Progress <span className="text-pink pull-right">
-                                {
-                                  progress.length==0 ? null : <div>{parseFloat(progress.data[2]*100).toFixed(0)}%</div>
-                                }
-                              </span></p>
-                              <div className="progress progress-bar-pink-alt progress-sm m-b-5">
-                                  <div className="progress-bar progress-bar-pink progress-animated wow animated animated"
-                                       role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"
-                                       // style="width: 68%;"
-                                       >
-                                  </div>
-                                  {/* <!-- /.progress-bar .progress-bar-danger --> */}
-                              </div>
-                              {/* <!-- /.progress .no-rounded --> */}
-
-                          </div>
-                        </a>
-                        {/* </Link> */}
-                      </div>
-                      {/* <!-- end col--> */}
-
-
-
-                  </div>
-                  {/* <!-- end row --> */}
-
-
-                  <div className="row">
-
-                      <div className="col-lg-4">
-                        {/* <Link to="/learning/math"> */}
-                         <a href={this.props.logined?"/learning/math":"https://passport.doxue.com/login?redirect_url=39.96.40.166&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date()))}>
-                          <div className="card-box project-box">
-                              {/* <div className="label label-success">Uncompleted</div> */}
-                              <h4 className="m-t-0 m-b-5">数学</h4>
-
-                              <p className="text-custom text-uppercase m-b-20 font-13">Math</p>
-                               <p className={style.text_muted1}>包含算术、代数、几何、数据分析。其中每一部分都划分为了若干章节，每一章节又细分成了各个知识点。
-                                  {/*<a href="#" className="font-600 text-muted">view more</a>*/}
-                              </p>
-                              {/*<p className={style.text_muted1}>正在测试中，敬请期待...
-                                   <a href="#" className="font-600 text-muted">view more</a>
-                              </p>*/}
-
-                              <p className="font-600 m-b-5">Progress <span className="text-custom pull-right">
-                                 {
-                                  progress.length==0 ? null : <div>{parseFloat(progress.data[3]*100).toFixed(0)}%</div>
-                                }
-                              </span></p>
-                              <div className="progress progress-bar-custom-alt progress-sm m-b-5">
-                                  <div className="progress-bar progress-bar-custom progress-animated wow animated animated"
-                                       role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"
-                                       >
-                                  </div>
-
-                              </div>
-
-
-                          </div>
-                        {/* </Link> */}
-                         </a>
-                      </div>
-                      {/* <!-- end col--> */}
-
-                  </div>
-                </div>
-
-
-
+                choice==0 ? <div>用户数据</div>
                 :
-                // choice==1 ? <p>用户信息</p> :
-                choice==2 ? <div className="card-box"><SystemHelp /></div> :
-                choice==3 ? <Feedback /> :
-                null
+                <div>反馈信息</div>
               }
 
             </div>
@@ -346,10 +195,13 @@ export default applyHOCs([
       logined: state.UserManager.logined,
       username: state.UserManager.name,
       content: state.PortTest.content,
+      choice: state.SubjectFunctionSelect.choice,
+      progress: state.PortTest.content,
       // data: state.DataParse.data
     }),
     dispatch => ({
       ...bindActionCreators( PortTestActions , dispatch),
+      ...bindActionCreators( SubjectFunctionSelectActions , dispatch ),
       // ...bindActionCreators( DataParseActions , dispatch)
     })
   )],
