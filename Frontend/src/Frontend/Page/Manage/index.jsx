@@ -55,7 +55,8 @@ class Manage extends React.PureComponent {
   render(){
     const {
       content,
-      varData
+      varData,
+      choice
     } = this.props;
     console.log(`${this.state.varData}`)
     // console.log(content);
