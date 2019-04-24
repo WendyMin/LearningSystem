@@ -11,10 +11,9 @@ import makePage from 'direct-core/makePage';
 import applyHOCs from 'direct-core/applyHOCs';
 
 import { actions as PortTestActions } from 'Connected/PortTest';
+import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import DataFormatConversion from 'UI/DataFormatConversion';
-// import { actions as DataParseActions , view as DataParse } from 'Connected/DataParse';
-// import WordsToString from 'Algorithm/WordsToString';
-// import FinishedNote from 'UI/FinishedNote';
+var sha1 = require('sha1');
 
 class Manage extends React.PureComponent {
   constructor( props ){
@@ -56,11 +55,10 @@ class Manage extends React.PureComponent {
     const {
       content,
       varData,
-      choice
+      choice,
+      progress
     } = this.props;
     console.log(`${this.state.varData}`)
-    // console.log(content);
-    // console.log(WordsToString(["basic", "luck", "basic", "cancel", "basic", "luck"]))
 
     return(
       <React.Fragment>
@@ -86,10 +84,8 @@ class Manage extends React.PureComponent {
                 <li>
                   <h4 className="page-title">
                     {
-                      choice==0 ? <div>主页  > 课程信息</div> :
-                      // choice==1 ? <div>主页  > 用户信息</div> :
-                      choice==2 ? <div>主页  > 查看帮助</div> :
-                                  <div>主页  > 问题反馈</div>
+                      choice==0 ? <div>管理  > 用户数据 </div> :
+                      <div>管理  > 反馈信息</div>
                    }
                   </h4>
                 </li>
@@ -131,30 +127,17 @@ class Manage extends React.PureComponent {
                   <li onClick={()=>this.props.setSubjectFunctionSelect(0)}>
                     <a className="waves-effect" style={choice==0?{"color":"#71b6f9"}:null}>
                       <i className="zmdi zmdi-layers"></i>
-                       <span> 课程信息 </span>
+                       <span> 用户数据 </span>
                     </a>
                   </li>
 
-                  {/*<li onClick={()=>this.props.setSubjectFunctionSelect(1)}>
+                  <li onClick={()=>this.props.setSubjectFunctionSelect(1)}>
                     <a href="javascript:void(0);" className="waves-effect" style={choice==1?{"color":"#71b6f9"}:null}>
                       <i className="zmdi zmdi-library"></i>
-                      <span> 用户信息 </span>
-                    </a>
-                  </li>*/}
-
-                  <li onClick={()=>this.props.setSubjectFunctionSelect(2)}>
-                    <a className="waves-effect" style={choice==2?{"color":"#71b6f9"}:null}>
-                      <i className="zmdi zmdi-book"></i>
-                      <span> 查看帮助 </span>
+                      <span> 反馈信息 </span>
                     </a>
                   </li>
 
-                  <li onClick={()=>this.props.setSubjectFunctionSelect(3)}>
-                    <a className="waves-effect" style={choice==3?{"color":"#71b6f9"}:null}>
-                      <i className="zmdi zmdi-chart"></i>
-                      <span> 问题反馈 </span>
-                    </a>
-                   </li>
 
                 </ul>
                <div className="clearfix"></div>
@@ -361,6 +344,8 @@ export default applyHOCs([
       logined: state.UserManager.logined,
       username: state.UserManager.name,
       content: state.PortTest.content,
+      choice: state.SubjectFunctionSelect.choice,
+      progress: state.PortTest.content,
       // data: state.DataParse.data
     }),
     dispatch => ({
