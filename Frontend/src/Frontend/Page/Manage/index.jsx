@@ -86,10 +86,8 @@ class Manage extends React.PureComponent {
                 <li>
                   <h4 className="page-title">
                     {
-                      choice==0 ? <div>主页  > 课程信息</div> :
-                      // choice==1 ? <div>主页  > 用户信息</div> :
-                      choice==2 ? <div>主页  > 查看帮助</div> :
-                                  <div>主页  > 问题反馈</div>
+                      choice==0 ? <div>管理  > 用户数据 </div> :
+                      <div>管理  > 反馈信息</div>
                    }
                   </h4>
                 </li>
@@ -142,19 +140,6 @@ class Manage extends React.PureComponent {
                     </a>
                   </li>
 
-                  <li onClick={()=>this.props.setSubjectFunctionSelect(2)}>
-                    <a className="waves-effect" style={choice==2?{"color":"#71b6f9"}:null}>
-                      <i className="zmdi zmdi-book"></i>
-                      <span> 查看帮助 </span>
-                    </a>
-                  </li>
-
-                  <li onClick={()=>this.props.setSubjectFunctionSelect(3)}>
-                    <a className="waves-effect" style={choice==3?{"color":"#71b6f9"}:null}>
-                      <i className="zmdi zmdi-chart"></i>
-                      <span> 问题反馈 </span>
-                    </a>
-                   </li>
 
                 </ul>
                <div className="clearfix"></div>
