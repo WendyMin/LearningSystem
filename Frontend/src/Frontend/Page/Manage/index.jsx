@@ -13,7 +13,11 @@ import applyHOCs from 'direct-core/applyHOCs';
 import { actions as PortTestActions } from 'Connected/PortTest';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import DataFormatConversion from 'UI/DataFormatConversion';
+<<<<<<< HEAD
 // var sha1 = require('sha1');
+=======
+var sha1 = require('sha1');
+>>>>>>> 08590b2ee5831af816aa22833b077bf350796e21
 
 class Manage extends React.PureComponent {
   constructor( props ){
@@ -58,6 +62,7 @@ class Manage extends React.PureComponent {
       choice,
       progress
     }
+
       = this.props;
     console.log(`${this.state.varData}`)
 
