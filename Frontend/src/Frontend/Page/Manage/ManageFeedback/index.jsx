@@ -66,60 +66,43 @@ loadChtoEnglish = () => {
             <div>
 
               <div className="row">
-                <div className={style.title}>写作句型练习 </div>
+                <div className={style.title}>反馈信息 </div>
                 <br/>
-                {
-                  content.length==0?null:
-                  content.map((chtoeng, key)=>
-                  <div key={key} className="col-md-12" >
-                    <div className="card-box kanban-box">
-                      <div className="kanban-detail">
-                        {/* <span className="label label-primary pull-right">Translate</span> */}
-                        <p className={style.title18}>
-                          {chtoeng.chinese}</p>
-                        <ul className="list-inline m-b-0">
-                          <textarea rows="2" class="form-control" placeholder="Write your answer"></textarea>
-                          <li>
-                            <br/>
-                            {
-                              this.state.submit?
-                              <p className={style.title16}><strong>参考答案：</strong>{chtoeng.english}</p>
-                              :null
-                            }
-                            {/* <p className={style.title16}><strong>翻译：</strong>{chtoeng.english}</p> */}
-                            <br/>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+
+                <div className="col-md-12" >
+                  <div className="card-box kanban-box">
+
+
+                  <table className="table table-bordered m-0" align = "center">
+                    <thead>
+                      <tr>
+                        <th>用户名</th>
+                        <th>反馈信息</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>user1</th>
+                        <th>英语有点难</th>
+                      </tr>
+                      <tr>
+                        <th>user2</th>
+                        <th>数学做得挺好的[点击查看图片]</th>
+                      </tr>
+                      <tr>
+                        <th>user3</th>
+                        <th>数学做得挺好的</th>
+                      </tr>
+                      <tr>
+                        <th>user4</th>
+                        <th>数学做得挺好的</th>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+
                   </div>
-                  )
-                }
-              </div>
-
-              {/* <div className="row">
-                <div className={style.ShowEngAndReturn}>
-                  <Button text="返回英语学习主页面" onClick={() => {setLearningType("英语主页面")}}/>
-                  &nbsp;&nbsp;
-                  <Button text="显示答案" onClick={() => this.setState({submit: true}) }/>
-                  &nbsp;&nbsp;
-                  <Button text="进入课后阅读材料" onClick={() => {setLearningType("英语课后阅读材料")} }/>
-                </div>
-              </div> */}
-
-              <div className="row">
-                <div className={style.buttonright}>
-                  <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                      onClick={() => {setLearningType("英语主页面")}} >
-                      返回英语学习主页面</button>
-                &nbsp;&nbsp;
-                <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                    onClick={() => this.setState({submit: true})} >
-                    显示答案</button>
-                &nbsp;&nbsp;
-                <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                    onClick={() => {setLearningType("英语课后阅读材料")}} >
-                    进入课后阅读材料</button>
                 </div>
               </div>
 

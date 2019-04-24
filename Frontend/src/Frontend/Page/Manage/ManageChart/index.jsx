@@ -66,61 +66,133 @@ loadChtoEnglish = () => {
             <div>
 
               <div className="row">
-                <div className={style.title}>写作句型练习 </div>
+                <div className={style.title}>用户数据 </div>
                 <br/>
-                {
-                  content.length==0?null:
-                  content.map((chtoeng, key)=>
-                  <div key={key} className="col-md-12" >
-                    <div className="card-box kanban-box">
-                      <div className="kanban-detail">
-                        {/* <span className="label label-primary pull-right">Translate</span> */}
-                        <p className={style.title18}>
-                          {chtoeng.chinese}</p>
+
+
+                <div className="col-md-4" >
+                  <div className="card-box kanban-box">
+                    <div className="kanban-detail">
+                        <span className="label label-primary pull-right">Finished</span>
+                        <div className={style.title18}>
+                          User 1
+                        </div>
                         <ul className="list-inline m-b-0">
-                          <textarea rows="2" class="form-control" placeholder="Write your answer"></textarea>
-                          <li>
-                            <br/>
-                            {
-                              this.state.submit?
-                              <p className={style.title16}><strong>参考答案：</strong>{chtoeng.english}</p>
-                              :null
-                            }
-                            {/* <p className={style.title16}><strong>翻译：</strong>{chtoeng.english}</p> */}
-                            <br/>
-                          </li>
+                            <li>
+                                <br/>
+                                <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
+
+                                    >英语</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                   >逻辑</button>
+                                <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                    >写作</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                       >数学</button>
+                            </li>
                         </ul>
-                      </div>
                     </div>
                   </div>
-                  )
-                }
-              </div>
-
-              {/* <div className="row">
-                <div className={style.ShowEngAndReturn}>
-                  <Button text="返回英语学习主页面" onClick={() => {setLearningType("英语主页面")}}/>
-                  &nbsp;&nbsp;
-                  <Button text="显示答案" onClick={() => this.setState({submit: true}) }/>
-                  &nbsp;&nbsp;
-                  <Button text="进入课后阅读材料" onClick={() => {setLearningType("英语课后阅读材料")} }/>
                 </div>
-              </div> */}
 
-              <div className="row">
-                <div className={style.buttonright}>
-                  <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                      onClick={() => {setLearningType("英语主页面")}} >
-                      返回英语学习主页面</button>
-                &nbsp;&nbsp;
-                <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                    onClick={() => this.setState({submit: true})} >
-                    显示答案</button>
-                &nbsp;&nbsp;
-                <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                    onClick={() => {setLearningType("英语课后阅读材料")}} >
-                    进入课后阅读材料</button>
+
+                <div className="col-md-4" >
+                  <div className="card-box kanban-box">
+                    <div className="kanban-detail">
+                        <span className="label label-primary pull-right">Finished</span>
+                        <div className={style.title18}>
+                          User 1
+                        </div>
+                        <ul className="list-inline m-b-0">
+                            <li>
+                                <br/>
+                                <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
+
+                                    >英语</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                   >逻辑</button>
+                                <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                    >写作</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                       >数学</button>
+                            </li>
+                        </ul>
+                    </div>
+                  </div>
                 </div>
+
+
+
+                <div className="col-md-4" >
+                  <div className="card-box kanban-box">
+                    <div className="kanban-detail">
+                        <span className="label label-primary pull-right">Finished</span>
+                        <div className={style.title18}>
+                          User 1
+                        </div>
+                        <ul className="list-inline m-b-0">
+                            <li>
+                                <br/>
+                                <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
+
+                                    >英语</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                   >逻辑</button>
+                                <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                    >写作</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                       >数学</button>
+                            </li>
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div className="col-md-4" >
+                  <div className="card-box kanban-box">
+                    <div className="kanban-detail">
+                        <span className="label label-primary pull-right">Finished</span>
+                        <div className={style.title18}>
+                          User 1
+                        </div>
+                        <ul className="list-inline m-b-0">
+                            <li>
+                                <br/>
+                                <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
+
+                                    >英语</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                   >逻辑</button>
+                                <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                    >写作</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+
+                                       >数学</button>
+                            </li>
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+
+
+
               </div>
 
             </div>
