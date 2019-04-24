@@ -13,11 +13,12 @@ import applyHOCs from 'direct-core/applyHOCs';
 import { actions as PortTestActions } from 'Connected/PortTest';
 import { actions as SubjectFunctionSelectActions } from 'Connected/SubjectFunctionSelect';
 import DataFormatConversion from 'UI/DataFormatConversion';
-<<<<<<< HEAD
-// var sha1 = require('sha1');
-=======
+
+import ManageFeedback from 'Page/Manage/ManageFeedback';
+import ManageChart from 'Page/Manage/ManageChart';
+
 var sha1 = require('sha1');
->>>>>>> 08590b2ee5831af816aa22833b077bf350796e21
+
 
 class Manage extends React.PureComponent {
   constructor( props ){
@@ -166,9 +167,9 @@ class Manage extends React.PureComponent {
               {/* <div className="row"> */}
 
               {
-                choice==0 ? <div>用户数据</div>
+                choice==0 ? <ManageChart />
                 :
-                <div>反馈信息</div>
+                <ManageFeedback />
               }
 
             </div>
