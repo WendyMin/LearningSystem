@@ -229,11 +229,11 @@ class EngTest extends React.PureComponent {
                     onClick = {forceNext}>
                     下一题</button>
                 </div> */}
-                <div className={style.textgrey}>测试时间约为2分钟</div>
+                <div className={style.textgrey}>测试时间约为2-5分钟</div>
               </div>
 
               :
-              <TestStart testnum="约30道" testtime="2  分钟" onClick={() => this.setState({enterTestSure: true})}/>
+              <TestStart testnum="约30道（会随完成情况适量增减）" testtime="2  分钟" onClick={() => this.setState({enterTestSure: true})}/>
 
             }
 
