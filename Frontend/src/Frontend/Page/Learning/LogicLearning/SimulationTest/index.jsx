@@ -163,7 +163,7 @@ class SimulationTest extends React.PureComponent {
                 :
                 <div>
                   {
-                    this.state.startTestNoteShow ? <TestStart testnum="30道" testtime="30分钟" onClick={() => {this.setState({startTestNoteShow: false});this.loadQuestions()}}/> :
+                    this.state.startTestNoteShow ? <TestStart testdescription="测试题目涵盖十五个章节，每个章节包含两道题目" testnum="30道" testtime="30分钟" onClick={() => {this.setState({startTestNoteShow: false});this.loadQuestions()}}/> :
                     <div className="card-box"><br/>
                      <SingleOptionQuestions loader = {this.loadQuestions} subject = "logic_test" layoutFormat="leftRight" whetherHaveXuhao = {true}/>
                      <div align = "center">

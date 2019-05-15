@@ -190,7 +190,7 @@ class LunShuoZhenTi extends React.PureComponent {
                 <a href="#uploadArticle" role="tab" data-toggle="tab">上传文章</a>
             </li>
             <li role="presentation">
-                <a href="#viewArticle" role="tab" data-toggle="tab">已传文章</a>
+                <a href="#viewArticle" role="tab" data-toggle="tab" onClick={()=>this.loadAllSubmitTextContent()}>已传文章</a>
             </li>
             <li role="presentation">
                <a href="#EgLiYi" role="tab" data-toggle="tab">参考立意</a>
