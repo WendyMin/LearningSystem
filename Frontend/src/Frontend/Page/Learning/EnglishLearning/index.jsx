@@ -71,7 +71,7 @@ class EnglishLearning extends React.PureComponent {
                        choice==1 ?
                         <div>
                          <span>英语  > </span>
-                         <span onClick={()=>{this.props.setLearningType("英语主页面")}} >进入学习></span>
+                         <span onClick={()=>{this.props.setLearningType("英语主页面")}} >进入学习 </span>
                          {
                            learningType == "" || learningType == "英语主页面" ? null :
                            learningType == "英语生词难句" ? <span onClick={()=>{this.props.setLearningType(learningType)}} > > 生词难句</span> :
