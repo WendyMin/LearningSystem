@@ -109,7 +109,7 @@ class LogicReviewContent extends React.PureComponent {
       questions
     } = this.props;
     // console.log(total_content.content)
-    
+
     return (
       <React.Fragment>
         <div className="row">
@@ -136,11 +136,11 @@ class LogicReviewContent extends React.PureComponent {
                 {
                   questions.length == 0 ? <div align="center" style = {{"fontSize":"18px","color":"#ff5b5b"}}>您在本章没有错题！</div> :
                   <div>
-                    <SingleOptionQuestions loader = {this.requestChapterContent} layoutFormat="upDown" whetherHaveXuhao = {true}/>
                     <div align="center">
                       {this.state.submit ? null :
-                      <Button text = {"提交"} onClick={this.submitQuestions}/>}
+                      <Button text = {"查看解析"} onClick={this.submitQuestions}/>}
                     </div>
+                    <SingleOptionQuestions loader = {this.requestChapterContent} layoutFormat="upDown" whetherHaveXuhao = {true}/>
                   </div>
                 }
               </div>
