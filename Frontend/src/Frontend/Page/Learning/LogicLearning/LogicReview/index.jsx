@@ -129,10 +129,26 @@ class LogicReview extends React.PureComponent {
                                  onMouseOver = {() => {this.setState({leftErrorShow: true , rightErrorShow: false});setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
                                  onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter);setLearningType(oneChapter)}}
                              >
-                               {oneChapter}
+                               {oneChapter}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                               {oneChapter==choice?
+                               <span>{choice == "" || !this.state.leftErrorShow ? null :
+                               <span className = {style.info}>
+                                 <span>总错误率&nbsp;&nbsp;
+                                   {data.finish_lunzheng==undefined ? null :
+                                    <span>
+                                      {data.finish_lunzheng.map((oneChapter,key) => oneChapter==choice?<span>{data.lunzheng[key].total_mba}</span>:null)}
+                                      {data.finish_xingshi.map((oneChapter,key) => oneChapter==choice?<span>{data.xingshi[key].total_mba}</span>:null)}
+                                    </span>
+                                   }
+                                   </span>
+                                 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;错题总数&nbsp;&nbsp;{this.props.questions.length}</span>
+                               </span>
+                             }</span>
+                             :null
+                            }
                              </li>
                            </div>)}
-                           {choice == "" || !this.state.leftErrorShow ? null :
+                           {/*choice == "" || !this.state.leftErrorShow ? null :
                            <div className = {style.info}>
                              <div>总错误率&nbsp;&nbsp;
                                {data.finish_lunzheng==undefined ? null :
@@ -144,7 +160,7 @@ class LogicReview extends React.PureComponent {
                                </div>
                              <div>错题总数&nbsp;&nbsp;{this.props.questions.length}</div>
                            </div>
-                           }
+                           */}
 
 
                          </div>
@@ -158,15 +174,35 @@ class LogicReview extends React.PureComponent {
                     <div className="card-box">
                       <div align="center" style = {{"fontSize":"20px","color":"#188ae2"}}>一般复习</div><br/>
                       {
-                        ordinaryChapterName.length == 0 ? <div align="center" style = {{"fontSize":"18px","color":"#ff5b5b"}}>您目前没有需要重点复习的章节</div> :
+                        ordinaryChapterName.length == 0 ? <div align="center" style = {{"fontSize":"18px","color":"#ff5b5b"}}>您目前没有需要一般复习的章节</div> :
                         <div>
                           {/* <strong align = "center"><div style = {{"color":"#f9c851"}}>请点击选择要复习的章节</div></strong> */}
                           {ordinaryChapterName.map((oneChapter , key) =>
-                          <div key = {key}><br/><li style = {oneChapter == choice ? {"color":"#71b6f9","cursor":"pointer"} : null}
+                          <div key = {key}><br/>
+                          <li style = {oneChapter == choice ? {"color":"#71b6f9","cursor":"pointer"} : null}
                             onMouseOver = {() => {this.setState({leftErrorShow: false , rightErrorShow: true});setChapter(oneChapter);this.requestChapterContent(oneChapter)}}
                             onClick = {() => {this.setState({reviewContent: true , tongjiShow: false});setChapter(oneChapter);setLearningType(oneChapter)}}
-                            >{oneChapter}</li></div>)}
-                            {choice == "" || !this.state.rightErrorShow ? null :
+                            >
+                            {oneChapter}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            {oneChapter==choice?
+                            <span>{choice == "" || !this.state.rightErrorShow ? null :
+                            <span className = {style.info}>
+                              <span>总错误率&nbsp;&nbsp;
+                                {data.finish_lunzheng==undefined ? null :
+                                 <span>
+                                   {data.finish_lunzheng.map((oneChapter,key) => oneChapter==choice?<span>{data.lunzheng[key].total_mba}</span>:null)}
+                                   {data.finish_xingshi.map((oneChapter,key) => oneChapter==choice?<span>{data.xingshi[key].total_mba}</span>:null)}
+                                 </span>
+                                }
+                                </span>
+                              <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;错题总数&nbsp;&nbsp;{this.props.questions.length}</span>
+                            </span>
+                            }</span>
+                          :null
+                         }
+                            </li>
+                            </div>)}
+                            {/*choice == "" || !this.state.rightErrorShow ? null :
                             <div className = {style.info}>
                               <div>总错误率&nbsp;&nbsp;
                                 {data.finish_lunzheng==undefined ? null :
@@ -178,7 +214,7 @@ class LogicReview extends React.PureComponent {
                                 </div>
                               <div>错题总数&nbsp;&nbsp;{this.props.questions.length}</div>
                             </div>
-                            }
+                            */}
                         </div>
                       }
                     </div>

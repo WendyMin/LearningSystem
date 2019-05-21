@@ -101,7 +101,11 @@ class Shengcinanju extends React.PureComponent {
             <div className={style.title}>本篇生词</div>
             <br/>
             {
-              shengci[0] == undefined?null:
+              shengci[0] == undefined?
+              <div className="col-md-12">
+                <div className={style.textmiddle}>暂无</div>
+              </div>
+              :
               shengci.map((word, key)=>
               <div key={key} className="col-md-3" >
                 <div className={style.cardboxfix}>
@@ -126,7 +130,11 @@ class Shengcinanju extends React.PureComponent {
             <div className={style.title}>本篇难句</div>
             <br/>
             {
-              nanju == undefined?null:
+              nanju[0] == undefined?
+              <div className="col-md-12">
+                <div className={style.textmiddle}>暂无</div>
+              </div>
+              :
               nanju.map((sentence, key)=>
               <div key={key} className="col-md-12" >
                 <div className="card-box kanban-box">

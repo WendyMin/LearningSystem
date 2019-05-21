@@ -64,8 +64,10 @@ class EngReview extends React.PureComponent {
       showReviewList: true,
       showWordAndSentence: false,
       showArticle: false,
+      showShengcinanju: false,
       courseSelect: -1,
       processStep: 0,
+      article_id: -1,
     };
     const {
       setLearningType,
@@ -120,30 +122,50 @@ class EngReview extends React.PureComponent {
   //   })
   // }
 
+  getShengCi = ( articleId ) => {
+    this.props.loadShengci({
+      url: "/api/eng_getUserWord",
+      body: {
+        username:  this.props.username,
+        articleId: articleId,
+      }
+    })
+  }
+
+  getNanJu = ( articleId ) => {
+    this.props.loadNanju({
+      url: "/api/eng_getUserSentence",
+      body: {
+        username:  this.props.username,
+        articleId: articleId,
+      }
+    });
+  }
+
   nextStep = () => {
     this.setState({
       processStep: this.state.processStep + 1
     });
   }
 
-  getArticle = (articleid) => {
+  getArticle = (articleId) => {
     this.props.loadContent({
       body: {
         username: this.props.username,
-        articleId: articleid,
+        articleId: articleId,
         lock: 1
       }
     })
   }
 
-  loadQuestions = () => {
+  loadQuestions = (articleId) => {
     // console.log(typeof(this.props.articleId))
     this.props.loadQuestions({
       url: "/api/eng_getQuestion",
       body: {
         username: this.props.username,
         lock: 0,
-        article_id: this.props.articleId,
+        article_id: articleId,
         //articleId: articleId+1
       },
       parser: questions => questions.map( q => ({
@@ -202,6 +224,8 @@ class EngReview extends React.PureComponent {
       reviewlist,
       hardword,
       hardsentence,
+      shengci,
+      nanju,
       setLearningType,
       learningType,
       // article,
@@ -212,8 +236,10 @@ class EngReview extends React.PureComponent {
       showReviewList,
       showWordAndSentence,
       showArticle,
+      showShengcinanju,
       courseSelect,
-      processStep
+      processStep,
+      article_id,
     } = this.state;
 
     var text = "";
@@ -293,15 +319,20 @@ class EngReview extends React.PureComponent {
                                   <li>
                                       <br/>
                                       <button className="btn btn-success btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-success btn-trans waves-effect w-md waves-success m-b-5"
-                                              onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false});
+                                              onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: true, showArticle: false, showShengcinanju: false});
                                             this.getHardWord(list.articleid); this.getHardSentence(list.articleid) }}
                                           >查看核心词汇、重点句</button>
                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                       <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
-                                           onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true, processStep: 0});
-                                           this.getArticle(list.articleid); this.loadQuestions();this.props.hideAllTranslate();
+                                           onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: true, processStep: 0, showShengcinanju: false});
+                                           this.getArticle(list.articleid); this.loadQuestions(list.articleid);this.props.hideAllTranslate();
                                          }}
                                          >查看阅读文章</button>
+                                      <button className="btn btn-primary btn-sm waves-effect waves-primary w-md waves-success m-b-5 btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                                          onClick = {() => {this.setState({showReviewList: false , showWordAndSentence: false, showArticle: false, showShengcinanju: true, article_id: list.articleid});
+                                            this.getShengCi(list.articleid); this.getNanJu(list.articleid)
+                                        }}
+                                        >查看生词难句</button>
                                   </li>
                               </ul>
                           </div>
@@ -462,7 +493,83 @@ class EngReview extends React.PureComponent {
             </div>
 
             :
-            null
+            showShengcinanju == true ?
+            <div>
+              <div className="row">
+                <div className={style.title}>本篇生词</div>
+                <br/>
+                {
+
+                  shengci[0] == undefined?
+                  <div className="col-md-12">
+                    <div className={style.textmiddle}>暂无</div>
+                  </div>
+                  :
+                  shengci.map((word, key)=>
+                  <div key={key} className="col-md-3" >
+                    <div className={style.cardboxfix}>
+                      <div className="kanban-detail">
+                        <span className="label label-primary pull-right">Word</span>
+                        <p className={style.title18}>{word.word_l}</p>
+                        <ul className="list-inline m-b-0">
+                          <li>
+                            <p className={style.title16}>{word.translate}</p>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                )
+              }
+              </div>
+
+              <br/>
+
+              <div className="row">
+                <div className={style.title}>本篇难句</div>
+                <br/>
+                {
+                  nanju[0] == undefined?
+                  <div className="col-md-12">
+                    <div className={style.textmiddle}>暂无</div>
+                  </div>
+                  :
+                  nanju.map((sentence, key)=>
+                  <div key={key} className="col-md-12" >
+                    <div className="card-box kanban-box">
+                      <div className="kanban-detail">
+                        <span className="label label-primary pull-right">Sentence</span>
+                        <p className={style.title18}>
+                          {/* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; */}
+                          {sentence.sentence}</p>
+                        <ul className="list-inline m-b-0">
+                          <li>
+                            <br/>
+                            <p className={style.title16}><strong>翻译：</strong>{sentence.translate}</p>
+                            <br/>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  )
+                }
+              </div>
+
+
+              <div className="row">
+                <div className={style.buttonright}>
+                <button  class="btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5"
+                    onClick = {() =>  {this.setState({showReviewList: true , showWordAndSentence: false, showArticle: false, showShengcinanju: false})}} >
+                    返回列表页面</button>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            :null
 
           }
 
@@ -499,6 +606,8 @@ export default applyHOCs([
       reviewlist: state.EnglishReviewPort.reviewlist,
       hardword: state.EnglishReviewPort.hardword,
       hardsentence: state.EnglishReviewPort.hardsentence,
+      shengci: state.EnglishReviewPort.shengci,
+      nanju: state.EnglishReviewPort.nanju,
       // article: state.PortTest.content4,
       questions: state.SingleOptionQuestions.content,
       loadQuestionState: state.SingleOptionQuestions.loadState,

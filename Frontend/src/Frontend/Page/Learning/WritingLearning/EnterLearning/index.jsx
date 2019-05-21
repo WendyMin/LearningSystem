@@ -27,111 +27,129 @@ class EnterLearning extends React.PureComponent {
   constructor( props ){
     super( props );
     this.state = {
-      typeSelectShow: true
+      typeSelectShow: true,
+      lunzheng: false,
+      lunshuo: false
     }
   }
+
+  // TypeSelectNote = () =>{
+  //   alert("您还没有选择要学习的类型，请选择您要学习的类型!");
+  //   this.setState({typeSelectShow: true})
+  // }
 
   render(){
     const {
       setLearningType,
       learningType,
     } = this.props;
-    //console.log(learningType)
+    // console.log(learningType)
+    var TextStyle = [];
+    this.state.changeColor1 ? TextStyle[0] = style.choosed_type : TextStyle[0] = style.normal_type ;
+    this.state.changeColor2 ? TextStyle[1] = style.choosed_type : TextStyle[1] = style.normal_type ;
+    this.state.changeColor3 ? TextStyle[2] = style.choosed_type : TextStyle[2] = style.normal_type ;
+    this.state.changeColor4 ? TextStyle[3] = style.choosed_type : TextStyle[3] = style.normal_type ;
 
 
     return(
       <React.Fragment>
         {
           this.state.typeSelectShow || learningType == "" ?
-          <div className="row"><br/>
-            <div className="col-lg-6">
-              <div className="text-center card-box" style={{"height":"500px"}}>
-                 <div>
-                     <img src="/static/images/users/avatar-10.jpg" className="img-circle thumb-xl img-thumbnail m-b-10" alt="profile-image"/>
-                     <h4>论证有效性分析</h4><br/>
-                     <p className="text-muted font-13 m-b-30" style={{"height":"30px"}}>
-                       论证有效性分析主要包括写作技巧精讲、巩固强化练习、近年真题演练及数据统计四个部分
-                     </p>
-
-                     <div className="text-left" style={{"height":"170px"}}>
-                        <p className="text-muted font-13"><strong>写作技巧精讲 :</strong> <span className="m-l-15">分为找错析错和写作模板两个部分，可以查看对应的知识点</span></p>
-
-                        <p className="text-muted font-13"><strong>巩固强化练习 :</strong><span className="m-l-15">查看参考范文，也可以自己上传文章</span></p>
-
-                        <p className="text-muted font-13"><strong>近年真题演练 :</strong> <span className="m-l-15">涵盖历年来的真题，对每一年真题包括多选题以及答案解析;此部分用户也可以查看参考范文，上传文章</span></p>
-
-                        <p className="text-muted font-13"><strong>数据统计 :</strong> <span className="m-l-15">查看做过的历年真题数据统计，以及系统推荐需要重点关注的知识点以及文章</span></p>
-                    </div>
-
-                    {/* <button type="button" className="btn btn-custom btn-rounded waves-effect waves-light">开始学习</button> */}
-                    <div className="btn-group dropup">
-                      <button type="button" className="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">开始学习 <span className="caret"></span></button>
-                      <ul className="dropdown-menu" role="menu">
-                        <li><a onClick={() => {this.setState({typeSelectShow:false});setLearningType("论证技巧")}}>写作技巧精讲</a></li>
-                        <li><a onClick={() => {this.setState({typeSelectShow:false});setLearningType("论证巩固")}}>巩固强化练习</a></li>
-                        <li><a onClick={() => {this.setState({typeSelectShow:false});setLearningType("论证真题")}}>近年真题演练</a></li>
-                        <li><a onClick={() => {this.setState({typeSelectShow:false});setLearningType("论证数据")}}>数据统计</a></li>
-                      </ul>
-                    </div>
+          <div>
+          <div align="center">
+            <div style={{"fontSize": "22px","color": "#188ae2"}}>请先点击选择您要学习的类型：</div><br/>
+            <button className={this.state.lunzheng ? "btn btn-success btn-trans waves-effect waves-success w-md m-b-5 btn-lg":"btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-sm"}
+                    onClick = {() => this.setState({lunzheng: true, lunshuo: false})}
+            >论证有效性分析</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button className={this.state.lunshuo ? "btn btn-success btn-trans waves-effect waves-success w-md m-b-5 btn-lg":"btn btn-primary btn-trans waves-effect waves-primary w-md m-b-5 btn-sm"}
+                    onClick = {() => this.setState({lunzheng: false, lunshuo: true})}
+            >论说文</button>
+          </div><br/>
 
 
-                 </div>
+          <div className="row port m-b-20">
+            <div className="portfolioContainer">
+              <a href="javascript:void(0);">
+               <div className="col-sm-6 col-lg-3 col-md-4 natural personal">
+                   <div className="gal-detail thumb" onClick={() => {this.setState({typeSelectShow:false});this.state.lunzheng?setLearningType("论证技巧"):this.state.lunshuo?setLearningType("论说技巧"):null}}>
+                      <img src="/static/images/gallery/2.jpg" className="thumb-img" alt="work-thumbnail"/>
+                      <h4 className = {TextStyle[0]}
+                          onMouseOver = {() => this.setState({typeSelectShow: true , changeColor1: true})}
+                          onMouseLeave = {() => this.setState({changeColor1: false})}
+                      >写作技巧精讲
+                      </h4>
+                      <p className={style.text_muted1}>
+                        点击可以查看每一章的知识点详细介绍
+                      </p>
+                   </div>
+               </div>
+              </a>
 
+              <a href="javascript:void(0);">
+                <div className="col-sm-6 col-lg-3 col-md-4 creative personal photography">
+                  <div className="gal-detail thumb" onClick={() => {this.setState({typeSelectShow:false});this.state.lunzheng?setLearningType("论证巩固"):this.state.lunshuo?setLearningType("论说巩固"):null}}>
+                    <img src="/static/images/gallery/5.jpg" className="thumb-img" alt="work-thumbnail"/>
+                    <h4  className = {TextStyle[1]}
+                         onMouseOver = {() => this.setState({typeSelectShow: true , changeColor2: true})}
+                         onMouseLeave = {() => this.setState({changeColor2: false})}
+                    >巩固强化练习
+                    </h4>
+                    <p className={style.text_muted1}>
+                        点击查看每一章节的重点习题，提交后可以查看正确答案和解析
+                    </p>
+                  </div>
                 </div>
+              </a>
+
+              <a href="javascript:void(0);">
+                <div className="col-sm-6 col-lg-3 col-md-4 natural creative">
+                   <div className="gal-detail thumb"  onClick={() => {this.setState({typeSelectShow:false});this.state.lunzheng?setLearningType("论证真题"):this.state.lunshuo?setLearningType("论说真题"):null}}>
+                       <img src="/static/images/gallery/8.jpg" className="thumb-img" alt="work-thumbnail"/>
+                       <h4  className = {TextStyle[2]}
+                            onMouseOver = {() => this.setState({typeSelectShow: true , changeColor3: true})}
+                            onMouseLeave = {() => this.setState({changeColor3: false})}
+                       >近年真题演练
+                       </h4>
+                       <p className={style.text_muted1}>
+                           点击查看每一章节的强化练习，提交后可以查看正确答案和解析
+                       </p>
+                   </div>
+                </div>
+              </a>
+
+              <a href="javascript:void(0);">
+                <div className={this.state.lunshuo?style.translucent:""}>
+                <div className="col-sm-6 col-lg-3 col-md-4 personal photography">
+                  <div className="gal-detail thumb" onClick={() => {this.setState({typeSelectShow:false});this.state.lunzheng?setLearningType("论证数据"):null}}>
+                    <img src="/static/images/gallery/3.jpg" className="thumb-img" alt="work-thumbnail"/>
+                    <h4 className = {TextStyle[3]}
+                        onMouseOver = {() => this.setState({typeSelectShow: true , changeColor4: true})}
+                        onMouseLeave = {() => this.setState({changeColor4: false})}
+                    >数据统计
+                    </h4>
+                    <p className={style.text_muted1}>
+                      点击查看每一章节的单元测试题，测试完成后，点击提交可以查看正确答案和解析，可以查看本章节的数据统计
+                    </p>
+                  </div>
+                </div>
+                </div>
+              </a>
 
             </div>
-           {/* <!-- end col --> */}
-
-           <div className="col-lg-6">
-            {/* <div className={style.text_area}> */}
-           <div className="text-center card-box" style={{"height":"500px"}}>
-              <div>
-                <img src="/static/images/users/avatar-9.jpg" className="img-circle thumb-xl img-thumbnail m-b-10" alt="profile-image"/>
-                <h4>论说文</h4><br/>
-                <p className="text-muted font-13 m-b-30" style={{"height":"30px"}}>
-                 论说文主要包括写作技巧精讲、巩固强化练习、近年真题演练三个部分
-                </p>
-
-                <div className="text-left" style={{"height":"170px"}}>
-                   {/* <p className="text-muted font-13"><strong>Introduction :</strong></p> */}
-
-                   <p className="text-muted font-13"><strong>写作技巧精讲 :</strong> <span className="m-l-15">分为题型突破、审题立意等几部分，可以选择查看每一部分对应的知识点</span></p>
-
-                   <p className="text-muted font-13"><strong>巩固强化练习 :</strong><span className="m-l-15">查看参考范文，也可以自己上传文章</span></p>
-
-                   <p className="text-muted font-13"><strong>近年真题演练 :</strong> <span className="m-l-15">涵盖历年来的真题，对每一年真题用户可以查看参考范文，参考立意，也可以上传自己写的文章</span></p>
-
-               </div>
-
-               {/* <button type="button" className="btn btn-custom btn-rounded waves-effect waves-light">开始学习</button> */}
-               <div className="btn-group dropup">
-                 <button type="button" className="btn btn-primary dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">开始学习 <span className="caret"></span></button>
-                 <ul className="dropdown-menu" role="menu">
-                   <li><a onClick={() => {this.setState({typeSelectShow:false});setLearningType("论说技巧")}}>写作技巧精讲</a></li>
-                   <li><a onClick={() => {this.setState({typeSelectShow:false});setLearningType("论说巩固")}}>巩固强化练习</a></li>
-                   <li><a onClick={() => {this.setState({typeSelectShow:false});setLearningType("论说真题")}}>近年真题演练</a></li>
-                 </ul>
-               </div>
-
-              </div>
-           </div>
-           </div>
-          {/* <!-- end col --> */}
           </div>
+          </div>
+
           :
 
-          learningType =="论证技巧"?<LunZhengKnowledge/>:
-          learningType =="论证巩固"?<LunZhengGongGuSelect/>:
-          learningType =="论证真题"?<LunZhengZhenTiSelect/>:
-          learningType =="论证数据"?<LunZhengTongji/>:
+          learningType == "论证技巧" ? <LunZhengKnowledge/> :
+          learningType == "论证巩固" ? <LunZhengGongGuSelect/> :
+          learningType == "论证真题" ? <LunZhengZhenTiSelect/> :
+          learningType == "论证数据" ? <LunZhengTongji/> :
 
           learningType == "论说技巧" ? <LunShuoKnowledge/> :
           learningType == "论说巩固" ? <LunShuogGongGuSelect/> :
-          learningType == "论说真题" ? <LunShuoZhenTiSelect/> : null}
-
-
-         {/* <!-- end row --> */}
-
+          learningType == "论说真题" ? <LunShuoZhenTiSelect/> : null
+        }
 
       </React.Fragment>
     )

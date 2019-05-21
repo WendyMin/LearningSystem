@@ -112,7 +112,8 @@ class LogicLearning extends React.PureComponent {
                       onClick={()=>{confirm('您确定要退出登录吗?')?location.href="https://passport.doxue.com/login?redirect_url=39.106.175.128&stamp="+Date.parse(new Date())+"&secret_code="+sha1('LOGIN_REDIRECT' + Date.parse(new Date())):''}}
                       href="javascript:void(0);"
                       >
-                     <i className="zmdi zmdi-power"></i>
+                     {/*<i className="zmdi zmdi-power"></i>*/}
+                     退出
                    </a>
                  </li>
                 </ul>

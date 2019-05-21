@@ -2,8 +2,8 @@ import {
   __ASYNC_LOAD_REVIEW_LIST,
   __ASYNC_LOAD_HARD_WORD,
   __ASYNC_LOAD_HARD_SENTENCE,
-  // __ASYNC_LOAD_PORT_CONTENT4,
-  // __ASYNC_LOAD_PORT_CONTENT5,
+  __ASYNC_LOAD_SHENGCI,
+  __ASYNC_LOAD_NANJU,
 } from 'actionTypes';
 
 let loadReviewListCounter = 0;
@@ -205,129 +205,129 @@ export const loadHardSentence= ({ url , body , parser , headers  , initState }) 
 
 
 
-// let loadPortContentCounter4 = 0;
-// const loadPortContentStart4 = () => ({
-//     type: __ASYNC_LOAD_PORT_CONTENT4.pending,
-//     payload: {
-//
-//     },
-//     id: loadPortContentCounter4
-// });
-// const loadPortContentResolved4 = ( response , initState ) => ({
-//     type: __ASYNC_LOAD_PORT_CONTENT4.resolved,
-//     payload: {
-//       response,
-//       initState
-//     },
-//     id: loadPortContentCounter4
-// });
-// const loadPortContentRejected4 = ( reason , detail ) => ({
-//     type: __ASYNC_LOAD_PORT_CONTENT4.rejected,
-//     payload: {
-//       reason,
-//       detail
-//     },
-//     id: loadPortContentCounter4
-// });
-//
-//
-// export const loadPortContent4= ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
-// //export const loadButtonContents = ({ url , body ,headers  , initState }) => ( dispatch , getState ) => {
-//     const reqId4 = ++loadPortContentCounter4;
-//     const dispatchLastest4 = action => {
-//       if( reqId4 === loadPortContentCounter4 ){
-//         dispatch( action );
-//       }
-//     }
-//     dispatch( loadPortContentStart4() );
-//     if( typeof body === "object" ){
-//       body = JSON.stringify( body );
-//     }
-//     fetch( url , {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           ...headers
-//         },
-//         body: body
-//     })
-//   .then( response => {
-//     if( !response.ok ){
-//       dispatchLastest4( loadPortContentRejected4( "server" , response.status ) );
-//       return;
-//     }
-//    response.json()
-//     .then( json => dispatchLastest4( loadPortContentResolved4(  json  , initState ) ) )
-//     .catch( err => {
-//       dispatchLastest4( loadPortContentRejected4( "json" , err ) )
-//     //console.log(response)
-//   });
-//   })
-//   .catch( err => {
-//       dispatchLastest4( loadPortContentRejected4( "network" , err ) );
-//  });
-// };
-//
-//
-// let loadPortContentCounter5 = 0;
-// const loadPortContentStart5 = () => ({
-//     type: __ASYNC_LOAD_PORT_CONTENT5.pending,
-//     payload: {
-//
-//     },
-//     id: loadPortContentCounter5
-// });
-// const loadPortContentResolved5 = ( response , initState ) => ({
-//     type: __ASYNC_LOAD_PORT_CONTENT5.resolved,
-//     payload: {
-//       response,
-//       initState
-//     },
-//     id: loadPortContentCounter5
-// });
-// const loadPortContentRejected5 = ( reason , detail ) => ({
-//     type: __ASYNC_LOAD_PORT_CONTENT5.rejected,
-//     payload: {
-//       reason,
-//       detail
-//     },
-//     id: loadPortContentCounter5
-// });
-//
-//
-// export const loadPortContent5= ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
-// //export const loadButtonContents = ({ url , body ,headers  , initState }) => ( dispatch , getState ) => {
-//     const reqId5 = ++loadPortContentCounter5;
-//     const dispatchLastest5 = action => {
-//       if( reqId5 === loadPortContentCounter5 ){
-//         dispatch( action );
-//       }
-//     }
-//     dispatch( loadPortContentStart5() );
-//     if( typeof body === "object" ){
-//       body = JSON.stringify( body );
-//     }
-//     fetch( url , {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//           ...headers
-//         },
-//         body: body
-//     })
-//   .then( response => {
-//     if( !response.ok ){
-//       dispatchLastest5( loadPortContentRejected5( "server" , response.status ) );
-//       return;
-//     }
-//    response.json()
-//     .then( json => dispatchLastest5( loadPortContentResolved5(  json  , initState ) ) )
-//     .catch( err => {
-//       dispatchLastest5( loadPortContentRejected5( "json" , err ) )
-//     //console.log(response)
-//   });
-//   })
-//   .catch( err => {
-//       dispatchLastest5( loadPortContentRejected5( "network" , err ) );
-//  });
-// };
+let loadShengciCounter = 0;
+const loadShengciStart = () => ({
+    type: __ASYNC_LOAD_SHENGCI.pending,
+    payload: {
+
+    },
+    id: loadShengciCounter
+});
+const loadShengciResolved = ( response , initState ) => ({
+    type: __ASYNC_LOAD_SHENGCI.resolved,
+    payload: {
+      response,
+      initState
+    },
+    id: loadShengciCounter
+});
+const loadShengciRejected = ( reason , detail ) => ({
+    type: __ASYNC_LOAD_SHENGCI.rejected,
+    payload: {
+      reason,
+      detail
+    },
+    id: loadShengciCounter
+});
+
+
+export const loadShengci= ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+//export const loadButtonContents = ({ url , body ,headers  , initState }) => ( dispatch , getState ) => {
+    const reqId4 = ++loadShengciCounter;
+    const dispatchLastest4 = action => {
+      if( reqId4 === loadShengciCounter ){
+        dispatch( action );
+      }
+    }
+    dispatch( loadShengciStart() );
+    if( typeof body === "object" ){
+      body = JSON.stringify( body );
+    }
+    fetch( url , {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers
+        },
+        body: body
+    })
+  .then( response => {
+    if( !response.ok ){
+      dispatchLastest4( loadShengciRejected( "server" , response.status ) );
+      return;
+    }
+   response.json()
+    .then( json => dispatchLastest4( loadShengciResolved(  json  , initState ) ) )
+    .catch( err => {
+      dispatchLastest4( loadShengciRejected( "json" , err ) )
+    //console.log(response)
+  });
+  })
+  .catch( err => {
+      dispatchLastest4( loadShengciRejected( "network" , err ) );
+ });
+};
+
+
+let loadNanjuCounter = 0;
+const loadNanjuStart = () => ({
+    type: __ASYNC_LOAD_NANJU.pending,
+    payload: {
+
+    },
+    id: loadNanjuCounter
+});
+const loadNanjuResolved = ( response , initState ) => ({
+    type: __ASYNC_LOAD_NANJU.resolved,
+    payload: {
+      response,
+      initState
+    },
+    id: loadNanjuCounter
+});
+const loadNanjuRejected = ( reason , detail ) => ({
+    type: __ASYNC_LOAD_NANJU.rejected,
+    payload: {
+      reason,
+      detail
+    },
+    id: loadNanjuCounter
+});
+
+
+export const loadNanju= ({ url , body , parser , headers  , initState }) => ( dispatch , getState ) => {
+//export const loadButtonContents = ({ url , body ,headers  , initState }) => ( dispatch , getState ) => {
+    const reqId5 = ++loadNanjuCounter;
+    const dispatchLastest5 = action => {
+      if( reqId5 === loadNanjuCounter ){
+        dispatch( action );
+      }
+    }
+    dispatch( loadNanjuStart() );
+    if( typeof body === "object" ){
+      body = JSON.stringify( body );
+    }
+    fetch( url , {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...headers
+        },
+        body: body
+    })
+  .then( response => {
+    if( !response.ok ){
+      dispatchLastest5( loadNanjuRejected( "server" , response.status ) );
+      return;
+    }
+   response.json()
+    .then( json => dispatchLastest5( loadNanjuResolved(  json  , initState ) ) )
+    .catch( err => {
+      dispatchLastest5( loadNanjuRejected( "json" , err ) )
+    //console.log(response)
+  });
+  })
+  .catch( err => {
+      dispatchLastest5( loadNanjuRejected( "network" , err ) );
+ });
+};

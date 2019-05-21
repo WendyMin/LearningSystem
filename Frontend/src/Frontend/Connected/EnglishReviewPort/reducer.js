@@ -2,14 +2,16 @@ import {
   __ASYNC_LOAD_REVIEW_LIST,
   __ASYNC_LOAD_HARD_WORD,
   __ASYNC_LOAD_HARD_SENTENCE,
-  // __ASYNC_LOAD_PORT_CONTENT4,
-  // __ASYNC_LOAD_PORT_CONTENT5,
+  __ASYNC_LOAD_SHENGCI,
+  __ASYNC_LOAD_NANJU,
 } from 'actionTypes';
 
 export default ( state = {
     reviewlist: "",
     hardword: [],
     hardsentence: [],
+    shengci: [],
+    nanju : [],
     // content4: [],
     // content5: [],
     name2: [],
@@ -154,83 +156,86 @@ export default ( state = {
 
 
 
-    // case __ASYNC_LOAD_PORT_CONTENT4.pending: {
-    //   let loadState = {...state.loadState };
-    //   loadState.lastFailed = false;
-    //   loadState.pending++;
-    //   return {
-    //     ...state,
-    //     loadState
-    //   };
-    // }
-    // case __ASYNC_LOAD_PORT_CONTENT4.resolved: {
-    //   let { response , initState } = payload;
-    //   initState = initState || {
-    //     lock: false,
-    //     show: false,
-    //     choice: -1
-    //   };
-    //   let loadState = {...state.loadState };
-    //   loadState.resolved++;
-    //   loadState.pending--;
-    //   return {
-    //     ...state,
-    //     loadState,
-    //     content4: response,
-    //   };
-    // }
-    // case __ASYNC_LOAD_PORT_CONTENT4.rejected: {
-    //   let { reason , detail } = payload;
-    //   let loadState = {...state.loadState };
-    //   loadState.rejected++;
-    //   loadState.pending--;
-    //   loadState.lastFailed = true;
-    //   loadState.failedReason = reason;
-    //   loadState.failedDetail = detail;
-    //   return {
-    //     ...state,
-    //     loadState
-    //   };
-    // }
-    //
-    // case __ASYNC_LOAD_PORT_CONTENT5.pending: {
-    //   let loadState = {...state.loadState };
-    //   loadState.lastFailed = false;
-    //   loadState.pending++;
-    //   return {
-    //     ...state,
-    //     loadState
-    //   };
-    // }
-    // case __ASYNC_LOAD_PORT_CONTENT5.resolved: {
-    //   let { response , initState } = payload;
-    //   initState = initState || {
-    //     lock: false,
-    //     show: false,
-    //     choice: -1
-    //   };
-    //   let loadState = {...state.loadState };
-    //   loadState.resolved++;
-    //   loadState.pending--;
-    //   return {
-    //     ...state,
-    //     loadState,
-    //     content5: response,
-    //   };
-    // }
-    // case __ASYNC_LOAD_PORT_CONTENT5.rejected: {
-    //   let { reason , detail } = payload;
-    //   let loadState = {...state.loadState };
-    //   loadState.rejected++;
-    //   loadState.pending--;
-    //   loadState.lastFailed = true;
-    //   loadState.failedReason = reason;
-    //   loadState.failedDetail = detail;
-    //   return {
-    //     ...state,
-    //     loadState
-    //   };
-    // }
+    case __ASYNC_LOAD_SHENGCI.pending: {
+      let loadState = {...state.loadState };
+      loadState.lastFailed = false;
+      loadState.pending++;
+      return {
+        ...state,
+        loadState
+      };
+    }
+    case __ASYNC_LOAD_SHENGCI.resolved: {
+      let { response , initState } = payload;
+      initState = initState || {
+        lock: false,
+        show: false,
+        choice: -1
+      };
+      let loadState = {...state.loadState };
+      loadState.resolved++;
+      loadState.pending--;
+      return {
+        ...state,
+        loadState,
+        shengci: response,
+      };
+    }
+    case __ASYNC_LOAD_SHENGCI.rejected: {
+      let { reason , detail } = payload;
+      let loadState = {...state.loadState };
+      loadState.rejected++;
+      loadState.pending--;
+      loadState.lastFailed = true;
+      loadState.failedReason = reason;
+      loadState.failedDetail = detail;
+      return {
+        ...state,
+        loadState
+      };
+    }
+
+
+
+
+    case __ASYNC_LOAD_NANJU.pending: {
+      let loadState = {...state.loadState };
+      loadState.lastFailed = false;
+      loadState.pending++;
+      return {
+        ...state,
+        loadState
+      };
+    }
+    case __ASYNC_LOAD_NANJU.resolved: {
+      let { response , initState } = payload;
+      initState = initState || {
+        lock: false,
+        show: false,
+        choice: -1
+      };
+      let loadState = {...state.loadState };
+      loadState.resolved++;
+      loadState.pending--;
+      return {
+        ...state,
+        loadState,
+        nanju: response,
+      };
+    }
+    case __ASYNC_LOAD_NANJU.rejected: {
+      let { reason , detail } = payload;
+      let loadState = {...state.loadState };
+      loadState.rejected++;
+      loadState.pending--;
+      loadState.lastFailed = true;
+      loadState.failedReason = reason;
+      loadState.failedDetail = detail;
+      return {
+        ...state,
+        loadState
+      };
+    }
 
 
 

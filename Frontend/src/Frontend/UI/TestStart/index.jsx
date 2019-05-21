@@ -7,7 +7,7 @@ class TestStart extends React.PureComponent<Props> {
   }
 
   render(){
-    const { testnum, testtime , onClick } = this.props;
+    const { testdescription, testnum, testtime , onClick } = this.props;
     return (
       <div>
         <div className="row" style={{"height":"80px"}}></div>
@@ -19,6 +19,7 @@ class TestStart extends React.PureComponent<Props> {
             <br/>
             <h3>本次测试信息</h3>
             <br/>
+            <p>{testdescription}</p>
             <p className={style.text}>
               题目总数:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style={{"color":"#ff5b5b"}}> {testnum} </span>
             </p>
